@@ -22,6 +22,7 @@ namespace QuanLyKhachSan.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ThemKhachHang(KhachHang khachHang)
         {
             if (ModelState.IsValid)
@@ -32,6 +33,35 @@ namespace QuanLyKhachSan.Controllers
             }
             return View(khachHang);
         }
+        public IActionResult SuaKhachHang(string? id)
+        {
+          
+            var categoryFromDb = _db.KhachHangs.FirstOrDefault(s => s.MaKhachHang == id);
+
+            return View(categoryFromDb);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SuaKhachHang(KhachHang kh)
+        {
+            _db.KhachHangs.Update(kh);
+            _db.SaveChanges();
+            return RedirectToAction("Index","KhachHang");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult XoaKhachHang(string? id)
+        {
+            var kh = _db.KhachHangs.FirstOrDefault(s => s.MaKhachHang == id);
+           if(kh == null)
+            {
+                return NotFound();
+            }
+           _db.KhachHangs.Remove(kh);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
 
     }
 }

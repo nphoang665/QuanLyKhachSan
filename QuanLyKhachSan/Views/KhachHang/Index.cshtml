@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<QuanLyKhachSan.Model.KhachHang>
 
+
 <style>
     .container {
         margin-top: 20px;
@@ -81,6 +82,8 @@
                         <th>Điện thoại</th>
                         <th>Địa chỉ</th>
                         <th>Ghi chú</th>
+                        <th>Sửa</th>
+                        <th>Xóa</th>
                         <!-- Thêm các tiêu đề cột khác ở đây -->
                     </tr>
                 </thead>
@@ -95,14 +98,22 @@
                             <td>@khachHang.DienThoai</td>
                             <td>@khachHang.DiaChi</td>
                             <td>@khachHang.GhiChu</td>
-
+                            <td><a asp-action="SuaKhachHang" asp-route-id="@khachHang.MaKhachHang" class="btn btn-primary">Sửa</a></td>
+                            @using (Html.BeginForm("XoaKhachHang", "KhachHang", new { id = khachHang.MaKhachHang }, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <td>
+                                    <div>
+                                        <input type="submit" value="Xóa" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');" />
+                                    </div>
+                                </td>
+                            }
                         </tr>
                     }
                 </tbody>
             </table>
-        
         </div>
-
+        
 
     </div>
    
