@@ -1,0 +1,163 @@
+﻿@model IEnumerable<QuanLyKhachSan.Model.KhachHang>
+
+<style>
+    .container {
+        margin-top: 20px;
+    }
+
+    .row {
+        margin-bottom: 20px;
+    }
+
+    .col-md-3 {
+        padding-left: 20px;
+        padding-right: 20px;
+        border-right: 1px solid #ddd;
+    }
+
+    .card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .card-header {
+        padding: 10px 20px;
+        background-color: #f7f7f7;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .table {
+        width: 100%;
+        table-layout: fixed;
+    }
+
+        .table th,
+        .table td {
+            padding: 10px;
+        }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .form-control {
+        width: 100%;
+    }
+
+</style>
+
+<div class="container">
+   
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Tìm kiếm</h5>
+                </div>
+                <div class="card-body">
+                    <form action="#">
+                        <div class="form-group">
+                        
+                            <input type="text" class="form-control" id="tim-kiem" placeholder="Nhập từ khóa">
+                        </div>
+                      
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <a class="nav-link text-dark btn btn-primary w-25" asp-area="" asp-controller="KhachHang" asp-action="ThemKhachHang" >Thêm Khách Hàng</a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Mã KH</th>
+                        <th>Tên KH</th>
+                        <th>Giới tính</th>
+                        <th>Ngày sinh</th>
+                        <th>Điện thoại</th>
+                        <th>Địa chỉ</th>
+                        <th>Ghi chú</th>
+                        <!-- Thêm các tiêu đề cột khác ở đây -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var khachHang in Model)
+                    {
+                        <tr>
+                            <td>@khachHang.MaKhachHang</td>
+                            <td>@khachHang.TenKhachHang</td>
+                            <td>@khachHang.GioiTinh</td>
+                            <td>@khachHang.NgaySinh</td>
+                            <td>@khachHang.DienThoai</td>
+                            <td>@khachHang.DiaChi</td>
+                            <td>@khachHang.GhiChu</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        
+        </div>
+
+
+    </div>
+   
+    <style>
+        .btn-group-vertical .btn {
+            text-align: left;
+        }
+      
+    </style>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card w-100 bg-white">
+                <div class="card-header"><h5>Tìm kiếm</h5></div>
+                <div class="card-body">
+                    <div class="btn-group-vertical btn-group-toggle w-100 text-left" data-toggle="buttons">
+                        <label class="btn btn-secondary w-100">
+                            <input type="radio" name="gender" id="all" autocomplete="off" checked> Tất cả
+                        </label>
+                        <label class="btn btn-secondary w-100">
+                            <input type="radio" name="gender" id="male" autocomplete="off"> Nam
+                        </label>
+                        <label class="btn btn-secondary w-100">
+                            <input type="radio" name="gender" id="female" autocomplete="off"> Nữ
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card w-100 bg-white">
+                <div class="card-header"><h5>Trạng Thái</h5></div>
+                <div class="card-body">
+                    <div class="btn-group-vertical btn-group-toggle w-100 text-left" data-toggle="buttons">
+                        <label class="btn btn-secondary w-100">
+                            <input type="radio" name="DangHoatDong" id="all" autocomplete="off" checked> Đang Hoạt Động
+                        </label>
+                        <label class="btn btn-secondary w-100">
+                            <input type="radio" name="gender" id="male" autocomplete="off"> Ngừng Hoạt Động
+                        </label>
+                        <label class="btn btn-secondary w-100">
+                            <input type="radio" name="gender" id="female" autocomplete="off"> Tất Cả
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- CSS -->
+ 
+
+</div>
+

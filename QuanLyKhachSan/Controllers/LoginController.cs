@@ -30,7 +30,7 @@ namespace QuanLyKhachSan.Controllers
             else
             {
                 // Đăng nhập thành công, chuyển hướng đến trang chủ
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "TongQuan");
             }
         }
 
