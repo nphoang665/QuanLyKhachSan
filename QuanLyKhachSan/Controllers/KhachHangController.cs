@@ -61,7 +61,7 @@ namespace QuanLyKhachSan.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+     
 
     }
 }

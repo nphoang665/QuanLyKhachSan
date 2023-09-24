@@ -1,4 +1,4 @@
-﻿@model IEnumerable<QuanLyKhachSan.Model.KhachHang>
+﻿@model IEnumerable<QuanLyKhachSan.Model.NhanVien>
 
 
 <style>
@@ -49,7 +49,6 @@
         width: 100%;
     }
 
-
 </style>
 
 <div class="container">
@@ -65,7 +64,7 @@
                     </div>
                 </div>
             </div>
-        
+
 
 
 
@@ -108,21 +107,21 @@
 
         </div>
 
-@*         Ba ô tìm kiếm
- *@        <style>
-            <style >
-            .table td, .table th {
-                white-space: normal;
-                word-wrap: break-word;
-            }
+        @*         Ba ô tìm kiếm
+        *@        <style>
+                      <style >
+                      .table td, .table th {
+                          white-space: normal;
+                          word-wrap: break-word;
+                      }
         </style>
         <div class="col-md-9">
-            <a class="nav-link text-dark btn btn-primary w-25" asp-area="" asp-controller="KhachHang" asp-action="ThemKhachHang">Thêm Khách Hàng</a>
+            <a class="nav-link text-dark btn btn-primary  w-25" asp-area="" asp-controller="NhanVien" asp-action="ThemNhanVien">Thêm Nhân Viên</a>
             <table class="table">
                 <thead>
                     <tr>
-                        <th width="100px" height="100%">Mã KH</th>
-                        <th width="180px" height="100%">Tên KH</th>
+                        <th width="100px" height="100%">Mã NV</th>
+                        <th width="180px" height="100%">Tên NV</th>
                         <th width="100px" height="100%">Giới tính</th>
                         <th width="150px" height="100%">Ngày sinh</th>
                         <th width="130px" height="100%">Điện thoại</th>
@@ -133,18 +132,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                        @foreach (var khachHang in Model)
+                        @foreach (var nhanvien in Model)
                         {
                         <tr>
-                            <td>@khachHang.MaKhachHang</td>
-                            <td>@khachHang.TenKhachHang</td>
-                            <td>@khachHang.GioiTinh</td>
-                            <td>@khachHang.NgaySinh</td>
-                            <td>@khachHang.DienThoai</td>
-                            <td>@khachHang.DiaChi</td>
-                            <td>@khachHang.GhiChu</td>
-                            <td><a asp-action="SuaKhachHang" asp-route-id="@khachHang.MaKhachHang" class="btn btn-primary">Sửa</a></td>
-                                @using (Html.BeginForm("XoaKhachHang", "KhachHang", new { id = khachHang.MaKhachHang }, FormMethod.Post))
+                            <td>@nhanvien.MaNhanVien</td>
+                            <td>@nhanvien.TenNhanVien</td>
+                            <td>@nhanvien.GioiTinh</td>
+                            <td>@nhanvien.NgaySinh</td>
+                            <td>@nhanvien.DienThoai</td>
+                            <td>@nhanvien.DiaChi</td>
+                            <td>@nhanvien.GhiChu</td>
+                            <td><a asp-action="SuaNhanVien" asp-controller="NhanVien" asp-route-id="@nhanvien.MaNhanVien" class="btn btn-primary">Sửa</a></td>
+                                @using (Html.BeginForm("XoaNhanVien", "NhanVien", new { id = nhanvien.MaNhanVien }, FormMethod.Post))
                                 {
                                     @Html.AntiForgeryToken()
                                 <td><input type="submit" value="Xóa" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');" /></td>
@@ -155,18 +154,18 @@
             </table>
         </div>
 
-        </div>
-
-
-
     </div>
 
-    <style>
-        .btn-group-vertical .btn {
-            text-align: left;
-        }
-    </style>
-   
+
+
+</div>
+
+<style>
+    .btn-group-vertical .btn {
+        text-align: left;
+    }
+</style>
+
 
 
 </div>

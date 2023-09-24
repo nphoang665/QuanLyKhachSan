@@ -8,15 +8,14 @@ using System.Threading.Tasks;
 
 namespace QuanLyKhachSan.Model
 {
-    public  class KhachHang
-
+    public class NhanVien
     {
         [Key]
-        [DisplayName("Mã Khách Hàng")]
-        public string MaKhachHang { get; set; }
+        [DisplayName("Mã Nhân Viên")]
+        public string MaNhanVien { get; set; }
         [Required]
-        [DisplayName("Tên Khách Hàng")]
-        public string TenKhachHang { get; set; }
+        [DisplayName("Tên Nhân Viên")]
+        public string TenNhanVien { get; set; }
         [DisplayName("Giới Tính")]
 
         public string GioiTinh { get; set; }
@@ -32,6 +31,6 @@ namespace QuanLyKhachSan.Model
         [DisplayName("Ghi Chú")]
 
         public string GhiChu { get; set; }
-     
+
     }
 }
