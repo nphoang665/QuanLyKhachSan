@@ -1,9 +1,15 @@
 ﻿@model IEnumerable<QuanLyKhachSan.Model.KhachHang>
 
+@{
+    int currentPage = (int)ViewData["CurrentPage"];
+    int totalPages = (int)ViewData["TotalPages"];
+    int numberOfPagesToShow = 3; // Số trang trung gian bạn muốn hiển thị
+}
 
 <style>
     .container {
         margin-top: 20px;
+
     }
 
     .row {
@@ -92,13 +98,13 @@
                 <div class="card-body">
                     <div class="btn-group-vertical btn-group-toggle w-100 text-left" data-toggle="buttons">
                         <label class="btn btn-secondary w-100">
-                            <input type="radio" name="DangHoatDong" id="all" autocomplete="off" checked> Đang Hoạt Động
+                            <input type="radio" name="TrangThai" id="DangHoatDong" autocomplete="off" checked> Đang Hoạt Động
                         </label>
                         <label class="btn btn-secondary w-100">
-                            <input type="radio" name="gender" id="male" autocomplete="off"> Ngừng Hoạt Động
+                            <input type="radio" name="TrangThai" id="NgungHoatDong" autocomplete="off"> Ngừng Hoạt Động
                         </label>
                         <label class="btn btn-secondary w-100">
-                            <input type="radio" name="gender" id="female" autocomplete="off"> Tất Cả
+                            <input type="radio" name="TrangThai" id="TatCa" autocomplete="off"> Tất Cả
                         </label>
                     </div>
                 </div>
@@ -157,9 +163,62 @@
 
         </div>
 
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+            <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { page = currentPage - 1 })" tabindex="-1">Previous</a>
+            </li>
+            @if (totalPages <= numberOfPagesToShow)
+            {
+                // Hiển thị tất cả các trang nếu tổng số trang nhỏ hơn hoặc bằng số trang trung gian
+                for (int i = 1; i <= totalPages; i++)
+                {
+                    <li class="page-item @(i == currentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                    </li>
+                }
+            }
+            else
+            {
+                // Hiển thị một số trang trung gian và tạo nút "..." để bỏ qua các trang còn lại
+                int startPage = Math.Max(currentPage - (numberOfPagesToShow / 2), 1);
+                int endPage = Math.Min(startPage + numberOfPagesToShow - 1, totalPages);
+
+                if (startPage > 1)
+                {
+                    <li class="page-item"><a class="page-link" href="@Url.Action("Index", new { page = 1 })">1</a></li>
+                    if (startPage > 2)
+                    {
+                        <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                    }
+                }
+
+                for (int i = startPage; i <= endPage; i++)
+                {
+                    <li class="page-item @(i == currentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                    </li>
+                }
+
+                if (endPage < totalPages)
+                {
+                    if (endPage < totalPages - 1)
+                    {
+                        <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                    }
+                    <li class="page-item"><a class="page-link" href="@Url.Action("Index", new { page = totalPages })">@totalPages</a></li>
+                }
+            }
+
+            <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { page = currentPage + 1 })">Next</a>
+            </li>
+        </ul>
+    </nav>
 
 
-    </div>
+
+</div>
 
     <style>
         .btn-group-vertical .btn {
@@ -167,6 +226,5 @@
         }
     </style>
    
-
 
 </div>

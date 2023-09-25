@@ -12,11 +12,29 @@ namespace QuanLyKhachSan.Controllers
         {
             _db = db;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-        var khachHangs= await _db.KhachHangs.ToListAsync();
-            return View(khachHangs);    
+            int pageSize = 1;
+            int totalKhachHangs = await _db.KhachHangs.CountAsync();
+            int totalPages = (int)Math.Ceiling((double)totalKhachHangs / pageSize);
+
+            if (page < 1)
+                page = 1;
+            else if (page > totalPages)
+                page = totalPages;
+
+            var paginatedKhachHangs = await _db.KhachHangs
+                .OrderBy(kh => kh.MaKhachHang)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            ViewData["TotalPages"] = totalPages;
+            ViewData["CurrentPage"] = page;
+
+            return View(paginatedKhachHangs);
         }
+
         public IActionResult ThemKhachHang()
         {
             return View();

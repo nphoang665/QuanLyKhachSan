@@ -1,9 +1,15 @@
 ﻿@model IEnumerable<QuanLyKhachSan.Model.NhanVien>
+@{
+    int currentPage = (int)ViewData["CurrentPageNhanVien"];
+    int totalPages = (int)ViewData["TotalPagesNhanVien"];
+    int numberOfPagesToShow = 3; // Số trang trung gian bạn muốn hiển thị
+}
 
 
 <style>
     .container {
         margin-top: 20px;
+        max-width:5000px;
     }
 
     .row {
@@ -48,12 +54,12 @@
     .form-control {
         width: 100%;
     }
-
+ 
 </style>
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">Tìm kiếm</h5>
@@ -117,32 +123,32 @@
         </style>
         <div class="col-md-9">
             <a class="nav-link text-dark btn btn-primary  w-25" asp-area="" asp-controller="NhanVien" asp-action="ThemNhanVien">Thêm Nhân Viên</a>
-            <table class="table">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th width="100px" height="100%">Mã NV</th>
-                        <th width="180px" height="100%">Tên NV</th>
-                        <th width="100px" height="100%">Giới tính</th>
-                        <th width="150px" height="100%">Ngày sinh</th>
-                        <th width="130px" height="100%">Điện thoại</th>
-                        <th width="150px" height="100%">Địa chỉ</th>
-                        <th width="100px" height="100%">Ghi chú</th>
-                        <th width="70px">Sửa</th>
-                        <th width="70px">Xóa</th>
+                        <th width="80px" class="text-center">Mã NV</th>
+                        <th class="text-center">Tên NV</th>
+                        <th class="text-center">Giới tính</th>
+                        <th class="text-center">Ngày sinh</th>
+                        <th class="text-center">Điện thoại</th>
+                        <th class="text-center">Địa chỉ</th>
+                        <th class="text-center">Ghi chú</th>
+                        <th class="text-center" width="80px">Sửa</th>
+                        <th class="text-center" width="80px">Xóa</th>
                     </tr>
                 </thead>
                 <tbody>
                         @foreach (var nhanvien in Model)
                         {
                         <tr>
-                            <td>@nhanvien.MaNhanVien</td>
-                            <td>@nhanvien.TenNhanVien</td>
-                            <td>@nhanvien.GioiTinh</td>
-                            <td>@nhanvien.NgaySinh</td>
-                            <td>@nhanvien.DienThoai</td>
-                            <td>@nhanvien.DiaChi</td>
-                            <td>@nhanvien.GhiChu</td>
-                            <td><a asp-action="SuaNhanVien" asp-controller="NhanVien" asp-route-id="@nhanvien.MaNhanVien" class="btn btn-primary">Sửa</a></td>
+                            <td class="text-truncate">@nhanvien.MaNhanVien</td>
+                            <td class ="text-truncate">@nhanvien.TenNhanVien</td>
+                            <td class="text-truncate">@nhanvien.GioiTinh</td>
+                            <td class="text-truncate">@nhanvien.NgaySinh</td>
+                            <td class="text-truncate">@nhanvien.DienThoai</td>
+                            <td class="text-truncate">@nhanvien.DiaChi</td>
+                            <td class="text-truncate">@nhanvien.GhiChu</td>
+                            <td class="text-truncate"><a asp-action="SuaNhanVien" asp-controller="NhanVien" asp-route-id="@nhanvien.MaNhanVien" class="btn btn-primary">Sửa</a></td>
                                 @using (Html.BeginForm("XoaNhanVien", "NhanVien", new { id = nhanvien.MaNhanVien }, FormMethod.Post))
                                 {
                                     @Html.AntiForgeryToken()
@@ -156,7 +162,58 @@
 
     </div>
 
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+            <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { page = currentPage - 1 })" tabindex="-1">Previous</a>
+            </li>
+            @if (totalPages <= numberOfPagesToShow)
+            {
+                // Hiển thị tất cả các trang nếu tổng số trang nhỏ hơn hoặc bằng số trang trung gian
+                for (int i = 1; i <= totalPages; i++)
+                {
+                    <li class="page-item @(i == currentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                    </li>
+                }
+            }
+            else
+            {
+                // Hiển thị một số trang trung gian và tạo nút "..." để bỏ qua các trang còn lại
+                int startPage = Math.Max(currentPage - (numberOfPagesToShow / 2), 1);
+                int endPage = Math.Min(startPage + numberOfPagesToShow - 1, totalPages);
 
+                if (startPage > 1)
+                {
+                    <li class="page-item"><a class="page-link" href="@Url.Action("Index", new { page = 1 })">1</a></li>
+                    if (startPage > 2)
+                    {
+                        <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                    }
+                }
+
+                for (int i = startPage; i <= endPage; i++)
+                {
+                    <li class="page-item @(i == currentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                    </li>
+                }
+
+                if (endPage < totalPages)
+                {
+                    if (endPage < totalPages - 1)
+                    {
+                        <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                    }
+                    <li class="page-item"><a class="page-link" href="@Url.Action("Index", new { page = totalPages })">@totalPages</a></li>
+                }
+            }
+
+            <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { page = currentPage + 1 })">Next</a>
+            </li>
+        </ul>
+    </nav>
 
 </div>
 
