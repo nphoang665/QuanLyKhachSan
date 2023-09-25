@@ -35,20 +35,27 @@ namespace QuanLyKhachSan.Controllers
 
             return View(paginatedKhachHangs);
         }
-        public IActionResult ThemNhanVien()
-        {
-            return View();
-        }
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ThemNhanVien(NhanVien nhanvien)
+        public async Task<IActionResult> ThemNhanVien()
         {
+            var formCollection = Request.Form;
+
+            var nhanvien = new NhanVien();
+            nhanvien.MaNhanVien = formCollection["MaNhanVien"];
+            nhanvien.TenNhanVien = formCollection["TenNhanVien"];
+            nhanvien.GioiTinh = formCollection["GioiTinh"];
+            nhanvien.NgaySinh = DateTime.Parse(formCollection["NgaySinh"]);
+            nhanvien.DienThoai = formCollection["DienThoai"];
+            nhanvien.DiaChi = formCollection["DiaChi"];
+            nhanvien.GhiChu = formCollection["GhiChu"];
+
             if (ModelState.IsValid)
             {
                 _db.NhanViens.Add(nhanvien);
-              await  _db.SaveChangesAsync();
+                await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-
             }
             return View(nhanvien);
         }

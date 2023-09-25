@@ -1,4 +1,7 @@
-﻿@model IEnumerable<QuanLyKhachSan.Model.NhanVien>
+﻿ @model IEnumerable<QuanLyKhachSan.Model.NhanVien> 
+ 
+  
+
 @{
     int currentPage = (int)ViewData["CurrentPageNhanVien"];
     int totalPages = (int)ViewData["TotalPagesNhanVien"];
@@ -9,7 +12,7 @@
 <style>
     .container {
         margin-top: 20px;
-        max-width:5000px;
+        max-width: 5000px;
     }
 
     .row {
@@ -54,7 +57,30 @@
     .form-control {
         width: 100%;
     }
- 
+    /* Lớp đè */
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Màu nền độ mờ (sử dụng rgba để điều chỉnh độ trong suốt) */
+        z-index: 1000; /* Độ cao z để đảm bảo lớp đè hiển thị trên các phần tử khác */
+    }
+
+    /* Nội dung lớp đè */
+    .form-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Đổ bóng cho lớp đè */
+        z-index: 1001; /* Độ cao z cao hơn lớp đè */
+    }
 </style>
 
 <div class="container">
@@ -113,16 +139,21 @@
 
         </div>
 
-        @*         Ba ô tìm kiếm
-        *@        <style>
-                      <style >
-                      .table td, .table th {
-                          white-space: normal;
-                          word-wrap: break-word;
-                      }
+
+        <style>
+            .table td, .table th {
+                white-space: normal;
+                word-wrap: break-word;
+            }
         </style>
         <div class="col-md-9">
-            <a class="nav-link text-dark btn btn-primary  w-25" asp-area="" asp-controller="NhanVien" asp-action="ThemNhanVien">Thêm Nhân Viên</a>
+            @* <a class="nav-link text-dark btn btn-primary  w-25" asp-area="" asp-controller="NhanVien" asp-action="ThemNhanVien">Thêm Nhân Viên</a> *@
+
+
+            <button type="button" id="addButton" class="nav-link text-dark btn btn-primary w-25" asp-area="" asp-controller="KhachHang" asp-action="ThemKhachHang">Thêm Khách Hàng</button>
+
+
+
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -138,24 +169,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                        @foreach (var nhanvien in Model)
-                        {
+                    @foreach (var nhanvien in Model)
+                    {
                         <tr>
                             <td class="text-truncate">@nhanvien.MaNhanVien</td>
-                            <td class ="text-truncate">@nhanvien.TenNhanVien</td>
+                            <td class="text-truncate">@nhanvien.TenNhanVien</td>
                             <td class="text-truncate">@nhanvien.GioiTinh</td>
                             <td class="text-truncate">@nhanvien.NgaySinh</td>
                             <td class="text-truncate">@nhanvien.DienThoai</td>
                             <td class="text-truncate">@nhanvien.DiaChi</td>
                             <td class="text-truncate">@nhanvien.GhiChu</td>
                             <td class="text-truncate"><a asp-action="SuaNhanVien" asp-controller="NhanVien" asp-route-id="@nhanvien.MaNhanVien" class="btn btn-primary">Sửa</a></td>
-                                @using (Html.BeginForm("XoaNhanVien", "NhanVien", new { id = nhanvien.MaNhanVien }, FormMethod.Post))
-                                {
-                                    @Html.AntiForgeryToken()
+                            @using (Html.BeginForm("XoaNhanVien", "NhanVien", new { id = nhanvien.MaNhanVien }, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
                                 <td><input type="submit" value="Xóa" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');" /></td>
-                                }
+                            }
                         </tr>
-                        }
+                    }
                 </tbody>
             </table>
         </div>
@@ -217,6 +248,48 @@
 
 </div>
 
+
+
+
+
+<!-- Lớp đè lên và form thêm -->
+<div id="overlay" class="overlay">
+    <div class="form-container">
+        <h2>Thêm thông tin khách hàng</h2>
+        <form method="post" asp-action="ThemNhanVien" asp-controller="NhanVien">
+            <div class="border p-3 mt-4">
+                <div class="row pb-2">
+                    <h2>Thêm Nhân Viên</h2>
+                    <hr />
+                    <label>Mã Nhân Viên</label>
+                    <input name="MaNhanVien" class=form-control />
+                    <label>Tên Nhân Viên</label>
+                    <input name="TenNhanVien" class=form-control />
+                    <label>Giới Tính</label>
+
+                    <input name="GioiTinh" class=form-control />
+                    <label>Ngày Sinh</label>
+                    <input name="NgaySinh" class=form-control type="date" />
+                    <label>Điện Thoại</label>
+                    <input name="DienThoai" class=form-control /> 
+                    <label>Địa Chỉ</label>
+                    <input name="DiaChi" class=form-control />
+                    <label>Ghi Chú</label>
+                    <input name="GhiChu" class=form-control />
+                </div>
+              
+
+                <button type="submit" class="btn btn-primary">Create</button>
+                <a asp-controller="NhanVien" asp-action="Index" class="btn btn-primary">Back To List</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+
+
 <style>
     .btn-group-vertical .btn {
         text-align: left;
@@ -225,4 +298,20 @@
 
 
 
-</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var addButton = document.getElementById('addButton');
+        var overlay = document.getElementById('overlay');
+        var closeButton = document.getElementById('closeButton');
+
+        addButton.addEventListener('click', function () {
+            overlay.style.display = 'block';
+        });
+
+        closeButton.addEventListener('click', function () {
+            overlay.style.display = 'none';
+        });
+    });
+</script>
