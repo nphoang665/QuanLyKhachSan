@@ -1,0 +1,50 @@
+﻿.btn_color {
+    background-color: #279656;
+}
+
+.room {
+    height: 120px;
+    width: 220px;
+    background-color: forestgreen;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 10px
+}
+
+.room-number {
+    height: 40px;
+    width: 70px;
+    background-color: orange;
+    border-radius: 10px;
+    padding-top: 6px;
+    padding-left: 13px;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+}
+
+.text_type_room {
+    position: absolute;
+    top: 60px;
+    left: 10px;
+    font-size: 18px;
+}
+
+.text-price {
+    font-size: 11px;
+    position: absolute;
+    top: 90px;
+    left: 10px;
+}
+
+.icon-star {
+    margin-left: 160px;
+    font-size: 20px;
+}
+
+.icon-three-dot-vertical {
+    margin-left: 190px;
+    font-size: 20px;
+    position: absolute;
+    top: 0px
+}

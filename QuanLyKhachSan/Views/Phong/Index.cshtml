@@ -1,1 +1,296 @@
-﻿
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Booking</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<link href="~/css/Phong.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="container-fluid" id="tongquat">
+        <header>
+            <nav class="nav navbar">
+                <a class="btn btn-primary btn_color" href="#">
+                    <i class="bi bi-grid-3x3"></i>
+                    Sơ đồ
+                </a>
+                <a class="d-none"><i class="bi bi-search"></i></a>
+                <a><input type="checkbox" /> <label>Đang sử dụng</label></a>
+                <a> <input type="checkbox" /> <label>Phòng Trống</label></a>
+                <a class="d-none"><i class="bi bi-gear"></i></a>
+                <a class="btn btn-primary btn_color">Đặt Phòng</a>
+            </nav>
+        </header>
+
+        <h2>Tầng 1</h2>
+
+        <!-- Use Bootstrap's grid system to create responsive layout -->
+        <div class="row">
+            <!-- Each room is a column that will adjust its size based on the viewport -->
+            <!-- Room P.101 -->
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="room">
+                    <div class="room-number">
+                        <a>P.101</a>
+                    </div>
+                    <div class="icon">
+                        <div class="icon-star"><i class="bi bi-stars"></i></div>
+                        <div class="icon-three-dot-vertical"> <i class="bi bi-three-dots-vertical"></i></div>
+                    </div>
+                    <p class="text_type_room">Phòng Đơn</p>
+                    <p class="text-price">100.000/Giờ-500.000/Ngày-500.000/Đêm</p>
+
+                </div>
+            </div>
+
+            <!-- Room P.102 -->
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="room">
+                    <div class="room-number">
+                        <a>P.102</a>
+                    </div>
+                    <div class="icon">
+                        <div class="icon-star"><i class="bi bi-stars"></i></div>
+                        <div class="icon-three-dot-vertical"> <i class="bi bi-three-dots-vertical"></i></div>
+                    </div>
+                    <p class="text_type_room">Phòng Đơn</p>
+                    <p class="text-price">100.000/Giờ-500.000/Ngày-500.000/Đêm</p>
+                </div>
+            </div>
+            <!-- ... -->
+            <!-- Room P.103 -->
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="room">
+                    <div class="room-number">
+                        <a>P.103</a>
+                    </div>
+                    <div class="icon">
+                        <div class="icon-star"><i class="bi bi-stars"></i></div>
+                        <div class="icon-three-dot-vertical"> <i class="bi bi-three-dots-vertical"></i></div>
+                    </div>
+                    <p class="text_type_room">Phòng Đơn</p>
+                    <p class="text-price">100.000/Giờ-500.000/Ngày-500.000/Đêm</p>
+                </div>
+            </div>
+            <!-- ... -->
+            <!-- Room P.104 -->
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="room">
+                    <div class="room-number">
+                        <a>P.104</a>
+                    </div>
+                    <div class="icon">
+                        <div class="icon-star"><i class="bi bi-stars"></i></div>
+                        <div class="icon-three-dot-vertical"> <i class="bi bi-three-dots-vertical"></i></div>
+                    </div>
+                    <p class="text_type_room">Phòng Đơn</p>
+                    <p class="text-price">100.000/Giờ-500.000/Ngày-500.000/Đêm</p>
+                </div>
+                
+            </div>
+            <!-- ... -->
+            
+        </div>
+        <h2>Tầng 2</h2>
+        <div class="row">
+            <!-- Each room is a column that will adjust its size based on the viewport -->
+            <!-- Room P.101 -->
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="room">
+                    <div class="room-number">
+                        <a>P.201</a>
+                    </div>
+                    <div class="icon">
+                        <div class="icon-star"><i class="bi bi-stars"></i></div>
+                        <div class="icon-three-dot-vertical"> <i class="bi bi-three-dots-vertical"></i></div>
+                    </div>
+                    <p class="text_type_room">Phòng Đơn</p>
+                    <p class="text-price">100.000/Giờ-500.000/Ngày-500.000/Đêm</p>
+                </div>
+
+            </div>
+
+            <!-- Room P.102 -->
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="room">
+                    <div class="room-number">
+                        <a>P.202</a>
+                    </div>
+                    <div class="icon">
+                        <div class="icon-star"><i class="bi bi-stars"></i></div>
+                        <div class="icon-three-dot-vertical"> <i class="bi bi-three-dots-vertical"></i></div>
+                    </div>
+                        <p class="text_type_room">Phòng Đơn</p>
+                    <p class="text-price">100.000/Giờ-500.000/Ngày-500.000/Đêm</p>
+                </div>
+            </div>
+            <!-- ... -->
+            <!-- Room P.103 -->
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="room">
+                    <div class="room-number">
+                        <a>P.303</a>
+                    </div>
+                    <div class="icon">
+                        <div class="icon-star"><i class="bi bi-stars"></i></div>
+                        <div class="icon-three-dot-vertical"> <i class="bi bi-three-dots-vertical"></i></div>
+                    </div>
+                    <p class="text_type_room">Phòng Đơn</p>
+                    <p class="text-price">100.000/Giờ-500.000/Ngày-500.000/Đêm</p>
+                </div>
+            </div>
+            <!-- ... -->
+            <!-- Room P.104 -->
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="room">
+                    <div class="room-number">
+                        <a>P.404</a>
+                    </div>
+                    <div class="icon">
+                        <div class="icon-star"><i class="bi bi-stars"></i></div>
+                        <div class="icon-three-dot-vertical"> <i class="bi bi-three-dots-vertical"></i></div>
+                    </div>
+                    <p class="text_type_room">Phòng Đơn</p>
+                    <p class="text-price">100.000/Giờ-500.000/Ngày-500.000/Đêm</p>
+                </div>
+            </div>
+            <!-- ... -->
+
+        </div>
+        <h2>Tầng 3</h2>
+        <div class="row">
+            <!-- Each room is a column that will adjust its size based on the viewport -->
+            <!-- Room P.101 -->
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="room">
+                    <div class="room-number">
+                        <a>P.301</a>
+                    </div>
+                    <div class="icon">
+                        <div class="icon-star"><i class="bi bi-stars"></i></div>
+                        <div class="icon-three-dot-vertical"> <i class="bi bi-three-dots-vertical"></i></div>
+                        <p class="text_type_room">Phòng Đơn</p>
+                        <p class="text-price">100.000/Giờ-500.000/Ngày-500.000/Đêm</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room P.102 -->
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="room">
+                    <div class="room-number">
+                        <a>P.302</a>
+                    </div>
+                    <div class="icon">
+                        <div class="icon-star"><i class="bi bi-stars"></i></div>
+                        <div class="icon-three-dot-vertical"> <i class="bi bi-three-dots-vertical"></i></div>
+                    </div>
+                    <p class="text_type_room">Phòng Đơn</p>
+                    <p class="text-price">100.000/Giờ-500.000/Ngày-500.000/Đêm</p>
+                </div>
+            </div>
+            <!-- ... -->
+            <!-- Room P.103 -->
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="room">
+                    <div class="room-number">
+                        <a>P.303</a>
+                    </div>
+                    <div class="icon">
+                        <div class="icon-star"><i class="bi bi-stars"></i></div>
+                        <div class="icon-three-dot-vertical"> <i class="bi bi-three-dots-vertical"></i></div>
+                    </div>
+                    <p class="text_type_room">Phòng Đơn</p>
+                    <p class="text-price">100.000/Giờ-500.000/Ngày-500.000/Đêm</p>
+                </div>
+            </div>
+            <!-- ... -->
+            <!-- Room P.104 -->
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="room">
+                    <div class="room-number">
+                        <a>P.404</a>
+                    </div>
+                    <div class="icon">
+                        <div class="icon-star"><i class="bi bi-stars"></i></div>
+                        <div class="icon-three-dot-vertical"> <i class="bi bi-three-dots-vertical"></i></div>
+                    </div>
+                    <p class="text_type_room">Phòng Đơn</p>
+                    <p class="text-price">100.000/Giờ-500.000/Ngày-500.000/Đêm</p>
+                </div>
+            </div>
+            <!-- ... -->
+
+        </div>
+<h2>Tầng 4</h2>
+        <div class="row">
+            <!-- Each room is a column that will adjust its size based on the viewport -->
+            <!-- Room P.101 -->
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="room">
+                    <div class="room-number">
+                        <a>P.401</a>
+                    </div>
+                    <div class="icon">
+                        <div class="icon-star"><i class="bi bi-stars"></i></div>
+                        <div class="icon-three-dot-vertical"> <i class="bi bi-three-dots-vertical"></i></div>
+                    </div>
+                    <p class="text_type_room">Phòng Đơn</p>
+                    <p class="text-price">100.000/Giờ-500.000/Ngày-500.000/Đêm</p>
+                </div>
+            </div>
+
+            <!-- Room P.102 -->
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="room">
+                    <div class="room-number">
+                        <a>P.402</a>
+                    </div>
+                    <div class="icon">
+                        <div class="icon-star"><i class="bi bi-stars"></i></div>
+                        <div class="icon-three-dot-vertical"> <i class="bi bi-three-dots-vertical"></i></div>
+                    </div>
+                    <p class="text_type_room">Phòng Đơn</p>
+                    <p class="text-price">100.000/Giờ-500.000/Ngày-500.000/Đêm</p>
+                </div>
+            </div>
+            <!-- ... -->
+            <!-- Room P.103 -->
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="room">
+                    <div class="room-number">
+                        <a>P.403</a>
+                    </div>
+                    <div class="icon">
+                        <div class="icon-star"><i class="bi bi-stars"></i></div>
+                        <div class="icon-three-dot-vertical"> <i class="bi bi-three-dots-vertical"></i></div>
+                    </div>
+                    <p class="text_type_room">Phòng Đơn</p>
+                    <p class="text-price">100.000/Giờ-500.000/Ngày-500.000/Đêm</p>
+                </div>
+            </div>
+            <!-- ... -->
+            <!-- Room P.104 -->
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="room">
+                    <div class="room-number">
+                        <a>P.404</a>
+                    </div>
+                    <div class="icon">
+                        <div class="icon-star"><i class="bi bi-stars"></i></div>
+                        <div class="icon-three-dot-vertical"> <i class="bi bi-three-dots-vertical"></i></div>
+                    </div>
+                    <p class="text_type_room">Phòng Đơn</p>
+                    <p class="text-price">100.000/Giờ-500.000/Ngày-500.000/Đêm</p>
+                </div>
+            </div>
+            <!-- ... -->
+
+        </div>
+
+    </div>
+</body>
+</html>
