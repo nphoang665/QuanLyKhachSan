@@ -63,9 +63,9 @@
 
 
         <div class="col-md-9">
-            <button type="button" id="addButton" class="nav-link text-dark btn w-25 btn_them" asp-area="" asp-controller="KhachHang" asp-action="ThemKhachHang">Thêm Khách Hàng</button>
+            <button type="button" id="addButton" class="nav-link text-dark btn w-25 btn_them" asp-area="" asp-controller="KhachHang" asp-action="ThemKhachHang" style="margin-bottom:12px;">Thêm Khách Hàng</button>
 
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover " id="table_main">
                 <thead>
                     <tr>
                         <th width="100px" height="100%" class="text-center">Mã KH</th>
@@ -75,8 +75,8 @@
                         <th width="130px" height="100%" class="text-center">Điện thoại</th>
                         <th width="150px" height="100%" class="text-center">Địa chỉ</th>
                         <th width="100px" height="100%" class="text-center">Ghi chú</th>
-                        <th width="70px">Sửa</th>
-                        <th width="70px">Xóa</th>
+                        <th width="70px" class="text-center">Sửa</th>
+                        <th width="70px" class="text-center">Xóa</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -93,7 +93,7 @@
 
 
                             <td>
-                                <button type="button" class="btn btn-primary editButton" data-id="@khachHang.MaKhachHang">
+                                <button type="button" class="btn btn-primary editButton" data-id="@khachHang.MaKhachHang" style="margin-left:5px;">
                                 <i class="bi bi-pencil"></i>
                                 </button>
                             </td>
@@ -104,7 +104,7 @@
                             {
                                 @Html.AntiForgeryToken()
                                 <td>
-                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');">
+                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');" style="margin-left:5px;">
                                         <i class="bi bi-trash"></i>
                                     </button>
                                 </td>

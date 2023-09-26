@@ -58,7 +58,7 @@
         </div>
      
         <div class="col-md-9">
-            <button type="button" id="addButton" class="nav-link text-dark btn w-25 btn_them " asp-area="" asp-controller="NhanVien" asp-action="ThemNhanVien">Thêm Nhân Viên</button>
+            <button type="button" id="addButton" class="nav-link text-dark btn w-25 btn_them " asp-area="" asp-controller="NhanVien" asp-action="ThemNhanVien" style="margin-bottom:12px;">Thêm Nhân Viên</button>
 
 
 
@@ -72,8 +72,8 @@
                         <th class="text-center">Điện thoại</th>
                         <th class="text-center">Địa chỉ</th>
                         <th class="text-center">Ghi chú</th>
-                        <th class="text-center" width="80px">Sửa</th>
-                        <th class="text-center" width="80px">Xóa</th>
+                        <th class="text-center" width="70px">Sửa</th>
+                        <th class="text-center" width="70px">Xóa</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -89,7 +89,7 @@
                             <td class="text-truncate">@nhanvien.GhiChu</td>
 
                             <td>
-                                <button type="button" class="btn btn-primary editButton" data-id="@nhanvien.MaNhanVien">
+                                <button type="button" class="btn btn-primary editButton" data-id="@nhanvien.MaNhanVien" style="margin-left:5px;">
                                     <i class="bi bi-pencil"></i>
                                 </button>
                             </td>
@@ -98,7 +98,7 @@
                             {
                                 @Html.AntiForgeryToken()
                                 <td>
-                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');">
+                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');" style="margin-left:5px;">
                                         <i class="bi bi-trash"></i>
                                     </button>
                                 </td>
