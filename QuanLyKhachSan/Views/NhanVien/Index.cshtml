@@ -1,88 +1,11 @@
 ﻿ @model IEnumerable<QuanLyKhachSan.Model.NhanVien> 
- 
-  
-
 @{
     int currentPage = (int)ViewData["CurrentPageNhanVien"];
     int totalPages = (int)ViewData["TotalPagesNhanVien"];
     int numberOfPagesToShow = 3; // Số trang trung gian bạn muốn hiển thị
 }
-
-
-<style>
-    .container {
-        margin-top: 20px;
-        max-width: 5000px;
-    }
-
-    .row {
-        margin-bottom: 20px;
-    }
-
-    .col-md-3 {
-        padding-left: 20px;
-        padding-right: 20px;
-        border-right: 1px solid #ddd;
-    }
-
-    .card {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .card-header {
-        padding: 10px 20px;
-        background-color: #f7f7f7;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .card-body {
-        padding: 20px;
-    }
-
-    .table {
-        width: 100%;
-        table-layout: fixed;
-    }
-
-        .table th,
-        .table td {
-            padding: 10px;
-        }
-
-    .form-group {
-        margin-bottom: 10px;
-    }
-
-    .form-control {
-        width: 100%;
-    }
-    /* Lớp đè */
-    .overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); /* Màu nền độ mờ (sử dụng rgba để điều chỉnh độ trong suốt) */
-        z-index: 1000; /* Độ cao z để đảm bảo lớp đè hiển thị trên các phần tử khác */
-    }
-
-    /* Nội dung lớp đè */
-    .form-container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Đổ bóng cho lớp đè */
-        z-index: 1001; /* Độ cao z cao hơn lớp đè */
-    }
-</style>
-
+<link rel="stylesheet" href="~/css/css-min-all.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <div class="container">
     <div class="row">
         <div class="col-md-2">
@@ -95,9 +18,7 @@
                         <input type="text" class="form-control" id="tim-kiem" placeholder="Nhập từ khóa">
                     </div>
                 </div>
-            </div>
-
-
+            </div>  
 
 
             <div class="card w-100 bg-white">
@@ -134,27 +55,14 @@
                     </div>
                 </div>
             </div>
-
-
-
         </div>
-
-
-        <style>
-            .table td, .table th {
-                white-space: normal;
-                word-wrap: break-word;
-            }
-        </style>
+     
         <div class="col-md-9">
-            @* <a class="nav-link text-dark btn btn-primary  w-25" asp-area="" asp-controller="NhanVien" asp-action="ThemNhanVien">Thêm Nhân Viên</a> *@
-
-
-            <button type="button" id="addButton" class="nav-link text-dark btn btn-primary w-25" asp-area="" asp-controller="KhachHang" asp-action="ThemKhachHang">Thêm Khách Hàng</button>
+            <button type="button" id="addButton" class="nav-link text-dark btn w-25 btn_them " asp-area="" asp-controller="NhanVien" asp-action="ThemNhanVien">Thêm Nhân Viên</button>
 
 
 
-            <table class="table table-bordered">
+            <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th width="80px" class="text-center">Mã NV</th>
@@ -175,15 +83,25 @@
                             <td class="text-truncate">@nhanvien.MaNhanVien</td>
                             <td class="text-truncate">@nhanvien.TenNhanVien</td>
                             <td class="text-truncate">@nhanvien.GioiTinh</td>
-                            <td class="text-truncate">@nhanvien.NgaySinh</td>
+                            <td class="text-truncate">@nhanvien.NgaySinh.ToShortDateString()</td>
                             <td class="text-truncate">@nhanvien.DienThoai</td>
                             <td class="text-truncate">@nhanvien.DiaChi</td>
                             <td class="text-truncate">@nhanvien.GhiChu</td>
-                            <td class="text-truncate"><a asp-action="SuaNhanVien" asp-controller="NhanVien" asp-route-id="@nhanvien.MaNhanVien" class="btn btn-primary">Sửa</a></td>
+
+                            <td>
+                                <button type="button" class="btn btn-primary editButton" data-id="@nhanvien.MaNhanVien">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                            </td>
+
                             @using (Html.BeginForm("XoaNhanVien", "NhanVien", new { id = nhanvien.MaNhanVien }, FormMethod.Post))
                             {
                                 @Html.AntiForgeryToken()
-                                <td><input type="submit" value="Xóa" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');" /></td>
+                                <td>
+                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
                             }
                         </tr>
                     }
@@ -254,13 +172,15 @@
 
 <!-- Lớp đè lên và form thêm -->
 <div id="overlay" class="overlay">
+  
     <div class="form-container">
-        <h2>Thêm thông tin khách hàng</h2>
+        <button id="closeButton"><i class="bi bi-x-lg icon_x"></i></button>
+        
+        <h2>Thêm thông tin nhân viên</h2>
         <form method="post" asp-action="ThemNhanVien" asp-controller="NhanVien">
             <div class="border p-3 mt-4">
                 <div class="row pb-2">
-                    <h2>Thêm Nhân Viên</h2>
-                    <hr />
+       
                     <label>Mã Nhân Viên</label>
                     <input name="MaNhanVien" class=form-control />
                     <label>Tên Nhân Viên</label>
@@ -280,38 +200,47 @@
               
 
                 <button type="submit" class="btn btn-primary">Create</button>
-                <a asp-controller="NhanVien" asp-action="Index" class="btn btn-primary">Back To List</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+@* edit *@
+<div class="overlayEdit" id="overlayEdit">
+    <div class="form-containerEdit">
+        <button id="closeButtonEdit"><i class="bi bi-x-lg icon_x"></i></button>
+
+        <h2>Sửa thông tin nhân viên</h2>
+
+        <form method="post" asp-action="SuaNhanVien" asp-controller="NhanVien">
+            <div class="border p-3 mt-4">
+                <div class="row pb-2">
+
+                    <label>Mã Nhân Viên</label>
+                    <input name="MaNhanVienSua" class=form-control />
+                    <label>Tên Nhân Viên</label>
+                    <input name="TenNhanVienSua" class=form-control />
+                    <label>Giới Tính</label>
+
+                    <input name="GioiTinhSua" class=form-control />
+                    <label>Ngày Sinh</label>
+                    <input name="NgaySinhSua" class=form-control type="date" />
+                    <label>Điện Thoại</label>
+                    <input name="DienThoaiSua" class=form-control />
+                    <label>Địa Chỉ</label>
+                    <input name="DiaChiSua" class=form-control />
+                    <label>Ghi Chú</label>
+                    <input name="GhiChuSua" class=form-control />
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Edit</button>
             </div>
 
         </form>
     </div>
 </div>
 
+<script src="~/js/nhanvien.js" />
 
 
-
-<style>
-    .btn-group-vertical .btn {
-        text-align: left;
-    }
-</style>
-
-
-
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var addButton = document.getElementById('addButton');
-        var overlay = document.getElementById('overlay');
-        var closeButton = document.getElementById('closeButton');
-
-        addButton.addEventListener('click', function () {
-            overlay.style.display = 'block';
-        });
-
-        closeButton.addEventListener('click', function () {
-            overlay.style.display = 'none';
-        });
-    });
-</script>

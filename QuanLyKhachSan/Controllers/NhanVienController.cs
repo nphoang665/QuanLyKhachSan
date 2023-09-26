@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using QuanLyKhachSan.DataAcess.Data;
@@ -15,7 +16,7 @@ namespace QuanLyKhachSan.Controllers
         }
         public async Task<IActionResult> Index(int page = 1)
         {
-            int pageSize = 1;
+            int pageSize = 7;
             int totalKhachHangs = await _db.NhanViens.CountAsync();
             int totalPages = (int)Math.Ceiling((double)totalKhachHangs / pageSize);
 
@@ -53,29 +54,37 @@ namespace QuanLyKhachSan.Controllers
 
             if (ModelState.IsValid)
             {
+               
                 _db.NhanViens.Add(nhanvien);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(nhanvien);
         }
-        public IActionResult SuaNhanVien(string? id)
-        {
-            var nhanVienFromDb = _db.NhanViens.FirstOrDefault(s=>s.MaNhanVien == id);
-
-            return View(nhanVienFromDb);
-        }
+    
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult SuaNhanVien(NhanVien nv)
+        public async Task<IActionResult> SuaNhanVien()
         {
+            var formCollection = Request.Form;
+
+            var nhanvien = new NhanVien();
+            nhanvien.MaNhanVien = formCollection["MaNhanVienSua"];
+            nhanvien.TenNhanVien = formCollection["TenNhanVienSua"];
+            nhanvien.GioiTinh = formCollection["GioiTinhSua"];
+            nhanvien.NgaySinh = DateTime.Parse(formCollection["NgaySinhSua"]);
+            nhanvien.DienThoai = formCollection["DienThoaiSua"];
+            nhanvien.DiaChi = formCollection["DiaChiSua"];
+            nhanvien.GhiChu = formCollection["GhiChuSua"];
+
             if (ModelState.IsValid)
             {
-                _db.NhanViens.Update(nv);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
+
+                _db.NhanViens.Update(nhanvien);
+                await _db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            return View(nv);
+            return View(nhanvien);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

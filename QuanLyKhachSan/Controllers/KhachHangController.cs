@@ -14,7 +14,7 @@ namespace QuanLyKhachSan.Controllers
         }
         public async Task<IActionResult> Index(int page = 1)
         {
-            int pageSize = 1;
+            int pageSize = 7;
             int totalKhachHangs = await _db.KhachHangs.CountAsync();
             int totalPages = (int)Math.Ceiling((double)totalKhachHangs / pageSize);
 
@@ -35,36 +35,49 @@ namespace QuanLyKhachSan.Controllers
             return View(paginatedKhachHangs);
         }
 
-        public IActionResult ThemKhachHang()
-        {
-            return View();
-        }
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ThemKhachHang(KhachHang khachHang)
+        public async Task<IActionResult> ThemKhachHang()
         {
+                var formCollection = Request.Form;
+            var khachHang = new KhachHang();
+            khachHang.MaKhachHang = formCollection["MaKhachHang"];
+            khachHang.TenKhachHang = formCollection["TenKhachHang"];
+            khachHang.GioiTinh = formCollection["GioiTinh"];
+            khachHang.NgaySinh = DateTime.Parse(formCollection["NgaySinh"]);
+            khachHang.DienThoai = formCollection["DienThoai"];
+            khachHang.DiaChi = formCollection["DiaChi"];
+            khachHang.GhiChu = formCollection["GhiChu"];
             if (ModelState.IsValid)
             {
-                _db.Add(khachHang);
-                await _db.SaveChangesAsync();
+                _db.KhachHangs.Add(khachHang);
+                _db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             return View(khachHang);
         }
-        public IActionResult SuaKhachHang(string? id)
-        {
-          
-            var categoryFromDb = _db.KhachHangs.FirstOrDefault(s => s.MaKhachHang == id);
-
-            return View(categoryFromDb);
-        }
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult SuaKhachHang(KhachHang kh)
+        public async Task<IActionResult> SuaKhachHang()
         {
-            _db.KhachHangs.Update(kh);
-            _db.SaveChanges();
-            return RedirectToAction("Index","KhachHang");
+            var formCollection = Request.Form;
+            var khachHang = new KhachHang();
+            khachHang.MaKhachHang = formCollection["MaKhachHangSua"];
+            khachHang.TenKhachHang = formCollection["TenKhachHangSua"];
+            khachHang.GioiTinh = formCollection["GioiTinhSua"];
+            khachHang.NgaySinh = DateTime.Parse(formCollection["NgaySinhSua"]);
+            khachHang.DienThoai = formCollection["DienThoaiSua"];
+            khachHang.DiaChi = formCollection["DiaChiSua"];
+            khachHang.GhiChu = formCollection["GhiChuSua"];
+            if (ModelState.IsValid)
+            {
+                _db.KhachHangs.Update(khachHang);
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(khachHang);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

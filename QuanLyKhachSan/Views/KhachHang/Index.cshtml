@@ -5,62 +5,12 @@
     int totalPages = (int)ViewData["TotalPages"];
     int numberOfPagesToShow = 3; // Số trang trung gian bạn muốn hiển thị
 }
-
-<style>
-    .container {
-        margin-top: 20px;
-
-    }
-
-    .row {
-        margin-bottom: 20px;
-    }
-
-    .col-md-3 {
-        padding-left: 20px;
-        padding-right: 20px;
-        border-right: 1px solid #ddd;
-    }
-
-    .card {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .card-header {
-        padding: 10px 20px;
-        background-color: #f7f7f7;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .card-body {
-        padding: 20px;
-    }
-
-    .table {
-        width: 100%;
-        table-layout: fixed;
-    }
-
-        .table th,
-        .table td {
-            padding: 10px;
-        }
-
-    .form-group {
-        margin-bottom: 10px;
-    }
-
-    .form-control {
-        width: 100%;
-    }
-
-
-</style>
+<link rel="stylesheet" href="~/css/css-min-all.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">Tìm kiếm</h5>
@@ -109,31 +59,22 @@
                     </div>
                 </div>
             </div>
-
-
-
         </div>
 
-@*         Ba ô tìm kiếm
- *@        <style>
-            <style >
-            .table td, .table th {
-                white-space: normal;
-                word-wrap: break-word;
-            }
-        </style>
+
         <div class="col-md-9">
-            <a class="nav-link text-dark btn btn-primary w-25" asp-area="" asp-controller="KhachHang" asp-action="ThemKhachHang">Thêm Khách Hàng</a>
-            <table class="table">
+            <button type="button" id="addButton" class="nav-link text-dark btn w-25 btn_them" asp-area="" asp-controller="KhachHang" asp-action="ThemKhachHang">Thêm Khách Hàng</button>
+
+            <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th width="100px" height="100%">Mã KH</th>
-                        <th width="180px" height="100%">Tên KH</th>
-                        <th width="100px" height="100%">Giới tính</th>
-                        <th width="150px" height="100%">Ngày sinh</th>
-                        <th width="130px" height="100%">Điện thoại</th>
-                        <th width="150px" height="100%">Địa chỉ</th>
-                        <th width="100px" height="100%">Ghi chú</th>
+                        <th width="100px" height="100%" class="text-center">Mã KH</th>
+                        <th width="180px" height="100%" class="text-center">Tên KH</th>
+                        <th width="100px" height="100%" class="text-center">Giới tính</th>
+                        <th width="150px" height="100%" class="text-center">Ngày sinh</th>
+                        <th width="130px" height="100%" class="text-center">Điện thoại</th>
+                        <th width="150px" height="100%" class="text-center">Địa chỉ</th>
+                        <th width="100px" height="100%" class="text-center">Ghi chú</th>
                         <th width="70px">Sửa</th>
                         <th width="70px">Xóa</th>
                     </tr>
@@ -145,16 +86,29 @@
                             <td>@khachHang.MaKhachHang</td>
                             <td>@khachHang.TenKhachHang</td>
                             <td>@khachHang.GioiTinh</td>
-                            <td>@khachHang.NgaySinh</td>
+                            <td>@khachHang.NgaySinh.ToShortDateString()</td>
                             <td>@khachHang.DienThoai</td>
                             <td>@khachHang.DiaChi</td>
                             <td>@khachHang.GhiChu</td>
-                            <td><a asp-action="SuaKhachHang" asp-route-id="@khachHang.MaKhachHang" class="btn btn-primary">Sửa</a></td>
-                                @using (Html.BeginForm("XoaKhachHang", "KhachHang", new { id = khachHang.MaKhachHang }, FormMethod.Post))
-                                {
-                                    @Html.AntiForgeryToken()
-                                <td><input type="submit" value="Xóa" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');" /></td>
-                                }
+
+
+                            <td>
+                                <button type="button" class="btn btn-primary editButton" data-id="@khachHang.MaKhachHang">
+                                <i class="bi bi-pencil"></i>
+                                </button>
+                            </td>
+
+
+
+                            @using (Html.BeginForm("XoaKhachHang", "KhachHang", new { id = khachHang.MaKhachHang }, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <td>
+                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            }
                         </tr>
                         }
                 </tbody>
@@ -220,11 +174,81 @@
 
 </div>
 
-    <style>
-        .btn-group-vertical .btn {
-            text-align: left;
-        }
-    </style>
-   
+ 
 
+
+<!-- Lớp đè lên và form thêm -->
+<div id="overlay" class="overlay">
+    <div class="form-container">
+        <button id="closeButton"><i class="bi bi-x-lg icon_x"></i></button>
+
+        <h2>Thêm thông tin khách hàng</h2>
+
+        <form method="post" asp-action="ThemKhachHang" asp-controller="KhachHang">
+            <div class="border p-3 mt-4">
+                <div class="row pb-2">
+         
+                    <label>Mã Khách Hàng</label>
+                    <input name="MaKhachHang" class=form-control />
+                    <label>Tên Khách Hàng</label>
+                    <input name="TenKhachHang" class=form-control />
+                    <label>Giới Tính</label>
+
+                    <input name="GioiTinh" class=form-control />
+                    <label>Ngày Sinh</label>
+                    <input name="NgaySinh" class=form-control type="date" />
+                    <label>Điện Thoại</label>
+                    <input name="DienThoai" class=form-control />
+                    <label>Địa Chỉ</label>
+                    <input name="DiaChi" class=form-control />
+                    <label>Ghi Chú</label>
+                    <input name="GhiChu" class=form-control />
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+
+        </form>
+    </div>
 </div>
+@* edit *@
+<div class="overlayEdit" id="overlayEdit">
+    <div class="form-containerEdit">
+        <button id="closeButtonEdit"><i class="bi bi-x-lg icon_x"></i></button>
+
+        <h2>Sửa thông tin khách hàng</h2>
+
+        <form method="post" asp-action="SuaKhachHang" asp-controller="KhachHang">
+            <div class="border p-3 mt-4">
+                <div class="row pb-2">
+
+                    <label>Mã Khách Hàng</label>
+                    <input name="MaKhachHangSua" class=form-control />
+                    <label>Tên Khách Hàng</label>
+                    <input name="TenKhachHangSua" class=form-control />
+                    <label>Giới Tính</label>
+
+                    <input name="GioiTinhSua" class=form-control />
+                    <label>Ngày Sinh</label>
+                    <input name="NgaySinhSua" class=form-control type="date" />
+                    <label>Điện Thoại</label>
+                    <input name="DienThoaiSua" class=form-control />
+                    <label>Địa Chỉ</label>
+                    <input name="DiaChiSua" class=form-control />
+                    <label>Ghi Chú</label>
+                    <input name="GhiChuSua" class=form-control />
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+ 
+
+
+<script src="~/js/pop-up.js"/>
