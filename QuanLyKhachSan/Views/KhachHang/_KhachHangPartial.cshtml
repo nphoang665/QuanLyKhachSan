@@ -1,0 +1,50 @@
+﻿@model IEnumerable<QuanLyKhachSan.Model.KhachHang>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th width="100px" height="100%" class="text-center">Mã KH</th>
+            <th width="180px" height="100%" class="text-center">Tên KH</th>
+            <th width="100px" height="100%" class="text-center">Giới tính</th>
+            <th width="150px" height="100%" class="text-center">Ngày sinh</th>
+            <th width="130px" height="100%" class="text-center">Điện thoại</th>
+            <th width="150px" height="100%" class="text-center">Địa chỉ</th>
+            <th width="100px" height="100%" class="text-center">Ghi chú</th>
+            <th width="70px" class="text-center">Sửa</th>
+            <th width="70px" class="text-center">Xóa</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var khachHang in Model)
+        {
+            <tr>
+                <td>@khachHang.MaKhachHang</td>
+                <td>@khachHang.TenKhachHang</td>
+                <td>@khachHang.GioiTinh</td>
+                <td>@khachHang.NgaySinh.ToShortDateString()</td>
+                <td>@khachHang.DienThoai</td>
+                <td>@khachHang.DiaChi</td>
+                <td>@khachHang.GhiChu</td>
+
+
+                <td>
+                    <button type="button" class="btn btn-primary editButton" data-id="@khachHang.MaKhachHang" style="margin-left:5px;">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                </td>
+
+
+
+                @using (Html.BeginForm("XoaKhachHang", "KhachHang", new { id = khachHang.MaKhachHang }, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <td>
+                        <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');" style="margin-left:5px;">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

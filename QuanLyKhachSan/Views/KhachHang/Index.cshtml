@@ -8,16 +8,28 @@
 <link rel="stylesheet" href="~/css/css-min-all.css"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
+
+
 <div class="container">
     <div class="row">
         <div class="col-md-2">
-            <div class="card">
+            @* <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">Tìm kiếm</h5>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
                         <input type="text" class="form-control" id="tim-kiem" placeholder="Nhập từ khóa">
+                    </div>
+                </div>
+            </div> *@
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Tìm kiếm</h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="searchText" placeholder="Nhập từ khóa">
                     </div>
                 </div>
             </div>
@@ -249,6 +261,49 @@
 </div>
 
  
+@* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Xử lý sự kiện khi nhấn nút Tìm kiếm
+        $("#searchButton").click(function () {
+            var searchText = $("#searchText").val();
+            $.ajax({
+                url: "/KhachHang/Search",
+                type: "GET",
+                data: { searchText: searchText },
+                success: function (result) {
+                    $("#table_main tbody").empty(); // Xóa dữ liệu hiện tại
+                    $("#table_main tbody").html(result); // Hiển thị kết quả tìm kiếm mới
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script> *@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Xử lý sự kiện khi nhập vào textbox
+        $("#searchText").on("input", function () {
+            var searchText = $(this).val();
+            $.ajax({
+                url: "/KhachHang/Search",
+                type: "GET",
+                data: { searchText: searchText },
+                success: function (result) {
+                    $("#table_main tbody").empty(); // Xóa dữ liệu hiện tại
+                    $("#table_main tbody").html(result); // Hiển thị kết quả tìm kiếm mới
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script>
+
 
 
 <script src="~/js/pop-up.js"/>
