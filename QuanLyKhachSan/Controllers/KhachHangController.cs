@@ -96,11 +96,20 @@ namespace QuanLyKhachSan.Controllers
          [HttpGet]
         public async Task<IActionResult> Search(string searchText)
         {
-            var khachHangs = await _db.KhachHangs
+            var allkhachhang = _db.KhachHangs.ToList();
+            if (searchText == null)
+            {
+                return PartialView("_KhachHangPartial", allkhachhang);
+            }
+            else
+            {
+ var khachHangs = await _db.KhachHangs
                 .Where(kh => kh.TenKhachHang.Contains(searchText)) // Thay ".TenKhachHang" bằng thuộc tính bạn muốn tìm kiếm
                 .ToListAsync();
 
             return PartialView("_KhachHangPartial", khachHangs); // Trả về một PartialView chứa kết quả tìm kiếm
+            }
+           
         }
 
     }
