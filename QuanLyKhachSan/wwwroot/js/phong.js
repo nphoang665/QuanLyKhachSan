@@ -17,7 +17,7 @@ var checkOutInput = document.querySelector('input[name="NgayTra"]');
 
 function updateDuration() {
 
-    var kiemtra = document.getElementsByClassName('combo_Gio_Ngay');
+    var kiemtra = document.getElementById('combo_Gio_Ngay');
     if (kiemtra.value == 'Gio') {
         var checkInDate = new Date(checkInInput.value);
         var checkOutDate = new Date(checkOutInput.value);
