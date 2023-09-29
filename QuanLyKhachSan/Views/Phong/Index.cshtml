@@ -300,7 +300,7 @@
 			<button id="closeButton"><i class="bi bi-x-lg icon_x"></i></button>
 
 			<h2>Đặt nhận phòng</h2>
-			<input type="text" placeholder="Tìm khách hàng" id="search_client_popup"></input>
+			<input type="text" placeholder="Tìm khách hàng" id="search_client_popup"/>
 			<table class="table">
 				<thead>
 					<tr>
@@ -343,7 +343,7 @@
 							</select>
 						</td>
 						<td>
-							<select class="combo">
+							<select class="combo_Gio_Ngay">
 								<option value="Gio"> Giờ  </option>
 								<option value="Ngay"> Ngày </option>
 
@@ -352,13 +352,13 @@
 							</select>
 						</td>
 						<td>
-						<input type="datetime-local"  />
+						<input type="datetime-local" name="NgayNhan" />
 						</td>
 						<td>
-							<input type="datetime-local" />
+							<input type="datetime-local" name="NgayTra"/>
 						</td>
-						<td>0 giờ</td>
-						<td>000.000</td>
+						<td class="duration">0 giờ</td>
+						<td class="thanhtien">000.000</td>
 					</tr>
 				</tbody>
 			</table>
@@ -374,7 +374,7 @@
 			
                 <input value="0" class="input_khachhang_thanhtoan">
             </div>
-            <button class="confirm-button">Nhận Phòng</button>
+            <button type="submit" class="confirm-button">Nhận Phòng</button>
             <button class="cancel-button">Đặt Trước</button>
 		
 		</div>

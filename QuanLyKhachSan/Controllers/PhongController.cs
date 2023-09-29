@@ -8,5 +8,6 @@ namespace QuanLyKhachSan.Controllers
         {
             return View();
         }
+      
     }
 }
