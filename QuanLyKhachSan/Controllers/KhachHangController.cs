@@ -92,11 +92,25 @@ namespace QuanLyKhachSan.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult XoaKhachHangPartical(string? id)
+        {
+            var kh = _db.KhachHangs.FirstOrDefault(s => s.MaKhachHang == id);
+            if (kh == null)
+            {
+                return NotFound();
+            }
+            _db.KhachHangs.Remove(kh);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
-         [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> Search(string searchText)
         {
             var allkhachhang = _db.KhachHangs.ToList();
+       
             if (searchText == null)
             {
                 return PartialView("_KhachHangPartial", allkhachhang);
@@ -104,7 +118,7 @@ namespace QuanLyKhachSan.Controllers
             else
             {
  var khachHangs = await _db.KhachHangs
-                .Where(kh => kh.TenKhachHang.Contains(searchText)) // Thay ".TenKhachHang" bằng thuộc tính bạn muốn tìm kiếm
+                .Where(kh => kh.TenKhachHang.Contains(searchText.Trim())) // Thay ".TenKhachHang" bằng thuộc tính bạn muốn tìm kiếm
                 .ToListAsync();
 
             return PartialView("_KhachHangPartial", khachHangs); // Trả về một PartialView chứa kết quả tìm kiếm

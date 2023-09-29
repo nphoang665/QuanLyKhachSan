@@ -1,29 +1,29 @@
 ﻿@model IEnumerable<QuanLyKhachSan.Model.KhachHang>
-
 <table class="table table-bordered table-hover">
-  
+   
     <tbody>
-        @foreach (var khachHang in Model)
+        @foreach (var khachHang1 in Model)
         {
-            <tr>
-                <td>@khachHang.MaKhachHang</td>
-                <td>@khachHang.TenKhachHang</td>
-                <td>@khachHang.GioiTinh</td>
-                <td>@khachHang.NgaySinh.ToShortDateString()</td>
-                <td>@khachHang.DienThoai</td>
-                <td>@khachHang.DiaChi</td>
-                <td>@khachHang.GhiChu</td>
+          
+                <tr>
+                    <td>@khachHang1.MaKhachHang</td>
+                    <td>@khachHang1.TenKhachHang</td>
+                    <td>@khachHang1.GioiTinh</td>
+                    <td>@khachHang1.NgaySinh.ToShortDateString()</td>
+                    <td>@khachHang1.DienThoai</td>
+                    <td>@khachHang1.DiaChi</td>
+                    <td>@khachHang1.GhiChu</td>
 
 
-                <td>
-                    <button type="button" class="btn btn-primary editButton" data-id="@khachHang.MaKhachHang" style="margin-left:5px;">
-                        <i class="bi bi-pencil"></i>
-                    </button>
-                </td>
+                    <td>
+                        <button type="button" class="btn btn-primary editButton" data-id="@khachHang1.MaKhachHang" style="margin-left:5px;">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                    </td>
 
 
 
-                @using (Html.BeginForm("XoaKhachHang", "KhachHang", new { id = khachHang.MaKhachHang }, FormMethod.Post))
+                @using (Html.BeginForm("XoaKhachHangPartical", "KhachHang", new { id = khachHang1.MaKhachHang }, FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
                     <td>
@@ -32,7 +32,9 @@
                         </button>
                     </td>
                 }
-            </tr>
-        }
+                </tr>      
+                }
     </tbody>
+  
+
 </table>
