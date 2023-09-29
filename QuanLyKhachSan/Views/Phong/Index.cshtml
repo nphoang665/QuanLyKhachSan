@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@model DatPhong
+
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -295,16 +298,18 @@
 
 	</div>
 	@* popup *@
+
 	<div class="overlay" id="overlay">
 		<div class="form-container">
 			<button id="closeButton"><i class="bi bi-x-lg icon_x"></i></button>
-
+			<form method="post">
 			<h2>Đặt nhận phòng</h2>
 			<input type="text" placeholder="Tìm khách hàng" id="search_client_popup"/>
 			<table class="table">
 				<thead>
 					<tr>
 						<th >Hạng Phòng</th>
+						<th>Mã Khách Hàng</th>
 						<th>Phòng</th>
 						<th>Hình Thức</th>
 						<th>Ngày Nhận</th>
@@ -316,12 +321,24 @@
 
 				<tbody>
 					<tr>
-						<td>
-							Phòng đơn
-
+							<td>
+                              <select class="combo" asp-for="HangPhong">
+								  <option value="PhongDon">Phòng Đơn</option>
+									<option value="PhongDoi">Phòng Đôi</option>
+							  </select>
+						
 						</td>
 						<td>
-							<select class="combo">
+							<select class="combo"  asp-for="MaKhachHang">
+								<option value="KH001"> KH001</option>
+								<option value="KH002"> KH002 </option>
+								<option value="KH003"> KH003 </option>
+								<option value="KH004"> KH004 </option>
+								<option value="KH005"> KH005 </option>
+							</select>
+						</td>
+						<td>
+							<select class="combo" asp-for="Phong">
 
 								<option value="101"> P.101 </option>
 								<option value="102"> P.102 </option>
@@ -343,7 +360,7 @@
 							</select>
 						</td>
 						<td>
-							<select class="combo_Gio_Ngay">
+							<select id="combo_Gio_Ngay" asp-for="HinhThuc">
 								<option value="Gio"> Giờ  </option>
 								<option value="Ngay"> Ngày </option>
 
@@ -352,13 +369,19 @@
 							</select>
 						</td>
 						<td>
-						<input type="datetime-local" name="NgayNhan" />
+						<input type="datetime-local" name="NgayNhan" asp-for="NgayNhan" />
 						</td>
 						<td>
-							<input type="datetime-local" name="NgayTra"/>
+							<input type="datetime-local" name="NgayTra" asp-for="NgayTra"/>
 						</td>
-						<td class="duration">0 giờ</td>
-						<td class="thanhtien">000.000</td>
+							<td class="duration">
+								<label asp-for="DuKien">giờ</label>
+							
+							</td>
+							<td class="thanhtien">
+								<label asp-for="ThanhTien">000.000</label>
+								
+							</td>
 					</tr>
 				</tbody>
 			</table>
@@ -374,9 +397,9 @@
 			
                 <input value="0" class="input_khachhang_thanhtoan">
             </div>
-            <button type="submit" class="confirm-button">Nhận Phòng</button>
+            <button type="submit" class="confirm-button" asp-action="NhanPhong" asp-controller="Phong">Nhận Phòng</button>
             <button class="cancel-button">Đặt Trước</button>
-		
+			</form>
 		</div>
 	
 	</div>

@@ -18,5 +18,6 @@ namespace QuanLyKhachSan.DataAcess.Data
         public DbSet<TaiKhoan> TaiKhoan { get; set; }
         public DbSet<KhachHang> KhachHangs { get; set; }
         public DbSet<NhanVien> NhanViens { get; set; }
+        public DbSet<DatPhong> DatPhongs { get; set; }
     }
 }
