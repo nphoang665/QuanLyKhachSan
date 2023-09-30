@@ -26,12 +26,12 @@ namespace QuanLyKhachSan.Controllers
             nhanphong.HinhThuc = HinhThuc;
             nhanphong.NgayNhan = Ngaynhan;
             nhanphong.NgayTra = NgayTra;
-            nhanphong.DuKien = "1";
-            nhanphong.ThanhTien = 10000;
+            nhanphong.DuKien = DuKien;
+            nhanphong.ThanhTien = ThanhTien;
             
             _db.DatPhongs.Add(nhanphong);
             _db.SaveChanges();
-            return View(nhanphong);
+            return RedirectToAction("Index");
         }
     }
 }

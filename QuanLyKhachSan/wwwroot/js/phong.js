@@ -17,29 +17,36 @@ var checkOutInput = document.querySelector('input[name="NgayTra"]');
 
 function updateDuration() {
 
-    var kiemtra = document.getElementById('combo_Gio_Ngay');
+    var kiemtra = document.querySelector('.combo_Gio_Ngay');
+
     if (kiemtra.value == 'Gio') {
         var checkInDate = new Date(checkInInput.value);
         var checkOutDate = new Date(checkOutInput.value);
 
         var duration = (checkOutDate - checkInDate) / 1000 / 60 / 60;
-        var thanhtien = duration * 10000;
+        var thanhtien = duration * 100000;
 
-        document.querySelector('.duration').textContent = duration + ' giờ';
-        document.querySelector('.thanhtien').textContent = thanhtien;
+        document.getElementById('dukien').value = duration + ' giờ';
+        document.getElementById('thanhtien').value = thanhtien;
         document.querySelector('.tien_khachhang_tra').textContent = thanhtien;
+        document.getElementById('labelDuKien').textContent = document.getElementById('dukien').value;
+        document.getElementById('lableThanhTien').textContent = document.getElementById('thanhtien').value;
+
     }
     else {
         var checkInDate = new Date(checkInInput.value);
         var checkOutDate = new Date(checkOutInput.value);
 
-        var duration = (checkOutDate - checkInDate) / 1000 / 60 / 60/24;
-        var thanhtien = duration * 10000;
+        var duration = (checkOutDate - checkInDate) / 1000 / 60 / 60 / 24;
+        var thanhtien = duration * 500000;
 
-        document.querySelector('.duration').textContent = duration + ' ngày';
-        document.querySelector('.thanhtien').textContent = thanhtien;
+        document.getElementById('dukien').value = duration + ' ngày';
+        document.getElementById('thanhtien').value = thanhtien;
         document.querySelector('.tien_khachhang_tra').textContent = thanhtien;
+        document.getElementById('labelDuKien').textContent = document.getElementById('dukien').value;
+        document.getElementById('lableThanhTien').textContent = document.getElementById('thanhtien').value;
     }
+
    
 
    

@@ -308,6 +308,7 @@
 			<table class="table">
 				<thead>
 					<tr>
+					
 						<th >Hạng Phòng</th>
 						<th>Mã Khách Hàng</th>
 						<th>Phòng</th>
@@ -360,7 +361,7 @@
 							</select>
 						</td>
 						<td>
-							<select class="combo_Gio_Ngay">
+							<select class="combo_Gio_Ngay" asp-for="HinhThuc">
 								<option value="Gio"> Giờ  </option>
 								<option value="Ngay"> Ngày </option>
 
@@ -375,12 +376,13 @@
 							<input type="datetime-local" name="NgayTra" asp-for="NgayTra"/>
 						</td>
 							<td class="duration">
-								<label asp-for="DuKien">giờ</label>
-							
+								<label asp-for="DuKien" id="labelDuKien">0 giờ</label>
+							<input type="hidden" asp-for="DuKien" id="dukien"/>
 							</td>
 							<td class="thanhtien">
-								<label asp-for="ThanhTien">000.000</label>
-								
+								<label asp-for="ThanhTien" id="lableThanhTien">000.000</label>
+								<input type="hidden" asp-for="ThanhTien" id="thanhtien"/>
+
 							</td>
 					</tr>
 				</tbody>
