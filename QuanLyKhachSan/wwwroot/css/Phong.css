@@ -145,3 +145,6 @@
 .combo{
     width:100px;
 }
+.room.booked {
+    background-color: red; 
+}

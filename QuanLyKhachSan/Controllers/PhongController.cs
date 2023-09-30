@@ -14,7 +14,9 @@ namespace QuanLyKhachSan.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+			var bookedRooms = _db.DatPhongs.Select(p => p.Phong).ToList();
+			ViewBag.BookedRooms = bookedRooms;
+			return View();
         }
         [HttpPost]
         public IActionResult NhanPhong(string HangPhong,string MaKhachHang,string Phong, string HinhThuc,DateTime Ngaynhan,DateTime NgayTra,string DuKien, double ThanhTien)
