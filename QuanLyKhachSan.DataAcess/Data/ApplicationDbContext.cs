@@ -19,5 +19,7 @@ namespace QuanLyKhachSan.DataAcess.Data
         public DbSet<KhachHang> KhachHangs { get; set; }
         public DbSet<NhanVien> NhanViens { get; set; }
         public DbSet<DatPhong> DatPhongs { get; set; }
-    }
+		public DbSet<Room> Phong { get; set; }
+
+	}
 }

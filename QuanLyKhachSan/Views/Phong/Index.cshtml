@@ -3,28 +3,7 @@
 
 @{
 	
-	var rooms = new List<Room> {
-		new Room { Number = "101", Type = "Phòng Đơn", Price = "100.000/Giờ-500.000/Ngày-500.000/Đêm" },
-		new Room { Number = "102", Type = "Phòng Đơn", Price = "100.000/Giờ-500.000/Ngày-500.000/Đêm" },
-	  new Room { Number = "103", Type = "Phòng Đơn", Price = "100.000/Giờ-500.000/Ngày-500.000/Đêm" },
-		new Room { Number = "104", Type = "Phòng Đơn", Price = "100.000/Giờ-500.000/Ngày-500.000/Đêm" },
-
-
-			new Room { Number = "201", Type = "Phòng Đơn", Price = "100.000/Giờ-500.000/Ngày-500.000/Đêm" },
-		new Room { Number = "202", Type = "Phòng Đơn", Price = "100.000/Giờ-500.000/Ngày-500.000/Đêm" },
-	  new Room { Number = "203", Type = "Phòng Đơn", Price = "100.000/Giờ-500.000/Ngày-500.000/Đêm" },
-		new Room { Number = "204", Type = "Phòng Đơn", Price = "100.000/Giờ-500.000/Ngày-500.000/Đêm" },
-
-			new Room { Number = "301", Type = "Phòng Đơn", Price = "100.000/Giờ-500.000/Ngày-500.000/Đêm" },
-		new Room { Number = "302", Type = "Phòng Đơn", Price = "100.000/Giờ-500.000/Ngày-500.000/Đêm" },
-	  new Room { Number = "303", Type = "Phòng Đơn", Price = "100.000/Giờ-500.000/Ngày-500.000/Đêm" },
-		new Room { Number = "304", Type = "Phòng Đơn", Price = "100.000/Giờ-500.000/Ngày-500.000/Đêm" },
-
-			new Room { Number = "401", Type = "Phòng Đơn", Price = "100.000/Giờ-500.000/Ngày-500.000/Đêm" },
-		new Room { Number = "402", Type = "Phòng Đơn", Price = "100.000/Giờ-500.000/Ngày-500.000/Đêm" },
-	  new Room { Number = "403", Type = "Phòng Đơn", Price = "100.000/Giờ-500.000/Ngày-500.000/Đêm" },
-		new Room { Number = "404", Type = "Phòng Đơn", Price = "100.000/Giờ-500.000/Ngày-500.000/Đêm" },
-    };
+	
 	var bookedRooms = ViewBag.BookedRooms as List<string>;
 }
 
@@ -58,10 +37,10 @@
 
 		<h2>Tầng 1</h2>
 		<div class="row">
-			@foreach (var room in rooms)
+			@foreach (var room in ViewBag.Rooms)
 			{
 				var roomClass = "room";
-				if (ViewBag.BookedRooms.Contains(room.Number))
+				if (bookedRooms.Contains(room.Number))
 				{
 					roomClass += " booked";
 				}

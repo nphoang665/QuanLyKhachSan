@@ -14,6 +14,8 @@ namespace QuanLyKhachSan.Controllers
         }
         public IActionResult Index()
         {
+			var rooms = _db.Phong.ToList();
+			ViewBag.Rooms = rooms;
 			var bookedRooms = _db.DatPhongs.Select(p => p.Phong).ToList();
 			ViewBag.BookedRooms = bookedRooms;
 			return View();
