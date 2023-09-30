@@ -12,8 +12,8 @@ using QuanLyKhachSan.DataAcess.Data;
 namespace QuanLyKhachSan.DataAcess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230924022120_addNhanVienToDb")]
-    partial class addNhanVienToDb
+    [Migration("20230930131118_addDatabase")]
+    partial class addDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,48 @@ namespace QuanLyKhachSan.DataAcess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("QuanLyKhachSan.Model.DatPhong", b =>
+                {
+                    b.Property<string>("MaDatPhong")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("DuKien")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("GiaPhong")
+                        .HasColumnType("float");
+
+                    b.Property<string>("HangPhong")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HinhThuc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaKhachHang")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("NgayNhan")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("NgayTra")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Phong")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("ThanhTien")
+                        .HasColumnType("float");
+
+                    b.HasKey("MaDatPhong");
+
+                    b.ToTable("DatPhongs");
+                });
 
             modelBuilder.Entity("QuanLyKhachSan.Model.KhachHang", b =>
                 {
@@ -89,6 +131,37 @@ namespace QuanLyKhachSan.DataAcess.Migrations
                     b.HasKey("MaNhanVien");
 
                     b.ToTable("NhanViens");
+                });
+
+            modelBuilder.Entity("QuanLyKhachSan.Model.Room", b =>
+                {
+                    b.Property<string>("MaPhong")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("GhiChu")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("GiaTheoGio")
+                        .HasColumnType("float");
+
+                    b.Property<double>("GiaTheoNgay")
+                        .HasColumnType("float");
+
+                    b.Property<double>("GiaTheoQuaDem")
+                        .HasColumnType("float");
+
+                    b.Property<string>("HangPhong")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("KhuVuc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MaPhong");
+
+                    b.ToTable("Phong");
                 });
 
             modelBuilder.Entity("QuanLyKhachSan.Model.TaiKhoan", b =>

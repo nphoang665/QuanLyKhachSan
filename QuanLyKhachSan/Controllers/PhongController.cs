@@ -16,20 +16,24 @@ namespace QuanLyKhachSan.Controllers
         {
 			var rooms = _db.Phong.ToList();
 			ViewBag.Rooms = rooms;
+            var khachhangs= _db.KhachHangs.ToList();
+            ViewBag.KhachHangs = khachhangs;
 			var bookedRooms = _db.DatPhongs.Select(p => p.Phong).ToList();
 			ViewBag.BookedRooms = bookedRooms;
 			return View();
         }
         [HttpPost]
-        public IActionResult NhanPhong(string HangPhong,string MaKhachHang,string Phong, string HinhThuc,DateTime Ngaynhan,DateTime NgayTra,string DuKien, double ThanhTien)
+        public IActionResult NhanPhong(string MaDatPhong, string Phong, string HangPhong, string MaKhachHang, string HinhThuc, float GiaPhong,DateTime NgayNhan,DateTime NgayTra,string DuKien, float ThanhTien )
         {
             var nhanphong = new DatPhong();
+          nhanphong.MaDatPhong = MaDatPhong;
+            nhanphong.Phong = Phong;
             nhanphong.HangPhong = HangPhong;
             nhanphong.MaKhachHang = MaKhachHang;
-            nhanphong.Phong= Phong;
             nhanphong.HinhThuc = HinhThuc;
-            nhanphong.NgayNhan = Ngaynhan;
-            nhanphong.NgayTra = NgayTra;
+            nhanphong.GiaPhong = GiaPhong;
+            nhanphong.NgayNhan  = NgayNhan;
+            nhanphong.NgayNhan = NgayTra;
             nhanphong.DuKien = DuKien;
             nhanphong.ThanhTien = ThanhTien;
             

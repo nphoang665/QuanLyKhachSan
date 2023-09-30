@@ -2,9 +2,10 @@
 <link href="~/css/Phong.css" rel="stylesheet" />
 
 @{
-	
-	
+
+
 	var bookedRooms = ViewBag.BookedRooms as List<string>;
+	var khachHangDatPhong = ViewBag.KhachHangs as List<string>;
 }
 
 <!DOCTYPE html>
@@ -40,7 +41,7 @@
 			@foreach (var room in ViewBag.Rooms)
 			{
 				var roomClass = "room";
-				if (bookedRooms.Contains(room.Number))
+				if (bookedRooms.Contains(room.MaPhong))
 				{
 					roomClass += " booked";
 				}
@@ -48,14 +49,14 @@
 				<div class="col-sm-6 col-md-4 col-lg-3">
 					<div class="@roomClass">
 						<div class="room-number">
-							<a>@room.Number</a>
+							<a>P.@room.MaPhong</a>
 						</div>
 						<div class="icon">
 							<div class="icon-star"><i class="bi bi-stars"></i></div>
 							<div class="icon-three-dot-vertical"> <i class="bi bi-three-dots-vertical"></i></div>
 						</div>
-						<p class="text_type_room">@room.Type</p>
-						<p class="text-price">@room.Price</p>
+						<p class="text_type_room">@room.HangPhong</p>
+						<p class="text-price">@room.GiaTheoNgay</p>
 					</div>
 				</div>
 			}
@@ -70,15 +71,15 @@
 			<button id="closeButton"><i class="bi bi-x-lg icon_x"></i></button>
 			<form method="post">
 			<h2>Đặt nhận phòng</h2>
-			<input type="text" placeholder="Tìm khách hàng" id="search_client_popup"/>
-			<table class="table">
+			<table class="table table-bordered">
 				<thead>
 					<tr>
-					
-						<th >Hạng Phòng</th>
-						<th>Mã Khách Hàng</th>
+						<th >Mã DP</th>
 						<th>Phòng</th>
+						<th>Hạng Phòng</th>
+						<th>Mã KH</th>
 						<th>Hình Thức</th>
+						<th>Giá Phòng</th>
 						<th>Ngày Nhận</th>
 						<th>Trả Phòng</th>
 						<th>Dự Kiến</th>
@@ -88,63 +89,77 @@
 
 				<tbody>
 					<tr>
+						@* Mã đặt phòng *@
+							<td><input asp-for="MaDatPhong" style="width:100px" /></td>
 							<td>
-                              <select class="combo" asp-for="HangPhong">
+								@* Phòng *@
+								<select class="combo" asp-for="Phong" style="width:60px">
+
+									<option value="101"> P.101 </option>
+									<option value="102"> P.102 </option>
+									<option value="103"> P.103 </option>
+									<option value="104"> P.104 </option>
+									<option value="201"> P.201 </option>
+									<option value="202"> P.202 </option>
+									<option value="203"> P.203 </option>
+									<option value="204"> P.204 </option>
+									<option value="301"> P.301 </option>
+									<option value="302"> P.302 </option>
+									<option value="303"> P.303 </option>
+									<option value="304"> P.304 </option>
+									<option value="401"> P.401 </option>
+									<option value="402"> P.402 </option>
+									<option value="403"> P.403 </option>
+									<option value="404"> P.404 </option>
+
+								</select>
+							</td>
+							@* Hạng Phòng *@
+							<td>
+                              <select style="width:110px" class="combo" asp-for="HangPhong" >
 								  <option value="PhongDon">Phòng Đơn</option>
 									<option value="PhongDoi">Phòng Đôi</option>
 							  </select>
 						
 						</td>
+						@* mã khách hàng *@
 						<td>
-							<select class="combo"  asp-for="MaKhachHang">
-								<option value="KH001"> KH001</option>
-								<option value="KH002"> KH002 </option>
-								<option value="KH003"> KH003 </option>
-								<option value="KH004"> KH004 </option>
-								<option value="KH005"> KH005 </option>
-							</select>
+								<select style="width:80px" class="combo" asp-for="MaKhachHang">
+								
+									@foreach(var kh in ViewBag.KhachHangs)
+									{
+										<option value="@kh.MaKhachHang"> @kh.MaKhachHang</option>
+									}
+								</select>
 						</td>
-						<td>
-							<select class="combo" asp-for="Phong">
-
-								<option value="101"> P.101 </option>
-								<option value="102"> P.102 </option>
-								<option value="103"> P.103 </option>
-								<option value="104"> P.104 </option>
-								<option value="201"> P.201 </option>
-								<option value="202"> P.202 </option>
-								<option value="203"> P.203 </option>
-								<option value="204"> P.204 </option>
-								<option value="301"> P.301 </option>
-								<option value="302"> P.302 </option>
-								<option value="303"> P.303 </option>
-								<option value="304"> P.304 </option>
-								<option value="401"> P.401 </option>
-								<option value="402"> P.402 </option>
-								<option value="403"> P.403 </option>
-								<option value="404"> P.404 </option>
-
-							</select>
-						</td>
+						@* Hình thức *@
 						<td>
 							<select class="combo_Gio_Ngay" asp-for="HinhThuc">
 								<option value="Gio"> Giờ  </option>
+								<option value="Dem"> Đêm  </option>
 								<option value="Ngay"> Ngày </option>
-
-						
-
 							</select>
 						</td>
+
+						@* Giá phòng *@
 						<td>
-						<input type="datetime-local" name="NgayNhan" asp-for="NgayNhan" />
+								<label asp-for="GiaPhong" id="labelGiaPhong" >200000</label>
+								<input type="hidden" asp-for="GiaPhong" id="gia-phong" value="200000"/>
 						</td>
+						@* Ngày Nhận *@
 						<td>
-							<input type="datetime-local" name="NgayTra" asp-for="NgayTra"/>
+								<input style="width:185px" type="datetime-local" name="NgayNhan" asp-for="NgayNhan" />
 						</td>
+						@* Ngày trả *@
+						<td>
+								<input style="width:185px" type="datetime-local" name="NgayTra" asp-for="NgayTra" />
+						</td>
+						@* Dự kiến *@
 							<td class="duration">
 								<label asp-for="DuKien" id="labelDuKien">0 giờ</label>
 							<input type="hidden" asp-for="DuKien" id="dukien"/>
 							</td>
+							@* Thành tiền *@
 							<td class="thanhtien">
 								<label asp-for="ThanhTien" id="lableThanhTien">000.000</label>
 								<input type="hidden" asp-for="ThanhTien" id="thanhtien"/>

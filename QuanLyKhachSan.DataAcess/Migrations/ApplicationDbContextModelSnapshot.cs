@@ -24,10 +24,17 @@ namespace QuanLyKhachSan.DataAcess.Migrations
 
             modelBuilder.Entity("QuanLyKhachSan.Model.DatPhong", b =>
                 {
-                    b.Property<string>("HangPhong")
+                    b.Property<string>("MaDatPhong")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("DuKien")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("GiaPhong")
+                        .HasColumnType("float");
+
+                    b.Property<string>("HangPhong")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -52,7 +59,7 @@ namespace QuanLyKhachSan.DataAcess.Migrations
                     b.Property<double>("ThanhTien")
                         .HasColumnType("float");
 
-                    b.HasKey("HangPhong");
+                    b.HasKey("MaDatPhong");
 
                     b.ToTable("DatPhongs");
                 });
@@ -125,18 +132,31 @@ namespace QuanLyKhachSan.DataAcess.Migrations
 
             modelBuilder.Entity("QuanLyKhachSan.Model.Room", b =>
                 {
-                    b.Property<string>("Number")
+                    b.Property<string>("MaPhong")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Price")
+                    b.Property<string>("GhiChu")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
+                    b.Property<double>("GiaTheoGio")
+                        .HasColumnType("float");
+
+                    b.Property<double>("GiaTheoNgay")
+                        .HasColumnType("float");
+
+                    b.Property<double>("GiaTheoQuaDem")
+                        .HasColumnType("float");
+
+                    b.Property<string>("HangPhong")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Number");
+                    b.Property<string>("KhuVuc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MaPhong");
 
                     b.ToTable("Phong");
                 });

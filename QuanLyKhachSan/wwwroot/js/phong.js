@@ -23,8 +23,9 @@ function updateDuration() {
         var checkInDate = new Date(checkInInput.value);
         var checkOutDate = new Date(checkOutInput.value);
 
-        var duration = (checkOutDate - checkInDate) / 1000 / 60 / 60;
-        var thanhtien = duration * 100000;
+        var duration = ((checkOutDate - checkInDate) / 1000 / 60 / 60).toFixed(2);
+        // Giá phòng theo giờ là 100000
+        var thanhtien = (duration * 200000).toFixed(2);
 
         document.getElementById('dukien').value = duration + ' giờ';
         document.getElementById('thanhtien').value = thanhtien;
@@ -37,20 +38,17 @@ function updateDuration() {
         var checkInDate = new Date(checkInInput.value);
         var checkOutDate = new Date(checkOutInput.value);
 
-        var duration = (checkOutDate - checkInDate) / 1000 / 60 / 60 / 24;
-        var thanhtien = duration * 500000;
+        var duration = ((checkOutDate - checkInDate) / 1000 / 60 / 60 / 24).toFixed(2);
+        // Giá phòng theo ngày là 800000
+        var thanhtien = (duration * 800000).toFixed(2);
 
         document.getElementById('dukien').value = duration + ' ngày';
         document.getElementById('thanhtien').value = thanhtien;
         document.querySelector('.tien_khachhang_tra').textContent = thanhtien;
         document.getElementById('labelDuKien').textContent = document.getElementById('dukien').value;
         document.getElementById('lableThanhTien').textContent = document.getElementById('thanhtien').value;
+
     }
-
-   
-
-   
-
 }
 
 checkInInput.addEventListener('change', updateDuration);
