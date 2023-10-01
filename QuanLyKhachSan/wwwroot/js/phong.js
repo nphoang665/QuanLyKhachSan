@@ -75,6 +75,52 @@ function updateHangPhong() {
     });
 
 }
+function popUpTraPhong(maPhong) {
+    // Cập nhật tiêu đề của popup với mã phòng
+   
+    document.querySelector('.form-TraPhong h1').textContent = 'Xác nhận trả phòng-P.' + maPhong;
+    document.getElementById('ma-phong_thanhtoan').textContent = 'P.' + maPhong;
+    document.getElementById('input_Phong_ThanhToan').value = maPhong;
+    $.ajax({
+        url: '/Phong/LayTenKhachHang',
+        type: 'GET',
+        data: { maPhong: maPhong },
+        success: function (data) {
+            // 'data' chính là đối tượng đặt phòng trả về từ controller
+            $('#ten_kh').text(data.tenKhachHang);
+        },
+
+    });
+  
+    $.ajax({
+        url: '/Phong/LayThanhToan',
+        type: 'GET',
+        data: { maPhong: maPhong },
+        success: function (data) {
+            // 'data' chính là đối tượng đặt phòng trả về từ controller
+            $('#Hang_Phong_ThanhToan').text(data.hangPhong);
+            $('#Ngay_Nhan_ThanhToan').val(data.ngayNhan);
+            $('#Ngay_Tra_ThanhToan').val(data.ngayTra);
+            $('#Tong_Tien_Thanh_Toan').text(data.thanhTien);
+        },
+      
+    });
+
+
+    
+    // Hiển thị popup
+    document.getElementById('TraPhong').style.display = 'block';
+}
+
+function Close_TraPhong() {
+    document.getElementById('TraPhong').style.display = 'none';
+
+}
+
+function DongTraPhong() {
+var dongTraPhong = document.getElementById('Dong_Tra_Phong');
+    dongTraPhong.display = 'none';
+}
 
 
 

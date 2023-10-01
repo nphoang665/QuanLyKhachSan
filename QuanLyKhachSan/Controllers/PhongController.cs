@@ -49,11 +49,34 @@ namespace QuanLyKhachSan.Controllers
 		[HttpGet]
 		public string GetHangPhong(string maPhong)
 		{
-		
-				var phong = _db.Phong.Find(maPhong);
-				return phong.HangPhong;
-			
-			
+
+			var phong = _db.Phong.Find(maPhong);
+			return phong.HangPhong;
+
+
 		}
+		[HttpGet]
+		public IActionResult LayThanhToan(string maPhong)
+		{
+			var datPhong = _db.DatPhongs.FirstOrDefault(s => s.Phong == maPhong);
+			return Json(datPhong);
+		}
+		[HttpGet]
+		public IActionResult LayTenKhachHang(string maPhong)
+		{
+			var phong = _db.DatPhongs.FirstOrDefault(s => s.Phong == maPhong);
+			var tenkhachhang = _db.KhachHangs.FirstOrDefault(s => s.MaKhachHang == phong.MaKhachHang);
+			return Json(tenkhachhang);
+		}
+		[HttpPost]
+		public IActionResult ThanhToan(string Phong)
+		{
+		var datphong=	_db.DatPhongs.FirstOrDefault(s => s.Phong == Phong);
+			_db.DatPhongs.Remove(datphong);
+			_db.SaveChanges();
+			return RedirectToAction("Index");	
+		}
+
+
 	}
 }
