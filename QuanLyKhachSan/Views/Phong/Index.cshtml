@@ -94,34 +94,21 @@
 							<td><input asp-for="MaDatPhong" style="width:100px" /></td>
 							<td>
 								@* Phòng *@
-								<select class="combo" asp-for="Phong" style="width:60px">
+								<select class="combo" id="Ma_Phong" asp-for="Phong" style="width:60px" onchange="updateHangPhong()">
 
-									<option value="101"> P.101 </option>
-									<option value="102"> P.102 </option>
-									<option value="103"> P.103 </option>
-									<option value="104"> P.104 </option>
-									<option value="201"> P.201 </option>
-									<option value="202"> P.202 </option>
-									<option value="203"> P.203 </option>
-									<option value="204"> P.204 </option>
-									<option value="301"> P.301 </option>
-									<option value="302"> P.302 </option>
-									<option value="303"> P.303 </option>
-									<option value="304"> P.304 </option>
-									<option value="401"> P.401 </option>
-									<option value="402"> P.402 </option>
-									<option value="403"> P.403 </option>
-									<option value="404"> P.404 </option>
+									@foreach (var phong in ViewBag.Rooms)
+									{
+										<option value="@phong.MaPhong"> P.@phong.MaPhong </option>
+									}
 
 								</select>
 							</td>
 							@* Hạng Phòng *@
 							<td>
-                              <select style="width:110px" class="combo" asp-for="HangPhong" >
-								  <option value="PhongDon">Phòng Đơn</option>
-									<option value="PhongDoi">Phòng Đôi</option>
-							  </select>
-						
+								
+								<label id="Hang_Phong" asp-for="HangPhong">Phòng Đơn</label>
+								<input type="hidden" asp-for="HangPhong" id="Input_HangPhong" />
+
 						</td>
 						@* mã khách hàng *@
 						<td>

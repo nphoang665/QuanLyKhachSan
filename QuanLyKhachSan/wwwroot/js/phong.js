@@ -58,4 +58,27 @@ function updateDuration() {
 checkInInput.addEventListener('change', updateDuration);
 checkOutInput.addEventListener('change', updateDuration);
 
+function updateHangPhong() {
+    var maPhong = $("#Ma_Phong").val();
+
+    $.ajax({
+        url: "/Phong/GetHangPhong?maPhong=" + maPhong,
+        type: "GET",
+
+        success: function (hangPhong) {
+            $("#Hang_Phong").text(hangPhong);
+            $("#Input_HangPhong").val(hangPhong);
+        },
+        error: function (request, status, error) {
+            console.log("Lỗi: " + error);
+        }
+    });
+
+}
+
+
+
+
+
+
 
