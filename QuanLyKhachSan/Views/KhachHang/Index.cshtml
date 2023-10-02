@@ -23,20 +23,14 @@
                     </div>
                 </div>
             </div> *@
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">Tìm kiếm</h5>
-                </div>
+            <form method="get" asp-controller="KhachHang" asp-action="Index">
                 <div class="card-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="searchText" placeholder="Nhập từ khóa">
+                        <input type="text" class="form-control" id="searchText" name="searchText" placeholder="Nhập từ khóa">
                     </div>
+                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                 </div>
-            </div>
-        
-
-
-
+            </form>
             <div class="card w-100 bg-white">
                 <div class="card-header"><h5>Giới Tính</h5></div>
                 <div class="card-body">
@@ -94,7 +88,10 @@
                 <tbody>
                         @foreach (var khachHang in Model)
                         {
+
+
                         <tr>
+                            
                             <td>@khachHang.MaKhachHang</td>
                             <td>@khachHang.TenKhachHang</td>
                             <td>@khachHang.GioiTinh</td>
@@ -284,7 +281,7 @@
     });
 </script> *@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
+@* <script>
     $(document).ready(function () {
         // Xử lý sự kiện khi nhập vào textbox
         $("#searchText").on("input", function () {
@@ -303,7 +300,7 @@
             });
         });
     });
-</script>
+</script> *@
 
 
 

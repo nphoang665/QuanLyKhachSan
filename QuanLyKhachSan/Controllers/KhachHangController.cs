@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using QuanLyKhachSan.DataAcess.Data;
 using QuanLyKhachSan.Model;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace QuanLyKhachSan.Controllers
 {
@@ -12,30 +13,37 @@ namespace QuanLyKhachSan.Controllers
         {
             _db = db;
         }
-        public async Task<IActionResult> Index(int page = 1)
+        public async Task<IActionResult> Index(string searchText, int page = 1)
         {
             int pageSize = 7;
             int totalKhachHangs = await _db.KhachHangs.CountAsync();
             int totalPages = (int)Math.Ceiling((double)totalKhachHangs / pageSize);
 
-            if (page < 1)
-                page = 1;
-            else if (page > totalPages)
-                page = totalPages;
+            // Lọc kết quả theo từ khóa tìm kiếm
+            
+            var khachHangs = _db.KhachHangs.AsQueryable();
+            if (!String.IsNullOrEmpty(searchText))
+            {
+                khachHangs = khachHangs.Where(kh => kh.TenKhachHang.Contains(searchText));
+            }
 
-            var paginatedKhachHangs = await _db.KhachHangs
+
+            // Phân trang kết quả
+            var paginatedKhachHangs = await khachHangs
                 .OrderBy(kh => kh.MaKhachHang)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
 
+            // Trả về view
             ViewData["TotalPages"] = totalPages;
             ViewData["CurrentPage"] = page;
-
+            ViewData["searchText"]=khachHangs;
             return View(paginatedKhachHangs);
         }
 
-       
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ThemKhachHang()
