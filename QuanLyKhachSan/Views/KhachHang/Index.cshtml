@@ -84,7 +84,7 @@
                         <th width="180px" height="100%" class="text-center">Tên KH</th>
                         <th width="100px" height="100%" class="text-center">Giới tính</th>
                         <th width="150px" height="100%" class="text-center">Ngày sinh</th>
-                        <th width="130px" height="100%" class="text-center">Điện thoại</th>
+                        <th width="150px" height="100%" class="text-center">Điện thoại</th>
                         <th width="150px" height="100%" class="text-center">Địa chỉ</th>
                         <th width="100px" height="100%" class="text-center">Ghi chú</th>
                         <th width="70px" class="text-center">Sửa</th>
@@ -129,7 +129,7 @@
 
         </div>
 
-    <nav aria-label="Page navigation example">
+    <nav aria-label="Page navigation example" style="position:absolute;right:100px;bottom:100px;">
         <ul class="pagination justify-content-end">
             <li class="page-item @(currentPage == 1 ? "disabled" : "")">
                 <a class="page-link" href="@Url.Action("Index", new { page = currentPage - 1 })" tabindex="-1">Previous</a>
