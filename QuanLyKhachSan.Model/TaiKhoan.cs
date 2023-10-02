@@ -14,5 +14,7 @@ namespace QuanLyKhachSan.Model
         public string TenDangNhap { get; set; }
         [Required]
         public string MatKhau { get; set; }
+        [Required]
+        public string Email { get; set; }
     }
 }

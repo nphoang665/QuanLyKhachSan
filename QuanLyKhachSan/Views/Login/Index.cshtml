@@ -2,14 +2,21 @@
 
 @{
     Layout = null;
+   
 }
 
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet" href="~/css/CssLogin.css" />
-<!------ Include the above in your HEAD tag ---------->
 
+<!------ Include the above in your HEAD tag ---------->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>LOGIN ROYAL HOTEL A$AP</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="~/css/CssLogin.css" />
+</head>
 <body>
     <section>
         <div class="form-box">
@@ -33,7 +40,7 @@
                     </div>
                     <button type="submit" asp-action="Index" asp-controller="Login">Đăng nhập</button>
                     <div class="register">
-                        <p>Bạn chưa có tài khoản? <a href="#">Đăng ký</a></p>
+                        <p>Bạn chưa có tài khoản? <a asp-action="Index" asp-controller="DangKy">Đăng ký</a></p>
                     </div>
                 </form>
             </div>
@@ -42,7 +49,7 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
-
+</html>
 
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
