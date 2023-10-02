@@ -10,50 +10,38 @@
 <link rel="stylesheet" href="~/css/CssLogin.css" />
 <!------ Include the above in your HEAD tag ---------->
 
-<div class="container">
-    <div class="row">
-        <partial name="_Notifical" />
-        <div class="main">
+<body>
+    <section>
+        <div class="form-box">
+            <div class="form-value">
+                <form action="" method="post">
+                    <h2 style="font-family: poppins;">WELCOME</h2>
+                    <img src="~/Image/Screenshot_4_preview_rev_1.png" alt="">
+                    <div class="inputbox">
+                        <ion-icon name="mail-outline"></ion-icon>
+                        <input type="text" required asp-for="TenDangNhap" />
+                        <label for="">Email / Số điện thoại</label>
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                        <input type="password" required asp-for="MatKhau" />
+                        <label for="">Mật khẩu</label>
+                    </div>
+                    <div class="forget">
+                        <label for="" style="display: contents;"><input type="checkbox">Nhớ mật khẩu  <a style="margin-left: 75px;" href="#">Quên mật khẩu?</a></label>
 
-            <h3>Please Log In, or <a href="#">Sign Up</a></h3>
-            <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <a href="#" class="btn btn-lg btn-primary btn-block">Facebook</a>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <a href="#" class="btn btn-lg btn-info btn-block">Google</a>
-                </div>
+                    </div>
+                    <button type="submit" asp-action="Index" asp-controller="Login">Đăng nhập</button>
+                    <div class="register">
+                        <p>Bạn chưa có tài khoản? <a href="#">Đăng ký</a></p>
+                    </div>
+                </form>
             </div>
-            <div class="login-or">
-                <hr class="hr-or">
-                <span class="span-or">or</span>
-            </div>
-
-            <form role="form" method="post">
-                <div class="form-group">
-                    <label for="inputUsernameEmail">Username or email</label>
-                    <input type="text" class="form-control" id="TenDangNhap" asp-for="TenDangNhap" placeholder="Nhập tên đăng nhập">
-                </div>
-                <div class="form-group">
-                    <a class="pull-right" href="#">Forgot password?</a>
-                    <label for="inputPassword">Password</label>
-                    <input type="password" class="form-control" id="MatKhau" asp-for="MatKhau" placeholder="Nhập mật khẩu">
-                </div>
-                <div class="checkbox pull-right">
-                    <label>
-                        <input type="checkbox">
-                        Remember me
-                    </label>
-                </div>
-                <button type="submit" class="btn btn btn-primary">
-                    Log In
-                </button>
-            </form>
-
         </div>
-
-    </div>
-</div>
+    </section>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
 
 
 @section Scripts{
