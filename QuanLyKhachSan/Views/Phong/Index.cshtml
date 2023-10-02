@@ -37,7 +37,6 @@
 			</nav>
 		</header>
 
-		<h2>Tầng 1</h2>
 		<div class="row">
 			@foreach (var room in ViewBag.Rooms)
 			{
@@ -46,7 +45,6 @@
 				{
 					roomClass += " booked";
 				}
-
 				<div class="col-sm-6 col-md-4 col-lg-3">
 					<div class="@roomClass">
 						<div class="room-number">
@@ -61,11 +59,8 @@
 						<p class="text-price">@room.GiaTheoNgay</p>
 					</div>
 				</div>
-
 			}
-
 		</div>
-
 	</div>
 	@* popup *@
 
@@ -109,8 +104,7 @@
 							<td>
 								
 								<label id="Hang_Phong" asp-for="HangPhong">Phòng Đơn</label>
-								<input type="hidden" asp-for="HangPhong" id="Input_HangPhong" />
-
+								<input type="hidden" asp-for="HangPhong" id="Input_HangPhong" value="Phòng Đơn" />
 						</td>
 						@* mã khách hàng *@
 						<td>
