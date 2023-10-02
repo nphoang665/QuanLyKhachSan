@@ -65,15 +65,15 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th width="80px" class="text-center">Mã NV</th>
-                        <th class="text-center">Tên NV</th>
-                        <th class="text-center">Giới tính</th>
-                        <th class="text-center">Ngày sinh</th>
-                        <th class="text-center">Điện thoại</th>
-                        <th class="text-center">Địa chỉ</th>
-                        <th class="text-center">Ghi chú</th>
-                        <th class="text-center" width="70px">Sửa</th>
-                        <th class="text-center" width="70px">Xóa</th>
+                        <th width="100px" height="100%" class="text-center">Mã NV</th>
+                        <th width="180px" height="100%" class="text-center">Tên NV</th>
+                        <th width="100px" height="100%" class="text-center">Giới tính</th>
+                        <th width="150px" height="100%" class="text-center">Ngày sinh</th>
+                        <th width ="150px" height="100%" class="text-center">Điện thoại</th>
+                        <th width="150px" height="100%" class="text-center">Địa chỉ</th>
+                        <th width="100px" height="100%" class="text-center">Ghi chú</th>
+                        <th height="100%" class="text-center" width="70px">Sửa</th>
+                        <th  height="100%" class="text-center" width="70px">Xóa</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -111,7 +111,7 @@
 
     </div>
 
-    <nav aria-label="Page navigation example">
+    <nav aria-label="Page navigation example" style="position:absolute;right:100px;bottom:100px;">
         <ul class="pagination justify-content-end">
             <li class="page-item @(currentPage == 1 ? "disabled" : "")">
                 <a class="page-link" href="@Url.Action("Index", new { page = currentPage - 1 })" tabindex="-1">Previous</a>
