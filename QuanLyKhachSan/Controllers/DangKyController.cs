@@ -22,8 +22,10 @@ namespace QuanLyKhachSan.Controllers
         {
             if (ModelState.IsValid)
             {
+              
                 _db.TaiKhoan.Add(tk);
-                _db.SaveChanges();
+                _db.SaveChanges(); 
+                TempData["notification"] = "Đăng ký thành công.";
             }
             return RedirectToAction("Index", "Login");
         }

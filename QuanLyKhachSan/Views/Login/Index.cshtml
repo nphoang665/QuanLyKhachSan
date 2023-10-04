@@ -54,3 +54,21 @@
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
 }
+<script>
+    @if (TempData["Error"] != null)
+    {
+            <script src="~/lib/jquery/dist/jquery.min.js" ></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: '@TempData["Error"]',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    </script>
+    }
+
+</script>
