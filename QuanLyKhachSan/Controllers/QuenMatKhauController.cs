@@ -18,40 +18,32 @@ namespace QuanLyKhachSan.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> GuiMail(string Email, string ConfirmId)
         {
-            try
-            {
-                // Tạo một mã xác nhận ngẫu nhiên (có thể sử dụng thư viện mã xác nhận chuyên dụng cho tính bảo mật cao hơn).
-                string maXacNhan = Guid.NewGuid().ToString("N").Substring(0, 6);
+			string from, to, pass, content;
+			from = "khachsanasap@gmail.com";
+			to = Email;
+			pass = "ulwg gvjl vqmb iwya";
+			content = ConfirmId;
 
-                // Gửi email xác nhận đến địa chỉ email của người dùng.
-                using (var client = new SmtpClient("smtp.gmail.com"))
-                {
-                    client.UseDefaultCredentials = false;
-                    client.Credentials = new NetworkCredential("sos21832cc1@gmail.com", "qzxccvbnm");
-                    client.Port = 587; // Sử dụng cổng 587 cho TLS.
-                    client.EnableSsl = true;
+			// Create a new SmtpClient object.
+			SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+			smtp.EnableSsl = true;
+			smtp.Port = 587;
+			smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+			smtp.Credentials = new NetworkCredential(from, pass);
 
-                    var message = new MailMessage
-                    {
-                        Subject = "Xác nhận mật khẩu",
-                        Body = $"Mã xác nhận của bạn là: {maXacNhan}",
-                        From = new MailAddress("sos21832cc1@gmail.com"),
-                    };
+			// Create a new MailMessage object.
+			MailMessage mail = new MailMessage();
+			mail.To.Add(to);
+			mail.From = new MailAddress(from);
+			mail.Subject = "Test";
+			mail.Body = content;
 
-                    message.To.Add(Email);
+			// Send the email.
+			await smtp.SendMailAsync(mail);
 
-                    client.Send(message);
-                }
-
-                // Ở đây, bạn có thể lưu mã xác nhận vào cơ sở dữ liệu hoặc làm bất kỳ điều gì khác với nó.
-
-                return RedirectToAction("Index", "QuenMatKhau"); // Chuyển đến trang xác nhận email.
-            }
-            catch (Exception ex)
-            {
-                return View("Loi");
-            }
-        }
+			// Return a success response.
+			return RedirectToAction("Index", "QuenMatKhau");
+		}
 
     }
 }
