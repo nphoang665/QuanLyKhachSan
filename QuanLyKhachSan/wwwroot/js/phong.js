@@ -35,7 +35,7 @@ function updateDuration() {
         document.getElementById('gia-phong').value = giaphong;
         document.getElementById('labelGiaPhong').textContent = document.getElementById('gia-phong').value;
     }
-  
+
     else {
         var checkInDate = new Date(checkInInput.value);
         var checkOutDate = new Date(checkOutInput.value);
@@ -77,7 +77,7 @@ function updateHangPhong() {
 }
 function popUpTraPhong(maPhong) {
     // Cập nhật tiêu đề của popup với mã phòng
-   
+
     document.querySelector('.form-TraPhong h1').textContent = 'Xác nhận trả phòng-P.' + maPhong;
     document.getElementById('ma-phong_thanhtoan').textContent = 'P.' + maPhong;
     document.getElementById('input_Phong_ThanhToan').value = maPhong;
@@ -91,7 +91,7 @@ function popUpTraPhong(maPhong) {
         },
 
     });
-  
+
     $.ajax({
         url: '/Phong/LayThanhToan',
         type: 'GET',
@@ -103,11 +103,11 @@ function popUpTraPhong(maPhong) {
             $('#Ngay_Tra_ThanhToan').val(data.ngayTra);
             $('#Tong_Tien_Thanh_Toan').text(data.thanhTien);
         },
-      
+
     });
 
 
-    
+
     // Hiển thị popup
     document.getElementById('TraPhong').style.display = 'block';
 }
@@ -118,7 +118,7 @@ function Close_TraPhong() {
 }
 
 function DongTraPhong() {
-var dongTraPhong = document.getElementById('Dong_Tra_Phong');
+    var dongTraPhong = document.getElementById('Dong_Tra_Phong');
     dongTraPhong.display = 'none';
 }
 

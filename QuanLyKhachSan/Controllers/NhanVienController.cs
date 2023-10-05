@@ -12,7 +12,7 @@ namespace QuanLyKhachSan.Controllers
         private readonly ApplicationDbContext _db;
         public NhanVienController(ApplicationDbContext db)
         {
-            _db= db;
+            _db = db;
         }
         public async Task<IActionResult> Index(int page = 1)
         {
@@ -36,32 +36,37 @@ namespace QuanLyKhachSan.Controllers
 
             return View(paginatedKhachHangs);
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ThemNhanVien()
         {
             var formCollection = Request.Form;
 
-            var nhanvien = new NhanVien();
-            nhanvien.MaNhanVien = formCollection["MaNhanVien"];
-            nhanvien.TenNhanVien = formCollection["TenNhanVien"];
-            nhanvien.GioiTinh = formCollection["GioiTinh"];
-            nhanvien.NgaySinh = DateTime.Parse(formCollection["NgaySinh"]);
-            nhanvien.DienThoai = formCollection["DienThoai"];
-            nhanvien.DiaChi = formCollection["DiaChi"];
-            nhanvien.GhiChu = formCollection["GhiChu"];
+            var nhanvien = new NhanVien
+            {
+                MaNhanVien = formCollection["MaNhanVien"],
+                TenNhanVien = formCollection["TenNhanVien"],
+                CCCD = formCollection["CCCD"],
+                GioiTinh = formCollection["GioiTinh"],
+                NgaySinh = DateTime.Parse(formCollection["NgaySinh"]),
+                ChucVu = formCollection["ChucVu"],
+                DienThoai = formCollection["DienThoai"],
+                DiaChi = formCollection["DiaChi"],
+                NgayVaoLam = DateTime.Parse(formCollection["NgayVaoLam"]),
+                GhiChu = formCollection["GhiChu"]
+            };
 
             if (ModelState.IsValid)
             {
-               
+
                 _db.NhanViens.Add(nhanvien);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(nhanvien);
         }
-    
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SuaNhanVien()
@@ -71,10 +76,13 @@ namespace QuanLyKhachSan.Controllers
             var nhanvien = new NhanVien();
             nhanvien.MaNhanVien = formCollection["MaNhanVienSua"];
             nhanvien.TenNhanVien = formCollection["TenNhanVienSua"];
+            nhanvien.CCCD = formCollection["CCCDSua"];
             nhanvien.GioiTinh = formCollection["GioiTinhSua"];
             nhanvien.NgaySinh = DateTime.Parse(formCollection["NgaySinhSua"]);
+            nhanvien.ChucVu = formCollection["ChucVuSua"];
             nhanvien.DienThoai = formCollection["DienThoaiSua"];
             nhanvien.DiaChi = formCollection["DiaChiSua"];
+            nhanvien.NgayVaoLam = DateTime.Parse(formCollection["NgayVaoLamSua"]);
             nhanvien.GhiChu = formCollection["GhiChuSua"];
 
             if (ModelState.IsValid)
@@ -93,6 +101,7 @@ namespace QuanLyKhachSan.Controllers
             var nv = _db.NhanViens.FirstOrDefault(s => s.MaNhanVien == id);
             _db.NhanViens.Remove(nv);
             _db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

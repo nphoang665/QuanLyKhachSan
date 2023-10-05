@@ -71,57 +71,60 @@
         <div class="col-md-9">
             <button type="button" id="addButton" class="nav-link text-dark btn w-25 btn_them" asp-area="" asp-controller="KhachHang" asp-action="ThemKhachHang" style="margin-bottom:12px;">Thêm Khách Hàng</button>
 
-            <table class="table table-bordered table-hover " id="table_main">
+            <table class="table table-bordered table-hover" id="table_main">
                 <thead>
                     <tr>
-                        <th width="100px" height="100%" class="text-center">Mã KH</th>
-                        <th width="180px" height="100%" class="text-center">Tên KH</th>
-                        <th width="100px" height="100%" class="text-center">Giới tính</th>
-                        <th width="150px" height="100%" class="text-center">Ngày sinh</th>
-                        <th width="150px" height="100%" class="text-center">Điện thoại</th>
-                        <th width="150px" height="100%" class="text-center">Địa chỉ</th>
-                        <th width="100px" height="100%" class="text-center">Ghi chú</th>
-                        <th width="70px" class="text-center">Sửa</th>
-                        <th width="70px" class="text-center">Xóa</th>
+                        <!-- Define the table headers -->
+                        <th class="text-center">Mã KH</th>
+                        <th class="text-center">Tên KH</th>
+                        <th class="text-center">CCCD</th>
+                        <th class="text-center">Giới tính</th>
+                        <th class="text-center">Ngày sinh</th>
+                        <th class="text-center">Điện thoại</th>
+                        <th class="text-center">Địa chỉ</th>
+                        <th class="text-center">Ghi chú</th>
+                        <th class="text-center">Sửa</th>
+                        <th class="text-center">Xóa</th>
                     </tr>
                 </thead>
                 <tbody>
-                        @foreach (var khachHang in Model)
-                        {
-
-
+                    <!-- Loop through each 'khachHang' in the Model -->
+                    @foreach (var khachHang in Model)
+                    {
                         <tr>
-                            
+                            <!-- Display the properties of 'khachHang' -->
                             <td>@khachHang.MaKhachHang</td>
                             <td>@khachHang.TenKhachHang</td>
+                            <td>@khachHang.CCCD</td> <!-- Added this line -->
                             <td>@khachHang.GioiTinh</td>
                             <td>@khachHang.NgaySinh.ToShortDateString()</td>
                             <td>@khachHang.DienThoai</td>
                             <td>@khachHang.DiaChi</td>
                             <td>@khachHang.GhiChu</td>
 
-
+                            <!-- Edit button -->
                             <td>
-                                <button type="button" class="btn btn-primary editButton" data-id="@khachHang.MaKhachHang" style="margin-left:5px;">
-                                <i class="bi bi-pencil"></i>
+                                <button type="button" class="btn btn-primary editButton" data-id="@khachHang.MaKhachHang">
+                                    <i class="bi bi-pencil"></i>
                                 </button>
                             </td>
 
-
-
+                            <!-- Delete button with confirmation -->
                             @using (Html.BeginForm("XoaKhachHang", "KhachHang", new { id = khachHang.MaKhachHang }, FormMethod.Post))
                             {
                                 @Html.AntiForgeryToken()
                                 <td>
-                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');" style="margin-left:5px;">
+                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');">
                                         <i class="bi bi-trash"></i>
                                     </button>
                                 </td>
                             }
                         </tr>
-                        }
+                    }
                 </tbody>
             </table>
+
+
         </div>
 
         </div>
@@ -186,24 +189,22 @@
  
 
 
-<!-- Lớp đè lên và form thêm -->
+<!-- Add form -->
 <div id="overlay" class="overlay">
     <div class="form-container">
-
         <button id="closeButton"><i class="bi bi-x-lg icon_x"></i></button>
-
         <h2>Thêm thông tin khách hàng</h2>
-
         <form method="post" asp-action="ThemKhachHang" asp-controller="KhachHang">
             <div class="border p-3 mt-4">
                 <div class="row pb-2">
-         
+                    <!-- Add all the fields from KhachHang -->
                     <label>Mã Khách Hàng</label>
                     <input name="MaKhachHang" class=form-control />
                     <label>Tên Khách Hàng</label>
                     <input name="TenKhachHang" class=form-control />
+                    <label>CCCD</label>
+                    <input name="CCCD" class=form-control /> <!-- Added this line -->
                     <label>Giới Tính</label>
-
                     <input name="GioiTinh" class=form-control />
                     <label>Ngày Sinh</label>
                     <input name="NgaySinh" class=form-control type="date" />
@@ -214,31 +215,29 @@
                     <label>Ghi Chú</label>
                     <input name="GhiChu" class=form-control />
                 </div>
-
-
+                <!-- Submit button -->
                 <button type="submit" class="btn btn-primary">Create</button>
             </div>
-
         </form>
     </div>
 </div>
-@* edit *@
+
+<!-- Edit form -->
 <div class="overlayEdit" id="overlayEdit">
     <div class="form-containerEdit">
         <button id="closeButtonEdit"><i class="bi bi-x-lg icon_x"></i></button>
-
         <h2>Sửa thông tin khách hàng</h2>
-
         <form method="post" asp-action="SuaKhachHang" asp-controller="KhachHang">
             <div class="border p-3 mt-4">
                 <div class="row pb-2">
-
+                    <!-- Add all the fields from KhachHang -->
                     <label>Mã Khách Hàng</label>
                     <input name="MaKhachHangSua" class=form-control />
                     <label>Tên Khách Hàng</label>
                     <input name="TenKhachHangSua" class=form-control />
+                    <label>CCCD</label>
+                    <input name="CCCDSua" class=form-control /> <!-- Added this line -->
                     <label>Giới Tính</label>
-
                     <input name="GioiTinhSua" class=form-control />
                     <label>Ngày Sinh</label>
                     <input name="NgaySinhSua" class=form-control type="date" />
@@ -249,11 +248,9 @@
                     <label>Ghi Chú</label>
                     <input name="GhiChuSua" class=form-control />
                 </div>
-
-
+                <!-- Submit button -->
                 <button type="submit" class="btn btn-primary">Edit</button>
             </div>
-
         </form>
     </div>
 </div>

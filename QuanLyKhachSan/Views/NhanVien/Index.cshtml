@@ -64,49 +64,50 @@
 
             <table class="table table-bordered table-hover">
                 <thead>
-                    <tr>
-                        <th width="100px" height="100%" class="text-center">Mã NV</th>
-                        <th width="180px" height="100%" class="text-center">Tên NV</th>
-                        <th width="100px" height="100%" class="text-center">Giới tính</th>
-                        <th width="150px" height="100%" class="text-center">Ngày sinh</th>
-                        <th width ="150px" height="100%" class="text-center">Điện thoại</th>
-                        <th width="150px" height="100%" class="text-center">Địa chỉ</th>
-                        <th width="100px" height="100%" class="text-center">Ghi chú</th>
-                        <th height="100%" class="text-center" width="70px">Sửa</th>
-                        <th  height="100%" class="text-center" width="70px">Xóa</th>
+                    <tr style="font-size:12px">
+                        <th class="text-center" style="width:80px">Mã NV</th>
+                        <th class="text-center" style="width:130px">Tên Nhân Viên</th>
+                        <th class="text-center" style="width:110px">CCCD</th>
+                        <th class="text-center" style="width:80px">Giới Tính</th>
+                        <th class="text-center" style="width:100px">Ngày Sinh</th>
+                        <th class="text-center" style="width:100px">Chức Vụ</th>
+                        <th class="text-center" style="width:100px">Số Điện Thoại</th>
+                        <th class="text-center" style="width:80px">Địa Chỉ</th>
+                        <th class="text-center" style="width:110px">Ngày Vào Làm</th>
+                        <th class="text-center" style="width:80px">Ghi Chú</th>
+                        <th class="text-center" style="width:80px">Sửa</th>
+                        <th class="text-center" style="width:80px">Xóa</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var nhanvien in Model)
                     {
-                        <tr>
-                            <td class="text-truncate">@nhanvien.MaNhanVien</td>
-                            <td class="text-truncate">@nhanvien.TenNhanVien</td>
-                            <td class="text-truncate">@nhanvien.GioiTinh</td>
-                            <td class="text-truncate">@nhanvien.NgaySinh.ToShortDateString()</td>
-                            <td class="text-truncate">@nhanvien.DienThoai</td>
-                            <td class="text-truncate">@nhanvien.DiaChi</td>
-                            <td class="text-truncate">@nhanvien.GhiChu</td>
+                        <tr style="font-size:12px">
+                            <td name="DisplayMaNhanVien">@nhanvien.MaNhanVien</td>
+                            <td >@nhanvien.TenNhanVien</td>
+                            <td>@nhanvien.CCCD</td>
+                            <td>@nhanvien.GioiTinh</td>
+                            <td>@nhanvien.NgaySinh.ToShortDateString()</td>
+                            <td>@nhanvien.ChucVu</td>
+                            <td>@nhanvien.DienThoai</td>
+                            <td>@nhanvien.DiaChi</td>
+                            <td>@nhanvien.NgayVaoLam.ToShortDateString()</td>
+                            <td>@nhanvien.GhiChu</td>
 
-                            <td>
-                                <button type="button" class="btn btn-primary editButton" data-id="@nhanvien.MaNhanVien" style="margin-left:5px;">
-                                    <i class="bi bi-pencil"></i>
-                                </button>
-                            </td>
+                            <!-- Sửa -->
+                            <td><button type="button" class="btn btn-primary editButton" data-id="@nhanvien.MaNhanVien"><i class="bi bi-pencil"></i></button></td>
 
+                            <!-- Xóa -->
                             @using (Html.BeginForm("XoaNhanVien", "NhanVien", new { id = nhanvien.MaNhanVien }, FormMethod.Post))
                             {
                                 @Html.AntiForgeryToken()
-                                <td>
-                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');" style="margin-left:5px;">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </td>
+                                <td><button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');"><i class="bi bi-trash"></i></button></td>
                             }
                         </tr>
                     }
                 </tbody>
             </table>
+
         </div>
 
     </div>
@@ -172,36 +173,35 @@
 
 <!-- Lớp đè lên và form thêm -->
 <div id="overlay" class="overlay">
-  
     <div class="form-container">
         <button id="closeButton"><i class="bi bi-x-lg icon_x"></i></button>
-        
         <h2>Thêm thông tin nhân viên</h2>
         <form method="post" asp-action="ThemNhanVien" asp-controller="NhanVien">
             <div class="border p-3 mt-4">
                 <div class="row pb-2">
-       
                     <label>Mã Nhân Viên</label>
                     <input name="MaNhanVien" class=form-control />
                     <label>Tên Nhân Viên</label>
                     <input name="TenNhanVien" class=form-control />
+                    <label>CCCD</label>
+                    <input name="CCCD" class=form-control />
                     <label>Giới Tính</label>
-
                     <input name="GioiTinh" class=form-control />
                     <label>Ngày Sinh</label>
                     <input name="NgaySinh" class=form-control type="date" />
-                    <label>Điện Thoại</label>
-                    <input name="DienThoai" class=form-control /> 
+                    <label>Chức Vụ</label>
+                    <input name="ChucVu" class=form-control />
+                    <label>Số Điện Thoại</label>
+                    <input name="DienThoai" class=form-control />
                     <label>Địa Chỉ</label>
                     <input name="DiaChi" class=form-control />
+                    <label>Ngày Vào Làm</label>
+                    <input name="NgayVaoLam" class=form-control type="date" />
                     <label>Ghi Chú</label>
                     <input name="GhiChu" class=form-control />
                 </div>
-              
-
                 <button type="submit" class="btn btn-primary">Create</button>
             </div>
-
         </form>
     </div>
 </div>
@@ -209,26 +209,28 @@
 <div class="overlayEdit" id="overlayEdit">
     <div class="form-containerEdit">
         <button id="closeButtonEdit"><i class="bi bi-x-lg icon_x"></i></button>
-
         <h2>Sửa thông tin nhân viên</h2>
-
         <form method="post" asp-action="SuaNhanVien" asp-controller="NhanVien">
             <div class="border p-3 mt-4">
                 <div class="row pb-2">
-
                     <label>Mã Nhân Viên</label>
                     <input name="MaNhanVienSua" class=form-control />
                     <label>Tên Nhân Viên</label>
                     <input name="TenNhanVienSua" class=form-control />
+                    <label>CCCD</label>
+                    <input name="CCCDSua" class=form-control />
                     <label>Giới Tính</label>
-
                     <input name="GioiTinhSua" class=form-control />
                     <label>Ngày Sinh</label>
                     <input name="NgaySinhSua" class=form-control type="date" />
-                    <label>Điện Thoại</label>
+                    <label>Chức Vụ</label>
+                    <input name="ChucVuSua" class=form-control />
+                    <label>Số Điện Thoại</label>
                     <input name="DienThoaiSua" class=form-control />
                     <label>Địa Chỉ</label>
                     <input name="DiaChiSua" class=form-control />
+                    <label>Ngày Vào Làm</label>
+                    <input name="NgayVaoLamSua" class=form-control type="date" />
                     <label>Ghi Chú</label>
                     <input name="GhiChuSua" class=form-control />
                 </div>

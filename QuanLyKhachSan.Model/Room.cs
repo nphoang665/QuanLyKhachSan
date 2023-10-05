@@ -9,13 +9,13 @@ namespace QuanLyKhachSan.Model
 {
 	public class Room
 	{
-		[Key]
-		public string MaPhong { get; set; }
-		public string KhuVuc { get; set; }
-		public string HangPhong { get; set; }
-		public double GiaTheoGio { get; set; }
-		public double GiaTheoQuaDem { get; set; }
-		public double GiaTheoNgay { get; set; }
-		public string GhiChu { get; set; }
-	}
+        [Key]
+        public string MaPhong { get; set; }
+        public string KhuVuc { get; set; }
+        public string HangPhong { get; set; }
+        public int GiaTheoGio { get; set; }
+        public int GiaTheoQuaDem { get; set; }
+        public int GiaTheoNgay { get; set; }
+        public string TrangThai { get; set; }
+    }
 }

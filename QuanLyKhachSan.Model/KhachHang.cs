@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyKhachSan.Model
 {
-    public  class KhachHang
+    public class KhachHang
 
     {
         [Key]
@@ -17,9 +17,12 @@ namespace QuanLyKhachSan.Model
         [Required]
         [DisplayName("Tên Khách Hàng")]
         public string TenKhachHang { get; set; }
+        [DisplayName("CCCD")]
+        public string CCCD { get; set; }
         [DisplayName("Giới Tính")]
 
         public string GioiTinh { get; set; }
+
         [DisplayName("Ngày Sinh")]
 
         public DateTime NgaySinh { get; set; }
@@ -32,6 +35,6 @@ namespace QuanLyKhachSan.Model
         [DisplayName("Ghi Chú")]
 
         public string GhiChu { get; set; }
-     
+
     }
 }

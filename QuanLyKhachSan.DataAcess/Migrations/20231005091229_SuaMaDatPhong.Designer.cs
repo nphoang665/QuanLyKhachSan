@@ -12,8 +12,8 @@ using QuanLyKhachSan.DataAcess.Data;
 namespace QuanLyKhachSan.DataAcess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231002141629_AddEmailClassTaiKhoanToDb")]
-    partial class AddEmailClassTaiKhoanToDb
+    [Migration("20231005091229_SuaMaDatPhong")]
+    partial class SuaMaDatPhong
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace QuanLyKhachSan.DataAcess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("QuanLyKhachSan.Model.DatPhong", b =>
+            modelBuilder.Entity("DatPhong", b =>
                 {
                     b.Property<string>("MaDatPhong")
                         .HasColumnType("nvarchar(450)");
@@ -34,12 +34,8 @@ namespace QuanLyKhachSan.DataAcess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("GiaPhong")
-                        .HasColumnType("float");
-
-                    b.Property<string>("HangPhong")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("GiaPhong")
+                        .HasColumnType("int");
 
                     b.Property<string>("HinhThuc")
                         .IsRequired()
@@ -47,7 +43,15 @@ namespace QuanLyKhachSan.DataAcess.Migrations
 
                     b.Property<string>("MaKhachHang")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("MaNhanVien")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("MaPhong")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("NgayNhan")
                         .HasColumnType("datetime2");
@@ -55,14 +59,16 @@ namespace QuanLyKhachSan.DataAcess.Migrations
                     b.Property<DateTime>("NgayTra")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Phong")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("ThanhTien")
-                        .HasColumnType("float");
+                    b.Property<int>("ThanhTien")
+                        .HasColumnType("int");
 
                     b.HasKey("MaDatPhong");
+
+                    b.HasIndex("MaKhachHang");
+
+                    b.HasIndex("MaNhanVien");
+
+                    b.HasIndex("MaPhong");
 
                     b.ToTable("DatPhongs");
                 });
@@ -71,6 +77,10 @@ namespace QuanLyKhachSan.DataAcess.Migrations
                 {
                     b.Property<string>("MaKhachHang")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CCCD")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DiaChi")
                         .IsRequired()
@@ -105,6 +115,14 @@ namespace QuanLyKhachSan.DataAcess.Migrations
                     b.Property<string>("MaNhanVien")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("CCCD")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ChucVu")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DiaChi")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -124,6 +142,9 @@ namespace QuanLyKhachSan.DataAcess.Migrations
                     b.Property<DateTime>("NgaySinh")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("NgayVaoLam")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("TenNhanVien")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -138,24 +159,24 @@ namespace QuanLyKhachSan.DataAcess.Migrations
                     b.Property<string>("MaPhong")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("GhiChu")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("GiaTheoGio")
+                        .HasColumnType("int");
 
-                    b.Property<double>("GiaTheoGio")
-                        .HasColumnType("float");
+                    b.Property<int>("GiaTheoNgay")
+                        .HasColumnType("int");
 
-                    b.Property<double>("GiaTheoNgay")
-                        .HasColumnType("float");
-
-                    b.Property<double>("GiaTheoQuaDem")
-                        .HasColumnType("float");
+                    b.Property<int>("GiaTheoQuaDem")
+                        .HasColumnType("int");
 
                     b.Property<string>("HangPhong")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("KhuVuc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrangThai")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -180,6 +201,33 @@ namespace QuanLyKhachSan.DataAcess.Migrations
                     b.HasKey("TenDangNhap");
 
                     b.ToTable("TaiKhoan");
+                });
+
+            modelBuilder.Entity("DatPhong", b =>
+                {
+                    b.HasOne("QuanLyKhachSan.Model.KhachHang", "KhachHang")
+                        .WithMany()
+                        .HasForeignKey("MaKhachHang")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("QuanLyKhachSan.Model.NhanVien", "NhanVien")
+                        .WithMany()
+                        .HasForeignKey("MaNhanVien")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("QuanLyKhachSan.Model.Room", "Phong")
+                        .WithMany()
+                        .HasForeignKey("MaPhong")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("KhachHang");
+
+                    b.Navigation("NhanVien");
+
+                    b.Navigation("Phong");
                 });
 #pragma warning restore 612, 618
         }

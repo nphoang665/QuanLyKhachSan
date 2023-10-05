@@ -48,10 +48,11 @@ namespace QuanLyKhachSan.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ThemKhachHang()
         {
-                var formCollection = Request.Form;
+            var formCollection = Request.Form;
             var khachHang = new KhachHang();
             khachHang.MaKhachHang = formCollection["MaKhachHang"];
             khachHang.TenKhachHang = formCollection["TenKhachHang"];
+            khachHang.CCCD = formCollection["CCCD"]; // Added this line
             khachHang.GioiTinh = formCollection["GioiTinh"];
             khachHang.NgaySinh = DateTime.Parse(formCollection["NgaySinh"]);
             khachHang.DienThoai = formCollection["DienThoai"];
@@ -65,7 +66,7 @@ namespace QuanLyKhachSan.Controllers
             }
             return View(khachHang);
         }
-      
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SuaKhachHang()
@@ -74,6 +75,7 @@ namespace QuanLyKhachSan.Controllers
             var khachHang = new KhachHang();
             khachHang.MaKhachHang = formCollection["MaKhachHangSua"];
             khachHang.TenKhachHang = formCollection["TenKhachHangSua"];
+            khachHang.CCCD = formCollection["CCCDSua"]; // Added this line
             khachHang.GioiTinh = formCollection["GioiTinhSua"];
             khachHang.NgaySinh = DateTime.Parse(formCollection["NgaySinhSua"]);
             khachHang.DienThoai = formCollection["DienThoaiSua"];
@@ -87,6 +89,7 @@ namespace QuanLyKhachSan.Controllers
             }
             return View(khachHang);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult XoaKhachHang(string? id)

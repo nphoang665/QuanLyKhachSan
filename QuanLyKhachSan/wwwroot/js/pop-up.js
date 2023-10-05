@@ -1,17 +1,13 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
-
-
-
     var addButton = document.getElementById('addButton');
     var overlay = document.getElementById('overlay');
     var closeButton = document.getElementById('closeButton');
     addButton.addEventListener('click', function () {
         overlay.style.display = 'block';
     });
-closeButton.addEventListener('click', function () {
+    closeButton.addEventListener('click', function () {
         overlay.style.display = 'none';
     });
-
 
     var editButtons = document.getElementsByClassName('editButton');
     var overlayEdit = document.getElementsByClassName('overlayEdit')[0];
@@ -25,20 +21,21 @@ closeButton.addEventListener('click', function () {
             // Get the data from the row
             var maKhachHang = row.cells[0].innerText;
             var tenKhachHang = row.cells[1].innerText;
-            var gioiTinh = row.cells[2].innerText;
-            var ngaySinh = row.cells[3].innerText;
-            var dienThoai = row.cells[4].innerText;
-            var diaChi = row.cells[5].innerText;
-            var ghiChu = row.cells[6].innerText;
+            var cccd = row.cells[2].innerText; // Added this line
+            var gioiTinh = row.cells[3].innerText;
+            var ngaySinh = row.cells[4].innerText;
+            var dienThoai = row.cells[5].innerText;
+            var diaChi = row.cells[6].innerText;
+            var ghiChu = row.cells[7].innerText;
 
-            
+            // Format the date
             var parts = ngaySinh.split('/');
             var formattedNgaySinh = parts[2] + '-' + parts[1] + '-' + parts[0];
-            document.getElementsByName('NgaySinhSua')[0].value = formattedNgaySinh;
-     
+
             // Fill the input fields with the data
             document.getElementsByName('MaKhachHangSua')[0].value = maKhachHang;
             document.getElementsByName('TenKhachHangSua')[0].value = tenKhachHang;
+            document.getElementsByName('CCCDSua')[0].value = cccd; // Added this line
             document.getElementsByName('GioiTinhSua')[0].value = gioiTinh;
             document.getElementsByName('NgaySinhSua')[0].value = formattedNgaySinh;
             document.getElementsByName('DienThoaiSua')[0].value = dienThoai;
@@ -52,10 +49,4 @@ closeButton.addEventListener('click', function () {
     closeButtonEdit.addEventListener('click', function () {
         overlayEdit.style.display = 'none';
     });
-
 });
-
-
-
-
-

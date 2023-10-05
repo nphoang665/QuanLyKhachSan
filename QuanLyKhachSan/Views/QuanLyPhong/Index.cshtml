@@ -15,7 +15,7 @@
 </head>
 
 <body>
-	<div class="container">
+	<div class="container" style="margin-top:110px">
 		<div class="row">
 			<div class="col-md-2">
 				<div class="card">
@@ -78,34 +78,25 @@
 						<tr>
 							<th>Mã Phòng</th>
 							<th>Khu Vực</th>
+							<th>Hạng Phòng</th>
 							<th>Giá Theo Giờ</th>
+							<th>Giá Theo Qua Đêm</th>
 							<th>Giá Theo Ngày</th>
 							<th>Trạng Thái</th>
-							<th>Ghi Chú</th>
 							<th width="70px">Sửa</th>
 						</tr>
 					</thead>
 					<tbody>
-						@foreach(var phong in Model)
+						@foreach (var phong in Model)
 						{
 							<tr>
-								<td>
-									@phong.MaPhong
-								</td>
-								<td>
-									@phong.KhuVuc
-								</td>
-								<td>
-									@phong.GiaTheoGio
-								<td>
-									@phong.GiaTheoNgay
-								</td>
-								<td>
-									1
-								</td>
-								<td>
-									@phong.GhiChu
-								</td>
+								<td>@phong.MaPhong</td>
+								<td>@phong.KhuVuc</td>
+								<td>@phong.HangPhong</td>
+								<td>@phong.GiaTheoGio</td>
+								<td>@phong.GiaTheoQuaDem</td>
+								<td>@phong.GiaTheoNgay</td>
+								<td>@phong.TrangThai</td>
 								<td>
 									<button type="button" class="btn btn-primary editButton" data-id="@phong.MaPhong" style="margin-left:5px;">
 										<i class="bi bi-pencil"></i>
@@ -113,9 +104,9 @@
 								</td>
 							</tr>
 						}
-						
 					</tbody>
 				</table>
+
 			</div>
 	</div>
 	</div>
