@@ -13,24 +13,20 @@
 <div class="container">
     <div class="row">
         <div class="col-md-2">
-            @* <div class="card">
+            <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">Tìm kiếm</h5>
                 </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="tim-kiem" placeholder="Nhập từ khóa">
+                <form method="get" asp-controller="KhachHang" asp-action="Index">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="searchText" name="searchText" placeholder="Nhập từ khóa">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                     </div>
-                </div>
-            </div> *@
-            <form method="get" asp-controller="KhachHang" asp-action="Index">
-                <div class="card-body">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="searchText" name="searchText" placeholder="Nhập từ khóa">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-                </div>
-            </form>
+                </form>
+            </div>
+          
             <div class="card w-100 bg-white">
                 <div class="card-header"><h5>Giới Tính</h5></div>
                 <div class="card-body">

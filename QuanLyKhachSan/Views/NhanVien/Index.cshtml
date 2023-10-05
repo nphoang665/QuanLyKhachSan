@@ -1,7 +1,7 @@
 ﻿ @model IEnumerable<QuanLyKhachSan.Model.NhanVien> 
 @{
-    int currentPage = (int)ViewData["CurrentPageNhanVien"];
-    int totalPages = (int)ViewData["TotalPagesNhanVien"];
+    int currentPage = (int)ViewData["CurrentPage"];
+    int totalPages = (int)ViewData["TotalPages"];
     int numberOfPagesToShow = 3; // Số trang trung gian bạn muốn hiển thị
 }
 <link rel="stylesheet" href="~/css/css-min-all.css" />
@@ -13,11 +13,14 @@
                 <div class="card-header">
                     <h5 class="card-title">Tìm kiếm</h5>
                 </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="tim-kiem" placeholder="Nhập từ khóa">
-                    </div>
-                </div>
+               <form method="get" asp-controller="NhanVien" asp-action="Index">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="searchText" name="searchText" placeholder="Nhập từ khóa">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                        </div>
+                    </form>
             </div>  
 
 
