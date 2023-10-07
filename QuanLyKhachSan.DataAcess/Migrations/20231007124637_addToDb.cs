@@ -12,26 +12,6 @@ namespace QuanLyKhachSan.DataAcess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "DatPhongs",
-                columns: table => new
-                {
-                    MaDatPhong = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Phong = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HangPhong = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaKhachHang = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HinhThuc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GiaPhong = table.Column<double>(type: "float", nullable: false),
-                    NgayNhan = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    NgayTra = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DuKien = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ThanhTien = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DatPhongs", x => x.MaDatPhong);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "KhachHangs",
                 columns: table => new
                 {
@@ -98,6 +78,59 @@ namespace QuanLyKhachSan.DataAcess.Migrations
                 {
                     table.PrimaryKey("PK_TaiKhoan", x => x.TenDangNhap);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "DatPhongs",
+                columns: table => new
+                {
+                    MaDatPhong = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MaNhanVien = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MaPhong = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MaKhachHang = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    HinhThuc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GiaPhong = table.Column<int>(type: "int", nullable: false),
+                    NgayNhan = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayTra = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DuKien = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ThanhTien = table.Column<float>(type: "real", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DatPhongs", x => x.MaDatPhong);
+                    table.ForeignKey(
+                        name: "FK_DatPhongs_KhachHangs_MaKhachHang",
+                        column: x => x.MaKhachHang,
+                        principalTable: "KhachHangs",
+                        principalColumn: "MaKhachHang",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DatPhongs_NhanViens_MaNhanVien",
+                        column: x => x.MaNhanVien,
+                        principalTable: "NhanViens",
+                        principalColumn: "MaNhanVien",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DatPhongs_Phong_MaPhong",
+                        column: x => x.MaPhong,
+                        principalTable: "Phong",
+                        principalColumn: "MaPhong",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DatPhongs_MaKhachHang",
+                table: "DatPhongs",
+                column: "MaKhachHang");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DatPhongs_MaNhanVien",
+                table: "DatPhongs",
+                column: "MaNhanVien");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DatPhongs_MaPhong",
+                table: "DatPhongs",
+                column: "MaPhong");
         }
 
         /// <inheritdoc />
@@ -107,6 +140,9 @@ namespace QuanLyKhachSan.DataAcess.Migrations
                 name: "DatPhongs");
 
             migrationBuilder.DropTable(
+                name: "TaiKhoan");
+
+            migrationBuilder.DropTable(
                 name: "KhachHangs");
 
             migrationBuilder.DropTable(
@@ -114,9 +150,6 @@ namespace QuanLyKhachSan.DataAcess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Phong");
-
-            migrationBuilder.DropTable(
-                name: "TaiKhoan");
         }
     }
 }

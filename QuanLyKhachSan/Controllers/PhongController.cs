@@ -27,7 +27,7 @@ namespace QuanLyKhachSan.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult NhanPhong(string MaDatPhong, string Phong, string MaKhachHang, string HinhThuc, int GiaPhong, DateTime NgayNhan, DateTime NgayTra, string DuKien, int ThanhTien,string MaNhanVien)
+		public async Task<IActionResult> NhanPhong(string MaDatPhong, string Phong, string MaKhachHang, string HinhThuc, int GiaPhong, DateTime NgayNhan, DateTime NgayTra, string DuKien, float ThanhTien,string MaNhanVien)
 		{
 			var nhanphong = new DatPhong();
 			nhanphong.MaDatPhong = MaDatPhong;
@@ -46,35 +46,51 @@ namespace QuanLyKhachSan.Controllers
 			return RedirectToAction("Index");
 		}
 
-		[HttpGet]
-		public string GetHangPhong(string maPhong)
-		{
+        [HttpGet]
+        public string GetHangPhong(string maPhong)
+        {
+            var phong = _db.Phong.Find(maPhong);
+            if (phong != null)
+            {
+                return phong.HangPhong;
+            }
+            return "No matching record found";
+        }
 
-			var phong = _db.Phong.Find(maPhong);
-			return phong.HangPhong;
-
-
-		}
-		[HttpGet]
+        [HttpGet]
 		public IActionResult LayThanhToan(string maPhong)
 		{
 			var datPhong = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == maPhong);
 			return Json(datPhong);
 		}
 		[HttpGet]
-		public IActionResult LayTenKhachHang(string maPhong)
-		{
-			var phong = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == maPhong);
-			var tenkhachhang = _db.KhachHangs.FirstOrDefault(s => s.MaKhachHang == phong.MaKhachHang);
-			return Json(tenkhachhang);
-		}
-		[HttpPost]
+        public IActionResult LayTenKhachHang(string maPhong)
+        {
+            var phong = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == maPhong);
+            if (phong != null)
+            {
+                var tenkhachhang = _db.KhachHangs.FirstOrDefault(s => s.MaKhachHang == phong.MaKhachHang);
+                if (tenkhachhang != null)
+                {
+                    return Json(tenkhachhang);
+                }
+            }
+            return Json(new { error = "No matching record found" });
+        }
+
+        [HttpPost]
 		public IActionResult ThanhToan(string Phong)
 		{
 			var datphong = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == Phong);
 			_db.DatPhongs.Remove(datphong);
 			_db.SaveChanges();
 			return RedirectToAction("Index");
+		}
+		[HttpGet]
+		public IActionResult CheckRoom(string maPhong)
+		{
+			var datphong = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == maPhong);
+			return Json(datphong != null);
 		}
 
 

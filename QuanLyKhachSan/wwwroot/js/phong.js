@@ -75,6 +75,30 @@ function updateHangPhong() {
     });
 
 }
+
+function popUpNhanPhong(maPhong) {
+    // Get the overlay element
+    var overlay = document.getElementById('overlay');
+
+    // Show the overlay
+    overlay.style.display = 'block';
+
+    // Update the room number in the popup
+    document.getElementById('Ma_Phong').value = maPhong;
+
+    // Update the room type in the popup
+    updateHangPhong();
+
+    // Attach event listeners to the check-in and check-out inputs
+    var checkInInput = document.querySelector('input[name="NgayNhan"]');
+    var checkOutInput = document.querySelector('input[name="NgayTra"]');
+    checkInInput.addEventListener('change', updateDuration);
+    checkOutInput.addEventListener('change', updateDuration);
+
+    // Call updateDuration to calculate the initial values
+    updateDuration();
+}
+
 function popUpTraPhong(maPhong) {
     // Cập nhật tiêu đề của popup với mã phòng
 
@@ -98,7 +122,7 @@ function popUpTraPhong(maPhong) {
         data: { maPhong: maPhong },
         success: function (data) {
             // 'data' chính là đối tượng đặt phòng trả về từ controller
-            $('#Hang_Phong_ThanhToan').text(data.hangPhong);
+            $('#Hang_Phong_ThanhToan').text(data.hinhThuc);
             $('#Ngay_Nhan_ThanhToan').val(data.ngayNhan);
             $('#Ngay_Tra_ThanhToan').val(data.ngayTra);
             $('#Tong_Tien_Thanh_Toan').text(data.thanhTien);
@@ -112,6 +136,7 @@ function popUpTraPhong(maPhong) {
     document.getElementById('TraPhong').style.display = 'block';
 }
 
+
 function Close_TraPhong() {
     document.getElementById('TraPhong').style.display = 'none';
 
@@ -121,6 +146,28 @@ function DongTraPhong() {
     var dongTraPhong = document.getElementById('Dong_Tra_Phong');
     dongTraPhong.display = 'none';
 }
+
+function checkRoomStatus(maPhong) {
+
+    $.ajax({
+        url: '/Phong/CheckRoom',
+        type: 'GET',
+        data: { maPhong: maPhong },
+        success: function (isBooked) {
+            if (isBooked) {
+                // If the room is already booked, show the checkout popup
+                console.log(1);
+                popUpTraPhong(maPhong);
+            } else {
+                popUpNhanPhong(maPhong);
+            }
+        },
+       error: function (error) {
+        console.log(error);
+    } 
+    });
+}
+
 
 
 

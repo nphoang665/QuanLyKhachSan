@@ -56,8 +56,8 @@ namespace QuanLyKhachSan.DataAcess.Migrations
                     b.Property<DateTime>("NgayTra")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ThanhTien")
-                        .HasColumnType("int");
+                    b.Property<float>("ThanhTien")
+                        .HasColumnType("real");
 
                     b.HasKey("MaDatPhong");
 
