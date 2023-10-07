@@ -5,36 +5,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="~/css/QuenMatKhau.css">
-  <title>LOGIN ROYAL HOTEL A$AP</title>
+    <link rel="stylesheet" href="~/css/QuenMatKhau.css">
+    <title>LOGIN ROYAL HOTEL A$AP</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <section>
         <div class="form-box">
             <div class="form-value">
-                <form method="post">
+   
+                <!-- Step 1: Email Input -->
+                <div id="step1">
                     <h2 style="font-family: poppins;">Quên mật khẩu</h2>
-                    <h3>Vui lòng nhập email hoặc số di động để làm mới mật khẩu của bạn.</h3>
+                    <h3>Vui lòng nhập email để làm mới mật khẩu của bạn.</h3>
                     <div class="inputbox">
                         <ion-icon name="mail-outline"></ion-icon>
-                        <input type="text" required asp-for="Email">
-                        <label >Email / Số điện thoại</label>
-                     
+                        <input type="text" id="email" required>
+                        <label>Email</label>
                     </div>
-                    <div class="inputbox">
-                        <ion-icon name="mail-outline"></ion-icon>
-                        <input type="text" required name="ConfirmId">
-                        <label for="">Mã Xác Thực</label>
+                    <button id="sendEmail">Gửi mail</button>
+                </div>
 
+                <!-- Step 2: Confirmation Code Input -->
+                <div id="step2" style="display: none;">
+                    <h2 style="font-family: poppins;">Nhập mã xác nhận</h2>
+                    <div class="inputbox">
+                        <ion-icon name="mail-outline"></ion-icon>
+                        <input type="text" id="confirmId" required>
+                        <label>Mã Xác Thực</label>
                     </div>
-                    <button type="submit" asp-action="GuiMail" asp-controller="QuenMatKhau">Lấy lại mật khẩu</button>
-                    <a href="#">Quay lại đăng nhập</a>
-                    <h1> @ViewBag.Message</h1>
-                </form>
+                    <button id="confirmCode">Xác nhận</button>
+                </div>
+
+                <!-- Step 3: Reset Password -->
+                <div id="step3" style="display: none;">
+                    <h2 style="font-family: poppins;">Đặt lại mật khẩu</h2>
+                    <div class="inputbox">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                        <input type="password" id="newPassword" required>
+                        <label>Mật khẩu mới</label>
+                    </div>
+                    <button id="resetPassword">Đặt lại mật khẩu</button>
+                </div>
+                <!-- Message Display -->
+                <h1 id="message"></h1>
+
             </div>
         </div>
     </section>
+
+    <!-- Include the Ionicons library -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <!-- Include your custom JavaScript -->
+   
+
 </body>
+<script src="~/js/QuenMatKhau.js"></script>
 </html>

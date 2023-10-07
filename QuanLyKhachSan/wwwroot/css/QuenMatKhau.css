@@ -114,3 +114,21 @@ a {
         margin: 10px auto;
         display: block;
     }
+
+#MaXacThuc{
+    display:none;
+}
+#MatKhauMoi {
+    display: none;
+
+}
+#NhapLaiMatKhauMoi {
+    display: none;
+}
+#NhapMaXacThuc{
+    display:none;
+
+}
+#DoiMatKhau {
+    display: none;
+}
