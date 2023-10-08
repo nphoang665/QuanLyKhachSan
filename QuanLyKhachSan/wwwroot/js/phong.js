@@ -167,6 +167,22 @@ function checkRoomStatus(maPhong) {
     } 
     });
 }
+function HienThiThongTinPhong(maPhong) {
+    console.log(maPhong);
+    var p = document.getElementById('container-boder');
+    p.style.display = 'block';
+    if (maPhong == '101') {
+        p.style.position = 'absolute';
+        p.style.top = '30vh'; // 20% chiều cao viewport
+        p.style.left = '10vw'; // 20% chiều rộng viewport
+    }
+    else if (maPhong == '102') {
+        p.style.position = 'absolute';
+        p.style.top = '30vh'; // 20% chiều cao viewport
+        p.style.left = '30vw'; // 40% chiều rộng viewport
+    }
+}
+
 
 
 

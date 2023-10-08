@@ -3,6 +3,7 @@
 }
 #tongquat{
     max-width:5000px;
+    position:relative;
 }
 .room {
     height: 120px;
@@ -218,4 +219,97 @@
     border:none;
     background:white;
     font-size:22px;
+}
+
+
+/*mới*/
+* {
+    font-size: 20px;
+}
+
+#container-boder {
+    width: 500px;
+    margin: 0 auto;
+    display:none;
+    position:absolute;
+    top:200px;
+    left:650px;
+    background-color:white;
+
+}
+
+.room-info {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 15px;
+}
+
+.ThoiGianSD {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
+
+.room-type {
+    font-weight: bold;
+}
+
+.start-date,
+.end-date,
+b {
+    color: #999;
+}
+
+.used-time {
+    position: absolute;
+    margin: 25px 30px;
+    font-size: 17px;
+}
+
+.icon {
+    margin-top: 10px;
+}
+
+.customer-name {
+    font-weight: bold;
+}
+
+.note {
+    color: #999;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.status {
+    color: #279656;
+    background-color: #E9F5EE;
+    border-radius: 20px;
+    padding: 2px 10px;
+}
+
+.btn-DoiPhong {
+    background-color: white;
+    color: #279656;
+    border: 2px solid #279656;
+    border-radius: 5px;
+    padding: 3px 10px;
+    cursor: pointer;
+}
+
+.btn-TraPhong {
+    color: white;
+    background-color: #0052A3;
+    border: none;
+    border-radius: 5px;
+    padding: 4px 12px;
+    cursor: pointer;
+}
+
+/* Cân bằng icon với text */
+.material-symbols-outlined {
+    vertical-align: middle;
+    margin-right: 5px;
 }
