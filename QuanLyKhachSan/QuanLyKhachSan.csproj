@@ -24,13 +24,4 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\QuanLyKhachSan.DataAcess\QuanLyKhachSan.DataAcess.csproj" />
-    <ProjectReference Include="..\QuanLyKhachSan.Model\QuanLyKhachSan.Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
 </Project>

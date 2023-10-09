@@ -16,8 +16,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\QuanLyKhachSan.Model\QuanLyKhachSan.Model.csproj" />
-  </ItemGroup>
-
 </Project>
