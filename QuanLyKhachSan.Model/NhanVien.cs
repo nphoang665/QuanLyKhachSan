@@ -20,7 +20,6 @@ namespace QuanLyKhachSan.Model
         public string TenNhanVien { get; set; }
 
         [DisplayName("CCCD")]
-        [RegularExpression(@"^[0-9]{9}$")]
         public string CCCD { get; set; }
 
         [DisplayName("Giới Tính")]
@@ -34,7 +33,6 @@ namespace QuanLyKhachSan.Model
         public string ChucVu { get; set; }
 
         [DisplayName("Số Điện Thoại")]
-        [RegularExpression(@"^[0-9]{10}$")]
         public string DienThoai { get; set; }
 
         [DisplayName("Địa Chỉ")]

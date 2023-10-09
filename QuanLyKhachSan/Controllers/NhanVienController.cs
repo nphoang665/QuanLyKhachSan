@@ -44,64 +44,49 @@ namespace QuanLyKhachSan.Controllers
             return View(paginatedKhachHangs);
         }
 
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ThemNhanVien()
+        // Trong Controller của bạn
+        [HttpGet]
+        public IActionResult ThemNhanVien()
         {
-            var formCollection = Request.Form;
-
-            var nhanvien = new NhanVien
-            {
-                MaNhanVien = formCollection["MaNhanVien"],
-                TenNhanVien = formCollection["TenNhanVien"],
-                CCCD = formCollection["CCCD"],
-                GioiTinh = formCollection["GioiTinh"],
-                NgaySinh = DateTime.Parse(formCollection["NgaySinh"]),
-                ChucVu = formCollection["ChucVu"],
-                DienThoai = formCollection["DienThoai"],
-                DiaChi = formCollection["DiaChi"],
-                NgayVaoLam = DateTime.Parse(formCollection["NgayVaoLam"]),
-                GhiChu = formCollection["GhiChu"]
-            };
-
-            if (!ModelState.IsValid)
-            {
-
-                _db.NhanViens.Add(nhanvien);
-                await _db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(nhanvien);
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SuaNhanVien()
+        public IActionResult ThemNhanVien(NhanVien model)
         {
-            var formCollection = Request.Form;
-
-            var nhanvien = new NhanVien();
-            nhanvien.MaNhanVien = formCollection["MaNhanVienSua"];
-            nhanvien.TenNhanVien = formCollection["TenNhanVienSua"];
-            nhanvien.CCCD = formCollection["CCCDSua"];
-            nhanvien.GioiTinh = formCollection["GioiTinhSua"];
-            nhanvien.NgaySinh = DateTime.Parse(formCollection["NgaySinhSua"]);
-            nhanvien.ChucVu = formCollection["ChucVuSua"];
-            nhanvien.DienThoai = formCollection["DienThoaiSua"];
-            nhanvien.DiaChi = formCollection["DiaChiSua"];
-            nhanvien.NgayVaoLam = DateTime.Parse(formCollection["NgayVaoLamSua"]);
-            nhanvien.GhiChu = formCollection["GhiChuSua"];
-
             if (ModelState.IsValid)
             {
-
-                _db.NhanViens.Update(nhanvien);
-                await _db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                _db.NhanViens.Add(model);
+               _db.SaveChangesAsync();
+                return RedirectToAction("Index"); 
             }
-            return View(nhanvien);
+
+            return View(model);
         }
+
+
+        [HttpGet]
+        public IActionResult SuaNhanVien(string id)
+        {
+            var nv = _db.NhanViens.FirstOrDefault(s=> s.MaNhanVien==id);
+            return View(nv);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SuaNhanVien(NhanVien model)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.NhanViens.Update(model);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult XoaNhanVien(string? id)
