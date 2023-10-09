@@ -1,12 +1,9 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
-
-
-
     var addButton = document.getElementById('DatPhong');
-    //var overlay = document.getElementById('overlay');
     var closeButton = document.getElementById('closeButton');
     addButton.addEventListener('click', function () {
         overlay.style.display = 'block';
+        updateHangPhong(); // Gọi hàm updateHangPhong() sau khi hiển thị overlay
     });
     closeButton.addEventListener('click', function () {
         overlay.style.display = 'none';
@@ -126,6 +123,10 @@ function popUpTraPhong(maPhong) {
             $('#Ngay_Nhan_ThanhToan').val(data.ngayNhan);
             $('#Ngay_Tra_ThanhToan').val(data.ngayTra);
             $('#Tong_Tien_Thanh_Toan').text(data.thanhTien);
+            $('#Du_Kien_ThanhToan').text(data.duKien);
+            $('#Ma_Dat_Phong_ThanhToan').text(data.maDatPhong);
+            $('#Gia_Phong_ThanhToan').text(data.giaPhong);
+            $('#Nhan_Vien_ThanhToan').text(data.maNhanVien);
         },
 
     });
@@ -167,21 +168,21 @@ function checkRoomStatus(maPhong) {
     } 
     });
 }
-function HienThiThongTinPhong(maPhong) {
-    console.log(maPhong);
-    var p = document.getElementById('container-boder');
-    p.style.display = 'block';
-    if (maPhong == '101') {
-        p.style.position = 'absolute';
-        p.style.top = '30vh'; // 20% chiều cao viewport
-        p.style.left = '10vw'; // 20% chiều rộng viewport
-    }
-    else if (maPhong == '102') {
-        p.style.position = 'absolute';
-        p.style.top = '30vh'; // 20% chiều cao viewport
-        p.style.left = '30vw'; // 40% chiều rộng viewport
-    }
-}
+//function HienThiThongTinPhong(maPhong) {
+//    console.log(maPhong);
+//    var p = document.getElementById('container-boder');
+//    p.style.display = 'block';
+//    if (maPhong == '101') {
+//        p.style.position = 'absolute';
+//        p.style.top = '30vh'; // 20% chiều cao viewport
+//        p.style.left = '10vw'; // 20% chiều rộng viewport
+//    }
+//    else if (maPhong == '102') {
+//        p.style.position = 'absolute';
+//        p.style.top = '30vh'; // 20% chiều cao viewport
+//        p.style.left = '30vw'; // 40% chiều rộng viewport
+//    }
+//}
 
 
 

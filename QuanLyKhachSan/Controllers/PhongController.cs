@@ -37,7 +37,7 @@ namespace QuanLyKhachSan.Controllers
 			nhanphong.HinhThuc = HinhThuc;
 			nhanphong.GiaPhong = GiaPhong;
 			nhanphong.NgayNhan = NgayNhan;
-			nhanphong.NgayNhan = NgayTra;
+			nhanphong.NgayTra = NgayTra;
 			nhanphong.DuKien = DuKien;
 			nhanphong.ThanhTien = ThanhTien;
 

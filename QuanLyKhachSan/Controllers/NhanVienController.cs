@@ -65,7 +65,7 @@ namespace QuanLyKhachSan.Controllers
                 GhiChu = formCollection["GhiChu"]
             };
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
 
                 _db.NhanViens.Add(nhanvien);
