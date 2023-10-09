@@ -90,11 +90,10 @@
                                 <td>@phong.GiaTheoQuaDem</td>
                                 <td>@phong.GiaTheoNgay</td>
                                 <td>@phong.TrangThai</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary editButton" data-id="@phong.MaPhong" style="margin-left:5px;">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                </td>
+                       
+                        <td><a type="button" class="btn btn-primary editButton" asp-action="SuaPhong" asp-route-id="@phong.MaPhong"><i class="bi bi-pencil"></i></a></td>
+
+                               
                             </tr>
                         }
                     </tbody>
