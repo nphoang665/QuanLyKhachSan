@@ -44,52 +44,47 @@ namespace QuanLyKhachSan.Controllers
 
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ThemKhachHang()
+        [HttpGet]
+        public IActionResult ThemKhachHang()
         {
-            var formCollection = Request.Form;
-            var khachHang = new KhachHang();
-            khachHang.MaKhachHang = formCollection["MaKhachHang"];
-            khachHang.TenKhachHang = formCollection["TenKhachHang"];
-            khachHang.CCCD = formCollection["CCCD"]; // Added this line
-            khachHang.GioiTinh = formCollection["GioiTinh"];
-            khachHang.NgaySinh = DateTime.Parse(formCollection["NgaySinh"]);
-            khachHang.DienThoai = formCollection["DienThoai"];
-            khachHang.DiaChi = formCollection["DiaChi"];
-            khachHang.GhiChu = formCollection["GhiChu"];
-            if (ModelState.IsValid)
-            {
-                _db.KhachHangs.Add(khachHang);
-                _db.SaveChanges();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(khachHang);
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SuaKhachHang()
+        public IActionResult ThemKhachHang(KhachHang model)
         {
-            var formCollection = Request.Form;
-            var khachHang = new KhachHang();
-            khachHang.MaKhachHang = formCollection["MaKhachHangSua"];
-            khachHang.TenKhachHang = formCollection["TenKhachHangSua"];
-            khachHang.CCCD = formCollection["CCCDSua"]; // Added this line
-            khachHang.GioiTinh = formCollection["GioiTinhSua"];
-            khachHang.NgaySinh = DateTime.Parse(formCollection["NgaySinhSua"]);
-            khachHang.DienThoai = formCollection["DienThoaiSua"];
-            khachHang.DiaChi = formCollection["DiaChiSua"];
-            khachHang.GhiChu = formCollection["GhiChuSua"];
             if (ModelState.IsValid)
             {
-                _db.KhachHangs.Update(khachHang);
-                _db.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                _db.KhachHangs.Add(model);
+                _db.SaveChangesAsync();
+                return RedirectToAction("Index");
             }
-            return View(khachHang);
+
+            return View(model);
         }
 
+
+        [HttpGet]
+        public IActionResult SuaKhachHang(string id)
+        {
+            var nv = _db.KhachHangs.FirstOrDefault(s => s.MaKhachHang == id);
+            return View(nv);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SuaKhachHang(KhachHang model)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.KhachHangs.Update(model);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult XoaKhachHang(string? id)

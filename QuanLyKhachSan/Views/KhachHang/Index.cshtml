@@ -68,7 +68,7 @@
 
 
         <div class="col-md-9">
-            <button type="button" id="addButton" class="nav-link text-dark btn w-25 btn_them" asp-area="" asp-controller="KhachHang" asp-action="ThemKhachHang" style="margin-bottom:12px;">Thêm Khách Hàng</button>
+        <a class="btn btn-primary" asp-area="" asp-controller="KhachHang" asp-action="ThemKhachHang">Thêm Khách Hàng</a>
 
             <table class="table table-bordered table-hover" id="table_main">
                 <thead>
@@ -102,11 +102,8 @@
                             <td>@khachHang.GhiChu</td>
 
                             <!-- Edit button -->
-                            <td>
-                                <button type="button" class="btn btn-primary editButton" data-id="@khachHang.MaKhachHang">
-                                    <i class="bi bi-pencil"></i>
-                                </button>
-                            </td>
+                        <td><a type="button" class="btn btn-primary editButton" asp-action="SuaKhachHang" asp-route-id="@khachHang.MaKhachHang"><i class="bi bi-pencil"></i></a></td>
+
 
                             <!-- Delete button with confirmation -->
                             @using (Html.BeginForm("XoaKhachHang", "KhachHang", new { id = khachHang.MaKhachHang }, FormMethod.Post))
@@ -182,122 +179,3 @@
     </nav>
 
 
-
-</div>
-
- 
-
-
-<!-- Add form -->
-<div id="overlay" class="overlay">
-    <div class="form-container">
-        <button id="closeButton"><i class="bi bi-x-lg icon_x"></i></button>
-        <h2>Thêm thông tin khách hàng</h2>
-        <form method="post" asp-action="ThemKhachHang" asp-controller="KhachHang">
-            <div class="border p-3 mt-4">
-                <div class="row pb-2">
-                    <!-- Add all the fields from KhachHang -->
-                    <label>Mã Khách Hàng</label>
-                    <input name="MaKhachHang" class=form-control />
-                    <label>Tên Khách Hàng</label>
-                    <input name="TenKhachHang" class=form-control />
-                    <label>CCCD</label>
-                    <input name="CCCD" class=form-control /> <!-- Added this line -->
-                    <label>Giới Tính</label>
-                    <input name="GioiTinh" class=form-control />
-                    <label>Ngày Sinh</label>
-                    <input name="NgaySinh" class=form-control type="date" />
-                    <label>Điện Thoại</label>
-                    <input name="DienThoai" class=form-control />
-                    <label>Địa Chỉ</label>
-                    <input name="DiaChi" class=form-control />
-                    <label>Ghi Chú</label>
-                    <input name="GhiChu" class=form-control />
-                </div>
-                <!-- Submit button -->
-                <button type="submit" class="btn btn-primary">Create</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- Edit form -->
-<div class="overlayEdit" id="overlayEdit">
-    <div class="form-containerEdit">
-        <button id="closeButtonEdit"><i class="bi bi-x-lg icon_x"></i></button>
-        <h2>Sửa thông tin khách hàng</h2>
-        <form method="post" asp-action="SuaKhachHang" asp-controller="KhachHang">
-            <div class="border p-3 mt-4">
-                <div class="row pb-2">
-                    <!-- Add all the fields from KhachHang -->
-                    <label>Mã Khách Hàng</label>
-                    <input name="MaKhachHangSua" class=form-control />
-                    <label>Tên Khách Hàng</label>
-                    <input name="TenKhachHangSua" class=form-control />
-                    <label>CCCD</label>
-                    <input name="CCCDSua" class=form-control /> <!-- Added this line -->
-                    <label>Giới Tính</label>
-                    <input name="GioiTinhSua" class=form-control />
-                    <label>Ngày Sinh</label>
-                    <input name="NgaySinhSua" class=form-control type="date" />
-                    <label>Điện Thoại</label>
-                    <input name="DienThoaiSua" class=form-control />
-                    <label>Địa Chỉ</label>
-                    <input name="DiaChiSua" class=form-control />
-                    <label>Ghi Chú</label>
-                    <input name="GhiChuSua" class=form-control />
-                </div>
-                <!-- Submit button -->
-                <button type="submit" class="btn btn-primary">Edit</button>
-            </div>
-        </form>
-    </div>
-</div>
-
- 
-@* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function () {
-        // Xử lý sự kiện khi nhấn nút Tìm kiếm
-        $("#searchButton").click(function () {
-            var searchText = $("#searchText").val();
-            $.ajax({
-                url: "/KhachHang/Search",
-                type: "GET",
-                data: { searchText: searchText },
-                success: function (result) {
-                    $("#table_main tbody").empty(); // Xóa dữ liệu hiện tại
-                    $("#table_main tbody").html(result); // Hiển thị kết quả tìm kiếm mới
-                },
-                error: function (error) {
-                    console.error(error);
-                }
-            });
-        });
-    });
-</script> *@
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-@* <script>
-    $(document).ready(function () {
-        // Xử lý sự kiện khi nhập vào textbox
-        $("#searchText").on("input", function () {
-            var searchText = $(this).val();
-            $.ajax({
-                url: "/KhachHang/Search",
-                type: "GET",
-                data: { searchText: searchText },
-                success: function (result) {
-                    $("#table_main tbody").empty(); // Xóa dữ liệu hiện tại
-                    $("#table_main tbody").html(result); // Hiển thị kết quả tìm kiếm mới
-                },
-                error: function (error) {
-                    console.error(error);
-                }
-            });
-        });
-    });
-</script> *@
-
-
-
-<script src="~/js/pop-up.js"/>

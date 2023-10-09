@@ -1,0 +1,66 @@
+﻿@model QuanLyKhachSan.Model.KhachHang
+
+@{
+    ViewData["Title"] = "Sửa Khách Hàng";
+}
+
+<h2>Thêm Khách Hàng</h2>
+
+<form asp-action="SuaKhachHang" method="post">
+    <div class="form-group">
+        <label for="MaKhachHang">Mã Khách Hàng</label>
+        <input asp-for="MaKhachHang" class="form-control" readonly />
+        @Html.ValidationMessageFor(model => model.MaKhachHang, "", new { @class = "text-danger" })
+
+    </div>
+    <div class="form-group">
+        <label for="TenKhachHang">Tên Khách Hàng</label>
+        <input asp-for="TenKhachHang" class="form-control" />
+        @Html.ValidationMessageFor(model => model.TenKhachHang, "", new { @class = "text-danger" })
+
+    </div>
+    <div class="form-group">
+        <label for="CCCD">CCCD</label>
+        <input asp-for="CCCD" class="form-control" />
+        @Html.ValidationMessageFor(model => model.CCCD, "", new { @class = "text-danger" })
+
+    </div>
+    <div class="form-group">
+        <label for="GioiTinh">Giới Tính</label>
+        <select asp-for="GioiTinh" class="form-control">
+
+            <option value="Nam">Nam</option>
+            <option value="Nữ">Nữ</option>
+        </select>
+        @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger" })
+
+    </div>
+    <div class="form-group">
+        <label for="NgaySinh">Ngày Sinh</label>
+        <input asp-for="NgaySinh" type="date" class="form-control" />
+        @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+
+    </div>
+    <div class="form-group">
+        <label for="DienThoai">Điện Thoại</label>
+        <input asp-for="DienThoai" class="form-control" />
+        @Html.ValidationMessageFor(model => model.DienThoai, "", new { @class = "text-danger" })
+
+    </div>
+    <div class="form-group">
+        <label for="DiaChi">Địa Chỉ</label>
+        <input asp-for="DiaChi" class="form-control" />
+        @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+
+    </div>
+    <div class="form-group">
+        <label for="GhiChu">Ghi Chú</label>
+        <input asp-for="GhiChu" class="form-control" />
+        @Html.ValidationMessageFor(model => model.GhiChu, "", new { @class = "text-danger" })
+
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Sửa Khách Hàng" class="btn btn-primary" />
+    </div>
+</form>
