@@ -29,42 +29,65 @@
                     </div>
                 </form>
             </div>
-          
+
+        <form method="get" asp-controller="KhachHang" asp-action="Index" id="searchForm">
             <div class="card w-100 bg-white">
                 <div class="card-header"><h5>Giới Tính</h5></div>
                 <div class="card-body">
                     <div class="btn-group-vertical btn-group-toggle w-100 text-left" data-toggle="buttons">
-                        <label class="btn btn-secondary w-100">
-                            <input type="radio" name="gender" id="all" autocomplete="off" checked> Tất cả
+                        <label class="btn btn-secondary w-100" asp-controller="KhachHang" asp-action="Index">
+                            <input type="radio" name="gender" id="all" autocomplete="off" value=""> Tất cả
                         </label>
                         <label class="btn btn-secondary w-100">
-                            <input type="radio" name="gender" id="male" autocomplete="off"> Nam
+                            <input type="radio" name="gender" id="male" autocomplete="off" value="Nam"> Nam
                         </label>
                         <label class="btn btn-secondary w-100">
-                            <input type="radio" name="gender" id="female" autocomplete="off"> Nữ
+                            <input type="radio" name="gender" id="female" autocomplete="off" value="Nữ"> Nữ
                         </label>
                     </div>
                 </div>
             </div>
+        </form>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('input[type=radio][name=gender]').change(function () {
+                    $('#searchForm').submit();
+                });
+            });
+        </script>
 
 
+
+        <form method="get" asp-controller="KhachHang" asp-action="Index" id="searchForm1">
             <div class="card w-100 bg-white">
                 <div class="card-header"><h5>Trạng Thái</h5></div>
                 <div class="card-body">
                     <div class="btn-group-vertical btn-group-toggle w-100 text-left" data-toggle="buttons">
                         <label class="btn btn-secondary w-100">
-                            <input type="radio" name="TrangThai" id="DangHoatDong" autocomplete="off" checked> Đang Hoạt Động
+                            <input type="radio" name="TrangThai" id="DangHoatDong" autocomplete="off" value="Đang Hoạt Động"> Đang Hoạt Động
                         </label>
                         <label class="btn btn-secondary w-100">
-                            <input type="radio" name="TrangThai" id="NgungHoatDong" autocomplete="off"> Ngừng Hoạt Động
+                            <input type="radio" name="TrangThai" id="NgungHoatDong" autocomplete="off" value="Ngừng Hoạt Động"> Ngừng Hoạt Động
                         </label>
-                        <label class="btn btn-secondary w-100">
-                            <input type="radio" name="TrangThai" id="TatCa" autocomplete="off"> Tất Cả
+                        <label class="btn btn-secondary w-100" asp-controller="KhachHang" asp-action="Index">
+                            <input type="radio" name="TrangThai" id="all" autocomplete="off" value=""> Tất cả
                         </label>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('input[type=radio][name=TrangThai]').change(function () {
+                    $('#searchForm1').submit();
+                });
+            });
+        </script>
+    </div>
 
 
         <div class="col-md-9">

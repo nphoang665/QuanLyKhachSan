@@ -13,34 +13,48 @@ namespace QuanLyKhachSan.Controllers
         {
             _db = db;
         }
-        public async Task<IActionResult> Index(string searchText, int page = 1)
+        public async Task<IActionResult> Index(string searchText, string gender, string TrangThai, int page = 1)
         {
+
             int pageSize = 7;
             int totalKhachHangs = await _db.KhachHangs.CountAsync();
             int totalPages = (int)Math.Ceiling((double)totalKhachHangs / pageSize);
-
-            // Lọc kết quả theo từ khóa tìm kiếm
-            
             var khachHangs = _db.KhachHangs.AsQueryable();
+
+            // Lọc kết quả theo giới tính
+            if (!String.IsNullOrEmpty(gender))
+            {
+                khachHangs = khachHangs.Where(kh => kh.GioiTinh == gender);
+            }
+            // Lọc kết quả theo từ khóa tìm kiếm
+
+
             if (!String.IsNullOrEmpty(searchText))
             {
                 khachHangs = khachHangs.Where(kh => kh.TenKhachHang.Contains(searchText));
             }
-
-
+            // Lọc theo trạng thái
+            if (!String.IsNullOrEmpty(TrangThai))
+            {
+                khachHangs = khachHangs.Where(kh => kh.GhiChu == TrangThai);
+            }
             // Phân trang kết quả
             var paginatedKhachHangs = await khachHangs
                 .OrderBy(kh => kh.MaKhachHang)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
-
+            // Lấy giá trị của radio button
             // Trả về view
             ViewData["TotalPages"] = totalPages;
             ViewData["CurrentPage"] = page;
-            ViewData["searchText"]=khachHangs;
+            ViewData["searchText"] = khachHangs;
+            ViewData["gender"] = gender;
+            ViewData["TrangThai"] = TrangThai;
             return View(paginatedKhachHangs);
+
         }
+
 
 
 

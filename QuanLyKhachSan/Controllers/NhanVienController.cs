@@ -15,7 +15,7 @@ namespace QuanLyKhachSan.Controllers
         {
             _db = db;
         }
-        public async Task<IActionResult> Index(string searchText, int page = 1)
+        public async Task<IActionResult> Index(string searchText, string gender, string ChucVu, int page = 1)
         {
             int pageSize = 7;
             int totalKhachHangs = await _db.NhanViens.CountAsync();
@@ -24,11 +24,21 @@ namespace QuanLyKhachSan.Controllers
             // Lọc kết quả theo từ khóa tìm kiếm
 
             var khachHangs = _db.NhanViens.AsQueryable();
+            // Lọc kết quả theo giới tính
+            if (!String.IsNullOrEmpty(gender))
+            {
+                khachHangs = khachHangs.Where(kh => kh.GioiTinh == gender);
+            }
             if (!String.IsNullOrEmpty(searchText))
             {
                 khachHangs = khachHangs.Where(kh => kh.TenNhanVien.Contains(searchText));
             }
 
+            // Lọc theo chức vụ
+            if (!String.IsNullOrEmpty(ChucVu))
+            {
+                khachHangs = khachHangs.Where(kh => kh.ChucVu.Contains(ChucVu));
+            }
 
             // Phân trang kết quả
             var paginatedKhachHangs = await khachHangs
@@ -43,6 +53,7 @@ namespace QuanLyKhachSan.Controllers
             ViewData["searchText"] = khachHangs;
             return View(paginatedKhachHangs);
         }
+
 
         // Trong Controller của bạn
         [HttpGet]
