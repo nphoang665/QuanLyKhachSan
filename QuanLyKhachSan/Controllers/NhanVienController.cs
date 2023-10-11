@@ -1,11 +1,7 @@
-﻿using MailKit.Search;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyKhachSan.DataAcess.Data;
 using QuanLyKhachSan.Model;
-
 namespace QuanLyKhachSan.Controllers
 {
     public class NhanVienController : Controller
@@ -66,21 +62,24 @@ namespace QuanLyKhachSan.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult ThemNhanVien(NhanVien model)
         {
+          
+
             if (ModelState.IsValid)
             {
                 _db.NhanViens.Add(model);
-               _db.SaveChangesAsync();
-                return RedirectToAction("Index"); 
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+
             }
-
-            return View(model);
+         
+             return View(model);
+           
         }
-
 
         [HttpGet]
         public IActionResult SuaNhanVien(string id)
         {
-            var nv = _db.NhanViens.FirstOrDefault(s=> s.MaNhanVien==id);
+            var nv = _db.NhanViens.FirstOrDefault(s => s.MaNhanVien == id);
             return View(nv);
         }
 
@@ -88,14 +87,19 @@ namespace QuanLyKhachSan.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult SuaNhanVien(NhanVien model)
         {
+          
             if (ModelState.IsValid)
             {
+                //ValidateNhanVien(model);
                 _db.NhanViens.Update(model);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(model);
+
+            
+
+           
         }
 
         [HttpPost]
@@ -107,6 +111,56 @@ namespace QuanLyKhachSan.Controllers
             _db.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+        private void ValidateNhanVien(NhanVien nv)
+        {
+
+            if (nv.MaNhanVien.Length != 6)
+            {
+                ModelState.AddModelError("MaNhanVien", "Mã nhân viên phải đạt 6 ký tự");
+
+
+            }
+            if (nv.TenNhanVien.Any(char.IsDigit))
+            {
+                ModelState.AddModelError("TenNhanVien", "Tên nhân viên không được chứa số.");
+            }
+            if (nv.TenNhanVien.Length > 50 || nv.TenNhanVien.Length < 3)
+            {
+                ModelState.AddModelError("TenNhanVien", "Tên nhân viên không được quá dài hoặc.");
+
+            }
+            if (nv.CCCD.Length != 12)
+            {
+                ModelState.AddModelError("CCCD", "Căn cước công dân phải đủ 12 số.");
+            }
+            if (!nv.CCCD.Any(char.IsDigit))
+            {
+                ModelState.AddModelError("CCCD", "Căn cước công dân phải là số.");
+            }
+            if (nv.ChucVu.Any(char.IsDigit))
+            {
+                ModelState.AddModelError("ChucVu", "Chức vụ không chứa số.");
+            }
+            if (!nv.DienThoai.Any(char.IsDigit))
+            {
+                ModelState.AddModelError("DienThoai", "Số điện thoại phải là số (không chứa chữ và kí tự đặc việt).");
+            }
+            if (nv.DienThoai.Length != 10)
+            {
+                ModelState.AddModelError("DienThoai", "Số điện thoại có 10 kí tự.");
+            }
+            DateTime ngayHienTai = DateTime.Now;
+            TimeSpan timeSpan = ngayHienTai - nv.NgaySinh;
+            if (timeSpan.TotalDays < 6570)
+            {
+                ModelState.AddModelError("NgaySinh", "Nhân viên phải đủ 18 tuổi.");
+            }
+            TimeSpan tinhNgayVaoLam = nv.NgayVaoLam - ngayHienTai;
+            if (tinhNgayVaoLam.TotalDays > 0)
+            {
+                ModelState.AddModelError("NgayVaoLam", "Ngày vào làm không được quá ngày hôm nay.");
+            }
         }
 
     }

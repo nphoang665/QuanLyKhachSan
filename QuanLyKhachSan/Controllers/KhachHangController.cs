@@ -71,7 +71,7 @@ namespace QuanLyKhachSan.Controllers
             if (ModelState.IsValid)
             {
                 _db.KhachHangs.Add(model);
-                _db.SaveChangesAsync();
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
