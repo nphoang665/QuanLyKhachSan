@@ -1,7 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using iTextSharp.text.pdf;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 using QuanLyKhachSan.DataAcess.Data;
 using QuanLyKhachSan.Model;
+using System.Data;
+using iTextSharp.text;
+using Microsoft.Office.Interop.Excel;
+using OfficeOpenXml.SystemDrawing.Text;
+
 namespace QuanLyKhachSan.Controllers
 {
     public class NhanVienController : Controller
@@ -162,6 +169,107 @@ namespace QuanLyKhachSan.Controllers
                 ModelState.AddModelError("NgayVaoLam", "Ngày vào làm không được quá ngày hôm nay.");
             }
         }
+        public ActionResult ExportExcel()
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // Đặt bản quyền cho EPPlus
+            using (ExcelPackage pck = new ExcelPackage())
+            {
+                // Tạo một worksheet mới
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("NhanVien");
 
+                // Lấy danh sách 
+                var nhanvien = _db.NhanViens.ToList();
+
+                // Tạo một bảng để lưu trữ dữ liệu 
+                System.Data.DataTable dataTable = new System.Data.DataTable();
+                dataTable.Columns.Add("Mã Nhân Viên");
+                dataTable.Columns.Add("Tên Nhân Viên");
+                dataTable.Columns.Add("CCCD");
+                dataTable.Columns.Add("Giới tính");
+                dataTable.Columns.Add("Ngày sinh");
+                dataTable.Columns.Add("Điện thoại");
+                dataTable.Columns.Add("Địa chỉ");
+                dataTable.Columns.Add("Chức Vụ");
+                dataTable.Columns.Add("Ngày Vào Làm");
+                dataTable.Columns.Add("Ghi chú");
+                // Thêm dữ liệu  vào bảng
+                foreach (var nv in nhanvien)
+                {
+                    DataRow dataRow = dataTable.NewRow();
+                    dataRow[0] = nv.MaNhanVien;
+                    dataRow[1] = nv.TenNhanVien;
+                    dataRow[2] = nv.CCCD;
+                    dataRow[3] = nv.GioiTinh;
+                    dataRow[4] = nv.NgaySinh.ToShortDateString();
+                    dataRow[5] = nv.DienThoai;
+                    dataRow[6] = nv.DiaChi;
+                    dataRow[7] = nv.ChucVu;
+                    dataRow[8] = nv.NgayVaoLam.ToShortDateString();
+                    dataRow[9] = nv.GhiChu;
+                    
+                    dataTable.Rows.Add(dataRow);
+                }
+
+                // Thêm dữ liệu từ bảng vào worksheet
+                ws.Cells["A1"].LoadFromDataTable(dataTable, true);
+
+                // Gửi file Excel về client
+                var stream = new MemoryStream(pck.GetAsByteArray());
+
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "NhanVien.xlsx");
+            }
+        }
+        public async Task<IActionResult> ExportPDF()
+        {
+            // Tạo một tài liệu PDF mới
+            Document pdfDoc = new Document();
+            MemoryStream memoryStream = new MemoryStream();
+            PdfWriter.GetInstance(pdfDoc, memoryStream);
+
+            // Lấy danh sách nhân viên
+            var nhanvien = _db.NhanViens.ToList();
+
+            pdfDoc.Open();
+
+            // Tạo một bảng để lưu trữ dữ liệu khách hàng
+            PdfPTable table = new PdfPTable(10);
+            table.SetWidths(new float[] { 50f, 50f, 50f, 50f, 50f, 50f, 50f, 50f, 50f, 50f }); // Chỉnh độ rộng của các cột
+
+            // Thêm tiêu đề cho các cột
+            table.AddCell("Mã Nhân Viên");
+            table.AddCell("Tên Nhân Viên");
+            table.AddCell("CCCD");
+            table.AddCell("Giới tính");
+            table.AddCell("Ngày sinh");
+            table.AddCell("Điện thoại");
+            table.AddCell("Địa chỉ");
+            table.AddCell("Chức Vụ");
+            table.AddCell("Ngày Vào Làm");
+            table.AddCell("Ghi chú");
+
+            foreach (var nv in nhanvien)
+            {
+                table.AddCell(nv.MaNhanVien);
+                table.AddCell(nv.TenNhanVien);
+                table.AddCell(nv.CCCD);
+                table.AddCell(nv.GioiTinh);
+                table.AddCell(nv.NgaySinh.ToShortDateString());
+                table.AddCell(nv.DienThoai);
+                table.AddCell(nv.DiaChi);
+                table.AddCell(nv.ChucVu);
+                table.AddCell(nv.NgayVaoLam.ToShortDateString());
+                table.AddCell(nv.GhiChu);
+            }
+
+            // Thêm bảng vào tài liệu PDF
+            pdfDoc.Add(table);
+
+            pdfDoc.Close();
+
+            byte[] bytes = memoryStream.ToArray();
+            memoryStream.Close();
+
+            return File(bytes, "application/pdf", "NhanVien.pdf");
+        }
     }
 }
