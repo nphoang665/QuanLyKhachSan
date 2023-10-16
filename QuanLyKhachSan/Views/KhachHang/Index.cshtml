@@ -94,23 +94,24 @@
         <a class="btn btn-primary" asp-area="" asp-controller="KhachHang" asp-action="ThemKhachHang">Thêm Khách Hàng</a>
         <a type="button" class="btn btn-primary editButton" asp-action="ExportExcel" asp-controller="KhachHang">Execl</a>
         <a type="button" class="btn btn-primary editButton" asp-action="ExportPDF" asp-controller="KhachHang">PDF</a>
-            <table class="table table-bordered table-hover" id="table_main">
+     
+            <table class="table table-bordered table-hover" id="table_main" style="margin-top:20px">
                 <thead>
                     <tr>
                         <!-- Define the table headers -->
-                        <th class="text-center">Mã KH</th>
-                        <th class="text-center">Tên KH</th>
-                        <th class="text-center">CCCD</th>
-                        <th class="text-center">Giới tính</th>
-                        <th class="text-center">Ngày sinh</th>
-                        <th class="text-center">Điện thoại</th>
-                        <th class="text-center">Địa chỉ</th>
-                        <th class="text-center">Ghi chú</th>
-                        <th class="text-center">Sửa</th>
-                        <th class="text-center">Xóa</th>
+                        <th class="text-center" width="80px">Mã KH</th>
+                        <th class="text-center" width="150px">Tên KH</th>
+                        <th class="text-center" width="100px">CCCD</th>
+                         <th class="text-center" width="100px">Giới tính</th>
+                        <th class="text-center" width="120px">Ngày sinh</th>
+                        <th class="text-center" width="120px">Điện thoại</th>
+                        <th class="text-center" width="120px">Địa chỉ</th>
+                    <th class="text-center" width="120px">Ghi chú</th>
+                    <th class="text-center" width="70px">Sửa</th>
+                    <th class="text-center" width="70px">Xóa</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style="font-size:14px">
                     <!-- Loop through each 'khachHang' in the Model -->
                     @foreach (var khachHang in Model)
                     {

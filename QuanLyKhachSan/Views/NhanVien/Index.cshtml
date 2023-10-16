@@ -91,7 +91,7 @@
         <a class="btn btn-primary" asp-area="" asp-controller="NhanVien" asp-action="ThemNhanVien">Thêm nhân viên</a>
         <a type="button" class="btn btn-primary editButton" asp-action="ExportExcel" asp-controller="NhanVien">Execl</a>
         <a type="button" class="btn btn-primary editButton" asp-action="ExportPDF" asp-controller="NhanVien">PDF</a>
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered table-hover" style="margin-top:20px">
             <thead>
                 <tr style="font-size:12px">
                     <th class="text-center" style="width:70px">Mã NV</th>
@@ -111,7 +111,7 @@
             <tbody>
                 @foreach (var nhanvien in Model)
                 {
-                    <tr style="font-size:12px">
+                    <tr style="font-size:14px">
                         <td name="DisplayMaNhanVien">@nhanvien.MaNhanVien</td>
                         <td>@nhanvien.TenNhanVien</td>
                         <td>@nhanvien.CCCD</td>

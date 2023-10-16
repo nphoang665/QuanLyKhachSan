@@ -152,11 +152,10 @@
             $.ajax({
                 url: '/Login/LuuMatKhau',
                 type: 'POST',
-                data: { MatKhau: newPassword }, // Chỉ truyền mật khẩu mới
+                data: { MatKhau: newPassword },
                 success: function (response) {
                     if (response.success) {
                         alert(response.responseText);
-                        // Thực hiện các hành động sau khi lưu mật khẩu thành công (nếu cần)
                     } else {
                         alert('Có lỗi xảy ra khi lưu mật khẩu.');
                     }

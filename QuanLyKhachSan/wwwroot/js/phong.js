@@ -4,13 +4,52 @@
     addButton.addEventListener('click', function () {
         overlay.style.display = 'block';
         updateHangPhong(); // Gọi hàm updateHangPhong() sau khi hiển thị overlay
-        document.getElementById('Ma_Phong').disabled = false;
+
+     
 
     });
     closeButton.addEventListener('click', function () {
         overlay.style.display = 'none';
+        // Tạo một phần tử select mới
+        var selectElement = document.createElement('select');
+
+        // Đặt id cho phần tử mới
+        selectElement.id = 'Ma_Phong';
+
+        // Add attributes to the select element
+        selectElement.className = 'combo';
+        selectElement.style.width = '100px';
+        selectElement.setAttribute('asp-for', 'Phong');
+        selectElement.setAttribute('onchange', 'updateHangPhong()');
+
+        // Lấy phần tử cũ
+        var oldElement = document.getElementById('Ma_Phong');
+
+        // Thay thế phần tử cũ bằng phần tử mới
+        oldElement.parentNode.replaceChild(selectElement, oldElement);
+
+        // Gọi API để lấy danh sách các phòng
+        $.ajax({
+            url: '/Phong/GetRooms', // Đường dẫn đến API của bạn
+            type: 'GET',
+            success: function (rooms) {
+                // Thêm các tùy chọn vào phần tử select mới từ danh sách phòng
+                for (var i = 0; i < rooms.length; i++) {
+                    var option = document.createElement('option');
+                    option.value = rooms[i].maPhong;
+                    option.text = 'P.' + rooms[i].maPhong;
+                    selectElement.appendChild(option);
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
     });
 });
+
+
+
 var checkInInput = document.querySelector('input[name="NgayNhan"]');
 var checkOutInput = document.querySelector('input[name="NgayTra"]');
 
@@ -159,11 +198,32 @@ function checkRoomStatus(maPhong) {
         success: function (isBooked) {
             if (isBooked) {
                 // If the room is already booked, show the checkout popup
-                console.log(1);
                 popUpTraPhong(maPhong);
             } else {
                 popUpNhanPhong(maPhong);
-                document.getElementById('Ma_Phong').disabled = true;
+                // Tạo một phần tử input mới
+                var inputElement = document.createElement('input');
+                
+
+                // Đặt id cho phần tử mới
+                inputElement.id = 'Ma_Phong';
+                inputElement.name = 'Phong';
+
+                // Đặt thuộc tính readonly
+                inputElement.readOnly = true;
+
+                // Lấy phần tử cũ
+                var oldElement = document.getElementById('Ma_Phong');
+
+                // Lấy dữ liệu từ phần tử select cũ
+                var selectedValue = oldElement.options[oldElement.selectedIndex].value;
+                // Đặt giá trị cho phần tử input mới
+                inputElement.value = selectedValue;
+
+                // Thay thế phần tử cũ bằng phần tử mới
+                oldElement.parentNode.replaceChild(inputElement, oldElement);
+
+                document.getElementById('Ma_Phong').style.width="80px"
             }
         },
        error: function (error) {

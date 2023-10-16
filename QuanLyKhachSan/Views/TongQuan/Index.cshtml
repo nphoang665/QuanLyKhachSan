@@ -130,6 +130,7 @@
 
 </div>
 <!-- /.container-fluid -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
@@ -160,18 +161,34 @@
             }
         }
     });
+    var PhongTrong, phongDaDat;
 
-    // Tạo dữ liệu mẫu cho biểu đồ Pie
-    var pieChartData = {
-        datasets: [{
-            data: [5, 2],
-            backgroundColor: ['rgb(54, 162, 235)', 'rgb(75, 192, 192)']
-        }]
-    };
+    $.ajax({
+        url: '/TongQuan/LayTinhTrangPhong',
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+            PhongTrong = parseInt(data.phongTrong);
+            phongDaDat = parseInt(data.phongDaDat);
+            console.log('Phòng Trống: ' + PhongTrong + ', Phòng đã đặt: ' + phongDaDat);
 
-    var pieChartCanvas = document.getElementById('myPieChart').getContext('2d');
-    var pieChart = new Chart(pieChartCanvas, {
-        type: 'pie',
-        data: pieChartData
+            // Tạo dữ liệu cho biểu đồ Pie
+            var pieChartData = {
+                datasets: [{
+                    data: [PhongTrong, phongDaDat],
+                    backgroundColor: ['rgb(54, 162, 235)', 'rgb(75, 192, 192)']
+                }]
+            };
+
+            var pieChartCanvas = document.getElementById('myPieChart').getContext('2d');
+            var pieChart = new Chart(pieChartCanvas, {
+                type: 'pie',
+                data: pieChartData
+            });
+        },
+        error: function (error) {
+            console.log('Có lỗi xảy ra: ', error);
+        }
     });
+
 </script>
