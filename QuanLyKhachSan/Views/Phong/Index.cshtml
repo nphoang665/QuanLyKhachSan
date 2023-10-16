@@ -33,7 +33,7 @@
 				<a><input type="checkbox" /> <label>Đang sử dụng</label></a>
 				<a> <input type="checkbox" /> <label>Phòng Trống</label></a>
 				<a class="d-none"><i class="bi bi-gear"></i></a>
-				<a class="btn btn-primary btn_color" id="DatPhong"><i class="bi bi-plus-circle"></i> Đặt Phòng</a>
+			<a class="btn btn-primary btn_color" id="DatPhong" onclick="updateDuration()"><i class="bi bi-plus-circle"></i> Đặt Phòng</a>
 			</nav>
 		</header>
 
@@ -260,59 +260,13 @@
 					<label for="" id="Tong_Tien_Thanh_Toan" style="font-weight: 700; color: #279656; margin-left: 150px;">000.000</label> @* điền thành tiền vào đây *@
 					<br>
 					<label for="" style="font-weight: 700;margin-top: 10px;margin-left: 10px;">Đã Thanh Toán</label>
-					<input type="number" value="0" style="position:absolute;top:365px;right:110px">
+					<input type="number" value="0" style="position:absolute;top:390px;right:110px">
 				</div>
 				<button id="Tra_Phong" type="submit" asp-action="ThanhToan" asp-controller="Phong">Trả phòng</button>
 			</form>
 		</div>
 	</div>
-	@* mới *@
-
-	<div id="container-boder">
-		<div class="room-info">
-			<h2>Phòng 102 <span class="status">Đang sử dụng</span> </h2>
-			<p>
-				<span class="room-type">Phòng đôi</span>
-			</p>
-			<div class="ThoiGianSD">
-				<span class="material-symbols-outlined icon">
-					schedule
-				</span>
-				<span class="start-date">01/01/2023 09:00</span> -
-				<span class="end-date">01/01/2023 10:00</span> <b>(1 giờ)</b>
-				<p class="used-time">Dùng đến hiện tại: 1 giờ 5 phút</p>
-			</div>
-			<p>
-				<span class="material-symbols-outlined">
-					person
-				</span>
-
-				<span class="customer-name"> Tên khách hàng</span>
-			</p>
-			<p>
-				<span class="material-symbols-outlined">
-					group
-				</span> <span class="adult-count">1 người lớn & 0 Trẻ em</span>
-			</p>
-			<p>
-				<span class="material-symbols-outlined">
-					edit
-				</span> <span class="note">Chưa có ghi chú</span>
-			</p>
-			<p>
-				<span class="material-symbols-outlined">
-					receipt_long
-				</span> <span class="price">100.000</span>
-			</p>
-			<button type="submit" class="btn-DoiPhong">Đổi phòng</button>
-			<button type="submit" class="btn-TraPhong">Trả phòng</button>
-		</div>
-	</div>
-
-
-
-
-
+	
 
 
 <script src="~/js/phong.js"></script>
