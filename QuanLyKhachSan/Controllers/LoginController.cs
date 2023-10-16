@@ -33,6 +33,19 @@ namespace QuanLyKhachSan.Controllers
                 return RedirectToAction("Index", "TongQuan");
             }
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DangKy(TaiKhoan tk)
+        {
+            if (ModelState.IsValid)
+            {
+
+                _db.TaiKhoan.Add(tk);
+                _db.SaveChanges();
+                TempData["notification"] = "Đăng ký thành công.";
+            }
+            return RedirectToAction("Index", "Login");
+        }
 
 
 

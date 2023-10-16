@@ -22,6 +22,8 @@ namespace QuanLyKhachSan.Controllers
 			ViewBag.KhachHangs = khachhangs;
 			var bookedRooms = _db.DatPhongs.Select(p => p.MaPhong).ToList();
 			ViewBag.BookedRooms = bookedRooms;
+			var nhanvien = _db.NhanViens.ToList();
+			ViewBag.NhanViens = nhanvien;
 
 			return View();
 		}

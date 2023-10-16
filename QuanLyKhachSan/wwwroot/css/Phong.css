@@ -92,9 +92,9 @@
     padding: 10px;
     border-radius: 5px;
     position: absolute;
-    top: 320px;
-    left: 920px;
-    width: 120px;
+    top: 85%;
+    left: 80%;
+    width: 200px;
 }
 
 
@@ -142,10 +142,10 @@
 }
 #closeButton{
     margin-left:1226px;
+    border:none;
+    background-color:rgb(255,255,255);
 }
-#closeButton:hover {
-    background:red;
-}
+
 .combo{
     width:100px;
 }

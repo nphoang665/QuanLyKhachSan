@@ -4,6 +4,8 @@
     addButton.addEventListener('click', function () {
         overlay.style.display = 'block';
         updateHangPhong(); // Gọi hàm updateHangPhong() sau khi hiển thị overlay
+        document.getElementById('Ma_Phong').disabled = false;
+
     });
     closeButton.addEventListener('click', function () {
         overlay.style.display = 'none';
@@ -83,7 +85,7 @@ function popUpNhanPhong(maPhong) {
     // Update the room number in the popup
     document.getElementById('Ma_Phong').value = maPhong;
 
-    // Update the room type in the popup
+        // Update the room type in the popup
     updateHangPhong();
 
     // Attach event listeners to the check-in and check-out inputs
@@ -161,6 +163,7 @@ function checkRoomStatus(maPhong) {
                 popUpTraPhong(maPhong);
             } else {
                 popUpNhanPhong(maPhong);
+                document.getElementById('Ma_Phong').disabled = true;
             }
         },
        error: function (error) {
@@ -168,21 +171,6 @@ function checkRoomStatus(maPhong) {
     } 
     });
 }
-//function HienThiThongTinPhong(maPhong) {
-//    console.log(maPhong);
-//    var p = document.getElementById('container-boder');
-//    p.style.display = 'block';
-//    if (maPhong == '101') {
-//        p.style.position = 'absolute';
-//        p.style.top = '30vh'; // 20% chiều cao viewport
-//        p.style.left = '10vw'; // 20% chiều rộng viewport
-//    }
-//    else if (maPhong == '102') {
-//        p.style.position = 'absolute';
-//        p.style.top = '30vh'; // 20% chiều cao viewport
-//        p.style.left = '30vw'; // 40% chiều rộng viewport
-//    }
-//}
 
 
 

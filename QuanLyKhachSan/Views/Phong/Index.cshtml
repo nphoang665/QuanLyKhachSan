@@ -9,6 +9,7 @@
 @{
 	var bookedRooms = ViewBag.BookedRooms as List<string>;
 	var khachHangDatPhong = ViewBag.KhachHangs as List<string>;
+	var nhanvienDatPhong = ViewBag.NhanVien as List<string>;
 }
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -77,23 +78,17 @@
 							<th>Phòng</th>
 							<th>Hạng Phòng</th>
 							<th>Mã KH</th>
-							<th>Mã NV</th>
-							<th>Hình Thức</th>
-							<th>Giá Phòng</th>
-							<th>Ngày Nhận</th>
-							<th>Trả Phòng</th>
-							<th>Dự Kiến</th>
-							<th>Thành Tiền</th>
+							<th>Người Lập Phiếu</th>
 						</tr>
 					</thead>
 
 					<tbody>
 						<tr>
 							@* Mã đặt phòng *@
-							<td><input asp-for="MaDatPhong" style="width:100px" /></td>
+							<td><input asp-for="MaDatPhong" style="width:120px" /></td>
 							<td>
 								@* Phòng *@
-								<select class="combo" id="Ma_Phong" asp-for="Phong" style="width:80px" onchange="updateHangPhong()">
+								<select class="combo" id="Ma_Phong" asp-for="Phong" style="width:100px" onchange="updateHangPhong()">
 
 									@foreach (var phong in ViewBag.Rooms)
 									{
@@ -105,12 +100,12 @@
 							@* Hạng Phòng *@
 							<td>
 
-								<label id="Hang_Phong" asp-for="HinhThuc"></label>
+								<label id="Hang_Phong" asp-for="HinhThuc" ></label>
 								<input type="hidden" asp-for="HinhThuc" id="Input_HangPhong" value="Phòng Đơn" />
 							</td>
 							@* mã khách hàng *@
 							<td>
-								<select style="width:80px" class="combo" asp-for="MaKhachHang">
+								<select style="width:120px" class="combo" asp-for="MaKhachHang">
 
 									@foreach (var kh in ViewBag.KhachHangs)
 									{
@@ -119,40 +114,58 @@
 								</select>
 							</td>
 							@* Mã nhân viên *@
-							<td> <input asp-for="MaNhanVien" style="width:80px"/></td>
-							@* Hình thức *@
-							<td>
-								<select class="combo_Gio_Ngay" asp-for="HinhThuc" onchange="updateDuration()">
-									<option value="Gio"> Giờ  </option>
-									<option value="Ngay"> Ngày </option>
-								</select>
-							</td>
-
-							@* Giá phòng *@
-							<td>
-								<label asp-for="GiaPhong" id="labelGiaPhong">50000</label>
-								<input type="hidden" asp-for="GiaPhong" id="gia-phong" value="50000" />
-							</td>
-							@* Ngày Nhận *@
-							<td>
-								<input style="width:185px" type="datetime-local" name="NgayNhan" asp-for="NgayNhan" />
-							</td>
-							@* Ngày trả *@
-							<td>
-								<input style="width:185px" type="datetime-local" name="NgayTra" asp-for="NgayTra" />
-							</td>
-							@* Dự kiến *@
-							<td class="duration">
-								<label asp-for="DuKien" id="labelDuKien">0 giờ</label>
-								<input type="hidden" asp-for="DuKien" id="dukien" />
-							</td>
-							@* Thành tiền *@
-							<td class="thanhtien">
-								<label asp-for="ThanhTien" id="lableThanhTien">000.000</label>
-								<input type="hidden" asp-for="ThanhTien" id="thanhtien" />
-
-							</td>
+						<td>
+							<select style="width:120px" class="combo" asp-for="MaNhanVien">
+								@foreach (var nv in ViewBag.NhanViens)
+								{
+									<option value="@nv.MaNhanVien">@nv.MaNhanVien</option>
+								}
+							</select> </td>
+							
 						</tr>
+					</tbody>
+					<thead>
+												
+							<th>Hình Thức</th>
+							<th>Giá Phòng</th>
+							<th>Ngày Nhận</th>
+							<th>Trả Phòng</th>
+							<th>Dự Kiến</th>
+							<th style="display:none">Thành Tiền</th>
+					</thead>
+					<tbody>
+					@* Hình thức *@
+				<td>
+					<select class="combo_Gio_Ngay" asp-for="HinhThuc" onchange="updateDuration()" style="width:120px">
+						<option value="Gio"> Giờ  </option>
+						<option value="Ngay"> Ngày </option>
+					</select>
+				</td>
+
+					@* Giá phòng *@
+				<td>
+					<label asp-for="GiaPhong" id="labelGiaPhong">50000</label>
+					<input type="hidden" asp-for="GiaPhong" id="gia-phong" value="50000" />
+				</td>
+					@* Ngày Nhận *@
+				<td>
+					<input style="width:235px" type="datetime-local" name="NgayNhan" asp-for="NgayNhan" />
+				</td>
+					@* Ngày trả *@
+				<td>
+					<input style="width:235px" type="datetime-local" name="NgayTra" asp-for="NgayTra" />
+				</td>
+					@* Dự kiến *@
+				<td class="duration">
+					<label asp-for="DuKien" id="labelDuKien">0 giờ</label>
+					<input type="hidden" asp-for="DuKien" id="dukien" />
+				</td>
+					@* Thành tiền *@
+				<td class="thanhtien" style="display:none">
+					<label asp-for="ThanhTien" id="lableThanhTien">000.000</label>
+					<input type="hidden" asp-for="ThanhTien" id="thanhtien" />
+
+				</td>
 					</tbody>
 				</table>
 				<div>
@@ -168,7 +181,6 @@
 					<input value="0" class="input_khachhang_thanhtoan">
 				</div>
 				<button type="submit" class="confirm-button" asp-action="NhanPhong" asp-controller="Phong">Nhận Phòng</button>
-				<button class="cancel-button">Đặt Trước</button>
 			</form>
 		</div>
 

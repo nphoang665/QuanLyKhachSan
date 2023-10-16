@@ -73,6 +73,7 @@ namespace QuanLyKhachSan.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult ThemKhachHang(KhachHang model)
         {
+            ValidateKhachHang(model);
             if (ModelState.IsValid)
             {
                 _db.KhachHangs.Add(model);
@@ -87,14 +88,15 @@ namespace QuanLyKhachSan.Controllers
         [HttpGet]
         public IActionResult SuaKhachHang(string id)
         {
-            var nv = _db.KhachHangs.FirstOrDefault(s => s.MaKhachHang == id);
-            return View(nv);
+            var kh = _db.KhachHangs.FirstOrDefault(s => s.MaKhachHang == id);
+            return View(kh);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult SuaKhachHang(KhachHang model)
         {
+            ValidateKhachHang(model);
             if (ModelState.IsValid)
             {
                 _db.KhachHangs.Update(model);
@@ -150,7 +152,72 @@ namespace QuanLyKhachSan.Controllers
             }
            
         }
+        private void ValidateKhachHang(KhachHang kh)
+        {
+            //validate Ma khach hàng
+            if (kh.MaKhachHang == null)
+            {
+                ModelState.AddModelError("MaKhachHang", "Mã khách hàng không được bỏ trống");
 
+            }
+            else if (kh.MaKhachHang.Length != 6)
+            {
+                ModelState.AddModelError("MaKhachHang", "Mã khách hàng phải đạt 6 ký tự");
+            }
+            // validate tenkhachhang
+            if (kh.TenKhachHang == null)
+            {
+                ModelState.AddModelError("TenKhachHang", "Tên khách hàng không được bỏ trống");
+            }
+            else if (kh.TenKhachHang.Any(char.IsDigit))
+            {
+                ModelState.AddModelError("TenKhachHang", "Tên khách hàng không được chứa số.");
+            }
+            else if (kh.TenKhachHang.Length > 50 || kh.TenKhachHang.Length < 3)
+            {
+                ModelState.AddModelError("TenKhachHang", "Tên khách hàng không được quá dài hoặc quá ngắn.");
+
+            }
+            //validate CCCD
+            if (kh.CCCD == null)
+            {
+                ModelState.AddModelError("CCCD", "Căn cước công dân không được bỏ trống");
+
+            }
+            else if (kh.CCCD.Length != 12)
+            {
+                ModelState.AddModelError("CCCD", "Căn cước công dân phải đủ 12 số.");
+            }
+            else if (!kh.CCCD.Any(char.IsDigit))
+            {
+                ModelState.AddModelError("CCCD", "Căn cước công dân phải là số.");
+            }
+            //validate ngaySinh
+            DateTime ngayHienTai = DateTime.Now;
+            TimeSpan timeSpan = ngayHienTai - kh.NgaySinh;
+            if (timeSpan.TotalDays < 5340)
+            {
+                ModelState.AddModelError("NgaySinh", "Khách hàng phải đủ 15 tuổi trở lên.");
+            }
+            //validate dienthoai
+            if (kh.DienThoai == null)
+            {
+                ModelState.AddModelError("DienThoai", "Số điện thoại không được bỏ trống.");
+
+            }
+            else if (!kh.DienThoai.Any(char.IsDigit))
+            {
+                ModelState.AddModelError("DienThoai", "Số điện thoại phải là số (không chứa chữ và kí tự đặc việt).");
+            }
+            else if (kh.DienThoai.Length != 10)
+            {
+                ModelState.AddModelError("DienThoai", "Số điện thoại có 10 kí tự.");
+            }
+
+
+
+
+        }
         public ActionResult ExportExcel()
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // Đặt bản quyền cho EPPlus

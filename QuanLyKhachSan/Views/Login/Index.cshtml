@@ -6,69 +6,82 @@
 }
 
 
-<!------ Include the above in your HEAD tag ---------->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  
-    <title>LOGIN ROYAL HOTEL A$AP</title>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link rel="stylesheet" href="~/css/CssLogin.css" />
-</head>
-<body>
-    <section>
-        <div class="form-box">
-            <div class="form-value">
-                <form action="" method="post">
-                    <h2 style="font-family: poppins;">WELCOME</h2>
-                    <img src="~/Image/Screenshot_4_preview_rev_1.png" alt="">
-                    <div class="inputbox">
-                        <ion-icon name="mail-outline"></ion-icon>
-                        <input type="text" required asp-for="TenDangNhap" />
-                        <label for="">Email / Số điện thoại</label>
-                    </div>
-                    <div class="inputbox">
-                        <ion-icon name="lock-closed-outline"></ion-icon>
-                        <input type="password" required asp-for="MatKhau" />
-                        <label for="">Mật khẩu</label>
-                    </div>
-                    <div class="forget">
-                        <label for="" style="display: contents;"><input type="checkbox">Nhớ mật khẩu  <a style="margin-left: 75px;" asp-action="Index" asp-controller="QuenMatKhau">Quên mật khẩu?</a></label>
 
-                    </div>
-                    <button type="submit" asp-action="Index" asp-controller="Login">Đăng nhập</button>
-                    <div class="register">
-                        <p>Bạn chưa có tài khoản? <a asp-action="Index" asp-controller="DangKy">Đăng ký</a></p>
-                    </div>
-                </form>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <title>Login</title>
+</head>
+
+<body>
+
+    <div class="container" id="container">
+        <div class="form-container forget-password">
+            <form>
+                <h1>Quên Mật khẩu</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+                <span>hoặc sử dụng email của bạn để đăng ký</span>
+                <input type="email" placeholder="Email">
+                <button>Quên Mật khẩu</button>
+            </form>
+        </div>
+
+        <div class="form-container sign-up">
+            <form method="post">
+                <h1>Create Account</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+                <span>or use your email for registeration</span>
+                <input type="text" placeholder="Name" asp-for="TenDangNhap">
+                <input type="email" placeholder="Email" asp-for="Email">
+                <input type="password" placeholder="Password" asp-for="MatKhau">
+                <button asp-action="DangKy" asp-controller="Login">Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in">
+            <form method="post">
+                <h1>Sign In</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+                <span>or use your email password</span>
+                <input type="text" placeholder="Email" asp-for="TenDangNhap">
+                <input type="password" placeholder="Password" asp-for="MatKhau">
+                <a href="#" id="Forgot_Password">Forget Your Password?</a>
+                <button asp-action="Index" asp-controller="Login">Sign In</button>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Welcome Back!</h1>
+                    <p>Enter your personal details to use all of site features</p>
+                    <button class="hidden" id="login">Sign In</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Register with your personal details to use all of site features</p>
+                    <button class="hidden" id="register">Sign Up</button>
+                </div>
             </div>
         </div>
-    </section>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    </div>
+    <script src="~/js/script.js"></script>
 </body>
 </html>
-
-@section Scripts{
-    <partial name="_ValidationScriptsPartial" />
-}
-<script>
-    @if (TempData["Error"] != null)
-    {
-            <script src="~/lib/jquery/dist/jquery.min.js" ></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        Swal.fire({
-            position: 'center',
-            icon: 'error',
-            title: '@TempData["Error"]',
-            showConfirmButton: false,
-            timer: 1500
-        })
-    </script>
-    }
-
-</script>

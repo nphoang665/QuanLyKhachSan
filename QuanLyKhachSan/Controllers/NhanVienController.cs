@@ -1,13 +1,11 @@
-﻿using iTextSharp.text.pdf;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 using QuanLyKhachSan.DataAcess.Data;
 using QuanLyKhachSan.Model;
 using System.Data;
-using iTextSharp.text;
-using Microsoft.Office.Interop.Excel;
-using OfficeOpenXml.SystemDrawing.Text;
 
 namespace QuanLyKhachSan.Controllers
 {
@@ -69,7 +67,7 @@ namespace QuanLyKhachSan.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult ThemNhanVien(NhanVien model)
         {
-          
+            ValidateNhanVien(model);
 
             if (ModelState.IsValid)
             {
@@ -78,9 +76,9 @@ namespace QuanLyKhachSan.Controllers
                 return RedirectToAction("Index");
 
             }
-         
-             return View(model);
-           
+
+            return View(model);
+
         }
 
         [HttpGet]
@@ -94,19 +92,16 @@ namespace QuanLyKhachSan.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult SuaNhanVien(NhanVien model)
         {
-          
+            ValidateNhanVien(model);
             if (ModelState.IsValid)
             {
-                //ValidateNhanVien(model);
+                
                 _db.NhanViens.Update(model);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(model);
 
-            
-
-           
         }
 
         [HttpPost]
@@ -121,39 +116,66 @@ namespace QuanLyKhachSan.Controllers
         }
         private void ValidateNhanVien(NhanVien nv)
         {
-
-            if (nv.MaNhanVien.Length != 6)
+            //validate Employee Id
+            if (nv.MaNhanVien == null)
             {
-                ModelState.AddModelError("MaNhanVien", "Mã nhân viên phải đạt 6 ký tự");
-
+                ModelState.AddModelError("MaNhanVien", "Mã nhân viên không được bỏ trống");
 
             }
-            if (nv.TenNhanVien.Any(char.IsDigit))
+            else if (nv.MaNhanVien.Length != 6)
+            {
+                ModelState.AddModelError("MaNhanVien", "Mã nhân viên phải đạt 6 ký tự");
+            }
+
+            //validate Name Employee
+            if(nv.TenNhanVien == null)
+            {
+                ModelState.AddModelError("TenNhanVien", "Tên nhân viên không được bỏ trống.");
+
+            }
+           else if (nv.TenNhanVien.Any(char.IsDigit))
             {
                 ModelState.AddModelError("TenNhanVien", "Tên nhân viên không được chứa số.");
             }
-            if (nv.TenNhanVien.Length > 50 || nv.TenNhanVien.Length < 3)
+           else if (nv.TenNhanVien.Length > 50 || nv.TenNhanVien.Length < 3)
             {
                 ModelState.AddModelError("TenNhanVien", "Tên nhân viên không được quá dài hoặc.");
 
             }
-            if (nv.CCCD.Length != 12)
+            //validate CCCD
+            if (nv.CCCD == null)
+            {
+                ModelState.AddModelError("CCCD", "Căn cước công dân không được bỏ trống");
+
+            }
+            else if (nv.CCCD.Length != 12)
             {
                 ModelState.AddModelError("CCCD", "Căn cước công dân phải đủ 12 số.");
             }
-            if (!nv.CCCD.Any(char.IsDigit))
+            else if (!nv.CCCD.Any(char.IsDigit))
             {
                 ModelState.AddModelError("CCCD", "Căn cước công dân phải là số.");
             }
-            if (nv.ChucVu.Any(char.IsDigit))
+            //validate chucvu
+            if (nv.ChucVu == null)
+            {
+                ModelState.AddModelError("ChucVu", "Chức vụ không được bỏ trống.");
+
+            }
+            else if (nv.ChucVu.Any(char.IsDigit))
             {
                 ModelState.AddModelError("ChucVu", "Chức vụ không chứa số.");
+            }//validate SoDienThoai
+            if (nv.DienThoai == null)
+            {
+                ModelState.AddModelError("DienThoai", "Số điện thoại không được bỏ trống.");
+
             }
-            if (!nv.DienThoai.Any(char.IsDigit))
+            else if (!nv.DienThoai.Any(char.IsDigit))
             {
                 ModelState.AddModelError("DienThoai", "Số điện thoại phải là số (không chứa chữ và kí tự đặc việt).");
             }
-            if (nv.DienThoai.Length != 10)
+            else if (nv.DienThoai.Length != 10)
             {
                 ModelState.AddModelError("DienThoai", "Số điện thoại có 10 kí tự.");
             }
@@ -206,7 +228,7 @@ namespace QuanLyKhachSan.Controllers
                     dataRow[7] = nv.ChucVu;
                     dataRow[8] = nv.NgayVaoLam.ToShortDateString();
                     dataRow[9] = nv.GhiChu;
-                    
+
                     dataTable.Rows.Add(dataRow);
                 }
 
