@@ -2,7 +2,11 @@
 @{
     ViewData["Title"] = "Quản Lý Phòng";
 }
-
+@{
+    int currentPage = (int)ViewData["CurrentPage"];
+    int totalPages = (int)ViewData["TotalPages"];
+    int numberOfPagesToShow = 3; // Số trang trung gian bạn muốn hiển thị
+}
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/css/QuanLyPhong.css" />
@@ -98,5 +102,58 @@
                         }
                     </tbody>
                 </table>
+        <nav aria-label="Page navigation example" style="position:absolute;right:100px;bottom:100px;">
+            <ul class="pagination justify-content-end">
+                <li class="page-item @(currentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = currentPage - 1 })" tabindex="-1">Previous</a>
+                </li>
+                @if (totalPages <= numberOfPagesToShow)
+                {
+                    // Hiển thị tất cả các trang nếu tổng số trang nhỏ hơn hoặc bằng số trang trung gian
+                    for (int i = 1; i <= totalPages; i++)
+                    {
+                        <li class="page-item @(i == currentPage ? "active" : "")">
+                            <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                        </li>
+                    }
+                }
+                else
+                {
+                    // Hiển thị một số trang trung gian và tạo nút "..." để bỏ qua các trang còn lại
+                    int startPage = Math.Max(currentPage - (numberOfPagesToShow / 2), 1);
+                    int endPage = Math.Min(startPage + numberOfPagesToShow - 1, totalPages);
+
+                    if (startPage > 1)
+                    {
+                        <li class="page-item"><a class="page-link" href="@Url.Action("Index", new { page = 1 })">1</a></li>
+                        if (startPage > 2)
+                        {
+                            <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                        }
+                    }
+
+                    for (int i = startPage; i <= endPage; i++)
+                    {
+                        <li class="page-item @(i == currentPage ? "active" : "")">
+                            <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                        </li>
+                    }
+
+                    if (endPage < totalPages)
+                    {
+                        if (endPage < totalPages - 1)
+                        {
+                            <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                        }
+                        <li class="page-item"><a class="page-link" href="@Url.Action("Index", new { page = totalPages })">@totalPages</a></li>
+                    }
+                }
+
+                <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = currentPage + 1 })">Next</a>
+                </li>
+            </ul>
+        </nav>
+
             </div>
         </div>

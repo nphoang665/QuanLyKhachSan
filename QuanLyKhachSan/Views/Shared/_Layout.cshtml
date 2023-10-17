@@ -84,10 +84,8 @@
 
                         <!-- Topbar Search -->
                         <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            20/10/2023 10:00:00s
-
+                            <input type="text" name="time" class="form-control" id="input_time" placeholder="Thời gian hiện tại" />
                         </form>
-
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
 
@@ -191,3 +189,22 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+<script>
+    // Lấy thời gian hiện tại
+    const now = new Date();
+
+    // Cập nhật thời gian vào form
+    const form = document.querySelector("form");
+    const inputTime = form.querySelector("input[name='time']");
+    inputTime.value = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+
+    // Chạy vòng lặp mỗi giây để cập nhật thời gian
+    setInterval(() => {
+        // Lấy thời gian hiện tại
+        const now = new Date();
+
+        // Cập nhật thời gian vào form
+        inputTime.value = `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+    }, 1000);
+
+</script>

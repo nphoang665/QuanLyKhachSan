@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyKhachSan.DataAcess.Data;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
+
 
 namespace QuanLyKhachSan.Controllers
 {
@@ -29,6 +31,7 @@ namespace QuanLyKhachSan.Controllers
 		[HttpPost]
 		public async Task<IActionResult> NhanPhong(string MaDatPhong, string Phong, string MaKhachHang, string HinhThuc, int GiaPhong, DateTime NgayNhan, DateTime NgayTra, string DuKien, float ThanhTien, string MaNhanVien)
 		{
+
 			var nhanphong = new DatPhong();
 			nhanphong.MaDatPhong = MaDatPhong;
 			nhanphong.MaPhong = Phong;
@@ -41,9 +44,16 @@ namespace QuanLyKhachSan.Controllers
 			nhanphong.DuKien = DuKien;
 			nhanphong.ThanhTien = ThanhTien;
 
+
+
 			_db.DatPhongs.Add(nhanphong);
 			_db.SaveChanges();
+
+			var phongDaDat = _db.Phong.FirstOrDefault(s => s.MaPhong == Phong);
+			phongDaDat.TrangThai = "Đang sử dụng";
+			_db.SaveChanges();
 			return RedirectToAction("Index");
+
 		}
 
 		[HttpGet]
@@ -54,7 +64,7 @@ namespace QuanLyKhachSan.Controllers
 			{
 				return phong.HangPhong;
 			}
-			return "No matching record found";
+			return "Không có hạng phòng trùng khớp";
 		}
 
 		[HttpGet]
@@ -75,13 +85,16 @@ namespace QuanLyKhachSan.Controllers
 					return Json(tenkhachhang);
 				}
 			}
-			return Json(new { error = "No matching record found" });
+			return Json(new { error = "không có tên khách hàng trùng khớp" });
 		}
 
 		[HttpPost]
 		public IActionResult ThanhToan(string Phong)
 		{
 			var datphong = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == Phong);
+			var PhongThanhToan = _db.Phong.FirstOrDefault(s => s.MaPhong == Phong);
+			PhongThanhToan.TrangThai = "Trống";
+			_db.SaveChanges();
 			_db.DatPhongs.Remove(datphong);
 			_db.SaveChanges();
 			return RedirectToAction("Index");
