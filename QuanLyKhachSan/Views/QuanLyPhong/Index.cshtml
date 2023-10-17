@@ -8,100 +8,62 @@
     int numberOfPagesToShow = 3; // Số trang trung gian bạn muốn hiển thị
 }
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="~/css/QuanLyPhong.css" />
-    <link rel="stylesheet" href="~/css/css-min-all.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="~/css/QuanLyPhong.css" />
+<link rel="stylesheet" href="~/css/css-min-all.css" />
 
 
-        <div class="row">
-            <div class="col-md-2">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">Tìm kiếm</h5>
-                    </div>
-                    <form method="get" asp-controller="KhachHang" asp-action="Index">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="searchText" name="searchText" placeholder="Nhập từ khóa">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-                        </div>
-                    </form>
-                </div>
-
-
-                <div class="card w-100 bg-white">
-                    <div class="card-header">
-                        <h5>Giới Tính</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="btn-group-vertical btn-group-toggle w-100 text-left" data-toggle="buttons">
-                            <label class="btn btn-secondary w-100">
-                                <input type="radio" name="gender" id="all" autocomplete="off" checked> Tất cả
-                            </label>
-                            <label class="btn btn-secondary w-100">
-                                <input type="radio" name="gender" id="male" autocomplete="off"> Nam
-                            </label>
-                            <label class="btn btn-secondary w-100">
-                                <input type="radio" name="gender" id="female" autocomplete="off"> Nữ
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="card w-100 bg-white">
-                    <div class="card-header"><h5>Trạng Thái</h5></div>
-                    <div class="card-body">
-                        <div class="btn-group-vertical btn-group-toggle w-100 text-left" data-toggle="buttons">
-                            <label class="btn btn-secondary w-100">
-                                <input type="radio" name="TrangThai" id="DangHoatDong" autocomplete="off" checked> Đang Hoạt Động
-                            </label>
-                            <label class="btn btn-secondary w-100">
-                                <input type="radio" name="TrangThai" id="NgungHoatDong" autocomplete="off"> Ngừng Hoạt Động
-                            </label>
-                            <label class="btn btn-secondary w-100">
-                                <input type="radio" name="TrangThai" id="TatCa" autocomplete="off"> Tất Cả
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-
+<div class="row">
+    <div class="col-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Tìm kiếm</h5>
             </div>
-            <div class="col-md-10">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Mã Phòng</th>
-                            <th>Khu Vực</th>
-                            <th>Hạng Phòng</th>
-                            <th>Giá Theo Giờ</th>
-                            <th>Giá Theo Qua Đêm</th>
-                            <th>Giá Theo Ngày</th>
-                            <th>Trạng Thái</th>
-                            <th width="70px">Sửa</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var phong in Model)
-                        {
-                            <tr>
-                                <td>@phong.MaPhong</td>
-                                <td>@phong.KhuVuc</td>
-                                <td>@phong.HangPhong</td>
-                                <td>@phong.GiaTheoGio</td>
-                                <td>@phong.GiaTheoQuaDem</td>
-                                <td>@phong.GiaTheoNgay</td>
-                                <td>@phong.TrangThai</td>
-                       
+            <form method="get" asp-controller="KhachHang" asp-action="Index">
+                <div class="card-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="searchText" name="searchText" placeholder="Nhập từ khóa">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+    <div class="col-md-10">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Mã Phòng</th>
+                    <th>Khu Vực</th>
+                    <th>Hạng Phòng</th>
+                    <th>Giá Theo Giờ</th>
+                    <th>Giá Theo Qua Đêm</th>
+                    <th>Giá Theo Ngày</th>
+                    <th>Trạng Thái</th>
+                    <th width="70px">Sửa</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var phong in Model)
+                {
+                    <tr>
+                        <td>@phong.MaPhong</td>
+                        <td>@phong.KhuVuc</td>
+                        <td>@phong.HangPhong</td>
+                        <td>@phong.GiaTheoGio</td>
+                        <td>@phong.GiaTheoQuaDem</td>
+                        <td>@phong.GiaTheoNgay</td>
+                        <td>@phong.TrangThai</td>
+
                         <td><a type="button" class="btn btn-primary editButton" asp-action="SuaPhong" asp-route-id="@phong.MaPhong"><i class="bi bi-pencil"></i></a></td>
 
-                               
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
         <nav aria-label="Page navigation example" style="position:absolute;right:100px;bottom:100px;">
             <ul class="pagination justify-content-end">
                 <li class="page-item @(currentPage == 1 ? "disabled" : "")">
@@ -155,5 +117,5 @@
             </ul>
         </nav>
 
-            </div>
-        </div>
+    </div>
+</div>
