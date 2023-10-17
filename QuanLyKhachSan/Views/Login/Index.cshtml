@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="~/css/style.css">
+
     <title>Login</title>
 </head>
 
@@ -32,6 +33,8 @@
                 </div>
                 <span style="text-align:center;">Nhập Email của bạn để kiểm tra và lấy lại mật khẩu.</span>
                 <input type="email" placeholder="Email" asp-for="Email" id="email_input">
+
+
                 <input type="text" placeholder="Mã xác nhận" id="confirmation_code" style="display: none;">
                 <button id="QuenMatKhau">Quên Mật khẩu</button>
                 <button id="confirm_code" style="display: none;">Xác nhận mã</button>
@@ -49,9 +52,11 @@
                 </div>
                 <span>hoặc sử dụng gmail để đăng ký</span>
                 <input type="text" placeholder="Tên đăng nhập" asp-for="TenDangNhap">
+
                 <input type="email" placeholder="Email" asp-for="Email">
+                
+
                 <input type="password" placeholder="Mật khẩu" asp-for="MatKhau">
-                <input type="password" placeholder="Nhập lại mật khẩu" asp-for="MatKhau">
                 <button asp-action="DangKy" asp-controller="Login">ĐĂNG KÝ</button>
             </form>
         </div>
@@ -66,8 +71,9 @@
                 </div>
                 <span>hoặc sử dụng gmail và mật khẩu</span>
                 <input type="text" placeholder="Email" asp-for="TenDangNhap">
+
                 <input type="password" placeholder="Mật khẩu" asp-for="MatKhau">
-                
+
                 <a href="#" id="Forgot_Password">Quên mật khẩu?</a>
                 <button asp-action="Index" asp-controller="Login">ĐĂNG NHẬP</button>
             </form>
@@ -166,3 +172,4 @@
     });
 
 </script>
+

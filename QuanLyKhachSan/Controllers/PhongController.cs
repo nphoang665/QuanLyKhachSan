@@ -42,11 +42,7 @@ namespace QuanLyKhachSan.Controllers
 
             // Thêm validation ở đây
             // Nếu validation không thành công, trả về một đối tượng JSON chứa thông tin về lỗi
-            if (!ModelState.IsValid)
-            {
-                return Json(new { success = false, error = "Validation failed." });
-            }
-
+      
             _db.DatPhongs.Add(nhanphong);
             _db.SaveChanges();
 
@@ -55,9 +51,8 @@ namespace QuanLyKhachSan.Controllers
             _db.SaveChanges();
 
             // Nếu hoạt động thành công, trả về một chuỗi chứa thông báo
-            return Json(new { success = true, message = "Đặt phòng thành công!" });
 
-
+            return RedirectToAction("Index");
 
         }
 

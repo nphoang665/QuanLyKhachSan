@@ -23,11 +23,12 @@ namespace QuanLyKhachSan.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Index(TaiKhoan obj)
         {
+         
+
             var account = _db.TaiKhoan.FirstOrDefault(s => s.TenDangNhap == obj.TenDangNhap && s.MatKhau == obj.MatKhau);
             if (account == null)
             {
                 // Tài khoản hoặc mật khẩu không chính xác
-                TempData["Error"] = "Đăng nhập không thành công do sai tài khoản hoặc mật khẩu";
                 return View();
             }
             else
@@ -36,6 +37,7 @@ namespace QuanLyKhachSan.Controllers
                 return RedirectToAction("Index", "TongQuan");
             }
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult DangKy(TaiKhoan tk)

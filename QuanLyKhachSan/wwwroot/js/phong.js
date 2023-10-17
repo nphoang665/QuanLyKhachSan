@@ -279,32 +279,6 @@ function checkRoomStatus(maPhong) {
     });
 }
 
-$(document).ready(function () {
-    $("#form_DatPhong").on("submit", function (event) {
-        event.preventDefault();
-
-        $.ajax({
-            url: '/Phong/NhanPhong', // Đường dẫn của action trong controller
-            type: 'POST',
-            data: $(this).serialize(),
-            success: function (data) {
-                // Xử lý khi thành công
-                if (data.success) {
-                    alert("Đặt phòng thành công!");
-                } else {
-                    // Xử lý khi có lỗi
-                    alert(data.error);
-                }
-            },
-            error: function (xhr, status, error) {
-                // Xử lý khi có lỗi xảy ra
-                var err = JSON.parse(xhr.responseText);
-                alert(err.Message);
-            }
-        });
-    });
-});
-
 
 
 
