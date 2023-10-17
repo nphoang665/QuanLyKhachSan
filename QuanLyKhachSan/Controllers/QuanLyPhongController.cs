@@ -81,7 +81,8 @@ namespace QuanLyKhachSan.Controllers
 			{
 				_db.Phong.Update(phong);
 				_db.SaveChanges();
-				return RedirectToAction("Index");
+                TempData["success"] = "Sửa thông tin phòng thành công";
+                return RedirectToAction("Index");
 			}
 			return View(phong);
 		}
