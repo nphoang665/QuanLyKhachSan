@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MailKit.Search;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyKhachSan.DataAcess.Data;
 using QuanLyKhachSan.Model;
@@ -13,14 +14,30 @@ namespace QuanLyKhachSan.Controllers
 		{
 			_db = db;
 		}
-		public async Task<IActionResult> Index(int page = 1)
+		public async Task<IActionResult> Index(string searchText, string hangPhong, string TrangThai,int page = 1)
 		{
 			int pageSize = 7;
 			int totalKhachHangs = await _db.Phong.CountAsync();
 			int totalPages = (int)Math.Ceiling((double)totalKhachHangs / pageSize);
-			var khachHangs = _db.Phong.AsQueryable();
+			var phong = _db.Phong.AsQueryable();
+            // Lọc kết quả theo giới tính
+            if (!String.IsNullOrEmpty(hangPhong))
+            {
+                phong = phong.Where(kh => kh.HangPhong == hangPhong);
+            }
+            // Lọc kết quả theo từ khóa tìm kiếm
 
-			var paginatedKhachHangs = await khachHangs
+
+            if (!String.IsNullOrEmpty(searchText))
+            {
+                phong = phong.Where(kh => kh.MaPhong.Contains(searchText));
+            }
+            // Lọc theo trạng thái
+            if (!String.IsNullOrEmpty(TrangThai))
+            {
+                phong = phong.Where(kh => kh.TrangThai == TrangThai);
+            }
+            var paginatedKhachHangs = await phong
 			.OrderBy(kh => kh.MaPhong)
 			.Skip((page - 1) * pageSize)
 			.Take(pageSize)
