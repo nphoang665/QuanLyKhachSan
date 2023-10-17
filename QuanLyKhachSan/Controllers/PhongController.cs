@@ -114,7 +114,7 @@ namespace QuanLyKhachSan.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetRoomPrice(string maPhong)
 		{
-			// Tìm phòng với mã phòng đã cho
+			///// Tìm phòng với mã phòng đã cho
 			var phong = await _db.Phong.FirstOrDefaultAsync(p => p.MaPhong == maPhong);
 
 			if (phong == null)
