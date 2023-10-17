@@ -71,6 +71,7 @@ namespace QuanLyKhachSan.Controllers
 
             if (ModelState.IsValid)
             {
+                TempData["success"] = "Thêm Nhân Viên Thành Công";
                 _db.NhanViens.Add(model);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
@@ -98,6 +99,7 @@ namespace QuanLyKhachSan.Controllers
                 
                 _db.NhanViens.Update(model);
                 _db.SaveChanges();
+                TempData["success"] = "Sửa Nhân Viên Thành Công";
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -111,7 +113,7 @@ namespace QuanLyKhachSan.Controllers
             var nv = _db.NhanViens.FirstOrDefault(s => s.MaNhanVien == id);
             _db.NhanViens.Remove(nv);
             _db.SaveChanges();
-
+            TempData["success"] = "Xóa Nhân Viên Thành Công";
             return RedirectToAction("Index");
         }
         private void ValidateNhanVien(NhanVien nv)

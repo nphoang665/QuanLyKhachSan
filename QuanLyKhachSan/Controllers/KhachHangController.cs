@@ -102,6 +102,7 @@ namespace QuanLyKhachSan.Controllers
             {
                 _db.KhachHangs.Update(model);
                 _db.SaveChanges();
+                TempData["success"] = "Sửa Khách Hàng Thành Công";
                 return RedirectToAction("Index");
             }
 
@@ -118,6 +119,7 @@ namespace QuanLyKhachSan.Controllers
             }
            _db.KhachHangs.Remove(kh);
             _db.SaveChanges();
+            TempData["success"] = "Xóa Khách Hàng Thành Công";
             return RedirectToAction("Index");
         }
         [HttpPost]
@@ -134,25 +136,6 @@ namespace QuanLyKhachSan.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Search(string searchText)
-        {
-            var allkhachhang = _db.KhachHangs.ToList();
-       
-            if (searchText == null)
-            {
-                return PartialView("_KhachHangPartial", allkhachhang);
-            }
-            else
-            {
-                var khachHangs = await _db.KhachHangs
-                .Where(kh => kh.TenKhachHang.Contains(searchText.Trim())) // Thay ".TenKhachHang" bằng thuộc tính bạn muốn tìm kiếm
-                .ToListAsync();
-
-            return PartialView("_KhachHangPartial", khachHangs); // Trả về một PartialView chứa kết quả tìm kiếm
-            }
-           
-        }
         private void ValidateKhachHang(KhachHang kh)
         {
             //validate Ma khach hàng

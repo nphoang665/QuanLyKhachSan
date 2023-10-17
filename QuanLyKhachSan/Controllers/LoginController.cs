@@ -27,7 +27,8 @@ namespace QuanLyKhachSan.Controllers
             if (account == null)
             {
                 // Tài khoản hoặc mật khẩu không chính xác
-                TempData["Error"] = "Đăng nhập không thành công do sai tài khoản hoặc mật khẩu";
+                TempData["error"] = "Đăng nhập không thành công do sai tài khoản hoặc mật khẩu";
+                //TempData["error"]= null;
                 return View();
             }
             else
