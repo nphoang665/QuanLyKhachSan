@@ -280,81 +280,81 @@ function checkRoomStatus(maPhong) {
 }
 
 
-// Lấy các phần tử DOM của form nhận phòng
-var form = document.querySelector("#form_DatPhong");
-var maDatPhong = document.querySelector("#MaDatPhong");
-var phong = document.querySelector("#Ma_Phong");
-var maKhachHang = document.querySelector("#MaKhachHang");
-var hinhThuc = document.querySelector("#HinhThuc");
-var ngayNhan = document.querySelector("#NgayNhan");
-var ngayTra = document.querySelector("#NgayTra");
+//// Lấy các phần tử DOM của form nhận phòng
+//var form = document.querySelector("#form_DatPhong");
+//var maDatPhong = document.querySelector("#MaDatPhong");
+//var phong = document.querySelector("#Ma_Phong");
+//var maKhachHang = document.querySelector("#MaKhachHang");
+//var hinhThuc = document.querySelector("#HinhThuc");
+//var ngayNhan = document.querySelector("#NgayNhan");
+//var ngayTra = document.querySelector("#NgayTra");
 
-// Thêm sự kiện submit cho form
-form.addEventListener("submit", async function (event) {
-    // Ngăn chặn form submit mặc định
-    event.preventDefault();
+//// Thêm sự kiện submit cho form
+//form.addEventListener("submit", async function (event) {
+//    // Ngăn chặn form submit mặc định
+//    event.preventDefault();
 
-    // Validate các trường dữ liệu
-    var errors = [];
-    if (maDatPhong.value === "") {
-        errors.push("Mã đặt phòng không được để trống");
-    }
-    if (phong.value === "") {
-        errors.push("Phòng không được để trống");
-    }
-    if (maKhachHang.value === "") {
-        errors.push("Mã khách hàng không được để trống");
-    }
-    if (hinhThuc.value === "") {
-        errors.push("Hình thức không được để trống");
-    }
-    if (ngayNhan.value === "") {
-        errors.push("Ngày nhận không được để trống");
-    }
-    if (ngayTra.value === "") {
-        errors.push("Ngày trả không được để trống");
-    }
+//    // Validate các trường dữ liệu
+//    var errors = [];
+//    if (maDatPhong.value === "") {
+//        errors.push("Mã đặt phòng không được để trống");
+//    }
+//    if (phong.value === "") {
+//        errors.push("Phòng không được để trống");
+//    }
+//    if (maKhachHang.value === "") {
+//        errors.push("Mã khách hàng không được để trống");
+//    }
+//    if (hinhThuc.value === "") {
+//        errors.push("Hình thức không được để trống");
+//    }
+//    if (ngayNhan.value === "") {
+//        errors.push("Ngày nhận không được để trống");
+//    }
+//    if (ngayTra.value === "") {
+//        errors.push("Ngày trả không được để trống");
+//    }
 
-    // Nếu có lỗi, hiển thị lỗi và không submit form
-    if (errors.length > 0) {
-        var errorMessage = "";
-        errors.forEach(error => {
-            errorMessage += "<li>" + error + "</li>";
-        });
+//    // Nếu có lỗi, hiển thị lỗi và không submit form
+//    if (errors.length > 0) {
+//        var errorMessage = "";
+//        errors.forEach(error => {
+//            errorMessage += "<li>" + error + "</li>";
+//        });
 
-        // Hiển thị lỗi trên form
-        var validateErrorElement = document.querySelector(".Validate_DatPhong");
-        validateErrorElement.innerHTML = "<ul>" + errorMessage + "</ul>";
+//        // Hiển thị lỗi trên form
+//        var validateErrorElement = document.querySelector(".Validate_DatPhong");
+//        validateErrorElement.innerHTML = "<ul>" + errorMessage + "</ul>";
 
-        return;
-    }
+//        return;
+//    }
 
-    // Gửi request đến server để nhận phòng
-    var response = await fetch("/Phong/NhanPhong", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            MaDatPhong: maDatPhong.value,
-            Phong: phong.value,
-            MaKhachHang: maKhachHang.value,
-            HinhThuc: hinhThuc.value,
-            NgayNhan: ngayNhan.value,
-            NgayTra: ngayTra.value
-        })
-    });
+//    // Gửi request đến server để nhận phòng
+//    var response = await fetch("/Phong/NhanPhong", {
+//        method: "POST",
+//        headers: {
+//            "Content-Type": "application/json"
+//        },
+//        body: JSON.stringify({
+//            MaDatPhong: maDatPhong.value,
+//            Phong: phong.value,
+//            MaKhachHang: maKhachHang.value,
+//            HinhThuc: hinhThuc.value,
+//            NgayNhan: ngayNhan.value,
+//            NgayTra: ngayTra.value
+//        })
+//    });
 
-    // Kiểm tra kết quả trả về
-    if (response.status === 200) {
-        // Nhận phòng thành công, chuyển hướng đến trang khác
-        window.location.href = "/Phong/Index";
-    } else {
-        // Nhận phòng thất bại, hiển thị lỗi
-        var errorMessage = await response.text();
-        alert(errorMessage);
-    }
-});
+//    // Kiểm tra kết quả trả về
+//    if (response.status === 200) {
+//        // Nhận phòng thành công, chuyển hướng đến trang khác
+//        window.location.href = "/Phong/Index";
+//    } else {
+//        // Nhận phòng thất bại, hiển thị lỗi
+//        var errorMessage = await response.text();
+//        alert(errorMessage);
+//    }
+//});
 
 
 
