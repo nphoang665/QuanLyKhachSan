@@ -5,53 +5,50 @@
 }
 
 <h2>Sửa Phòng</h2>
+<form asp-action="SuaPhong" asp-controller="QuanLyPhong" method="post">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="MaPhong">Mã Phòng</label>
+                <input asp-for="MaPhong" class="form-control" readonly />
+                <span asp-validation-for="MaPhong" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KhuVuc">Khu Vực</label>
+                <input asp-for="KhuVuc" class="form-control" />
+                <span asp-validation-for="KhuVuc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HangPhong">Hạng Phòng</label>
+                <input asp-for="HangPhong" class="form-control" />
+                <span asp-validation-for="HangPhong" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiaTheoGio">Giá Theo Giờ</label>
+                <input asp-for="GiaTheoGio" class="form-control" />
+                <span asp-validation-for="GiaTheoGio" class="text-danger"></span>
+            </div>
 
-<form asp-action="SuaPhong" method="post">
-    <div class="form-group">
-        <label for="MaPhong">Mã Phòng</label>
-        <input asp-for="MaPhong" class="form-control" readonly />
-        @Html.ValidationMessageFor(model => model.MaPhong, "", new { @class = "text-danger" })
-
-    </div>
-    <div class="form-group">
-        <label for="KhuVuc">Khu Vực</label>
-        <input asp-for="KhuVuc" class="form-control" />
-        @Html.ValidationMessageFor(model => model.KhuVuc, "", new { @class = "text-danger" })
-
-    </div>
-    <div class="form-group">
-        <label for="HangPhong">Hạng Phòng</label>
-        <input asp-for="HangPhong" class="form-control" />
-        @Html.ValidationMessageFor(model => model.HangPhong, "", new { @class = "text-danger" })
-
-    </div>
-    <div class="form-group">
-        <label for="GiaTheoGio">Giá Theo Giờ</label>
-        <input asp-for="GiaTheoGio" class="form-control" />
-        @Html.ValidationMessageFor(model => model.GiaTheoGio, "", new { @class = "text-danger" })
-
-    </div>
-    <div class="form-group">
-        <label for="GiaTheoNgay">Giá Theo Ngày</label>
-        <input asp-for="GiaTheoNgay" class="form-control" />
-        @Html.ValidationMessageFor(model => model.GiaTheoNgay, "", new { @class = "text-danger" })
-
-    </div>
-    <div class="form-group">
-        <label for="GiaTheoQuaDem">Giá Qua Đêm</label>
-        <input asp-for="GiaTheoQuaDem" class="form-control" />
-        @Html.ValidationMessageFor(model => model.GiaTheoQuaDem, "", new { @class = "text-danger" })
-
-    </div>
-    <div class="form-group">
-        <label for="TrangThai">Trạng Thái</label>
-        <input asp-for="TrangThai" class="form-control" />
-        @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
-
-    </div>
-    
-
-    <div class="form-group">
-        <input type="submit" value="Sửa Phòng" class="btn btn-primary" asp-action="SuaPhong"  asp-controller="QuanLyPhong"/>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="GiaTheoNgay">Giá Theo Ngày</label>
+                <input asp-for="GiaTheoNgay" class="form-control" />
+                <span asp-validation-for="GiaTheoNgay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiaTheoQuaDem">Giá Qua Đêm</label>
+                <input asp-for="GiaTheoQuaDem" class="form-control" />
+                <span asp-validation-for="GiaTheoQuaDem" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrangThai">Trạng Thái</label>
+                <input asp-for="TrangThai" class="form-control" />
+                <span asp-validation-for="TrangThai" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Sửa Phòng</button>
+        </div>
     </div>
 </form>

@@ -78,6 +78,7 @@ namespace QuanLyKhachSan.Controllers
             {
                 _db.KhachHangs.Add(model);
                 _db.SaveChanges();
+                TempData["success"] = "Thêm Khách Hàng Thành Công";
                 return RedirectToAction("Index");
             }
 
