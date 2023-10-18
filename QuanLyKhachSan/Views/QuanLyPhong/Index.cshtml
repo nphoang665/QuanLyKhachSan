@@ -9,99 +9,69 @@
 }
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-<link rel="stylesheet" href="~/css/QuanLyPhong.css" />
-<link rel="stylesheet" href="~/css/css-min-all.css" />
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+<style>
+
+    .dataTables_wrapper .dataTables_length {
+        float: left;
+        margin-right: 20px;
+    }
+
+    .dataTables_wrapper .dataTables_filter {
+        float: right;
+    }
+
+    .dataTables_length label {
+        margin: 0;
+    }
+
+        .dataTables_length label select {
+            display: inline;
+            width: 80px;
+        }
+</style>
 
 
 <div class="row">
-    <div class="col-md-2">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title">Tìm kiếm</h5>
-            </div>
-            <form method="get" asp-controller="QuanLyPhong" asp-action="Index">
-                <div class="card-body">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="searchText" name="searchText" placeholder="Nhập từ khóa">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-sm-9" style="margin:20px 0 0 0;">
+                <div class="dataTables_length" id="example_length">
+                    <label>
+                        Show:&nbsp;
+                        <select name="example_length" aria-controls="example" class="form-control d-inline">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </label>
                 </div>
-            </form>
+            </div>
+            <div class="col-sm-3" style="margin:20px 0 0 0; ">
+                <input type="text" id="searchInput" class="form-control mb-3" placeholder="Tìm kiếm">
+            </div>
         </div>
-        <form method="get" asp-controller="QuanLyPhong" asp-action="Index" id="searchForm">
-            <div class="card w-100 bg-white">
-                <div class="card-header"><h5>Hạng Phòng</h5></div>
-                <div class="card-body">
-                    <div class="btn-group-vertical btn-group-toggle w-100 text-left" data-toggle="buttons">
-                        <label class="btn btn-secondary w-100" asp-controller="KhachHang" asp-action="Index">
-                            <input type="radio" name="hangPhong" autocomplete="off" value=""> Tất cả
-                        </label>
-                        <label class="btn btn-secondary w-100">
-                            <input type="radio" name="hangPhong" autocomplete="off" value="VIP"> VIP
-                        </label>
-                        <label class="btn btn-secondary w-100">
-                            <input type="radio" name="hangPhong" autocomplete="off" value="Thường"> Thường
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('input[type=radio][name=hangPhong]').change(function () {
-                    $('#searchForm').submit();
-                });
-            });
-        </script>
-        <form method="get" asp-controller="QuanLyPhong" asp-action="Index" id="searchForm1">
-            <div class="card w-100 bg-white">
-                <div class="card-header"><h5>Trạng Thái</h5></div>
-                <div class="card-body">
-                    <div class="btn-group-vertical btn-group-toggle w-100 text-left" data-toggle="buttons">
-                        <label class="btn btn-secondary w-100">
-                            <input type="radio" name="TrangThai" autocomplete="off" value="Đang sử dụng"> Đang sử dụng
-                        </label>
-                        <label class="btn btn-secondary w-100">
-                            <input type="radio" name="TrangThai" autocomplete="off" value="Trống"> Trống
-                        </label>
-                        <label class="btn btn-secondary w-100" asp-controller="KhachHang" asp-action="Index">
-                            <input type="radio" name="TrangThai" id="all" autocomplete="off" value=""> Tất cả
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('input[type=radio][name=TrangThai]').change(function () {
-                    $('#searchForm1').submit();
-                });
-            });
-        </script>
-
-    </div>
-    <div class="col-md-10">
-        <table class="table table-bordered">
+        <table class="table table-bordered table-hover" style="width:135%;">
             <thead>
-                <tr>
-                    <th>Mã Phòng</th>
-                    <th>Khu Vực</th>
-                    <th>Hạng Phòng</th>
-                    <th>Giá Theo Giờ</th>
-                    <th>Giá Theo Qua Đêm</th>
-                    <th>Giá Theo Ngày</th>
-                    <th>Trạng Thái</th>
-                    <th width="70px">Sửa</th>
+                <tr style="font-size:1em">
+                    <th class="text-center">Mã Phòng</th>
+                    <th class="text-center">Khu Vực</t>
+                    <th class="text-center">Hạng Phòng</th>
+                    <th class="text-center">Giá Theo Giờ</th>
+                    <th class="text-center">Giá Theo Qua Đêm</th>
+                    <th class="text-center">Giá Theo Ngày</th>
+                    <th class="text-center">Trạng Thái</th>
+                    <th class="text-center" width="70px">Sửa</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var phong in Model)
                 {
-                    <tr>
+                    <tr style="font-size:.9em">
                         <td>@phong.MaPhong</td>
                         <td>@phong.KhuVuc</td>
                         <td>@phong.HangPhong</td>
@@ -117,7 +87,17 @@
                 }
             </tbody>
         </table>
-        <nav aria-label="Page navigation example" style="position:relative;right:0;">
+    </div>
+</div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
+        <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-end">
                 <li class="page-item @(currentPage == 1 ? "disabled" : "")">
                     <a class="page-link" href="@Url.Action("Index", new { page = currentPage - 1 })" tabindex="-1">Previous</a>
@@ -169,6 +149,3 @@
                 </li>
             </ul>
         </nav>
-
-    </div>
-</div>
