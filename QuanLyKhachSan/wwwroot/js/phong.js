@@ -255,12 +255,41 @@ $("#form_DatPhong").submit(function (e) {
                 messageElement.style.color = 'green';
                 window.location.href = "/Phong/Index";
 
-                // Xử lý sau khi đặt phòng thành công...
             } else {
                 messageElement.innerText = response.message;
                 messageElement.style.color = 'red';
             }
         }
+    });
+});
+
+$(document).ready(function () {
+    $('#Tra_Phong').click(function (e) {
+        e.preventDefault();
+
+        var Phong = $('#input_Phong_ThanhToan').val();
+        var khachDaThanhToan = $('input[name="khachDaThanhToan"]').val();
+
+        $.ajax({
+            url: '/Phong/ThanhToan',  
+            type: 'POST',
+            data: {
+                Phong: Phong,
+                khachDaThanhToan: khachDaThanhToan
+            },
+            success: function (response) {
+                if (response.success) {
+                    alert(response.message);
+                    window.location.href = "/Phong/Index";
+                } else {
+                    $('#message_TraPhong').text(response.message);
+                }
+            },
+            error: function (error) {
+                console.log(error);
+                $('#message_TraPhong').text('Có lỗi xảy ra, vui lòng thử lại.');
+            }
+        });
     });
 });
 

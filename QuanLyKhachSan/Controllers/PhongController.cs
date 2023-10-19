@@ -27,8 +27,9 @@ namespace QuanLyKhachSan.Controllers
 			return View();
 		}
 		[HttpPost]
-		public async Task<IActionResult> NhanPhong(string MaDatPhong, string Phong, string MaKhachHang, string HinhThuc, int GiaPhong, DateTime? NgayNhan, DateTime? NgayTra, string DuKien, float ThanhTien, string MaNhanVien)
+		public async Task<IActionResult> NhanPhong(string MaDatPhong, string Phong, string MaKhachHang, string HinhThuc, int GiaPhong, DateTime? NgayNhan, DateTime? NgayTra, string DuKien, float ThanhTien, string MaNhanVien,float khachTra)
 		{
+		
 			var MadatPhongExist = _db.DatPhongs.FirstOrDefault(s => s.MaDatPhong == MaDatPhong);
 			if (string.IsNullOrEmpty(MaDatPhong))
 			{
@@ -93,7 +94,10 @@ namespace QuanLyKhachSan.Controllers
 				var phongDaDat = _db.Phong.FirstOrDefault(s => s.MaPhong == Phong);
 				phongDaDat.TrangThai = "Đang sử dụng";
 			await _db.SaveChangesAsync();
-
+				float tongtienkhachdatra = ThanhTien - khachTra;
+				var tinhTienKhachHangTra = _db.DatPhongs.FirstOrDefault(s => s.MaDatPhong == MaDatPhong);
+				tinhTienKhachHangTra.ThanhTien = tongtienkhachdatra;
+				await _db.SaveChangesAsync();
 				return Json(new { success = true, message = "Đặt phòng thành công." });
 			}
 			else
@@ -138,17 +142,39 @@ namespace QuanLyKhachSan.Controllers
 			return Json(new { error = "không có tên khách hàng trùng khớp" });
 		}
 
+	
 		[HttpPost]
-		public IActionResult ThanhToan(string Phong)
+		public JsonResult ThanhToan(string Phong, string khachDaThanhToan)
 		{
-			var datphong = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == Phong);
-			var PhongThanhToan = _db.Phong.FirstOrDefault(s => s.MaPhong == Phong);
-			PhongThanhToan.TrangThai = "Trống";
-			_db.SaveChanges();
-			_db.DatPhongs.Remove(datphong);
-			_db.SaveChanges();
-			return RedirectToAction("Index");
+			float khachDaThanhToanSo;
+			bool laSo = float.TryParse(khachDaThanhToan, out khachDaThanhToanSo);
+
+			if (!laSo)
+			{
+				return Json(new { success = false, message = "Lỗi. Vui lòng nhập số." });
+			}
+
+			var LayTongTien = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == Phong);
+
+			if (khachDaThanhToanSo < LayTongTien.ThanhTien)
+			{
+				return Json(new { success = false, message = "Số tiền thanh toán không đủ. Vui lòng thanh toán đủ số tiền." });
+			}
+
+			else
+			{
+				var datphong = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == Phong);
+				var PhongThanhToan = _db.Phong.FirstOrDefault(s => s.MaPhong == Phong);
+				PhongThanhToan.TrangThai = "Trống";
+				_db.SaveChanges();
+				_db.DatPhongs.Remove(datphong);
+				_db.SaveChanges();
+
+				return Json(new { success = true, message = "Thanh toán thành công. Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi." });
+			}
 		}
+
+
 		[HttpGet]
 		public IActionResult CheckRoom(string maPhong)
 		{
@@ -158,22 +184,19 @@ namespace QuanLyKhachSan.Controllers
 		[HttpGet]
 		public JsonResult GetRooms()
 		{
-			var rooms = _db.Phong.ToList(); // Thay đổi này để phù hợp với cấu trúc dữ liệu của bạn
+			var rooms = _db.Phong.ToList(); 
 			return Json(rooms);
 		}
 		[HttpGet]
 		public async Task<IActionResult> GetRoomPrice(string maPhong)
 		{
-			///// Tìm phòng với mã phòng đã cho
 			var phong = await _db.Phong.FirstOrDefaultAsync(p => p.MaPhong == maPhong);
 
 			if (phong == null)
 			{
-				// Nếu không tìm thấy phòng, trả về một lỗi 404
 				return NotFound();
 			}
 
-			// Trả về giá theo giờ và giá theo ngày của phòng
 			return Ok(new { GiaTheoGio = phong.GiaTheoGio, GiaTheoNgay = phong.GiaTheoNgay });
 		}
 
