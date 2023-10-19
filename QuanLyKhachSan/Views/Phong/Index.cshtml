@@ -19,6 +19,7 @@
 	<link rel="stylesheet"
 		@* mới *@
 		  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 
@@ -171,7 +172,10 @@
 				<div>
 					<p>Ghi Chú</p>
 					<textarea></textarea>
+
 				</div>
+			<div id="message"></div>
+
 			<div asp-validation-summary="All" class="Validate_DatPhong"></div>
 
 				<div id="thanh-toan">
@@ -181,7 +185,7 @@
 
 					<input value="0" class="input_khachhang_thanhtoan">
 				</div>
-			 <button type="submit" class="confirm-button" asp-action="NhanPhong" asp-controller="Phong">Nhận Phòng</button> 
+			 <button type="submit" class="confirm-button"  >Nhận Phòng</button> 
 
  
 
