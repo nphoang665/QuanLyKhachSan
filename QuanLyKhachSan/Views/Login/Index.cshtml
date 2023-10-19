@@ -101,72 +101,70 @@
 <script>
     var serverConfirmationCode; // Biến để lưu mã xác nhận từ máy chủ
 
-    $(document).ready(function () {
-        $('#QuenMatKhau').click(function (e) {
-            e.preventDefault(); // Ngăn chặn việc tải lại trang
-            var email = $('#email_input').val();
-            if (email === "") {
-                // Nếu ô input email trống, hiển thị thông báo lỗi
-                $("#email_input").after('<span style="color:red;" id="error_Email_ForgotPassword">Email không được bỏ trống.</span>');
-            } else {
-                // Xóa thông báo lỗi nếu có
-                $("#error_Email_ForgotPassword").remove();
-                // Tiếp tục xử lý gửi email với mã xác nhận
-                $.ajax({
-                    url: '/Login/GuiMail',
-                    type: 'POST',
-                    data: { Email: email },
-                    success: function (response) {
-                        if (response.success) {
-                            alert(response.responseText);
-                            serverConfirmationCode = response.confirmationCode; // Lưu mã xác nhận từ máy chủ
+    $('#QuenMatKhau').click(function (e) {
+        e.preventDefault();
+        var email = $('#email_input').val();
+        if (email === "") {
+            $("#email_input").after('<span style="color:red;" id="error_Email_ForgotPassword">Email không được bỏ trống.</span>');
+        } else {
+            $("#error_Email_ForgotPassword").remove();
+            $('#QuenMatKhau').prop('disabled', true);
+            $('#QuenMatKhau').css('background-color', 'gray'); // Thêm dòng này để thay đổi màu nút
+            $.ajax({
+                url: '/Login/GuiMail',
+                type: 'POST',
+                data: { Email: email },
+                success: function (response) {
+                    if (response.success) {
+                        alert(response.responseText);
+                        serverConfirmationCode = response.confirmationCode;
+                        $('#QuenMatKhau').hide();
+                        if ($('#confirmation_code').length === 0 && $('#confirm_code').length === 0) {
+                            $('.form-container.sign-in form').append('<input type="text" placeholder="Mã xác nhận" id="confirmation_code">');
+                            $('.form-container.sign-in form').append('<button id="confirm_code">Xác nhận mã</button>');
+                        } else {
+                            $('#confirmation_code').show();
+                            $('#confirm_code').show();
+                            $('#email_input').prop('readonly', true);
 
-                            // Ẩn nút "Quên Mật khẩu"
-                            $('#QuenMatKhau').hide();
-                            // Kiểm tra xem đã có input và button cho mã xác nhận chưa
-                            if ($('#confirmation_code').length === 0 && $('#confirm_code').length === 0) {
-                                // Nếu chưa, thêm input mới cho mã xác nhận
-                                $('.form-container.sign-in form').append('<input type="text" placeholder="Mã xác nhận" id="confirmation_code">');
-                                // Thêm button mới cho việc xác nhận mã
-                                $('.form-container.sign-in form').append('<button id="confirm_code">Xác nhận mã</button>');
-                            } else {
-                                // Nếu đã có, hiển thị input và button cho mã xác nhận
-                                $('#confirmation_code').show();
-                                $('#confirm_code').show();
-                            }
-                        } else if (response.field === "EmailForgotPassword") {
-                            // Hiển thị thông báo lỗi dưới ô input email
-                            $("#email_input").after('<span style="color:red;" id="error_Email_ForgotPassword">' + response.message + '</span>');
                         }
+                    } else if (response.field === "EmailForgotPassword") {
+                        $("#email_input").after('<span style="color:red;" id="error_Email_ForgotPassword">' + response.message + '</span>');
+                        $('#QuenMatKhau').prop('disabled', false);
+                        $('#QuenMatKhau').css('background-color', ''); // Thêm dòng này để đặt lại màu nút thành màu xanh
                     }
-                });
-            }
-        });
+                }
+            });
+        }
+   
+
+  
+
 
         // Sự kiện click cho nút "Xác nhận mã"
         $(document).on('click', '#confirm_code', function (e) {
-            e.preventDefault(); // Ngăn chặn việc tải lại trang
+            e.preventDefault();
             var userConfirmationCode = $('#confirmation_code').val();
             if (userConfirmationCode == "") {
                 alert('Bạn chưa nhập mã xác nhận.');
-
-            }
-           else  if (userConfirmationCode === serverConfirmationCode) {
+            } else if (userConfirmationCode === serverConfirmationCode) {
                 // Nếu mã xác nhận đúng, hiển thị ô mật khẩu và nút lưu mật khẩu
                 $('#confirm_code').hide();
+                $('#confirm_code').css('background-color', 'gray'); // Thêm dòng này để thay đổi màu nút
                 $('.form-container.forget-password form').append('<input type="password" placeholder="Mật khẩu mới" id="new_password">');
                 $('.form-container.forget-password form').append('<button  id="save_password">Lưu Mật khẩu</button>');
-            }
-            
-            else {
+                $('#email_input').prop('readonly', true);
+                $('#confirmation_code').prop('readonly', true);
+            } else {
                 // Nếu mã xác nhận sai, thông báo cho người dùng
                 alert('Mã xác nhận không đúng. Vui lòng kiểm tra lại.');
+                $('#confirm_code').css('background-color', ''); // Thêm dòng này để đặt lại màu nút
             }
         });
 
         // Sự kiện click cho nút "Lưu Mật khẩu"
         $(document).on('click', '#save_password', function (e) {
-            e.preventDefault(); // Ngăn chặn việc tải lại trang
+            e.preventDefault();
             var newPassword = $('#new_password').val();
             $.ajax({
                 url: '/Login/LuuMatKhau',
@@ -176,17 +174,20 @@
                     if (response.success) {
                         alert(response.responseText);
                         window.location.href = "/Login/Index";
-
+                        $('#save_password').prop('disabled', true); // Thêm dòng này để vô hiệu hóa nút
+                        $('#save_password').css('background-color', 'gray'); // Thêm dòng này để thay đổi màu nút
                     } else {
                         // Hiển thị thông báo lỗi dưới ô input mật khẩu
                         if (response.field === "matKhauForgotPassword") {
                             $("#new_password").after('<span style="color:red;" id="error_MatKhau_ForgotPassword">' + response.message + '</span>');
+                            $('#save_password').css('background-color', ''); // Thêm dòng này để đặt lại màu nút
                         } else {
                             alert('Có lỗi xảy ra khi lưu mật khẩu.');
                         }
                     }
                 }
             });
+      
             $("#new_password").keyup(function () {
                 $("#error_MatKhau_ForgotPassword").remove();
             });
