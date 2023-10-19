@@ -48,8 +48,9 @@
     position: absolute;
     top: 0px
 }
+
 .overlay {
-    display:none ;
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -58,8 +59,9 @@
     background-color: rgba(0, 0, 0, 0.5); /* Màu nền độ mờ (sử dụng rgba để điều chỉnh độ trong suốt) */
     z-index: 1000; /* Độ cao z để đảm bảo lớp đè hiển thị trên các phần tử khác */
 }
+
 .form-container {
-    width:1300px;
+    width: 1300px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -74,6 +76,7 @@
 #search_client_popup {
     border-radius: 5px;
 }
+
 #thanh-toan {
     width: 420px;
     height: 80px;
@@ -83,6 +86,7 @@
     left: 840px;
     border-radius: 10px;
 }
+
 .confirm-button {
     background-color: #279656;
     color: #fff;
@@ -94,17 +98,17 @@
     width: 200px;
 }
 
-
 .cancel-button {
     background-color: #ff0000;
     color: #fff;
     padding: 10px;
     border-radius: 5px;
     position: absolute;
-    top:320px;
-    left:1120px;
-    width:120px;
+    top: 320px;
+    left: 1120px;
+    width: 120px;
 }
+
 .text_khachhang_tra {
     color: #000;
     font-size: 18px;
@@ -112,6 +116,7 @@
     margin-top: 5px;
     margin-left: 20px;
 }
+
 .tien_khachhang_tra {
     margin-left: 120px;
     color: #279656;
@@ -119,35 +124,38 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    
 }
+
 .text_khachhang_thanhtoan {
     color: #000;
     font-size: 18px;
     font-weight: 400;
-    margin-top:10px;
-    margin-left:20px;
+    margin-top: 10px;
+    margin-left: 20px;
 }
+
 .input_khachhang_thanhtoan {
     border: none;
     border-bottom: 2px solid #000;
     background: #D9D9D9;
-    width:150px;
-    position:absolute;
-    left:230px;
-    top:41px;
-}
-#closeButton{
-    margin-left:1226px;
-    border:none;
-    background-color:rgb(255,255,255);
+    width: 150px;
+    position: absolute;
+    left: 230px;
+    top: 41px;
 }
 
-.combo{
-    width:100px;
+#closeButton {
+    margin-left: 1226px;
+    border: none;
+    background-color: rgb(255,255,255);
 }
+
+.combo {
+    width: 100px;
+}
+
 .room.booked {
-    background-color: red; 
+    background-color: red;
 }
 /*Trả phòng*/
 .TraPhong {
@@ -177,7 +185,6 @@
     z-index: 1001;
     /* Độ cao z cao hơn lớp đè */
 }
-
 .icon-close {
     position: absolute;
     top: 20px;
@@ -209,30 +216,22 @@
     margin-top: 20px;
     margin-left: 580px;
 }
-#close-TraPhong{
-    position:absolute;
-    right:30px;
-    top:10px;
-    border:none;
-    background:white;
-    font-size:22px;
+#close-TraPhong {
+    position: absolute;
+    right: 30px;
+    top: 10px;
+    border: none;
+    background: white;
+    font-size: 22px;
 }
-
-
-/*mới*/
-* {
-    font-size: 20px;
-}
-
 #container-boder {
     width: 500px;
     margin: 0 auto;
-    display:none;
-    position:absolute;
-    top:200px;
-    left:650px;
-    background-color:white;
-
+    display: none;
+    position: absolute;
+    top: 200px;
+    left: 650px;
+    background-color: white;
 }
 
 .room-info {

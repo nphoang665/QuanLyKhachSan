@@ -1,14 +1,18 @@
-﻿
-@model DatPhong
+﻿@model DatPhong
+
 <link href="~/css/Phong.css" rel="stylesheet" />
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 
+
+<link rel="stylesheet"
+@* mới *@
+	  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
 @{
-    ViewData["Title"] = "Đặt phòng";
+	ViewData["Title"] = "Đặt phòng";
 }
 
 @{
@@ -17,128 +21,120 @@
 	var nhanvienDatPhong = ViewBag.NhanVien as List<string>;
 }
 
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-		  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-	<link rel="stylesheet"
-		@* mới *@
-		  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 
 <div>
-		<header>
-			<nav class="nav navbar">
-				<a class="btn btn-primary btn_color" href="#">
-					<i class="bi bi-grid-3x3"></i>
-					Sơ đồ
-				</a>
-				<a class="d-none"><i class="bi bi-search"></i></a>
-				<a><input type="checkbox" /> <label>Đang sử dụng</label></a>
-				<a> <input type="checkbox" /> <label>Phòng Trống</label></a>
-				<a class="d-none"><i class="bi bi-gear"></i></a>
+	<header>
+		<nav class="nav navbar">
+			<a class="btn btn-primary btn_color" href="#">
+				<i class="bi bi-grid-3x3"></i>
+				Sơ đồ
+			</a>
+			<a class="d-none"><i class="bi bi-search"></i></a>
+			<a><input type="checkbox" /> <label>Đang sử dụng</label></a>
+			<a> <input type="checkbox" /> <label>Phòng Trống</label></a>
+			<a class="d-none"><i class="bi bi-gear"></i></a>
 			<a class="btn btn-primary btn_color" id="DatPhong" onclick="updateDuration()"><i class="bi bi-plus-circle"></i> Đặt Phòng</a>
-			</nav>
-		</header>
+		</nav>
+	</header>
 
-		<div class="row" style="margin-left:50px">
-			@foreach (var room in ViewBag.Rooms)
+	<div class="row" style="margin-left:50px">
+		@foreach (var room in ViewBag.Rooms)
+		{
+			var roomClass = "room";
+			if (bookedRooms.Contains(room.MaPhong))
 			{
-				var roomClass = "room";
-				if (bookedRooms.Contains(room.MaPhong))
-				{
-					roomClass += " booked";
-				}
-				<div class="col-sm-6 col-md-4 col-lg-3">
-					<div class="@roomClass" onclick="HienThiThongTinPhong('@room.MaPhong')">
-						<div class="room-number">
-							<a>P.@room.MaPhong</a>
-						</div>
-						<div class="icon">
-							<div class="icon-star"><i class="bi bi-stars"></i></div>
-
-							<!-- Call checkRoomStatus function when the icon is clicked -->
-							<div style="cursor:pointer" class="icon-three-dot-vertical" onclick="checkRoomStatus('@room.MaPhong')"> <i class="bi bi-three-dots-vertical"></i></div>
-						</div>
-						<p class="text_type_room">@room.HangPhong</p>
-						<p class="text-price">@room.GiaTheoNgay</p>
-					</div>
-				</div>
+				roomClass += " booked";
 			}
-		</div>
+			<div class="col-sm-6 col-md-4 col-lg-3">
+				<div class="@roomClass" onclick="HienThiThongTinPhong('@room.MaPhong')">
+					<div class="room-number">
+						<a>P.@room.MaPhong</a>
+					</div>
+					<div class="icon">
+						<div class="icon-star"><i class="bi bi-stars"></i></div>
 
+						<!-- Call checkRoomStatus function when the icon is clicked -->
+						<div style="cursor:pointer" class="icon-three-dot-vertical" onclick="checkRoomStatus('@room.MaPhong')"> <i class="bi bi-three-dots-vertical"></i></div>
+					</div>
+					<p class="text_type_room">@room.HangPhong</p>
+					<p class="text-price">@room.GiaTheoNgay</p>
+				</div>
+			</div>
+		}
 	</div>
-	@* popup *@
 
-	<div class="overlay" id="overlay">
-		<div class="form-container">
-			<button id="closeButton"><i class="bi bi-x-lg icon_x"></i></button>
-			<form method="post" id="form_DatPhong">
-				<h2>Đặt nhận phòng</h2>
-				<table class="table table-bordered">
-					<thead>
-						<tr>
-							<th>Mã DP</th>
-							<th>Phòng</th>
-							<th>Hạng Phòng</th>
-							<th>Mã KH</th>
-							<th>Người Lập Phiếu</th>
-						</tr>
-					</thead>
+</div>
+@* popup *@
 
-					<tbody>
-						<tr>
-							@* Mã đặt phòng *@
-							<td><input asp-for="MaDatPhong" style="width:120px" id="MaDatPhong" /></td>
-							<td>
-								@* Phòng *@
-								<select class="combo" id="Ma_Phong" asp-for="Phong" style="width:100px" onchange="updateHangPhong()">
+<div class="overlay" id="overlay">
+	<div class="form-container">
+		<button id="closeButton"><i class="bi bi-x-lg icon_x"></i></button>
+		<form method="post" id="form_DatPhong">
+			<h2>Đặt nhận phòng</h2>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Mã DP</th>
+						<th>Phòng</th>
+						<th>Hạng Phòng</th>
+						<th>Mã KH</th>
+						<th>Người Lập Phiếu</th>
+					</tr>
+				</thead>
 
-									@foreach (var phong in ViewBag.Rooms)
-									{
-										<option value="@phong.MaPhong"> P.@phong.MaPhong </option>
-									}
+				<tbody>
+					<tr>
+						@* Mã đặt phòng *@
+						<td><input asp-for="MaDatPhong" style="width:120px" id="MaDatPhong" /></td>
+						<td>
+							@* Phòng *@
+							<select class="combo" id="Ma_Phong" asp-for="Phong" style="width:100px" onchange="updateHangPhong()">
 
-								</select>
-							</td>
-							@* Hạng Phòng *@
-							<td>
+								@foreach (var phong in ViewBag.Rooms)
+								{
+									<option value="@phong.MaPhong"> P.@phong.MaPhong </option>
+								}
 
-								<label id="Hang_Phong" asp-for="HinhThuc" ></label>
-								<input type="hidden" asp-for="HinhThuc" id="Input_HangPhong" value="Phòng Đơn" />
-							</td>
-							@* mã khách hàng *@
-							<td>
-								<select style="width:120px" class="combo" asp-for="MaKhachHang">
+							</select>
+						</td>
+						@* Hạng Phòng *@
+						<td>
 
-									@foreach (var kh in ViewBag.KhachHangs)
-									{
-										<option value="@kh.MaKhachHang"> @kh.MaKhachHang</option>
-									}
-								</select>
-							</td>
-							@* Mã nhân viên *@
+							<label id="Hang_Phong" asp-for="HinhThuc"></label>
+							<input type="hidden" asp-for="HinhThuc" id="Input_HangPhong" value="Phòng Đơn" />
+						</td>
+						@* mã khách hàng *@
+						<td>
+							<select style="width:120px" class="combo" asp-for="MaKhachHang">
+
+								@foreach (var kh in ViewBag.KhachHangs)
+								{
+									<option value="@kh.MaKhachHang"> @kh.MaKhachHang</option>
+								}
+							</select>
+						</td>
+						@* Mã nhân viên *@
 						<td>
 							<select style="width:120px" class="combo" asp-for="MaNhanVien">
 								@foreach (var nv in ViewBag.NhanViens)
 								{
 									<option value="@nv.MaNhanVien">@nv.MaNhanVien</option>
 								}
-							</select> </td>
-							
-						</tr>
-					</tbody>
-					<thead>
-												
-							<th>Hình Thức</th>
-							<th>Giá Phòng</th>
-							<th>Ngày Nhận</th>
-							<th>Trả Phòng</th>
-							<th>Dự Kiến</th>
-							<th style="display:none">Thành Tiền</th>
-					</thead>
-					<tbody>
+							</select>
+						</td>
+
+					</tr>
+				</tbody>
+				<thead>
+
+				<th>Hình Thức</th>
+				<th>Giá Phòng</th>
+				<th>Ngày Nhận</th>
+				<th>Trả Phòng</th>
+				<th>Dự Kiến</th>
+				<th style="display:none">Thành Tiền</th>
+				</thead>
+				<tbody>
 					@* Hình thức *@
 				<td>
 					<select class="combo_Gio_Ngay" asp-for="HinhThuc" onchange="updateDuration()" style="width:120px">
@@ -171,114 +167,114 @@
 					<input type="hidden" asp-for="ThanhTien" id="thanhtien" />
 
 				</td>
-					</tbody>
-				</table>
-				<div>
-					<p>Ghi Chú</p>
-					<textarea></textarea>
+				</tbody>
+			</table>
+			<div>
+				<p>Ghi Chú</p>
+				<textarea></textarea>
 
-				</div>
+			</div>
 			<div id="message"></div>
 
 			<div asp-validation-summary="All" class="Validate_DatPhong"></div>
 
-				<div id="thanh-toan">
-					<label class="text_khachhang_tra">Khách cần trả</label>
-					<label class="tien_khachhang_tra">000.000</label>
-					<p class="text_khachhang_thanhtoan">Khách thanh toán</p>
+			<div id="thanh-toan">
+				<label class="text_khachhang_tra">Khách cần trả</label>
+				<label class="tien_khachhang_tra">000.000</label>
+				<p class="text_khachhang_thanhtoan">Khách thanh toán</p>
 
-					<input value="0" class="input_khachhang_thanhtoan">
-				</div>
-			 <button type="submit" class="confirm-button"  >Nhận Phòng</button> 
+				<input value="0" class="input_khachhang_thanhtoan">
+			</div>
+			<button type="submit" class="confirm-button">Nhận Phòng</button>
 
- 
 
-</form>
-		</div>
 
+		</form>
 	</div>
 
-
-	@* trả phòng popup *@
-	<div class="TraPhong" id="TraPhong">
-		<div class="form-TraPhong">
-			<form method="post">
-				<h1> Xác nhận trả phòng-P.101</h1>
-				<button id="close-TraPhong" onclick="Close_TraPhong()"><i class="bi bi-x-lg"></i></button>
-				<div>
-					<i class="bi bi-person" style="font-size: 23px;"></i><label id="ten_kh">Tên Khách Hàng</label>
-				</div>
-				<table class="table table-bodered">
-					<thead class="title">
-						<tr>
-							<th class="text-center" style="background: #E9F5EE; ">Mã Đặt Phòng</th>
-							<th class="text-center" style="background: #E9F5EE; ">Mã Phòng</th>
-							<th class="text-center" style="background: #E9F5EE; ">Ngày Nhận</th>
-							<th class="text-center" style="background: #E9F5EE; ">Trả Phòng</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td class="text-center">
-								@* điền hạng phòng *@
-								<label id="Ma_Dat_Phong_ThanhToan"></label>
-							</td>
-							<td class="text-center " id="ma-phong_thanhtoan">
-								<label id="lbl_Phong_ThanhToan" asp-for="Phong">P.101</label>
+</div>
 
 
-							</td>
-							<input type="hidden" id="input_Phong_ThanhToan" asp-for="Phong" />
-							<td class="text-center">
-								<input type="datetime-local" name="" id="Ngay_Nhan_ThanhToan" disabled> @* điền giá trị ngày nhận *@
-							</td>
-							<td class="text-center">
-								<input type="datetime-local" name="" id="Ngay_Tra_ThanhToan" disabled> @* điền giá trị ngày trả *@
-							</td>
-						</tr>
-					</tbody>
-					<thead class="title">
-						<tr>
-							<th class="text-center" style="background: #E9F5EE; ">Hạng Phòng</th>
-							<th class="text-center" style="background: #E9F5EE; ">Dự Kiến</th>
-							<th class="text-center" style="background: #E9F5EE; ">Giá Phòng</th>
-							<th class="text-center" style="background: #E9F5EE; ">Nhân Viên Thanh Toán</th>
+@* trả phòng popup *@
+<div class="TraPhong" id="TraPhong">
+	<div class="form-TraPhong">
+		<form method="post">
+			<h1> Xác nhận trả phòng-P.101</h1>
+			<button id="close-TraPhong" onclick="Close_TraPhong()"><i class="bi bi-x-lg"></i></button>
+			<div>
+				<i class="bi bi-person" style="font-size: 23px;"></i><label id="ten_kh">Tên Khách Hàng</label>
+			</div>
+			<table class="table table-bodered">
+				<thead class="title">
+					<tr>
+						<th class="text-center" style="background: #E9F5EE; ">Mã Đặt Phòng</th>
+						<th class="text-center" style="background: #E9F5EE; ">Mã Phòng</th>
+						<th class="text-center" style="background: #E9F5EE; ">Ngày Nhận</th>
+						<th class="text-center" style="background: #E9F5EE; ">Trả Phòng</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="text-center">
+							@* điền hạng phòng *@
+							<label id="Ma_Dat_Phong_ThanhToan"></label>
+						</td>
+						<td class="text-center " id="ma-phong_thanhtoan">
+							<label id="lbl_Phong_ThanhToan" asp-for="Phong">P.101</label>
 
-						</tr>
-					</thead>
-					<tbody>
-					
-						<tr>
-                            <td class="text-center">
-                                @* điền hạng phòng *@
-                                <label id="Hang_Phong_ThanhToan"></label>
-                            </td>
 
-							<td class="text-center">
+						</td>
+						<input type="hidden" id="input_Phong_ThanhToan" asp-for="Phong" />
+						<td class="text-center">
+							<input type="datetime-local" name="" id="Ngay_Nhan_ThanhToan" disabled> @* điền giá trị ngày nhận *@
+						</td>
+						<td class="text-center">
+							<input type="datetime-local" name="" id="Ngay_Tra_ThanhToan" disabled> @* điền giá trị ngày trả *@
+						</td>
+					</tr>
+				</tbody>
+				<thead class="title">
+					<tr>
+						<th class="text-center" style="background: #E9F5EE; ">Hạng Phòng</th>
+						<th class="text-center" style="background: #E9F5EE; ">Dự Kiến</th>
+						<th class="text-center" style="background: #E9F5EE; ">Giá Phòng</th>
+						<th class="text-center" style="background: #E9F5EE; ">Nhân Viên Thanh Toán</th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr>
+						<td class="text-center">
+							@* điền hạng phòng *@
+							<label id="Hang_Phong_ThanhToan"></label>
+						</td>
+
+						<td class="text-center">
 							<label id="Du_Kien_ThanhToan"></label>
-							</td>
-							<td class="text-center">
-								<label id="Gia_Phong_ThanhToan"></label>
-							</td>
-							<td class="text-center">
-								<label id="Nhan_Vien_ThanhToan"></label>
+						</td>
+						<td class="text-center">
+							<label id="Gia_Phong_ThanhToan"></label>
+						</td>
+						<td class="text-center">
+							<label id="Nhan_Vien_ThanhToan"></label>
 
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				<div id="border">
-					<label for="" style="font-weight: 700; margin-top: 10px; margin-left: 10px;">Tổng cộng</label>
-					<label for="" id="Tong_Tien_Thanh_Toan" style="font-weight: 700; color: #279656; margin-left: 150px;">000.000</label> @* điền thành tiền vào đây *@
-					<br>
-					<label for="" style="font-weight: 700;margin-top: 10px;margin-left: 10px;">Đã Thanh Toán</label>
-					<input type="number" value="0" style="position:absolute;top:390px;right:110px">
-				</div>
-				<button id="Tra_Phong" type="submit" asp-action="ThanhToan" asp-controller="Phong">Trả phòng</button>
-			</form>
-		</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="border">
+				<label for="" style="font-weight: 700; margin-top: 10px; margin-left: 10px;">Tổng cộng</label>
+				<label for="" id="Tong_Tien_Thanh_Toan" style="font-weight: 700; color: #279656; margin-left: 150px;">000.000</label> @* điền thành tiền vào đây *@
+				<br>
+				<label for="" style="font-weight: 700;margin-top: 10px;margin-left: 10px;">Đã Thanh Toán</label>
+				<input type="number" value="0" style="position:absolute;top:390px;right:110px">
+			</div>
+			<button id="Tra_Phong" type="submit" asp-action="ThanhToan" asp-controller="Phong">Trả phòng</button>
+		</form>
 	</div>
-	
+</div>
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="~/js/phong.js"></script>
