@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="~/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <title>Login</title>
 </head>
@@ -23,7 +24,7 @@
     @Html.Partial("_Notifical")
     <div class="container" id="container">
         <div class="form-container forget-password">
-            <form method="post">
+            <form method="post" id="formQuenMatKhau">
                 <h1>Quên Mật khẩu</h1>
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
@@ -33,7 +34,7 @@
                 </div>
                 <span style="text-align:center;">Nhập Email của bạn để kiểm tra và lấy lại mật khẩu.</span>
                 <input type="email" placeholder="Email" asp-for="Email" id="email_input">
-
+                
 
                 <input type="text" placeholder="Mã xác nhận" id="confirmation_code" style="display: none;">
                 <button id="QuenMatKhau">Quên Mật khẩu</button>
@@ -41,7 +42,7 @@
             </form>
         </div>
         <div class="form-container sign-up">
-            <form method="post">
+            <form method="post" id="formDangKy">
                 <h1>ĐĂNG KÝ</h1>
                 <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
@@ -50,15 +51,14 @@
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
                 <span>hoặc sử dụng gmail để đăng ký</span>
-                <input type="text" placeholder="Tên đăng nhập" asp-for="TenDangNhap">
-
-                <input type="email" placeholder="Email" asp-for="Email">
-                
-
-                <input type="password" placeholder="Mật khẩu" asp-for="MatKhau">
-                <button asp-action="DangKy" asp-controller="Login">ĐĂNG KÝ</button>
+                <input type="text" placeholder="Tên đăng nhập" asp-for="TenDangNhap" id="input_Tk_Register">
+                <input type="email" placeholder="Email" asp-for="Email" id="input_Email_Register">
+                <input type="password" placeholder="Mật khẩu" asp-for="MatKhau" id="input_Mk_Register">
+                <button>ĐĂNG KÝ</button>
             </form>
         </div>
+
+
         <div class="form-container sign-in">
             <form method="post">
                 <h1>Đăng nhập</h1>
@@ -69,12 +69,13 @@
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
                 <span>hoặc sử dụng gmail và mật khẩu</span>
-                <input type="text" placeholder="Email" asp-for="TenDangNhap">
-
-                <input type="password" placeholder="Mật khẩu" asp-for="MatKhau">
+                <input type="text" placeholder="Email" asp-for="TenDangNhap" id="input_Tk_Login">
+                <span style="color:red;" id="ValidateTkLogin">@TempData["ErrorTenDangNhap"]</span>
+                <input type="password" placeholder="Mật khẩu" asp-for="MatKhau" id="input_Mk_Login">
+                <span style="color:red;" id="ValidateMkLogin">@TempData["ErrorMatKhau"]</span>
 
                 <a href="#" id="Forgot_Password">Quên mật khẩu?</a>
-                <button asp-action="Index" asp-controller="Login">ĐĂNG NHẬP</button>
+                <button asp-action="Index" asp-controller="Login" id="Login_Index">ĐĂNG NHẬP</button>
             </form>
         </div>
         <div class="toggle-container">
@@ -96,60 +97,73 @@
 </body>
 </html>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
     var serverConfirmationCode; // Biến để lưu mã xác nhận từ máy chủ
 
     $(document).ready(function () {
         $('#QuenMatKhau').click(function (e) {
             e.preventDefault(); // Ngăn chặn việc tải lại trang
-            // Ẩn các input hiện tại
-          
-
-            // Gửi email với mã xác nhận
             var email = $('#email_input').val();
-            $.ajax({
-                url: '/Login/GuiMail',
-                type: 'POST',
-                data: { Email: email },
-                success: function (response) {
-                    if (response.success) {
-                        alert(response.responseText);
-                        serverConfirmationCode = response.confirmationCode; // Lưu mã xác nhận từ máy chủ
+            if (email === "") {
+                // Nếu ô input email trống, hiển thị thông báo lỗi
+                $("#email_input").after('<span style="color:red;" id="error_Email_ForgotPassword">Email không được bỏ trống.</span>');
+            } else {
+                // Xóa thông báo lỗi nếu có
+                $("#error_Email_ForgotPassword").remove();
+                // Tiếp tục xử lý gửi email với mã xác nhận
+                $.ajax({
+                    url: '/Login/GuiMail',
+                    type: 'POST',
+                    data: { Email: email },
+                    success: function (response) {
+                        if (response.success) {
+                            alert(response.responseText);
+                            serverConfirmationCode = response.confirmationCode; // Lưu mã xác nhận từ máy chủ
 
-                        // Ẩn nút "Quên Mật khẩu"
-                        $('#QuenMatKhau').hide();
-                        // Kiểm tra xem đã có input và button cho mã xác nhận chưa
-                        if ($('#confirmation_code').length === 0 && $('#confirm_code').length === 0) {
-                            // Nếu chưa, thêm input mới cho mã xác nhận
-                            $('.form-container.sign-in form').append('<input type="text" placeholder="Mã xác nhận" id="confirmation_code">');
-                            // Thêm button mới cho việc xác nhận mã
-                            $('.form-container.sign-in form').append('<button id="confirm_code">Xác nhận mã</button>');
-                        } else {
-                            // Nếu đã có, hiển thị input và button cho mã xác nhận
-                            $('#confirmation_code').show();
-                            $('#confirm_code').show();
+                            // Ẩn nút "Quên Mật khẩu"
+                            $('#QuenMatKhau').hide();
+                            // Kiểm tra xem đã có input và button cho mã xác nhận chưa
+                            if ($('#confirmation_code').length === 0 && $('#confirm_code').length === 0) {
+                                // Nếu chưa, thêm input mới cho mã xác nhận
+                                $('.form-container.sign-in form').append('<input type="text" placeholder="Mã xác nhận" id="confirmation_code">');
+                                // Thêm button mới cho việc xác nhận mã
+                                $('.form-container.sign-in form').append('<button id="confirm_code">Xác nhận mã</button>');
+                            } else {
+                                // Nếu đã có, hiển thị input và button cho mã xác nhận
+                                $('#confirmation_code').show();
+                                $('#confirm_code').show();
+                            }
+                        } else if (response.field === "EmailForgotPassword") {
+                            // Hiển thị thông báo lỗi dưới ô input email
+                            $("#email_input").after('<span style="color:red;" id="error_Email_ForgotPassword">' + response.message + '</span>');
                         }
-                    } else {
-                        alert('Có lỗi xảy ra khi gửi email.');
                     }
-                }
-            });
+                });
+            }
         });
 
         // Sự kiện click cho nút "Xác nhận mã"
         $(document).on('click', '#confirm_code', function (e) {
             e.preventDefault(); // Ngăn chặn việc tải lại trang
             var userConfirmationCode = $('#confirmation_code').val();
-            if (userConfirmationCode === serverConfirmationCode) {
+            if (userConfirmationCode == "") {
+                alert('Bạn chưa nhập mã xác nhận.');
+
+            }
+           else  if (userConfirmationCode === serverConfirmationCode) {
                 // Nếu mã xác nhận đúng, hiển thị ô mật khẩu và nút lưu mật khẩu
                 $('#confirm_code').hide();
                 $('.form-container.forget-password form').append('<input type="password" placeholder="Mật khẩu mới" id="new_password">');
                 $('.form-container.forget-password form').append('<button  id="save_password">Lưu Mật khẩu</button>');
-            } else {
+            }
+            
+            else {
                 // Nếu mã xác nhận sai, thông báo cho người dùng
                 alert('Mã xác nhận không đúng. Vui lòng kiểm tra lại.');
             }
         });
+
         // Sự kiện click cho nút "Lưu Mật khẩu"
         $(document).on('click', '#save_password', function (e) {
             e.preventDefault(); // Ngăn chặn việc tải lại trang
@@ -161,13 +175,33 @@
                 success: function (response) {
                     if (response.success) {
                         alert(response.responseText);
+                        window.location.href = "/Login/Index";
+
                     } else {
-                        alert('Có lỗi xảy ra khi lưu mật khẩu.');
+                        // Hiển thị thông báo lỗi dưới ô input mật khẩu
+                        if (response.field === "matKhauForgotPassword") {
+                            $("#new_password").after('<span style="color:red;" id="error_MatKhau_ForgotPassword">' + response.message + '</span>');
+                        } else {
+                            alert('Có lỗi xảy ra khi lưu mật khẩu.');
+                        }
                     }
                 }
             });
+            $("#new_password").keyup(function () {
+                $("#error_MatKhau_ForgotPassword").remove();
+            });
         });
+
+        // Xóa thông báo lỗi khi người dùng nhập vào ô input mật khẩu
+      
+
+        // Xóa thông báo lỗi khi người dùng nhập vào ô input email
+        $("#email_input").keyup(function () {
+            $("#error_Email_ForgotPassword").remove();
+        }); 
+       
     });
 
 </script>
+
 
