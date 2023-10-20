@@ -36,7 +36,6 @@
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Phòng</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Report</a>
 </div>
 <div class="row">
     <div class="col-md-9">
@@ -61,13 +60,13 @@
         <table class="table table-bordered table-hover" style="width:135%;">
             <thead>
                 <tr style="font-size:1em">
-                    <th class="text-center">Mã Phòng</th>
-                    <th class="text-center">Khu Vực</t>
-                    <th class="text-center">Hạng Phòng</th>
-                    <th class="text-center">Giá Theo Giờ</th>
-                    <th class="text-center">Giá Theo Qua Đêm</th>
-                    <th class="text-center">Giá Theo Ngày</th>
-                    <th class="text-center">Trạng Thái</th>
+                    <th class="text-center">Mã phòng</th>
+                    <th class="text-center">Khu vực</t>
+                    <th class="text-center">Hạng phòng</th>
+                    <th class="text-center">Giá theo giờ</th>
+                    <th class="text-center">Giá qua đêm</th>
+                    <th class="text-center">Giá theo Ngày</th>
+                    <th class="text-center">Trạng thái</th>
                     <th class="text-center" width="70px">Sửa</th>
                 </tr>
             </thead>
@@ -96,7 +95,16 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<script>
+    $(document).ready(function () {
+        $("#searchInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("table tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 
 
 
