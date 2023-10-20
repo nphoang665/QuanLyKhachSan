@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyKhachSan.DataAcess.Data;
-
-
 namespace QuanLyKhachSan.Controllers
 {
 	public class PhongController : Controller

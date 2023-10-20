@@ -30,8 +30,8 @@
 				Sơ đồ
 			</a>
 			<a class="d-none"><i class="bi bi-search"></i></a>
-			<a><input type="checkbox" /> <label>Đang sử dụng</label></a>
-			<a> <input type="checkbox" /> <label>Phòng Trống</label></a>
+		@* 	<a><input type="checkbox" /> <label>Đang sử dụng</label></a>
+			<a> <input type="checkbox" /> <label>Phòng Trống</label></a> *@
 			<a class="d-none"><i class="bi bi-gear"></i></a>
 			<a class="btn btn-primary btn_color" id="DatPhong" onclick="updateDuration()"><i class="bi bi-plus-circle"></i> Đặt Phòng</a>
 		</nav>
@@ -57,7 +57,9 @@
 						<div style="cursor:pointer" class="icon-three-dot-vertical" onclick="checkRoomStatus('@room.MaPhong')"> <i class="bi bi-three-dots-vertical"></i></div>
 					</div>
 					<p class="text_type_room">@room.HangPhong</p>
-					<p class="text-price">@room.GiaTheoNgay</p>
+				@* 	<p class="text-price">Giá theo giờ @room.GiaTheoGio</p>
+					<br/> *@
+					<p class="text-price">Giá theo ngày @room.GiaTheoNgay</p>
 				</div>
 			</div>
 		}
@@ -222,7 +224,7 @@
 						<td class="text-center " id="ma-phong_thanhtoan">
 							<label id="lbl_Phong_ThanhToan" asp-for="Phong">P.101</label>
 
-
+	
 						</td>
 						<input type="hidden" id="input_Phong_ThanhToan" asp-for="Phong" />
 						<td class="text-center">
