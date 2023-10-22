@@ -35,7 +35,6 @@
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Nhân viên</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Report</a>
 </div>
 <div class="row">
 
@@ -67,15 +66,15 @@
             <thead>
                 <tr style="font-size:.9em">
                     <th class="text-center" style="width:auto">Mã NV</th>
-                    <th class="text-center" style="width:auto">Tên Nhân Viên</th>
+                    <th class="text-center" style="width:auto">Tên nhân viên</th>
                     <th class="text-center" style="width:auto">CCCD</th>
-                    <th class="text-center" style="width:auto">Giới Tính</th>
-                    <th class="text-center" style="width:auto">Ngày Sinh</th>
-                    <th class="text-center" style="width:auto">Chức Vụ</th>
-                    <th class="text-center" style="width:auto">Số Điện Thoại</th>
-                    <th class="text-center" style="width:auto">Địa Chỉ</th>
-                    <th class="text-center" style="width:auto">Ngày Vào Làm</th>
-                    <th class="text-center" style="width:auto">Ghi Chú</th>
+                    <th class="text-center" style="width:auto">Giới tính</th>
+                    <th class="text-center" style="width:auto">Ngày sinh</th>
+                    <th class="text-center" style="width:auto">Chức vụ</th>
+                    <th class="text-center" style="width:auto">Số điện thoại</th>
+                    <th class="text-center" style="width:auto">Địa chỉ</th>
+                    <th class="text-center" style="width:auto">Ngày vào làm</th>
+                    <th class="text-center" style="width:auto">Ghi chú</th>
                     <th class="text-center" style="width:70px">Sửa</th>
                     <th class="text-center" style="width:70px">Xóa</th>
                 </tr>
@@ -116,7 +115,16 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<script>
+    $(document).ready(function () {
+        $("#searchInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("table tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 
 <nav aria-label="Page navigation example" >
     <ul class="pagination justify-content-end">

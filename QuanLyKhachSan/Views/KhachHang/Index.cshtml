@@ -35,13 +35,12 @@
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Khách hàng</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i>Report</a>
 </div>
 <div class="row">
 
 
     <div class="col-md-9">
-        <a class="btn btn-primary" asp-area="" asp-controller="KhachHang" asp-action="ThemKhachHang">Thêm Khách Hàng</a>
+        <a class="btn btn-primary" asp-area="" asp-controller="KhachHang" asp-action="ThemKhachHang">Thêm khách hàng</a>
         <a type="button" class="btn btn-primary editButton" asp-action="ExportExcel" asp-controller="KhachHang">Excel</a>
         <a type="button" class="btn btn-primary editButton" asp-action="ExportPDF" asp-controller="KhachHang">PDF</a>
 
@@ -120,7 +119,16 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<script>
+    $(document).ready(function () {
+        $("#searchInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("table tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-end">
