@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using QuanLyKhachSan.Data;
 using QuanLyKhachSan.DataAcess.Data;
 namespace QuanLyKhachSan.Controllers
 {
@@ -164,9 +165,30 @@ namespace QuanLyKhachSan.Controllers
 				var datphong = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == Phong);
 				var PhongThanhToan = _db.Phong.FirstOrDefault(s => s.MaPhong == Phong);
 				PhongThanhToan.TrangThai = "Trống";
+				Random random = new Random();
+				int MaHoaDon = random.Next(100000, 1000000);
+				var hd = new HoaDon();
+				hd.MaHoaDon = MaHoaDon.ToString();
+				hd.HinhThuc = datphong.HinhThuc;
+				hd.GiaPhong = datphong.GiaPhong;
+				hd.NgayNhan = datphong.NgayNhan;
+				hd.NgayTra = datphong.NgayTra;
+				hd.DuKien = datphong.DuKien;
+				hd.ThanhTien = datphong.ThanhTien;
+				hd.MaDatPhong = datphong.MaDatPhong;
+				hd.MaKhachHang = datphong.MaKhachHang;
+				hd.MaNhanVien=datphong.MaNhanVien;
+				hd.MaPhong = datphong.MaPhong;
+				_db.HoaDon.Add(hd);
 				_db.SaveChanges();
+
+				_db.SaveChanges();
+
 				_db.DatPhongs.Remove(datphong);
+
 				_db.SaveChanges();
+
+			
 
 				return Json(new { success = true, message = "Thanh toán thành công. Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi." });
 			}

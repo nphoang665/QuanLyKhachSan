@@ -12,8 +12,8 @@ using QuanLyKhachSan.DataAcess.Data;
 namespace QuanLyKhachSan.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231009152809_addtoDb")]
-    partial class addtoDb
+    [Migration("20231024091141_AddtoDb")]
+    partial class AddtoDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,6 +71,36 @@ namespace QuanLyKhachSan.Migrations
                     b.HasIndex("MaPhong");
 
                     b.ToTable("DatPhongs");
+                });
+
+            modelBuilder.Entity("QuanLyKhachSan.Data.HoaDon", b =>
+                {
+                    b.Property<string>("MaHoaDon")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("DuKien")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GiaPhong")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HinhThuc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("NgayNhan")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("NgayTra")
+                        .HasColumnType("datetime2");
+
+                    b.Property<float>("ThanhTien")
+                        .HasColumnType("real");
+
+                    b.HasKey("MaHoaDon");
+
+                    b.ToTable("HoaDon");
                 });
 
             modelBuilder.Entity("QuanLyKhachSan.Model.KhachHang", b =>

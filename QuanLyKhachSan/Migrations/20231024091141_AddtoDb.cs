@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -7,24 +8,41 @@
 namespace QuanLyKhachSan.Migrations
 {
     /// <inheritdoc />
-    public partial class addtoDb : Migration
+    public partial class AddtoDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "HoaDon",
+                columns: table => new
+                {
+                    MaHoaDon = table.Column<string>(type: "char(6)", nullable: false),
+					HinhThuc = table.Column<string>(type: "nvarchar(30)", nullable: false),
+					GiaPhong = table.Column<int>(type: "int", nullable: false),
+					NgayNhan = table.Column<DateTime>(type: "datetime2", nullable: false),
+					NgayTra = table.Column<DateTime>(type: "datetime2", nullable: false),
+					DuKien = table.Column<string>(type: "nvarchar(40)", nullable: false),
+					ThanhTien = table.Column<float>(type: "real", nullable: false)
+				},
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HoaDon", x => x.MaHoaDon);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "KhachHangs",
                 columns: table => new
                 {
-                    MaKhachHang = table.Column<string>(type: "char(6)", nullable: false),
-                    TenKhachHang = table.Column<string>(type: "nvarchar(55)", nullable: false),
-                    CCCD = table.Column<string>(type: "char(12)", nullable: false),
-                    GioiTinh = table.Column<string>(type: "nvarchar(4)", nullable: false),
-                    NgaySinh = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DienThoai = table.Column<string>(type: "varchar(11)", nullable: false),
-                    DiaChi = table.Column<string>(type: "nvarchar(90)", nullable: false),
-                    GhiChu = table.Column<string>(type: "nvarchar(100)", nullable: false)
-                },
+					MaKhachHang = table.Column<string>(type: "char(6)", nullable: false),
+					TenKhachHang = table.Column<string>(type: "nvarchar(55)", nullable: false),
+					CCCD = table.Column<string>(type: "char(12)", nullable: false),
+					GioiTinh = table.Column<string>(type: "nvarchar(4)", nullable: false),
+					NgaySinh = table.Column<DateTime>(type: "datetime2", nullable: false),
+					DienThoai = table.Column<string>(type: "varchar(11)", nullable: false),
+					DiaChi = table.Column<string>(type: "nvarchar(90)", nullable: false),
+					GhiChu = table.Column<string>(type: "nvarchar(100)", nullable: false)
+				},
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_KhachHangs", x => x.MaKhachHang);
@@ -34,17 +52,17 @@ namespace QuanLyKhachSan.Migrations
                 name: "NhanViens",
                 columns: table => new
                 {
-                    MaNhanVien = table.Column<string>(type: "char(6)", nullable: false),
-                    TenNhanVien = table.Column<string>(type: "nvarchar(55)", nullable: false),
-                    CCCD = table.Column<string>(type: "char(12)", nullable: false),
-                    GioiTinh = table.Column<string>(type: "nvarchar(4)", nullable: false),
-                    NgaySinh = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ChucVu = table.Column<string>(type: "nvarchar(30)", nullable: false),
-                    DienThoai = table.Column<string>(type: "varchar(12)", nullable: false),
-                    DiaChi = table.Column<string>(type: "nvarchar(90)", nullable: false),
-                    NgayVaoLam = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    GhiChu = table.Column<string>(type: "nvarchar(100)", nullable: false)
-                },
+					MaNhanVien = table.Column<string>(type: "char(6)", nullable: false),
+					TenNhanVien = table.Column<string>(type: "nvarchar(55)", nullable: false),
+					CCCD = table.Column<string>(type: "char(12)", nullable: false),
+					GioiTinh = table.Column<string>(type: "nvarchar(4)", nullable: false),
+					NgaySinh = table.Column<DateTime>(type: "datetime2", nullable: false),
+					ChucVu = table.Column<string>(type: "nvarchar(30)", nullable: false),
+					DienThoai = table.Column<string>(type: "varchar(12)", nullable: false),
+					DiaChi = table.Column<string>(type: "nvarchar(90)", nullable: false),
+					NgayVaoLam = table.Column<DateTime>(type: "datetime2", nullable: false),
+					GhiChu = table.Column<string>(type: "nvarchar(100)", nullable: false)
+				},
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_NhanViens", x => x.MaNhanVien);
@@ -54,14 +72,14 @@ namespace QuanLyKhachSan.Migrations
                 name: "Phong",
                 columns: table => new
                 {
-                    MaPhong = table.Column<string>(type: "char(3)", nullable: false),
-                    KhuVuc = table.Column<string>(type: "nvarchar(40)", nullable: false),
-                    HangPhong = table.Column<string>(type: "nvarchar(20)", nullable: false),
-                    GiaTheoGio = table.Column<int>(type: "int", nullable: false),
-                    GiaTheoQuaDem = table.Column<int>(type: "int", nullable: false),
-                    GiaTheoNgay = table.Column<int>(type: "int", nullable: false),
-                    TrangThai = table.Column<string>(type: "nvarchar(30)", nullable: false)
-                },
+					MaPhong = table.Column<string>(type: "char(3)", nullable: false),
+					KhuVuc = table.Column<string>(type: "nvarchar(40)", nullable: false),
+					HangPhong = table.Column<string>(type: "nvarchar(20)", nullable: false),
+					GiaTheoGio = table.Column<int>(type: "int", nullable: false),
+					GiaTheoQuaDem = table.Column<int>(type: "int", nullable: false),
+					GiaTheoNgay = table.Column<int>(type: "int", nullable: false),
+					TrangThai = table.Column<string>(type: "nvarchar(30)", nullable: false)
+				},
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Phong", x => x.MaPhong);
@@ -71,10 +89,10 @@ namespace QuanLyKhachSan.Migrations
                 name: "TaiKhoan",
                 columns: table => new
                 {
-                    TenDangNhap = table.Column<string>(type: "varchar(25)", nullable: false),
-                    MatKhau = table.Column<string>(type: "varchar(25)", nullable: false),
-                    Email = table.Column<string>(type: "varchar(42)", nullable: false)
-                },
+					TenDangNhap = table.Column<string>(type: "varchar(25)", nullable: false),
+					MatKhau = table.Column<string>(type: "varchar(25)", nullable: false),
+					Email = table.Column<string>(type: "varchar(42)", nullable: false)
+				},
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TaiKhoan", x => x.TenDangNhap);
@@ -84,17 +102,17 @@ namespace QuanLyKhachSan.Migrations
                 name: "DatPhongs",
                 columns: table => new
                 {
-                    MaDatPhong = table.Column<string>(type: "char(6)", nullable: false),
-                    MaNhanVien = table.Column<string>(type: "char(6)", nullable: false),
-                    MaPhong = table.Column<string>(type: "char(3)", nullable: false),
-                    MaKhachHang = table.Column<string>(type: "char(6)", nullable: false),
-                    HinhThuc = table.Column<string>(type: "nvarchar(30)", nullable: false),
-                    GiaPhong = table.Column<int>(type: "int", nullable: false),
-                    NgayNhan = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    NgayTra = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DuKien = table.Column<string>(type: "nvarchar(40)", nullable: false),
-                    ThanhTien = table.Column<float>(type: "real", nullable: false)
-                },
+					MaDatPhong = table.Column<string>(type: "char(6)", nullable: false),
+					MaNhanVien = table.Column<string>(type: "char(6)", nullable: false),
+					MaPhong = table.Column<string>(type: "char(3)", nullable: false),
+					MaKhachHang = table.Column<string>(type: "char(6)", nullable: false),
+					HinhThuc = table.Column<string>(type: "nvarchar(30)", nullable: false),
+					GiaPhong = table.Column<int>(type: "int", nullable: false),
+					NgayNhan = table.Column<DateTime>(type: "datetime2", nullable: false),
+					NgayTra = table.Column<DateTime>(type: "datetime2", nullable: false),
+					DuKien = table.Column<string>(type: "nvarchar(40)", nullable: false),
+					ThanhTien = table.Column<float>(type: "real", nullable: false)
+				},
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DatPhongs", x => x.MaDatPhong);
@@ -195,6 +213,9 @@ namespace QuanLyKhachSan.Migrations
         {
             migrationBuilder.DropTable(
                 name: "DatPhongs");
+
+            migrationBuilder.DropTable(
+                name: "HoaDon");
 
             migrationBuilder.DropTable(
                 name: "TaiKhoan");

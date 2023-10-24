@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using QuanLyKhachSan.Data;
 using QuanLyKhachSan.Model;
 
 
@@ -15,6 +16,7 @@ namespace QuanLyKhachSan.DataAcess.Data
         public DbSet<NhanVien> NhanViens { get; set; }
         public DbSet<DatPhong> DatPhongs { get; set; }
         public DbSet<Room> Phong { get; set; }
+        public DbSet<HoaDon> HoaDon { get;set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<KhachHang>().HasData(
