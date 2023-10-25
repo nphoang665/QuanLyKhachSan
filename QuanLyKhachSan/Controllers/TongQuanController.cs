@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using QuanLyKhachSan.DataAcess.Data;
 
 namespace QuanLyKhachSan.Controllers
@@ -25,6 +26,20 @@ namespace QuanLyKhachSan.Controllers
 
             // Trả về dữ liệu dưới dạng JSON
             return Json(new { PhongTrong = PhongTrong, phongDaDat = phongDaDat });
+        }
+        public IActionResult LayDoanhThuTheoThang()
+        {
+            var doanhThuTheoThang = _db.HoaDon
+                .GroupBy(hd => new { hd.NgayTra.Year, hd.NgayTra.Month })
+                .Select(g => new
+                {
+                    Thang = g.Key.Month,
+                    Nam = g.Key.Year,
+                    DoanhThu = g.Sum(hd => hd.ThanhTien)
+                })
+                .ToList();
+
+            return Json(doanhThuTheoThang);
         }
 
     }
