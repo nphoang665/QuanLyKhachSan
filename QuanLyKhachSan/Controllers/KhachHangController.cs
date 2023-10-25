@@ -21,10 +21,17 @@ namespace QuanLyKhachSan.Controllers
         public async Task<IActionResult> Index(string searchText, string gender, string TrangThai, int page = 1)
         {
 
-            int pageSize = 7;
+            int? numberOfColumnsToShow = null;
+            if (Request.Query.ContainsKey("example_length"))
+            {
+                numberOfColumnsToShow = Convert.ToInt32(Request.Query["example_length"]);
+            }
+            ViewBag.NumberOfColumnsToShow = numberOfColumnsToShow;
+            int pageSize = numberOfColumnsToShow ?? 10;
             int totalKhachHangs = await _db.KhachHangs.CountAsync();
             int totalPages = (int)Math.Ceiling((double)totalKhachHangs / pageSize);
             var khachHangs = _db.KhachHangs.AsQueryable();
+
 
             // Lọc kết quả theo giới tính
             if (!String.IsNullOrEmpty(gender))
@@ -49,8 +56,6 @@ namespace QuanLyKhachSan.Controllers
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
-            // Lấy giá trị của radio button
-            // Trả về view
             ViewData["TotalPages"] = totalPages;
             ViewData["CurrentPage"] = page;
             ViewData["searchText"] = khachHangs;
