@@ -75,7 +75,8 @@ namespace QuanLyKhachSan.Model
 
         public string DienThoai { get; set; }
 
-
+        [DisplayName("Email")]
+        public string Email { get; set; }
 
         [DisplayName("Địa Chỉ")]
         //[Required(ErrorMessage = "Địa chỉ là bắt buộc.")]

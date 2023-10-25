@@ -27,15 +27,15 @@ namespace QuanLyKhachSan.DataAcess.Data
                 new KhachHang { MaKhachHang = "KH0005", TenKhachHang = "Hồ Thị Mỹ", CCCD = "987654321", GioiTinh = "Nữ", NgaySinh = new DateTime(1985, 2, 2), DienThoai = "0938485966", DiaChi = "TP Hồ Chí Minh", GhiChu = "Không" }
             );
             modelBuilder.Entity<NhanVien>().HasData(
-       new NhanVien { MaNhanVien = "NV0001", TenNhanVien = "Nguyễn Văn A", CCCD = "123456789", GioiTinh = "Nam", NgaySinh = new DateTime(1980, 1, 1), ChucVu = "Quản lý", DienThoai = "0123456789", DiaChi = "Hà Nội", NgayVaoLam = new DateTime(2020, 1, 1), GhiChu = "Không" },
-       new NhanVien { MaNhanVien = "NV0002", TenNhanVien = "Trần Thị B", CCCD = "987654321", GioiTinh = "Nữ", NgaySinh = new DateTime(1985, 2, 2), ChucVu = "Nhân viên", DienThoai = "0987654321", DiaChi = "TP Hồ Chí Minh", NgayVaoLam = new DateTime(2021, 2, 2), GhiChu = "Không" },
-       new NhanVien { MaNhanVien = "NV0003", TenNhanVien = "Phạm Văn C", CCCD = "234567890", GioiTinh = "Nam", NgaySinh = new DateTime(1990, 3, 3), ChucVu = "Quản lý", DienThoai = "0234567890", DiaChi = "Đà Nẵng", NgayVaoLam = new DateTime(2022, 3, 3), GhiChu = "Không" },
-       new NhanVien { MaNhanVien = "NV0004", TenNhanVien = "Lê Thị D", CCCD = "345678901", GioiTinh = "Nữ", NgaySinh = new DateTime(1995, 4, 4), ChucVu = "Nhân viên", DienThoai = "0345678901", DiaChi = "Cần Thơ", NgayVaoLam = new DateTime(2023, 4, 4), GhiChu = "Không" },
-       new NhanVien { MaNhanVien = "NV0005", TenNhanVien = "Hoàng Văn E", CCCD = "456789012", GioiTinh = "Nam", NgaySinh = new DateTime(2000, 5, 5), ChucVu = "Quản lý", DienThoai = "0456789012", DiaChi = "Hải Phòng", NgayVaoLam = new DateTime(2024, 5, 5), GhiChu = "Không" }
+       new NhanVien { MaNhanVien = "NV0001", TenNhanVien = "Nguyễn Văn A", CCCD = "123456789", GioiTinh = "Nam", NgaySinh = new DateTime(1980, 1, 1), ChucVu = "Quản lý", DienThoai = "0123456789",Email="an123@gmail.com", DiaChi = "Hà Nội", NgayVaoLam = new DateTime(2020, 1, 1), GhiChu = "Không" },
+       new NhanVien { MaNhanVien = "NV0002", TenNhanVien = "Trần Thị B", CCCD = "987654321", GioiTinh = "Nữ", NgaySinh = new DateTime(1985, 2, 2), ChucVu = "Nhân viên", DienThoai = "0987654321", Email = "be123@gmail.com", DiaChi = "TP Hồ Chí Minh", NgayVaoLam = new DateTime(2021, 2, 2), GhiChu = "Không" },
+       new NhanVien { MaNhanVien = "NV0003", TenNhanVien = "Phạm Văn C", CCCD = "234567890", GioiTinh = "Nam", NgaySinh = new DateTime(1990, 3, 3), ChucVu = "Quản lý", DienThoai = "0234567890", Email = "quoc123a@gmail.com", DiaChi = "Đà Nẵng", NgayVaoLam = new DateTime(2022, 3, 3), GhiChu = "Không" },
+       new NhanVien { MaNhanVien = "NV0004", TenNhanVien = "Lê Thị D", CCCD = "345678901", GioiTinh = "Nữ", NgaySinh = new DateTime(1995, 4, 4), ChucVu = "Nhân viên", DienThoai = "0345678901", Email = "tung123@gmail.com", DiaChi = "Cần Thơ", NgayVaoLam = new DateTime(2023, 4, 4), GhiChu = "Không" },
+       new NhanVien { MaNhanVien = "NV0005", TenNhanVien = "Hoàng Văn E", CCCD = "456789012", GioiTinh = "Nam", NgaySinh = new DateTime(2000, 5, 5), ChucVu = "Quản lý", DienThoai = "0456789012", Email = "e2s3441@gmail.com", DiaChi = "Hải Phòng", NgayVaoLam = new DateTime(2024, 5, 5), GhiChu = "Không" }
    );
             modelBuilder.Entity<TaiKhoan>().HasData(
-     new TaiKhoan { TenDangNhap = "admin", MatKhau = "admin", Email = "admin@gmail.com" },
-     new TaiKhoan { TenDangNhap = "user", MatKhau = "user", Email = "user@gmail.com" }
+     new TaiKhoan { TenDangNhap = "admin", MatKhau = "admin", Email = "an123@gmail.com" },
+     new TaiKhoan { TenDangNhap = "user", MatKhau = "user", Email = "be123@gmail.com" }
  );
             modelBuilder.Entity<Room>().HasData(
        new Room { MaPhong = "101", KhuVuc = "A", HangPhong = "VIP", GiaTheoGio = 200000, GiaTheoQuaDem = 500000, GiaTheoNgay = 1000000, TrangThai = "Trống" },

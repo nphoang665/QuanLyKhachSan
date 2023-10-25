@@ -50,6 +50,11 @@
                 @Html.ValidationMessageFor(model => model.DienThoai, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
+                <label for="Email">Email</label>
+                <input asp-for="Email" class="form-control" />
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
                 <label for="DiaChi">Địa Chỉ</label>
                 <input asp-for="DiaChi" class="form-control" />
                 @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })

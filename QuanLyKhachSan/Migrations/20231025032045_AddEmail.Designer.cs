@@ -12,8 +12,8 @@ using QuanLyKhachSan.DataAcess.Data;
 namespace QuanLyKhachSan.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231024091141_AddtoDb")]
-    partial class AddtoDb
+    [Migration("20231025032045_AddEmail")]
+    partial class AddEmail
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,6 +86,22 @@ namespace QuanLyKhachSan.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("HinhThuc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaDatPhong")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaKhachHang")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaNhanVien")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaPhong")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -218,6 +234,10 @@ namespace QuanLyKhachSan.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("GhiChu")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -248,6 +268,7 @@ namespace QuanLyKhachSan.Migrations
                             ChucVu = "Quản lý",
                             DiaChi = "Hà Nội",
                             DienThoai = "0123456789",
+                            Email = "an123@gmail.com",
                             GhiChu = "Không",
                             GioiTinh = "Nam",
                             NgaySinh = new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -261,6 +282,7 @@ namespace QuanLyKhachSan.Migrations
                             ChucVu = "Nhân viên",
                             DiaChi = "TP Hồ Chí Minh",
                             DienThoai = "0987654321",
+                            Email = "be123@gmail.com",
                             GhiChu = "Không",
                             GioiTinh = "Nữ",
                             NgaySinh = new DateTime(1985, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -274,6 +296,7 @@ namespace QuanLyKhachSan.Migrations
                             ChucVu = "Quản lý",
                             DiaChi = "Đà Nẵng",
                             DienThoai = "0234567890",
+                            Email = "quoc123a@gmail.com",
                             GhiChu = "Không",
                             GioiTinh = "Nam",
                             NgaySinh = new DateTime(1990, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -287,6 +310,7 @@ namespace QuanLyKhachSan.Migrations
                             ChucVu = "Nhân viên",
                             DiaChi = "Cần Thơ",
                             DienThoai = "0345678901",
+                            Email = "tung123@gmail.com",
                             GhiChu = "Không",
                             GioiTinh = "Nữ",
                             NgaySinh = new DateTime(1995, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -300,6 +324,7 @@ namespace QuanLyKhachSan.Migrations
                             ChucVu = "Quản lý",
                             DiaChi = "Hải Phòng",
                             DienThoai = "0456789012",
+                            Email = "e2s3441@gmail.com",
                             GhiChu = "Không",
                             GioiTinh = "Nam",
                             NgaySinh = new DateTime(2000, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -522,13 +547,13 @@ namespace QuanLyKhachSan.Migrations
                         new
                         {
                             TenDangNhap = "admin",
-                            Email = "admin@gmail.com",
+                            Email = "an123@gmail.com",
                             MatKhau = "admin"
                         },
                         new
                         {
                             TenDangNhap = "user",
-                            Email = "user@gmail.com",
+                            Email = "be123@gmail.com",
                             MatKhau = "user"
                         });
                 });
