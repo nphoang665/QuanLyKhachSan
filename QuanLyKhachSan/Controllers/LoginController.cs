@@ -41,6 +41,7 @@ namespace QuanLyKhachSan.Controllers
             }
             else
             {
+                TempData["TenDangNhap"] = obj.TenDangNhap;
                 // Đăng nhập thành công, chuyển hướng đến trang chủ
                 return RedirectToAction("Index", "TongQuan");
             }

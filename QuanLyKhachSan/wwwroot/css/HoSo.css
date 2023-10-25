@@ -1,0 +1,403 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  margin: 0;
+}
+/* CSS cho màn hình điện thoại di động */
+@media (max-width: 1250px) {
+  .nav_account_manager {
+    display: none; /* Ẩn phần nav */
+  }
+
+  #full-information {
+    grid-column: 1 / span 2; /* Chiếm toàn bộ chiều rộng */
+    margin-left: 0;
+    width: 100%;
+    /* các kiểu khác */
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+#container {
+  height: auto;
+  width: 100%;
+  background-color: rgb(13, 13, 13);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  display: flex;
+  flex-direction: row;
+}
+
+.title-account-left {
+  color: rgb(235, 235, 235);
+  font-size: 41px;
+  line-height: 45px;
+}
+.nav_account_manager {
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 40px;
+  width: 30%;
+  margin-left: 10%;
+  margin-top: 10%;
+  position: fixed;
+}
+#full-information {
+  flex-grow: 1;
+
+  width: 70%;
+  margin-top: 5%;
+  margin-left: 30%;
+}
+li {
+  list-style: none;
+}
+.title_employeeId {
+  color: #b8b8b8;
+}
+.tieu-de-id {
+  font-size: 17px;
+  width: 90%;
+}
+#Employee_Id {
+  display: flex;
+}
+#Pesonal_Information {
+  display: flex;
+}
+#Hotel_Account {
+  display: flex;
+}
+#Connected_Account {
+  display: flex;
+}
+#Login_Management {
+  display: flex;
+}
+.title_employeeId {
+  width: 40%;
+  background-color: rgb(33, 30, 31);
+  height: 180px;
+  border-radius: 5px 0px 0px 5px;
+}
+.input_employeeId {
+  width: 50%;
+  background-color: rgb(41, 39, 39);
+  border-radius: 0px 5px 5px 0px;
+  position: relative;
+}
+#tieude_ac {
+  margin-top: 6%;
+  margin-left: 10%;
+}
+#Employee_Id:hover ~ .nav_account_manager li:first-child {
+  color: red;
+}
+.label_main {
+  font-size: 14px;
+  color: #b8b8b8;
+  font-family: serif;
+  font-weight: 700;
+  position: absolute;
+  top: 35px;
+  left: 13%;
+}
+#input_main {
+  height: 50px;
+  border: 0;
+  background-color: rgb(50, 49, 49);
+  width: 40%;
+  font-size: 20px;
+  color: white;
+  border-radius: 7px;
+  margin-top: 10%;
+  margin-left: 12%;
+  background-color: rgb(41, 39, 39);
+  border: 2px solid rgb(51, 49, 49);
+}
+.lbl_manhanvien {
+  left: 61%;
+}
+.title_Personal_Information {
+  width: 40%;
+  background-color: rgb(33, 30, 31);
+  height: 300px;
+  border-radius: 5px 0px 0px 5px;
+}
+#tieude_Personal_Information {
+  margin-top: 6%;
+  margin-left: 10%;
+}
+.input_Personal_Information {
+  width: 50%;
+  background-color: rgb(41, 39, 39);
+  border-radius: 0px 5px 5px 0px;
+  position: relative;
+}
+#ipt_manhanvien {
+  height: 50px;
+  border: 0;
+  background-color: rgb(50, 49, 49);
+  width: 30%;
+  font-size: 20px;
+  color: white;
+  border-radius: 7px;
+  top: -28%;
+  margin-left: 60%;
+  position: relative;
+  background-color: rgb(41, 39, 39);
+  border: 2px solid rgb(51, 49, 49);
+}
+#lbl_email {
+  position: absolute;
+  font-size: 17px;
+  color: #b8b8b8;
+  font-family: serif;
+  font-weight: 700;
+  position: absolute;
+  top: 10%;
+  left: 13%;
+}
+#Email_ipt {
+  height: 50px;
+  border: 0;
+  background-color: rgb(50, 49, 49);
+  width: 78%;
+  font-size: 20px;
+  color: white;
+  border-radius: 7px;
+  margin-top: 10%;
+  margin-left: 12%;
+}
+#lbl_country {
+  position: absolute;
+  font-size: 17px;
+  color: #b8b8b8;
+  font-family: serif;
+  font-weight: 700;
+  position: absolute;
+  top: 41%;
+  left: 13%;
+}
+#country_ipt {
+  height: 50px;
+  border: 0;
+  background-color: rgb(50, 49, 49);
+  width: 35%;
+  font-size: 20px;
+  color: white;
+  border-radius: 7px;
+  margin-top: 8%;
+  margin-left: 12%;
+  background-color: rgb(41, 39, 39);
+  border: 2px solid rgb(51, 49, 49);
+}
+#lbl_ngaysinh {
+  position: absolute;
+  font-size: 17px;
+  color: #b8b8b8;
+  font-family: serif;
+  font-weight: 700;
+  position: absolute;
+  top: 41%;
+  left: 56%;
+}
+#ngaysinh_ipt {
+  height: 50px;
+  border: 0;
+  background-color: rgb(50, 49, 49);
+  width: 35%;
+  font-size: 20px;
+  color: white;
+  border-radius: 7px;
+  margin-top: 8%;
+  margin-left: 7%;
+  background-color: rgb(41, 39, 39);
+  border: 2px solid rgb(51, 49, 49);
+}
+.btn-save-infor {
+  height: 40px;
+  width: 40%;
+  border-radius: 5px;
+  background-color: rgb(41, 39, 39);
+  border: 2px solid rgb(51, 49, 49);
+  color: rgb(63, 61, 61);
+  font-size: 16px;
+  font-weight: 700;
+  margin-left: 51%;
+  margin-top: 3%;
+}
+.title_Hotel_Account {
+  width: 40%;
+  background-color: rgb(33, 30, 31);
+  height: 580px;
+  border-radius: 5px 0px 0px 5px;
+}
+#lbl_username {
+  position: absolute;
+  font-size: 17px;
+  color: #b8b8b8;
+  font-family: serif;
+  font-weight: 700;
+  position: absolute;
+  top: 4%;
+  left: 13%;
+}
+#username_ipt {
+  height: 50px;
+  border: 0;
+  background-color: rgb(50, 49, 49);
+  width: 77%;
+  font-size: 20px;
+  color: white;
+  border-radius: 7px;
+  margin-top: 9%;
+  margin-left: 12%;
+  background-color: rgb(41, 39, 39);
+  border: 2px solid rgb(51, 49, 49);
+}
+.title-change-pwd {
+  margin-left: 12%;
+  color: #f0f0f0;
+  margin-top: 4%;
+}
+#lbl_current-pwd {
+  position: absolute;
+  font-size: 17px;
+  color: #b8b8b8;
+  font-family: serif;
+  font-weight: 700;
+  position: absolute;
+  top: 29%;
+  left: 13%;
+}
+#current-pwd_ipt {
+  height: 50px;
+  border: 0;
+  background-color: rgb(50, 49, 49);
+  width: 78%;
+  font-size: 20px;
+  color: white;
+  border-radius: 7px;
+  margin-top: 5%;
+  margin-left: 12%;
+}
+#lbl_new-pwd {
+  position: absolute;
+  font-size: 17px;
+  color: #b8b8b8;
+  font-family: serif;
+  font-weight: 700;
+  position: absolute;
+  top: 45%;
+  left: 13%;
+}
+#new-pwd_ipt {
+  height: 50px;
+  border: 0;
+  background-color: rgb(50, 49, 49);
+  width: 78%;
+  font-size: 20px;
+  color: white;
+  border-radius: 7px;
+  margin-top: 8%;
+  margin-left: 12%;
+}
+
+#lbl_confirm-new-pwd {
+  position: absolute;
+  font-size: 17px;
+  color: #b8b8b8;
+  font-family: serif;
+  font-weight: 700;
+  position: absolute;
+  top: 61%;
+  left: 13%;
+}
+#confirm-new-pwd_ipt {
+  height: 50px;
+  border: 0;
+  background-color: rgb(50, 49, 49);
+  width: 78%;
+  font-size: 20px;
+  color: white;
+  border-radius: 7px;
+  margin-top: 8%;
+  margin-left: 12%;
+}
+.btn-save-account {
+  height: 40px;
+  width: 40%;
+  border-radius: 5px;
+  background-color: rgb(41, 39, 39);
+  border: 2px solid rgb(51, 49, 49);
+  color: rgb(63, 61, 61);
+  font-size: 16px;
+  font-weight: 700;
+  margin-left: 50%;
+  margin-top: 9%;
+}
+#log-out {
+  width: 70%;
+  height: 25%;
+  border-radius: 5px;
+  margin-top: 14%;
+  margin-left: 16%;
+  font-size: 16px;
+  font-weight: 600;
+}
+.title_Connected_Account {
+  width: 40%;
+  background-color: rgb(33, 30, 31);
+  height: 300px;
+  border-radius: 5px 0px 0px 5px;
+}
+.social-sign-in {
+  color: #b8b8b8;
+  margin-top: 8%;
+  margin-left: 10%;
+}
+#facebook {
+  background-color: rgb(24, 119, 242);
+  height: 50px;
+  width: 38%;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  margin-top: 6%;
+  margin-left: 10%;
+  font-size: 20px;
+}
+#google {
+  background-color: rgb(299, 299, 299);
+  height: 50px;
+  width: 38%;
+  color: black;
+  border: 0;
+  border-radius: 5px;
+  margin-left: 2%;
+  font-size: 20px;
+}
+#apple {
+  background-color: rgb(0, 0, 0);
+  height: 50px;
+  width: 38%;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  margin-left: 10%;
+  margin-top: 3%;
+  font-size: 20px;
+}
+#xbox {
+  background-color: rgb(16, 124, 16);
+  height: 50px;
+  width: 38%;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  margin-left: 2%;
+  font-size: 20px;
+}
