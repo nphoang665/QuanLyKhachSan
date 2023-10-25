@@ -1,4 +1,6 @@
-﻿@{
+﻿@model QuanLyKhachSan.Model.NhanVien
+
+@{
     Layout = null;
 }
 
@@ -42,9 +44,10 @@
                 </div>
                 <div class="input_employeeId">
                     <label class="label_main">FULL NAME</label>
-                    <input type="text" id="input_main" readonly>
+                    <input type="text" id="input_main" asp-for="TenNhanVien" readonly>
+
                     <label class="label_main lbl_manhanvien">EMPLOYEE ID</label>
-                    <input type="text" id="ipt_manhanvien" readonly>
+                    <input type="text" id="ipt_manhanvien" readonly asp-for="MaNhanVien">
                 </div>
             </div>
             <br>
@@ -63,11 +66,11 @@
                 </div>
                 <div class="input_Personal_Information">
                     <label for="" id="lbl_email">EMAIL</label>
-                    <input type="email" name="" id="Email_ipt">
+                    <input type="email" name="" id="Email_ipt" asp-for="Email">
                     <label for="" id="lbl_country">COUNTRY/REGION</label>
-                    <input type="email" name="" id="country_ipt" readonly>
+                    <input type="email" name="" id="country_ipt" readonly value="VNM">
                     <label for="" id="lbl_ngaysinh">DATE OF BIRTH</label>
-                    <input type="email" name="" id="ngaysinh_ipt" readonly>
+                    <input type="email" name="" id="ngaysinh_ipt" readonly asp-for="NgaySinh">
                     <button class="btn-save-infor">SAVE AND VERIFY</button>
 
                 </div>
@@ -87,7 +90,8 @@
                 </div>
                 <div class="input_employeeId">
                     <label for="" id="lbl_username">USERNAME</label>
-                    <input type="email" name="" id="username_ipt" readonly>
+                    <input type="email" name="" id="username_ipt" readonly asp-for="@Context.Request.Cookies["Username"]
+">
                     <h2 class="title-change-pwd">Change Password</h2>
                     <label for="" id="lbl_current-pwd">CURRENT PASSWORD</label>
                     <input type="email" name="" id="current-pwd_ipt">

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 using QuanLyKhachSan.DataAcess.Data;
 using QuanLyKhachSan.Model;
 using System.Net;
@@ -25,7 +26,6 @@ namespace QuanLyKhachSan.Controllers
             if (obj.TenDangNhap == null)
             {
                 TempData["ErrorTenDangNhap"] = "Bạn chưa nhập tên đăng nhập";
-
             }
             if (obj.MatKhau == null)
             {
@@ -35,17 +35,29 @@ namespace QuanLyKhachSan.Controllers
             if (account == null)
             {
                 TempData["ErrorMatKhau"] = "Sai mật khẩu. Mời bạn nhập lại";
-
-
                 return View();
             }
             else
             {
-                TempData["TenDangNhap"] = obj.TenDangNhap;
+
+                var _QrEmail = _db.TaiKhoan.FirstOrDefault(s => s.TenDangNhap == obj.TenDangNhap);
+                TempData["Email"] = _QrEmail.Email;
+                string email = TempData.Peek("Email") as string; // Sử dụng Peek thay vì lấy giá trị
+                var qr_TenNhanVien = _db.NhanViens.FirstOrDefault(s => s.Email == email);
+
+                // Tạo cookie
+                var cookieOptions = new CookieOptions();
+                cookieOptions.Expires = DateTime.Now.AddDays(30); // Đặt thời hạn cho cookie
+                HttpContext.Response.Cookies.Append("TenNhanVien", qr_TenNhanVien.TenNhanVien, cookieOptions);
+                HttpContext.Response.Cookies.Append("MaNv", qr_TenNhanVien.MaNhanVien, cookieOptions);
+                HttpContext.Response.Cookies.Append("Username", obj.TenDangNhap, cookieOptions);
+
                 // Đăng nhập thành công, chuyển hướng đến trang chủ
                 return RedirectToAction("Index", "TongQuan");
             }
+
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
