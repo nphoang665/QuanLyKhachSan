@@ -96,13 +96,14 @@ li {
   color: red;
 }
 .label_main {
-  font-size: 14px;
-  color: #b8b8b8;
-  font-family: serif;
-  font-weight: 700;
-  position: absolute;
-  top: 35px;
-  left: 13%;
+    font-size: 14px;
+    color: #b8b8b8;
+    font-family: serif;
+    font-weight: 700;
+    position: absolute;
+    top: 35px;
+    left: 13%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 #input_main {
   height: 50px;
@@ -116,6 +117,7 @@ li {
   margin-left: 12%;
   background-color: rgb(41, 39, 39);
   border: 2px solid rgb(51, 49, 49);
+  padding:10px;
 }
 .lbl_manhanvien {
   left: 61%;
@@ -149,16 +151,18 @@ li {
   position: relative;
   background-color: rgb(41, 39, 39);
   border: 2px solid rgb(51, 49, 49);
+  padding:10px;
 }
 #lbl_email {
-  position: absolute;
-  font-size: 17px;
-  color: #b8b8b8;
-  font-family: serif;
-  font-weight: 700;
-  position: absolute;
-  top: 10%;
-  left: 13%;
+    position: absolute;
+    font-size: 17px;
+    color: #b8b8b8;
+    font-family: serif;
+    font-weight: 700;
+    position: absolute;
+    top: 10%;
+    left: 13%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 #Email_ipt {
   height: 50px;
@@ -170,52 +174,57 @@ li {
   border-radius: 7px;
   margin-top: 10%;
   margin-left: 12%;
+  padding:10px;
 }
 #lbl_country {
-  position: absolute;
-  font-size: 17px;
-  color: #b8b8b8;
-  font-family: serif;
-  font-weight: 700;
-  position: absolute;
-  top: 41%;
-  left: 13%;
+    position: absolute;
+    font-size: 17px;
+    color: #b8b8b8;
+    font-family: serif;
+    font-weight: 700;
+    position: absolute;
+    top: 41%;
+    left: 13%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 #country_ipt {
-  height: 50px;
-  border: 0;
-  background-color: rgb(50, 49, 49);
-  width: 35%;
-  font-size: 20px;
-  color: white;
-  border-radius: 7px;
-  margin-top: 8%;
-  margin-left: 12%;
-  background-color: rgb(41, 39, 39);
-  border: 2px solid rgb(51, 49, 49);
+    height: 50px;
+    border: 0;
+    background-color: rgb(50, 49, 49);
+    width: 35%;
+    font-size: 20px;
+    color: white;
+    border-radius: 7px;
+    margin-top: 8%;
+    margin-left: 12%;
+    background-color: rgb(41, 39, 39);
+    border: 2px solid rgb(51, 49, 49);
+    padding: 10px;
 }
 #lbl_ngaysinh {
-  position: absolute;
-  font-size: 17px;
-  color: #b8b8b8;
-  font-family: serif;
-  font-weight: 700;
-  position: absolute;
-  top: 41%;
-  left: 56%;
+    position: absolute;
+    font-size: 17px;
+    color: #b8b8b8;
+    font-family: serif;
+    font-weight: 700;
+    position: absolute;
+    top: 41%;
+    left: 56%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 #ngaysinh_ipt {
-  height: 50px;
-  border: 0;
-  background-color: rgb(50, 49, 49);
-  width: 35%;
-  font-size: 20px;
-  color: white;
-  border-radius: 7px;
-  margin-top: 8%;
-  margin-left: 7%;
-  background-color: rgb(41, 39, 39);
-  border: 2px solid rgb(51, 49, 49);
+    height: 50px;
+    border: 0;
+    background-color: rgb(50, 49, 49);
+    width: 35%;
+    font-size: 20px;
+    color: white;
+    border-radius: 7px;
+    margin-top: 8%;
+    margin-left: 7%;
+    background-color: rgb(41, 39, 39);
+    border: 2px solid rgb(51, 49, 49);
+    padding: 10px;
 }
 .btn-save-infor {
   height: 40px;
@@ -236,96 +245,106 @@ li {
   border-radius: 5px 0px 0px 5px;
 }
 #lbl_username {
-  position: absolute;
-  font-size: 17px;
-  color: #b8b8b8;
-  font-family: serif;
-  font-weight: 700;
-  position: absolute;
-  top: 4%;
-  left: 13%;
+    position: absolute;
+    font-size: 17px;
+    color: #b8b8b8;
+    font-family: serif;
+    font-weight: 700;
+    position: absolute;
+    top: 4%;
+    left: 13%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 #username_ipt {
-  height: 50px;
-  border: 0;
-  background-color: rgb(50, 49, 49);
-  width: 77%;
-  font-size: 20px;
-  color: white;
-  border-radius: 7px;
-  margin-top: 9%;
-  margin-left: 12%;
-  background-color: rgb(41, 39, 39);
-  border: 2px solid rgb(51, 49, 49);
+    height: 50px;
+    border: 0;
+    background-color: rgb(50, 49, 49);
+    width: 77%;
+    font-size: 20px;
+    color: white;
+    border-radius: 7px;
+    margin-top: 9%;
+    margin-left: 12%;
+    background-color: rgb(41, 39, 39);
+    border: 2px solid rgb(51, 49, 49);
+    padding: 10px;
 }
 .title-change-pwd {
-  margin-left: 12%;
-  color: #f0f0f0;
-  margin-top: 4%;
+    margin-left: 12%;
+    color: #f0f0f0;
+    margin-top: 4%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 #lbl_current-pwd {
-  position: absolute;
-  font-size: 17px;
-  color: #b8b8b8;
-  font-family: serif;
-  font-weight: 700;
-  position: absolute;
-  top: 29%;
-  left: 13%;
+    position: absolute;
+    font-size: 17px;
+    color: #b8b8b8;
+    font-family: serif;
+    font-weight: 700;
+    position: absolute;
+    top: 29%;
+    left: 13%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 #current-pwd_ipt {
-  height: 50px;
-  border: 0;
-  background-color: rgb(50, 49, 49);
-  width: 78%;
-  font-size: 20px;
-  color: white;
-  border-radius: 7px;
-  margin-top: 5%;
-  margin-left: 12%;
+    height: 50px;
+    border: 0;
+    background-color: rgb(50, 49, 49);
+    width: 78%;
+    font-size: 20px;
+    color: white;
+    border-radius: 7px;
+    margin-top: 5%;
+    margin-left: 12%;
+    padding: 10px;
+
 }
 #lbl_new-pwd {
-  position: absolute;
-  font-size: 17px;
-  color: #b8b8b8;
-  font-family: serif;
-  font-weight: 700;
-  position: absolute;
-  top: 45%;
-  left: 13%;
+    position: absolute;
+    font-size: 17px;
+    color: #b8b8b8;
+    font-family: serif;
+    font-weight: 700;
+    position: absolute;
+    top: 45%;
+    left: 13%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 #new-pwd_ipt {
-  height: 50px;
-  border: 0;
-  background-color: rgb(50, 49, 49);
-  width: 78%;
-  font-size: 20px;
-  color: white;
-  border-radius: 7px;
-  margin-top: 8%;
-  margin-left: 12%;
+    height: 50px;
+    border: 0;
+    background-color: rgb(50, 49, 49);
+    width: 78%;
+    font-size: 20px;
+    color: white;
+    border-radius: 7px;
+    margin-top: 8%;
+    margin-left: 12%;
+    padding: 10px;
 }
 
 #lbl_confirm-new-pwd {
-  position: absolute;
-  font-size: 17px;
-  color: #b8b8b8;
-  font-family: serif;
-  font-weight: 700;
-  position: absolute;
-  top: 61%;
-  left: 13%;
+    position: absolute;
+    font-size: 17px;
+    color: #b8b8b8;
+    font-family: serif;
+    font-weight: 700;
+    position: absolute;
+    top: 61%;
+    left: 13%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 #confirm-new-pwd_ipt {
-  height: 50px;
-  border: 0;
-  background-color: rgb(50, 49, 49);
-  width: 78%;
-  font-size: 20px;
-  color: white;
-  border-radius: 7px;
-  margin-top: 8%;
-  margin-left: 12%;
+    height: 50px;
+    border: 0;
+    background-color: rgb(50, 49, 49);
+    width: 78%;
+    font-size: 20px;
+    color: white;
+    border-radius: 7px;
+    margin-top: 8%;
+    margin-left: 12%;
+    padding: 10px;
 }
 .btn-save-account {
   height: 40px;
@@ -349,15 +368,17 @@ li {
   font-weight: 600;
 }
 .title_Connected_Account {
-  width: 40%;
-  background-color: rgb(33, 30, 31);
-  height: 300px;
-  border-radius: 5px 0px 0px 5px;
+    width: 40%;
+    background-color: rgb(33, 30, 31);
+    height: 300px;
+    border-radius: 5px 0px 0px 5px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 .social-sign-in {
-  color: #b8b8b8;
-  margin-top: 8%;
-  margin-left: 10%;
+    color: #b8b8b8;
+    margin-top: 8%;
+    margin-left: 10%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 #facebook {
   background-color: rgb(24, 119, 242);
