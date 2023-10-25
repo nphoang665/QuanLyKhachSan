@@ -32,6 +32,7 @@
             </ul>
         </nav>
         <section id="full-information">
+            <form method="post">
             <div id="Employee_Id">
                 <div class="title_employeeId">
                     <div id="tieude_ac">
@@ -47,11 +48,12 @@
                     <input type="text" id="input_main" asp-for="TenNhanVien" readonly>
 
                     <label class="label_main lbl_manhanvien">EMPLOYEE ID</label>
-                    <input type="text" id="ipt_manhanvien" readonly asp-for="MaNhanVien">
+                    <input type="text" id="ipt_manhanvien" readonly asp-for="MaNhanVien" name="manhanvien">
                 </div>
             </div>
             <br>
             <br>
+           
             <div id="Pesonal_Information">
                 <div class="title_Personal_Information">
                     <div id="tieude_Personal_Information">
@@ -66,12 +68,12 @@
                 </div>
                 <div class="input_Personal_Information">
                     <label for="" id="lbl_email">EMAIL</label>
-                    <input type="email" name="" id="Email_ipt" asp-for="Email">
+                    <input type="email" name="" id="Email_ipt" asp-for="Email" name="email">
                     <label for="" id="lbl_country">COUNTRY/REGION</label>
                     <input type="email" name="" id="country_ipt" readonly value="VNM">
                     <label for="" id="lbl_ngaysinh">DATE OF BIRTH</label>
                     <input type="email" name="" id="ngaysinh_ipt" readonly asp-for="NgaySinh">
-                    <button class="btn-save-infor">SAVE AND VERIFY</button>
+                    <button class="btn-save-infor" asp-action="LuuEmailMoi" asp-controller="HoSo" >SAVE AND VERIFY</button>
 
                 </div>
             </div>
@@ -90,19 +92,18 @@
                 </div>
                 <div class="input_employeeId">
                     <label for="" id="lbl_username">USERNAME</label>
-                    <input type="email" name="" id="username_ipt" readonly asp-for="@Context.Request.Cookies["Username"]
-">
+                    <input name="tendangnhap"  id="username_ipt" readonly asp-for="@Context.Request.Cookies["Username"]">
                     <h2 class="title-change-pwd">Change Password</h2>
                     <label for="" id="lbl_current-pwd">CURRENT PASSWORD</label>
-                    <input type="email" name="" id="current-pwd_ipt">
+                    <input  name="mkHienTai" id="current-pwd_ipt">
                     <label for="" id="lbl_new-pwd">NEW PASSWORD</label>
-                    <input type="email" name="" id="new-pwd_ipt">
+                    <input  name="mkMoi" id="new-pwd_ipt">
                     <label for="" id="lbl_confirm-new-pwd">CONFIRM NEW PASSWORD</label>
-                    <input type="email" name="" id="confirm-new-pwd_ipt">
-                    <button class="btn-save-account">SAVE CHANGES</button>
-
+                    <input  name="xacThucMkMoi" id="confirm-new-pwd_ipt">
+                        <button class="btn-save-account" asp-action="DoiMatKhauHoSo" asp-controller="HoSo">SAVE CHANGES</button>
                 </div>
             </div>
+            </form>
             <br>
             <br>
             <div id="Connected_Account">
@@ -139,7 +140,7 @@
                 </div>
                 <div class="input_employeeId">
 
-                    <button id="log-out">LOG OUT EVERYWHERE</button>
+                    <button id="log-out" >LOG OUT EVERYWHERE</button>
                 </div>
             </div>
         </section>

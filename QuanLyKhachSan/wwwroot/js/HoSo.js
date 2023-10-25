@@ -13,6 +13,7 @@ sections.forEach(function (sectionId, index) {
     });
 });
 document.getElementById('Email_ipt').addEventListener('input', function (e) {
+    
     var originalEmail = 'nhutbmt123321@gmail.com';
     var currentEmail = e.target.value;
     var saveButton = document.querySelector('.btn-save-infor');
@@ -69,3 +70,6 @@ for (var i = 0; i < inputIds.length; i++) {
     });
 }
 
+document.getElementById('log-out').addEventListener('click', function () {
+    window.location.href = '/Login/Index';
+});
