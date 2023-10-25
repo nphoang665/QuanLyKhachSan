@@ -44,12 +44,15 @@
                 <div class="dataTables_length" id="example_length">
                     <label>
                         Show:&nbsp;
-                        <select name="example_length" aria-controls="example" class="form-control d-inline">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
+                        <form id="formExample" asp-controller="QuanLyPhong" asp-action="Index" method="get">
+                            <select name="example_length" aria-controls="example" class="form-control d-inline">
+                                <option value="10" selected="@(ViewBag.NumberOfColumnsToShow == 10)">10</option>
+                                <option value="25" selected="@(ViewBag.NumberOfColumnsToShow == 25)">25</option>
+                                <option value="50" selected="@(ViewBag.NumberOfColumnsToShow == 50)">50</option>
+                                <option value="100" selected="@(ViewBag.NumberOfColumnsToShow == 100)">100</option>
+                            </select>
+
+                        </form>
                     </label>
                 </div>
             </div>
@@ -160,3 +163,21 @@
                 </li>
             </ul>
         </nav>
+
+
+<script>
+    $(document).ready(function () {
+        $("#searchInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("table tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+        });
+
+        // Bắt sự kiện thay đổi giá trị trong dropdown "Show"
+        $('select[name="example_length"]').on('change', function () {
+            var selectedValue = $(this).val();
+            $('#formExample').submit(); // Gửi biểu mẫu khi giá trị thay đổi
+        });
+    });
+</script>

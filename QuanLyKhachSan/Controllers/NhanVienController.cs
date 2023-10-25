@@ -18,7 +18,13 @@ namespace QuanLyKhachSan.Controllers
         }
         public async Task<IActionResult> Index(string searchText, string gender, string ChucVu, int page = 1)
         {
-            int pageSize = 7;
+            int? numberOfColumnsToShow = null;
+            if (Request.Query.ContainsKey("example_length"))
+            {
+                numberOfColumnsToShow = Convert.ToInt32(Request.Query["example_length"]);
+            }
+            ViewBag.NumberOfColumnsToShow = numberOfColumnsToShow;
+            int pageSize = numberOfColumnsToShow ?? 10;
             int totalKhachHangs = await _db.NhanViens.CountAsync();
             int totalPages = (int)Math.Ceiling((double)totalKhachHangs / pageSize);
 
