@@ -41,7 +41,10 @@
     <div class="col-md-6">
             <div class="form-group">
                 <label for="ChucVu">Chức Vụ</label>
-                <input asp-for="ChucVu" class="form-control" />
+                <select asp-for="ChucVu" class="form-control">
+                    <option value="Quản Lý">Quản Lý</option>
+                    <option value="Nhân Viên">Nhân Viên</option>
+                </select>
                 @Html.ValidationMessageFor(model => model.ChucVu, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">

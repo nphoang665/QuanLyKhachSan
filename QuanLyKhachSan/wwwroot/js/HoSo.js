@@ -73,3 +73,6 @@ for (var i = 0; i < inputIds.length; i++) {
 document.getElementById('log-out').addEventListener('click', function () {
     window.location.href = '/Login/Index';
 });
+document.getElementById('back-TongQuan').addEventListener('click', function () {
+    window.location.href = '/TongQuan/Index';
+});

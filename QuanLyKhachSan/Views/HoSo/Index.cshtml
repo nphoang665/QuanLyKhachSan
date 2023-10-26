@@ -19,6 +19,7 @@
 </head>
 
 <body>
+  
     <div id="container">
         <nav class="nav_account_manager">
             <h1 class="title-account-left" style="width: 100px;">Account Management</h1>
@@ -31,7 +32,11 @@
                 <li><i class="fa fa-user" aria-hidden="true"></i> LOGIN MANAGEMENT</li>
             </ul>
         </nav>
+       
         <section id="full-information">
+            <button id="back-TongQuan">
+                Return To DashBoard
+            </button>
             <form method="post">
             <div id="Employee_Id">
                 <div class="title_employeeId">
@@ -69,6 +74,8 @@
                 <div class="input_Personal_Information">
                     <label for="" id="lbl_email">EMAIL</label>
                     <input type="email" name="" id="Email_ipt" asp-for="Email" name="email">
+
+                   <label>ok</label>
                     <label for="" id="lbl_country">COUNTRY/REGION</label>
                     <input type="email" name="" id="country_ipt" readonly value="VNM">
                     <label for="" id="lbl_ngaysinh">DATE OF BIRTH</label>
@@ -119,10 +126,10 @@
                 </div>
                 <div class="input_employeeId">
                     <p class="social-sign-in">SOCIAL SIGN-IN</p>
-                    <button id="facebook"><i class="bi bi-facebook" id="icon_sign-in"></i> Facebook</button>
-                    <button id="google"><i class="bi bi-google" id="icon_sign-in"></i> Google</button>
-                    <button id="apple"><i class="bi bi-apple" id="icon_sign-in"></i> Apple</button>
-                    <button id="xbox"><i class="bi bi-xbox" style="color: white;" id="icon_sign-in"></i> Xbox</button>
+                    <button id="facebook"><i class="bi bi-facebook" id="icon_sign-in"></i> Facebook    <i class="bi bi-plus-lg"></i></button>
+                    <button id="google"><i class="bi bi-google" id="icon_sign-in"></i> Google    <i class="bi bi-plus-lg"></i></button>
+                    <button id="apple"><i class="bi bi-apple" id="icon_sign-in"></i> Apple     <i class="bi bi-plus-lg"></i></button>
+                    <button id="xbox"><i class="bi bi-xbox" style="color: white;" id="icon_sign-in"></i> Xbox   <i class="bi bi-plus-lg"></i></button>
 
                 </div>
             </div>

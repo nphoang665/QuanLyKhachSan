@@ -64,10 +64,6 @@ namespace QuanLyKhachSan.Controllers
             return View(paginatedKhachHangs);
 
         }
-
-
-
-
         [HttpGet]
         public IActionResult ThemKhachHang()
         {
