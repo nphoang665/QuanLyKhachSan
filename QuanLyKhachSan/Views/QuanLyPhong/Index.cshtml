@@ -70,7 +70,13 @@
                     <th class="text-center">Giá qua đêm</th>
                     <th class="text-center">Giá theo Ngày</th>
                     <th class="text-center">Trạng thái</th>
-                    <th class="text-center" width="70px">Sửa</th>
+                        @{
+                            if (Context.Request.Cookies["ChucVu"] == "Quản lý")
+                            {
+                                <th class="text-center" width="70px">Sửa</th>
+                            }
+                        }
+                    
                 </tr>
             </thead>
             <tbody>
@@ -84,9 +90,12 @@
                         <td>@phong.GiaTheoQuaDem</td>
                         <td>@phong.GiaTheoNgay</td>
                         <td>@phong.TrangThai</td>
-
+                          @{
+                            if (Context.Request.Cookies["ChucVu"] == "Quản lý")
+                            {
                         <td><a type="button" class="btn btn-primary editButton" asp-action="SuaPhong" asp-route-id="@phong.MaPhong"><i class="bi bi-pencil"></i></a></td>
-
+                            }
+                            }
 
                     </tr>
                 }

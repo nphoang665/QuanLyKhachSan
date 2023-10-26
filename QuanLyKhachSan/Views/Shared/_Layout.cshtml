@@ -16,7 +16,6 @@
 <body>
     <header>
         <div id="wrapper">
-
             <!-- Sidebar -->
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -32,34 +31,67 @@
                 <hr class="sidebar-divider my-0">
 
                 <!-- Nav Item - Tổng quan -->
-                <li class="nav-item active" style="font-size:1.5em;">
-                    <a class="nav-link" asp-area="" asp-action="Index" asp-controller="TongQuan">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Tổng quan</span>
-                    </a>
-                    <a class="nav-link" asp-area="" asp-controller="QuanLyPhong" asp-action="Index">
-                        <i class="fas fa-solid fa-bed"></i>
-                        <span>Phòng</span>
-                    </a>
-                    <a class="nav-link" asp-area="" asp-controller="KhachHang" asp-action="Index">
-                        @* <i class="fas fa-fw fa-tachometer-alt"></i> *@
-                        <i class="fas fa-regular fa-user"></i>
-                        <span>Khách hàng</span>
-                    </a>
-                    <a class="nav-link" asp-area="" asp-controller="NhanVien" asp-action="Index">
-                        @* <i class="fas fa-fw fa-tachometer-alt"></i> *@
-                        <i class="fas fa-solid fa-user-pen"></i>
-                        <span>Nhân viên</span>
-                    </a>
-                    <a class="nav-link" asp-area="" asp-controller="Phong" asp-action="Index">
-                        <i class="fas fa-solid fa-house-user"></i>
-                        <span>Lễ tân</span>
-                    </a>
-                    <a class="nav-link" asp-area="" asp-controller="Login" asp-action="Index">
-                        <i class="fas fa-solid fa-arrow-right-from-bracket"></i>
-                        <span>Đăng xuất</span>
-                    </a>
-                </li>
+                @{
+                    if (Context.Request.Cookies["ChucVu"]=="Quản lý")
+                    {
+                        <li class="nav-item active" style="font-size:1.5em;">
+                            <a class="nav-link" asp-area="" asp-action="Index" asp-controller="TongQuan">
+                                <i class="fas fa-fw fa-tachometer-alt"></i>
+                                <span>Tổng quan</span>
+                            </a>
+                            <a class="nav-link" asp-area="" asp-controller="QuanLyPhong" asp-action="Index">
+                                <i class="fas fa-solid fa-bed"></i>
+                                <span>Phòng</span>
+                            </a>
+                            <a class="nav-link" asp-area="" asp-controller="KhachHang" asp-action="Index">
+                                @* <i class="fas fa-fw fa-tachometer-alt"></i> *@
+                                <i class="fas fa-regular fa-user"></i>
+                                <span>Khách hàng</span>
+                            </a>
+                            <a class="nav-link" asp-area="" asp-controller="NhanVien" asp-action="Index">
+                                @* <i class="fas fa-fw fa-tachometer-alt"></i> *@
+                                <i class="fas fa-solid fa-user-pen"></i>
+                                <span>Nhân viên</span>
+                            </a>
+                            <a class="nav-link" asp-area="" asp-controller="Phong" asp-action="Index">
+                                <i class="fas fa-solid fa-house-user"></i>
+                                <span>Lễ tân</span>
+                            </a>
+                            <a class="nav-link" asp-area="" asp-controller="Login" asp-action="Index">
+                                <i class="fas fa-solid fa-arrow-right-from-bracket"></i>
+                                <span>Đăng xuất</span>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item active" style="font-size:1.5em;">
+                            <a class="nav-link" asp-area="" asp-action="Index" asp-controller="TongQuan">
+                                <i class="fas fa-fw fa-tachometer-alt"></i>
+                                <span>Tổng quan</span>
+                            </a>
+                            <a class="nav-link" asp-area="" asp-controller="QuanLyPhong" asp-action="Index">
+                                <i class="fas fa-solid fa-bed"></i>
+                                <span>Phòng</span>
+                            </a>
+                            <a class="nav-link" asp-area="" asp-controller="KhachHang" asp-action="Index">
+                                @* <i class="fas fa-fw fa-tachometer-alt"></i> *@
+                                <i class="fas fa-regular fa-user"></i>
+                                <span>Khách hàng</span>
+                            </a>
+                          
+                            <a class="nav-link" asp-area="" asp-controller="Phong" asp-action="Index">
+                                <i class="fas fa-solid fa-house-user"></i>
+                                <span>Lễ tân</span>
+                            </a>
+                            <a class="nav-link" asp-area="" asp-controller="Login" asp-action="Index">
+                                <i class="fas fa-solid fa-arrow-right-from-bracket"></i>
+                                <span>Đăng xuất</span>
+                            </a>
+                        </li>
+                    }
+                }
+               
             </ul>
             <div id="content-wrapper" class="d-flex flex-column">
                 <!-- Main Content -->

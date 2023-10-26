@@ -51,7 +51,7 @@ namespace QuanLyKhachSan.Controllers
                 HttpContext.Response.Cookies.Append("TenNhanVien", qr_TenNhanVien.TenNhanVien, cookieOptions);
                 HttpContext.Response.Cookies.Append("MaNv", qr_TenNhanVien.MaNhanVien, cookieOptions);
                 HttpContext.Response.Cookies.Append("Username", obj.TenDangNhap, cookieOptions);
-
+                HttpContext.Response.Cookies.Append("ChucVu", qr_TenNhanVien.ChucVu, cookieOptions);
                 // Đăng nhập thành công, chuyển hướng đến trang chủ
                 return RedirectToAction("Index", "TongQuan");
             }

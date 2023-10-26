@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using QuanLyKhachSan.DataAcess.Data;
 
 namespace QuanLyKhachSan.Controllers
 {
+    
     public class HoSoController : Controller
     {
         private readonly ApplicationDbContext _db;
