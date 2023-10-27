@@ -97,11 +97,12 @@
                 </div>
                 <div class="mt-4 text-center small">
                     <span class="mr-2">
-                        <i class="fas fa-circle text-primary"></i> Phòng trống
+                        <i class="fas fa-circle text-primary"></i>Phòng trống(<span id="phongTrong"></span>)
                     </span>
                     <span class="mr-2">
-                        <i class="fas fa-circle text-success"></i> Đang thuê
+                        <i class="fas fa-circle text-success"></i> Đang thuê(<span id="phongDaDat"></span>)
                     </span>
+
                 </div>
             </div>
         </div>
@@ -115,24 +116,49 @@
 <script>
     // Tạo dữ liệu mẫu cho biểu đồ Area
 
-    $.ajax({
-        url: '/TongQuan/LayDoanhThuTheoThang', // Thay 'ControllerName' bằng tên controller của bạn
-        type: 'GET',
-        dataType: 'json',
-        success: function (data) {
-            var labels = data.map(function (item) {
-                return item.Thang;
-            });
-            console.log(labels)
-            var revenue = data.map(function (item) {
-                return item.DoanhThu;
-            });
+    // var areaChartData = {
+    //     labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6','Tháng 7', 'Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'],
+    //     datasets: [{
+    //         label: 'Tổng thu nhập',
+    //         data: [1000, 1500, 1200, 1700, 2000, 1200, 1000, 1500, 1200, 1700, 2000, 1200],
+    //         backgroundColor: 'rgba(75, 192, 192, 0.2)',
+    //         borderColor: 'rgba(75, 192, 192, 1)',
+    //         borderWidth: 1
+    //     }]
+    // };
+    // var areaChartCanvas = document.getElementById('myAreaChart').getContext('2d');
+    // var areaChart = new Chart(areaChartCanvas, {
+    //     type: 'line',
+    //     data: areaChartData,
+    //     options: {
+    //         scales: {
+    //             x: {
+    //                 beginAtZero: true
+    //             },
+    //             y: {
+    //                 beginAtZero: true
+    //             }
+    //         }
+    //     }
+    // });
 
+    fetch('/TongQuan/LayDoanhThuTheoThang')
+        .then(response => response.json())
+        .then(doanhThuTheoThang => {
+            // Tạo một mảng để lưu trữ tổng thu nhập cho mỗi tháng
+            var tongThuNhap = new Array(12).fill(0);
+            for (var i = 0; i < doanhThuTheoThang.length; i++) {
+                // Lưu ý rằng chỉ số của mảng bắt đầu từ 0
+                tongThuNhap[i] = doanhThuTheoThang[i];
+                console.log(i);
+                console.log(tongThuNhap[i]);
+            }
+            // Bây giờ bạn có thể sử dụng tongThuNhap cho dữ liệu của biểu đồ
             var areaChartData = {
-                labels: labels,
+                labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
                 datasets: [{
                     label: 'Tổng thu nhập',
-                    data: revenue,
+                    data: tongThuNhap,
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
@@ -154,12 +180,11 @@
                     }
                 }
             });
-        },
-        error: function (error) {
-            console.log('Có lỗi xảy ra:', error);
-        }
-    });
-    
+        });
+
+
+
+
     var PhongTrong, phongDaDat;
 
     $.ajax({
@@ -167,9 +192,12 @@
         type: 'POST',
         dataType: 'json',
         success: function (data) {
-            PhongTrong = parseInt(data.phongTrong);
-            phongDaDat = parseInt(data.phongDaDat);
-            console.log('Phòng Trống: ' + PhongTrong + ', Phòng đã đặt: ' + phongDaDat);
+            var PhongTrong = parseInt(data.phongTrong);
+            var phongDaDat = parseInt(data.phongDaDat);
+
+            // Cập nhật các phần tử HTML với dữ liệu mới
+            document.getElementById('phongTrong').innerText = PhongTrong;
+            document.getElementById('phongDaDat').innerText = phongDaDat;
 
             // Tạo dữ liệu cho biểu đồ Pie
             var pieChartData = {

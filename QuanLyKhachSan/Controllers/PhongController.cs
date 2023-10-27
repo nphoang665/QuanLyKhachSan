@@ -26,90 +26,85 @@ namespace QuanLyKhachSan.Controllers
 			return View();
 		}
 		[HttpPost]
-		public async Task<IActionResult> NhanPhong(string MaDatPhong, string Phong, string MaKhachHang, string HinhThuc, int GiaPhong, DateTime? NgayNhan, DateTime? NgayTra, string DuKien, float ThanhTien, string MaNhanVien,float khachTra)
-		{
-		
-			var MadatPhongExist = _db.DatPhongs.FirstOrDefault(s => s.MaDatPhong == MaDatPhong);
-			if (string.IsNullOrEmpty(MaDatPhong))
-			{
-				return Json(new { success = false, message = "Mã đặt phòng không được để trống." });
-			}
-			if(MadatPhongExist != null)
-			{
-				return Json(new { success = false, message = "Mã đặt phòng đã tồn tại." });
-			}
-			if (MaDatPhong.Length != 6)
-			{
-				return Json(new { success = false, message = "Mã đặt phòng phải là 6 kí tự." });
-			}
-			// Kiểm tra ngày nhận
-			if (NgayNhan == null)
-			{
-				return Json(new { success = false, message = "Ngày nhận không được để trống." });
-			}
+        public async Task<IActionResult> NhanPhong(string MaDatPhong, string Phong, string MaKhachHang, string HinhThuc, int GiaPhong, DateTime? NgayNhan, DateTime? NgayTra, string DuKien, float ThanhTien, string MaNhanVien, float khachTra)
+        {
+            var MadatPhongExist = _db.DatPhongs.FirstOrDefault(s => s.MaDatPhong == MaDatPhong);
+            if (string.IsNullOrEmpty(MaDatPhong))
+            {
+                return Json(new { success = false, message = "Mã đặt phòng không được để trống." });
+            }
+            if (MadatPhongExist != null)
+            {
+                return Json(new { success = false, message = "Mã đặt phòng đã tồn tại." });
+            }
+            if (MaDatPhong.Length != 6)
+            {
+                return Json(new { success = false, message = "Mã đặt phòng phải là 6 kí tự." });
+            }
+            if (NgayNhan == null)
+            {
+                return Json(new { success = false, message = "Ngày nhận không được để trống." });
+            }
+            if (NgayTra == null)
+            {
+                return Json(new { success = false, message = "Ngày trả không được để trống." });
+            }
+            if (NgayTra < NgayNhan)
+            {
+                return Json(new { success = false, message = "Lỗi. Ngày trả phòng không được nhỏ hơn ngày nhận phòng." });
+            }
+            if (NgayNhan.Value.Date < DateTime.Today)
+            {
+                return Json(new { success = false, message = "Ngày đặt không được nhỏ hơn ngày hôm nay." });
+            }
 
-			// Kiểm tra ngày trả
-			if (NgayTra == null)
-			{
-				return Json(new { success = false, message = "Ngày trả không được để trống." });
-			}
-			if (NgayTra < NgayNhan)
-			{
-				return Json(new { success = false, message = "Lỗi. Ngày trả phòng không được nhỏ hơn ngày nhận phòng." });
-			}
+            if (ModelState.IsValid)
+            {
+                var nhanphong = new DatPhong();
+                nhanphong.MaDatPhong = MaDatPhong;
+                nhanphong.MaPhong = Phong;
+                nhanphong.MaNhanVien = MaNhanVien;
+                nhanphong.MaKhachHang = MaKhachHang;
+                nhanphong.HinhThuc = HinhThuc;
+                nhanphong.GiaPhong = GiaPhong;
 
-			// Kiểm tra ngày đặt
-			if (NgayNhan.Value.Date < DateTime.Today)
-			{
-				return Json(new { success = false, message = "Ngày đặt không được nhỏ hơn ngày hôm nay." });
-			}
+                if (NgayNhan.HasValue)
+                {
+                    nhanphong.NgayNhan = NgayNhan.Value;
+                }
 
-			if (ModelState.IsValid)
-			{
-				var nhanphong = new DatPhong();
-				nhanphong.MaDatPhong = MaDatPhong;
-				nhanphong.MaPhong = Phong;
-				nhanphong.MaNhanVien = MaNhanVien;
-				nhanphong.MaKhachHang = MaKhachHang;
-				nhanphong.HinhThuc = HinhThuc;
-				nhanphong.GiaPhong = GiaPhong;
+                if (NgayTra.HasValue)
+                {
+                    nhanphong.NgayTra = NgayTra.Value;
+                }
 
-				if (NgayNhan.HasValue)
-				{
-					nhanphong.NgayNhan = NgayNhan.Value;
-				}
+                nhanphong.DuKien = DuKien;
+                nhanphong.ThanhTien = ThanhTien;
 
-				if (NgayTra.HasValue)
-				{
-					nhanphong.NgayTra = NgayTra.Value;
-				}
+                _db.DatPhongs.Add(nhanphong);
+                await _db.SaveChangesAsync();
 
-				nhanphong.DuKien = DuKien;
-				nhanphong.ThanhTien = ThanhTien;
+                var phongDaDat = _db.Phong.FirstOrDefault(s => s.MaPhong == Phong);
+                phongDaDat.TrangThai = "Đang sử dụng";
+                await _db.SaveChangesAsync();
 
-				_db.DatPhongs.Add(nhanphong);
-			await _db.SaveChangesAsync();
+                float tongtienkhachdatra = ThanhTien - khachTra;
+                var tinhTienKhachHangTra = _db.DatPhongs.FirstOrDefault(s => s.MaDatPhong == MaDatPhong);
+                tinhTienKhachHangTra.ThanhTien = tongtienkhachdatra;
 
-				var phongDaDat = _db.Phong.FirstOrDefault(s => s.MaPhong == Phong);
-				phongDaDat.TrangThai = "Đang sử dụng";
-			await _db.SaveChangesAsync();
-				float tongtienkhachdatra = ThanhTien - khachTra;
-				var tinhTienKhachHangTra = _db.DatPhongs.FirstOrDefault(s => s.MaDatPhong == MaDatPhong);
-				tinhTienKhachHangTra.ThanhTien = tongtienkhachdatra;
-				await _db.SaveChangesAsync();
-				return Json(new { success = true, message = "Đặt phòng thành công." });
-			}
-			else
-			{
-				return Json(new { success = false, message = "Đặt phòng không thành công." });
-			}
-		}
+                await _db.SaveChangesAsync();
+
+                return Json(new { success = true, message = "Đặt phòng thành công." });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Đặt phòng không thành công." });
+            }
+        }
 
 
 
-
-
-		[HttpGet]
+        [HttpGet]
 		public string GetHangPhong(string maPhong)
 		{
 			var phong = _db.Phong.Find(maPhong);
