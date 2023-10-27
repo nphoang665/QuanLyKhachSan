@@ -4,28 +4,28 @@ using QuanLyKhachSan.Data;
 using QuanLyKhachSan.DataAcess.Data;
 namespace QuanLyKhachSan.Controllers
 {
-	public class PhongController : Controller
-	{
-		private readonly ApplicationDbContext _db;
-		public PhongController(ApplicationDbContext db)
-		{
-			_db = db;
-		}
+    public class PhongController : Controller
+    {
+        private readonly ApplicationDbContext _db;
+        public PhongController(ApplicationDbContext db)
+        {
+            _db = db;
+        }
 
-		public IActionResult Index()
-		{
-			var rooms = _db.Phong.ToList();
-			ViewBag.Rooms = rooms;
-			var khachhangs = _db.KhachHangs.ToList();
-			ViewBag.KhachHangs = khachhangs;
-			var bookedRooms = _db.DatPhongs.Select(p => p.MaPhong).ToList();
-			ViewBag.BookedRooms = bookedRooms;
-			var nhanvien = _db.NhanViens.ToList();
-			ViewBag.NhanViens = nhanvien;
+        public IActionResult Index()
+        {
+            var rooms = _db.Phong.ToList();
+            ViewBag.Rooms = rooms;
+            var khachhangs = _db.KhachHangs.ToList();
+            ViewBag.KhachHangs = khachhangs;
+            var bookedRooms = _db.DatPhongs.Select(p => p.MaPhong).ToList();
+            ViewBag.BookedRooms = bookedRooms;
+            var nhanvien = _db.NhanViens.ToList();
+            ViewBag.NhanViens = nhanvien;
 
-			return View();
-		}
-		[HttpPost]
+            return View();
+        }
+        [HttpPost]
         public async Task<IActionResult> NhanPhong(string MaDatPhong, string Phong, string MaKhachHang, string HinhThuc, int GiaPhong, DateTime? NgayNhan, DateTime? NgayTra, string DuKien, float ThanhTien, string MaNhanVien, float khachTra)
         {
             var MadatPhongExist = _db.DatPhongs.FirstOrDefault(s => s.MaDatPhong == MaDatPhong);
@@ -105,115 +105,115 @@ namespace QuanLyKhachSan.Controllers
 
 
         [HttpGet]
-		public string GetHangPhong(string maPhong)
-		{
-			var phong = _db.Phong.Find(maPhong);
-			if (phong != null)
-			{
-				return phong.HangPhong;
-			}
-			return "Không có hạng phòng trùng khớp";
-		}
+        public string GetHangPhong(string maPhong)
+        {
+            var phong = _db.Phong.Find(maPhong);
+            if (phong != null)
+            {
+                return phong.HangPhong;
+            }
+            return "Không có hạng phòng trùng khớp";
+        }
 
-		[HttpGet]
-		public IActionResult LayThanhToan(string maPhong)
-		{
-			var datPhong = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == maPhong);
-			return Json(datPhong);
-		}
-		[HttpGet]
-		public IActionResult LayTenKhachHang(string maPhong)
-		{
-			var phong = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == maPhong);
-			if (phong != null)
-			{
-				var tenkhachhang = _db.KhachHangs.FirstOrDefault(s => s.MaKhachHang == phong.MaKhachHang);
-				if (tenkhachhang != null)
-				{
-					return Json(tenkhachhang);
-				}
-			}
-			return Json(new { error = "không có tên khách hàng trùng khớp" });
-		}
-
-	
-		[HttpPost]
-		public JsonResult ThanhToan(string Phong, string khachDaThanhToan)
-		{
-			float khachDaThanhToanSo;
-			bool laSo = float.TryParse(khachDaThanhToan, out khachDaThanhToanSo);
-
-			if (!laSo)
-			{
-				return Json(new { success = false, message = "Lỗi. Vui lòng nhập số." });
-			}
-
-			var LayTongTien = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == Phong);
-
-			if (khachDaThanhToanSo < LayTongTien.ThanhTien)
-			{
-				return Json(new { success = false, message = "Số tiền thanh toán không đủ. Vui lòng thanh toán đủ số tiền." });
-			}
-
-			else
-			{
-				var datphong = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == Phong);
-				var PhongThanhToan = _db.Phong.FirstOrDefault(s => s.MaPhong == Phong);
-				PhongThanhToan.TrangThai = "Trống";
-				Random random = new Random();
-				int MaHoaDon = random.Next(100000, 1000000);
-				var hd = new HoaDon();
-				hd.MaHoaDon = MaHoaDon.ToString();
-				hd.HinhThuc = datphong.HinhThuc;
-				hd.GiaPhong = datphong.GiaPhong;
-				hd.NgayNhan = datphong.NgayNhan;
-				hd.NgayTra = datphong.NgayTra;
-				hd.DuKien = datphong.DuKien;
-				hd.ThanhTien = datphong.ThanhTien;
-				hd.MaDatPhong = datphong.MaDatPhong;
-				hd.MaKhachHang = datphong.MaKhachHang;
-				hd.MaNhanVien=datphong.MaNhanVien;
-				hd.MaPhong = datphong.MaPhong;
-				_db.HoaDon.Add(hd);
-				_db.SaveChanges();
-
-				_db.SaveChanges();
-
-				_db.DatPhongs.Remove(datphong);
-
-				_db.SaveChanges();
-
-			
-
-				return Json(new { success = true, message = "Thanh toán thành công. Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi." });
-			}
-		}
+        [HttpGet]
+        public IActionResult LayThanhToan(string maPhong)
+        {
+            var datPhong = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == maPhong);
+            return Json(datPhong);
+        }
+        [HttpGet]
+        public IActionResult LayTenKhachHang(string maPhong)
+        {
+            var phong = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == maPhong);
+            if (phong != null)
+            {
+                var tenkhachhang = _db.KhachHangs.FirstOrDefault(s => s.MaKhachHang == phong.MaKhachHang);
+                if (tenkhachhang != null)
+                {
+                    return Json(tenkhachhang);
+                }
+            }
+            return Json(new { error = "không có tên khách hàng trùng khớp" });
+        }
 
 
-		[HttpGet]
-		public IActionResult CheckRoom(string maPhong)
-		{
-			var datphong = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == maPhong);
-			return Json(datphong != null);
-		}
-		[HttpGet]
-		public JsonResult GetRooms()
-		{
-			var rooms = _db.Phong.ToList(); 
-			return Json(rooms);
-		}
-		[HttpGet]
-		public async Task<IActionResult> GetRoomPrice(string maPhong)
-		{
-			var phong = await _db.Phong.FirstOrDefaultAsync(p => p.MaPhong == maPhong);
+        [HttpPost]
+        public JsonResult ThanhToan(string Phong, string khachDaThanhToan)
+        {
+            float khachDaThanhToanSo;
+            bool laSo = float.TryParse(khachDaThanhToan, out khachDaThanhToanSo);
 
-			if (phong == null)
-			{
-				return NotFound();
-			}
+            if (!laSo)
+            {
+                return Json(new { success = false, message = "Lỗi. Vui lòng nhập số." });
+            }
 
-			return Ok(new { GiaTheoGio = phong.GiaTheoGio, GiaTheoNgay = phong.GiaTheoNgay });
-		}
+            var LayTongTien = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == Phong);
 
-	}
+            if (khachDaThanhToanSo < LayTongTien.ThanhTien)
+            {
+                return Json(new { success = false, message = "Số tiền thanh toán không đủ. Vui lòng thanh toán đủ số tiền." });
+            }
+
+            else
+            {
+                var datphong = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == Phong);
+                var PhongThanhToan = _db.Phong.FirstOrDefault(s => s.MaPhong == Phong);
+                PhongThanhToan.TrangThai = "Trống";
+                Random random = new Random();
+                int MaHoaDon = random.Next(100000, 1000000);
+                var hd = new HoaDon();
+                hd.MaHoaDon = MaHoaDon.ToString();
+                hd.HinhThuc = datphong.HinhThuc;
+                hd.GiaPhong = datphong.GiaPhong;
+                hd.NgayNhan = datphong.NgayNhan;
+                hd.NgayTra = datphong.NgayTra;
+                hd.DuKien = datphong.DuKien;
+                hd.ThanhTien = datphong.ThanhTien;
+                hd.MaDatPhong = datphong.MaDatPhong;
+                hd.MaKhachHang = datphong.MaKhachHang;
+                hd.MaNhanVien = datphong.MaNhanVien;
+                hd.MaPhong = datphong.MaPhong;
+                _db.HoaDon.Add(hd);
+                _db.SaveChanges();
+
+                _db.SaveChanges();
+
+                _db.DatPhongs.Remove(datphong);
+
+                _db.SaveChanges();
+
+
+
+                return Json(new { success = true, message = "Thanh toán thành công. Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi." });
+            }
+        }
+
+
+        [HttpGet]
+        public IActionResult CheckRoom(string maPhong)
+        {
+            var datphong = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == maPhong);
+            return Json(datphong != null);
+        }
+        [HttpGet]
+        public JsonResult GetRooms()
+        {
+            var rooms = _db.Phong.ToList();
+            return Json(rooms);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetRoomPrice(string maPhong)
+        {
+            var phong = await _db.Phong.FirstOrDefaultAsync(p => p.MaPhong == maPhong);
+
+            if (phong == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(new { GiaTheoGio = phong.GiaTheoGio, GiaTheoNgay = phong.GiaTheoNgay });
+        }
+
+    }
 }

@@ -65,11 +65,12 @@ function updateDuration() {
         success: function (room) {
             var giaphong;
             if (kiemtra.value == 'Gio') {
-                giaphong = room.giaTheoGio;
+                giaphong = parseFloat(room.giaTheoGio);
                 var checkInDate = new Date(checkInInput.value);
-        var checkOutDate = new Date(checkOutInput.value);
-        var duration = ((checkOutDate - checkInDate) / 1000 / 60 / 60).toFixed(2);
-        var thanhtien = (duration * giaphong).toFixed(2);
+                var checkOutDate = new Date(checkOutInput.value);
+                var duration = ((checkOutDate - checkInDate) / 1000 / 60 / 60).toFixed(2);
+                var thanhtien = Math.round(duration * giaphong);
+                console.log(thanhtien);
 
         document.getElementById('dukien').value = duration + ' giờ';
         document.getElementById('thanhtien').value = thanhtien;
@@ -79,11 +80,12 @@ function updateDuration() {
         document.getElementById('gia-phong').value = giaphong;
         document.getElementById('labelGiaPhong').textContent = document.getElementById('gia-phong').value;
             } else {
-                giaphong = room.giaTheoNgay;
+                giaphong = parseFloat(room.giaTheoNgay);
                 var checkInDate = new Date(checkInInput.value);
-        var checkOutDate = new Date(checkOutInput.value);
-        var duration = ((checkOutDate - checkInDate) / 1000 / 60 / 60 / 24).toFixed(2);
-        var thanhtien = (duration * giaphong).toFixed(2);
+                var checkOutDate = new Date(checkOutInput.value);
+                var duration = ((checkOutDate - checkInDate) / 1000 / 60 / 60 / 24).toFixed(2);
+                var thanhtien = Math.round(duration * giaphong);
+                console.log(thanhtien);
 
         document.getElementById('dukien').value = duration + ' ngày';
         document.getElementById('thanhtien').value = thanhtien;

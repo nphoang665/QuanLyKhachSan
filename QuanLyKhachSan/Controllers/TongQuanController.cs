@@ -54,6 +54,24 @@ namespace QuanLyKhachSan.Controllers
 
             return Json(doanhThuTheoThang);
         }
+        [HttpGet]
+        public IActionResult LayThuNhapTheoNam()
+        {
+            var thanhTien = _db.HoaDon.Sum(s => s.ThanhTien);
+
+            return Json(thanhTien);
+        }
+        [HttpGet]
+        public IActionResult LayThuNhapTheoThang(int year, int month)
+        {
+            // Giả sử dbContext là một instance của DbContext của bạn
+            var thanhtien = _db.HoaDon
+                .Where(hd => hd.NgayNhan.Year == year && hd.NgayNhan.Month == month)
+                .Sum(hd => hd.ThanhTien);
+
+            // Trả về tổng thu nhập dưới dạng JSON
+            return Json(thanhtien);
+        }
 
 
     }
