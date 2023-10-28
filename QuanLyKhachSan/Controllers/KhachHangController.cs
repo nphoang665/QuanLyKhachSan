@@ -77,6 +77,8 @@ namespace QuanLyKhachSan.Controllers
             ValidateKhachHang(model);
             if (ModelState.IsValid)
             {
+                DateTime ngayhientai = DateTime.Now;
+                model.NgayTao = ngayhientai;
                 _db.KhachHangs.Add(model);
                 _db.SaveChanges();
                 TempData["success"] = "Thêm Khách Hàng Thành Công";

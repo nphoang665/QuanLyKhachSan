@@ -26,6 +26,8 @@ namespace QuanLyKhachSan.Model
         public string DienThoai { get; set; }
         [DisplayName("Địa Chỉ")]
         public string DiaChi { get; set; }
+        [DisplayName("Ngày Tạo")]
+        public DateTime NgayTao { get; set; }
         [DisplayName("Ghi Chú")]
         public string GhiChu { get; set; }
     }
