@@ -123,7 +123,13 @@ namespace QuanLyKhachSan.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.TaiKhoan.Add(tk);
+                DateTime ngayHienTai =DateTime.Now;
+                var taikhoan = new TaiKhoan();
+                taikhoan.TenDangNhap = tk.TenDangNhap;
+                taikhoan.MatKhau = tk.MatKhau;
+                taikhoan.Email = tk.Email;
+                taikhoan.NgayTao = ngayHienTai;
+                _db.TaiKhoan.Add(taikhoan);
                 _db.SaveChanges();
                 return Json(new { success = true, message = "Đăng ký thành công." });
             }
