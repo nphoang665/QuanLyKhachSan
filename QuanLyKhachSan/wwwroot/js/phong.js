@@ -296,5 +296,11 @@ $(document).ready(function () {
 
 
 
-
-
+$(document).ready(function () {
+    $("#toggle-button1").addClass("active");
+    $(".tri-state-toggle-button").click(function () {
+        $(".tri-state-toggle-button").removeClass("active");
+        var id = $(this).attr('id');
+        $("#" + id).addClass("active");
+    });
+});
