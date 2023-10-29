@@ -123,7 +123,23 @@ namespace QuanLyKhachSan.Controllers
         public IActionResult SuaNhanVien(NhanVien model)
         {
             ValidateNhanVien(model);
-            if (ModelState.IsValid)
+			if (_db.NhanViens.Any(nv => nv.CCCD == model.CCCD && nv.MaNhanVien != model.MaNhanVien))
+			{
+				ModelState.AddModelError("CCCD", "CCCD đã tồn tại.");
+			}
+
+			// Check for duplicate DienThoai
+			if (_db.NhanViens.Any(nv => nv.DienThoai == model.DienThoai && nv.MaNhanVien != model.MaNhanVien))
+			{
+				ModelState.AddModelError("DienThoai", "Số điện thoại đã tồn tại.");
+			}
+
+			// Check for duplicate Email
+			if (_db.NhanViens.Any(nv => nv.Email == model.Email && nv.MaNhanVien != model.MaNhanVien))
+			{
+				ModelState.AddModelError("Email", "Email đã tồn tại.");
+			}
+			if (ModelState.IsValid)
             {
                 
                 _db.NhanViens.Update(model);
