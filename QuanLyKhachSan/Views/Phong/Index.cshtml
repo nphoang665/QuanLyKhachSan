@@ -121,22 +121,26 @@
 						</td>
 						@* mã khách hàng *@
 						<td>
-							<select style="width:120px" class="combo" asp-for="MaKhachHang">
+							<select style="width:120px" class="combo" asp-for="MaKhachHang" id="select_mkh">
 
 								@foreach (var kh in ViewBag.KhachHangs)
 								{
 									<option value="@kh.MaKhachHang"> @kh.MaKhachHang</option>
 								}
+								
 							</select>
+							<label id="labelMaKhachHang"></label>
 						</td>
 						@* Mã nhân viên *@
 						<td>
-							<select style="width:120px" class="combo" asp-for="MaNhanVien">
+							<select style="width:120px" class="combo" asp-for="MaNhanVien" id="select_mnv" >
 								@foreach (var nv in ViewBag.NhanViens)
 								{
 									<option value="@nv.MaNhanVien">@nv.MaNhanVien</option>
 								}
 							</select>
+							<label id="labelMaNhanVien"></label>
+
 						</td>
 
 					</tr>

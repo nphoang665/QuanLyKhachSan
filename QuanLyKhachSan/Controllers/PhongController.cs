@@ -234,6 +234,32 @@ namespace QuanLyKhachSan.Controllers
 
             return Ok(new { GiaTheoGio = phong.GiaTheoGio, GiaTheoNgay = phong.GiaTheoNgay });
         }
-
-    }
+        [HttpGet]
+		public IActionResult LayTenKhachHangDatPhong(string maKhachHang)
+		{
+			var khachHang = _db.KhachHangs.FirstOrDefault(kh => kh.MaKhachHang == maKhachHang);
+			if (khachHang != null)
+			{
+				return Json(khachHang.TenKhachHang);
+			}
+			else
+			{
+				return NotFound();
+			}
+		}
+        [HttpGet]
+		// Hành động LayTenNhanVien
+		public IActionResult LayTenNhanVienDatPhong(string maNhanVien)
+		{
+			var nhanVien = _db.NhanViens.FirstOrDefault(nv => nv.MaNhanVien == maNhanVien);
+			if (nhanVien != null)
+			{
+				return Json(nhanVien.TenNhanVien);
+			}
+			else
+			{
+				return NotFound();
+			}
+		}
+	}
 }
