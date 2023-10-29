@@ -27,7 +27,8 @@ namespace QuanLyKhachSan.Controllers
             {
                 numberOfColumnsToShow = Convert.ToInt32(Request.Query["example_length"]);
             }
-            ViewBag.NumberOfColumnsToShow = numberOfColumnsToShow;
+            ViewBag.NumberOfColumnsToShow = numberOfColumnsToShow ?? 10;
+
             int pageSize = numberOfColumnsToShow ?? 10;
             int totalKhachHangs = await _db.KhachHangs.CountAsync();
             int totalPages = (int)Math.Ceiling((double)totalKhachHangs / pageSize);
@@ -59,6 +60,22 @@ namespace QuanLyKhachSan.Controllers
         public IActionResult ThemKhachHang(KhachHang model)
         {
             ValidateKhachHang(model);
+            if (_db.KhachHangs.Any(nv => nv.MaKhachHang == model.MaKhachHang))
+            {
+                ModelState.AddModelError("MaKhachHang", "Mã khách hàng đã tồn tại.");
+            }
+
+            // Check for duplicate DienThoai
+            if (_db.KhachHangs.Any(nv => nv.DienThoai == model.DienThoai))
+            {
+                ModelState.AddModelError("DienThoai", "Số điện thoại đã tồn tại.");
+            }
+
+            // Check for duplicate CCCD
+            if (_db.KhachHangs.Any(nv => nv.CCCD == model.CCCD))
+            {
+                ModelState.AddModelError("CCCD", "CCCD đã tồn tại.");
+            }
             if (ModelState.IsValid)
             {
                 DateTime ngayhientai = DateTime.Now;
@@ -85,6 +102,16 @@ namespace QuanLyKhachSan.Controllers
         public IActionResult SuaKhachHang(KhachHang model)
         {
             ValidateKhachHang(model);
+            if (_db.KhachHangs.Any(nv => nv.CCCD == model.CCCD && nv.MaKhachHang != model.MaKhachHang))
+            {
+                ModelState.AddModelError("CCCD", "CCCD đã tồn tại.");
+            }
+
+            // Check for duplicate DienThoai
+            if (_db.KhachHangs.Any(nv => nv.DienThoai == model.DienThoai && nv.MaKhachHang != model.MaKhachHang))
+            {
+                ModelState.AddModelError("DienThoai", "Số điện thoại đã tồn tại.");
+            }
             if (ModelState.IsValid)
             {
                 _db.KhachHangs.Update(model);

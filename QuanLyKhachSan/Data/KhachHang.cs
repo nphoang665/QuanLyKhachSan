@@ -27,7 +27,7 @@ namespace QuanLyKhachSan.Model
         [Required(ErrorMessage = "Ngày sinh không được để trống.")]
         public DateTime NgaySinh { get; set; }
         [DisplayName("Số điện thoại")]
-        [Required(ErrorMessage = "Ngày sinh không được để trống.")]
+        [Required(ErrorMessage = "Số điện thoại không được để trống.")]
         public string DienThoai { get; set; }
         [DisplayName("Địa chỉ")]
         [Required(ErrorMessage = "Địa chỉ không được để trống.")]

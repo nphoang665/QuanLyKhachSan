@@ -21,7 +21,7 @@ namespace QuanLyKhachSan.Controllers
             {
                 numberOfColumnsToShow = Convert.ToInt32(Request.Query["example_length"]);
             }
-            ViewBag.NumberOfColumnsToShow = numberOfColumnsToShow;
+            ViewBag.NumberOfColumnsToShow = numberOfColumnsToShow??10;
             int pageSize = numberOfColumnsToShow ?? 10;
             int totalKhachHangs = await _db.Phong.CountAsync();
 			int totalPages = (int)Math.Ceiling((double)totalKhachHangs / pageSize);
