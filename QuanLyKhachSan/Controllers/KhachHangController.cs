@@ -8,6 +8,7 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using OfficeOpenXml;
 using NuGet.Protocol;
+using System.Text.RegularExpressions;
 
 namespace QuanLyKhachSan.Controllers
 {
@@ -125,28 +126,30 @@ namespace QuanLyKhachSan.Controllers
         private void ValidateKhachHang(KhachHang kh)
         {
             //validate Ma khach hàng
-            if (kh.MaKhachHang == null)
+            if (string.IsNullOrEmpty(kh.MaKhachHang))
             {
                 ModelState.AddModelError("MaKhachHang", "Mã khách hàng không được bỏ trống");
-
             }
             else if (kh.MaKhachHang.Length != 6)
             {
                 ModelState.AddModelError("MaKhachHang", "Mã khách hàng phải đạt 6 ký tự");
             }
+            else if (!Regex.IsMatch(kh.MaKhachHang, "^[a-zA-Z0-9]*$"))
+            {
+                ModelState.AddModelError("MaKhachHang", "Mã khách hàng chỉ được chứa chữ và số.");
+            }
             // validate tenkhachhang
-            if (kh.TenKhachHang == null)
+            if (string.IsNullOrEmpty(kh.TenKhachHang))
             {
                 ModelState.AddModelError("TenKhachHang", "Tên khách hàng không được bỏ trống");
-            }
-            else if (kh.TenKhachHang.Any(char.IsDigit))
-            {
-                ModelState.AddModelError("TenKhachHang", "Tên khách hàng không được chứa số.");
             }
             else if (kh.TenKhachHang.Length > 50 || kh.TenKhachHang.Length < 3)
             {
                 ModelState.AddModelError("TenKhachHang", "Tên khách hàng không được quá dài hoặc quá ngắn.");
-
+            }
+            else if (!Regex.IsMatch(kh.TenKhachHang, "^[\\p{L}\\s]*$"))
+            {
+                ModelState.AddModelError("TenKhachHang", "Tên khách hàng chỉ được chứa chữ cái và không được chứa số.");
             }
             //validate CCCD
             if (kh.CCCD == null)

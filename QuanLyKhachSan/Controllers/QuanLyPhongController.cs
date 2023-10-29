@@ -71,7 +71,11 @@ namespace QuanLyKhachSan.Controllers
 				ModelState.AddModelError("KhuVuc", "Khu vực không được để trống");
 				return false;
 			}
-			if (string.IsNullOrEmpty(phong.HangPhong))
+            else if (!Regex.IsMatch(phong.KhuVuc, "^[a-zA-Z0-9]*$"))
+            {
+                ModelState.AddModelError("KhuVuc", "Khu vực chỉ được chứa chữ và số.");
+            }
+            if (string.IsNullOrEmpty(phong.HangPhong))
 			{
 				ModelState.AddModelError("HangPhong", "Hạng phòng không được để trống");
 				return false;
@@ -91,7 +95,17 @@ namespace QuanLyKhachSan.Controllers
 				ModelState.AddModelError("Gia", "Giá không được chứa chữ và kí tự đặc biệt");
 				return false;
 			}
-
+			else if(phong.GiaTheoGio <=0)
+			{
+                ModelState.AddModelError("GiaTheoGio", "Giá không được nhỏ hơn hoặc bằng 0");
+                ModelState.AddModelError("GiaTheoNgay", "Giá không được nhỏ hơn hoặc bằng 0");
+                return false;
+            }
+			else if(phong.GiaTheoNgay <=0)
+			{
+                ModelState.AddModelError("GiaTheoNgay", "Giá không được nhỏ hơn hoặc bằng 0");
+                return false;
+            }
 			// Thêm các điều kiện xác thực khác ở đây
 
 			return true;

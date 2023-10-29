@@ -6,6 +6,7 @@ using OfficeOpenXml;
 using QuanLyKhachSan.DataAcess.Data;
 using QuanLyKhachSan.Model;
 using System.Data;
+using System.Text.RegularExpressions;
 
 namespace QuanLyKhachSan.Controllers
 {
@@ -134,21 +135,24 @@ namespace QuanLyKhachSan.Controllers
             {
                 ModelState.AddModelError("MaNhanVien", "Mã nhân viên phải đạt 6 ký tự");
             }
+            else if (!Regex.IsMatch(nv.MaNhanVien, "^[a-zA-Z0-9]*$"))
+            {
+                ModelState.AddModelError("MaNhanVien", "Mã nhân viên chỉ được chứa chữ và số.");
+            }
 
             //validate Name Employee
-            if(nv.TenNhanVien == null)
+            if (nv.TenNhanVien == null)
             {
                 ModelState.AddModelError("TenNhanVien", "Tên nhân viên không được bỏ trống.");
 
             }
-           else if (nv.TenNhanVien.Any(char.IsDigit))
+            else if (nv.TenNhanVien.Length > 50 || nv.TenNhanVien.Length < 3)
             {
-                ModelState.AddModelError("TenNhanVien", "Tên nhân viên không được chứa số.");
+                ModelState.AddModelError("TenNhanVien", "Tên nhân viên không được quá dài hoặc quá ngắn.");
             }
-           else if (nv.TenNhanVien.Length > 50 || nv.TenNhanVien.Length < 3)
+            else if (!Regex.IsMatch(nv.TenNhanVien, "^[\\p{L}\\s]*$"))
             {
-                ModelState.AddModelError("TenNhanVien", "Tên nhân viên không được quá dài hoặc.");
-
+                ModelState.AddModelError("TenNhanVien", "Tên nhân viên chỉ được chứa chữ cái và không được chứa số.");
             }
             //validate CCCD
             if (nv.CCCD == null)

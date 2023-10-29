@@ -17,7 +17,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="KhuVuc">Khu Vực</label>
-                <input asp-for="KhuVuc" class="form-control" type="text" maxlength="20"/>
+                <input asp-for="KhuVuc" class="form-control" type="text" maxlength="20" pattern="[A-Za-z0-9]*"
+                       title="Vui lòng chỉ nhập chữ và số." />
                 <span asp-validation-for="KhuVuc" class="text-danger"></span>
             </div>
             <div class="form-group">
