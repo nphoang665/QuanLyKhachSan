@@ -28,5 +28,6 @@ public class DatPhong
     public DateTime NgayTra { get; set; }
     public string DuKien { get; set; }
     public float ThanhTien { get; set; }
+    public float KhachDaThanhToan { get; set; }
 
 }
