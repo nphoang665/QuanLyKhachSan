@@ -174,14 +174,14 @@
             var phongDaDat = parseInt(data.phongDaDat);
 
             // Cập nhật các phần tử HTML với dữ liệu mới
-            document.getElementById('phongTrong').innerText = PhongTrong;
             document.getElementById('phongDaDat').innerText = phongDaDat;
+            document.getElementById('phongTrong').innerText = PhongTrong;
 
             // Tạo dữ liệu cho biểu đồ Pie
             var pieChartData = {
                 datasets: [{
-                    data: [PhongTrong, phongDaDat],
-                    backgroundColor: ['rgb(54, 162, 235)', 'rgb(75, 192, 192)']
+                    data: [phongDaDat, PhongTrong],
+                    backgroundColor: ['rgb(75, 192, 192)', 'rgb(54, 162, 235)']
                 }]
             };
 

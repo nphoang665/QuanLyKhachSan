@@ -32,24 +32,7 @@ namespace QuanLyKhachSan.Controllers
             int totalPages = (int)Math.Ceiling((double)totalKhachHangs / pageSize);
             var khachHangs = _db.KhachHangs.AsQueryable();
 
-
-            // Lọc kết quả theo giới tính
-            if (!String.IsNullOrEmpty(gender))
-            {
-                khachHangs = khachHangs.Where(kh => kh.GioiTinh == gender);
-            }
-            // Lọc kết quả theo từ khóa tìm kiếm
-
-
-            if (!String.IsNullOrEmpty(searchText))
-            {
-                khachHangs = khachHangs.Where(kh => kh.TenKhachHang.Contains(searchText));
-            }
-            // Lọc theo trạng thái
-            if (!String.IsNullOrEmpty(TrangThai))
-            {
-                khachHangs = khachHangs.Where(kh => kh.GhiChu == TrangThai);
-            }
+         
             // Phân trang kết quả
             var paginatedKhachHangs = await khachHangs
                 .OrderBy(kh => kh.MaKhachHang)

@@ -12,23 +12,29 @@ namespace QuanLyKhachSan.Model
 
     {
         [Key]
-        [DisplayName("Mã Khách Hàng")]
+        [DisplayName("Mã khách kàng")]
+        [Required(ErrorMessage = "Mã khách hàng không được để trống.")]
         public string MaKhachHang { get; set; }
-        [DisplayName("Tên Khách Hàng")]
+        [DisplayName("Tên khách hàng")]
+        [Required(ErrorMessage = "Tên khách hàng không được để trống.")]
         public string TenKhachHang { get; set; }
         [DisplayName("CCCD")]
+        [Required(ErrorMessage = "CCCD không được để trống.")]
         public string CCCD { get; set; }
-        [DisplayName("Giới Tính")]
+        [DisplayName("Giới tính")]
         public string GioiTinh { get; set; }
-        [DisplayName("Ngày Sinh")]
+        [DisplayName("Ngày sinh")]
+        [Required(ErrorMessage = "Ngày sinh không được để trống.")]
         public DateTime NgaySinh { get; set; }
-        [DisplayName("Số Điện Thoại")]
+        [DisplayName("Số điện thoại")]
+        [Required(ErrorMessage = "Ngày sinh không được để trống.")]
         public string DienThoai { get; set; }
-        [DisplayName("Địa Chỉ")]
+        [DisplayName("Địa chỉ")]
+        [Required(ErrorMessage = "Địa chỉ không được để trống.")]
         public string DiaChi { get; set; }
-        [DisplayName("Ngày Tạo")]
+        [DisplayName("Ngày tạo")]
         public DateTime NgayTao { get; set; }
-        [DisplayName("Ghi Chú")]
-        public string GhiChu { get; set; }
+        [DisplayName("Ghi chú")]
+        public string? GhiChu { get; set; }
     }
 }

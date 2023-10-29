@@ -68,19 +68,41 @@ namespace QuanLyKhachSan.Controllers
             {
 
                 var _QrEmail = _db.TaiKhoan.FirstOrDefault(s => s.TenDangNhap == obj.TenDangNhap);
-                TempData["Email"] = _QrEmail.Email;
-                string email = TempData.Peek("Email") as string; // Sử dụng Peek thay vì lấy giá trị
-                var qr_TenNhanVien = _db.NhanViens.FirstOrDefault(s => s.Email == email);
+                if (_QrEmail != null)
+                {
+                    TempData["Email"] = _QrEmail.Email;
+                    string email = TempData.Peek("Email") as string;
+                    if (!string.IsNullOrEmpty(email))
+                    {
+                        var qr_TenNhanVien = _db.NhanViens.FirstOrDefault(s => s.Email == email);
+                        if (qr_TenNhanVien != null)
+                        {
+                            // Tạo cookie và chuyển hướng
+                            var cookieOptions = new CookieOptions();
+                            cookieOptions.Expires = DateTime.Now.AddDays(30);
+                            HttpContext.Response.Cookies.Append("TenNhanVien", qr_TenNhanVien.TenNhanVien, cookieOptions);
+                            HttpContext.Response.Cookies.Append("MaNv", qr_TenNhanVien.MaNhanVien, cookieOptions);
+                            HttpContext.Response.Cookies.Append("Username", obj.TenDangNhap, cookieOptions);
+                            HttpContext.Response.Cookies.Append("ChucVu", qr_TenNhanVien.ChucVu, cookieOptions);
 
-                // Tạo cookie
-                var cookieOptions = new CookieOptions();
-                cookieOptions.Expires = DateTime.Now.AddDays(30); // Đặt thời hạn cho cookie
-                HttpContext.Response.Cookies.Append("TenNhanVien", qr_TenNhanVien.TenNhanVien, cookieOptions);
-                HttpContext.Response.Cookies.Append("MaNv", qr_TenNhanVien.MaNhanVien, cookieOptions);
-                HttpContext.Response.Cookies.Append("Username", obj.TenDangNhap, cookieOptions);
-                HttpContext.Response.Cookies.Append("ChucVu", qr_TenNhanVien.ChucVu, cookieOptions);
+                            return RedirectToAction("Index", "TongQuan");
+                        }
+                        else
+                        {
+                            TempData["ErrorTenDangNhap"] = "Không tìm thấy thông tin nhân viên.";
+                        }
+                    }
+                    else
+                    {
+                        TempData["ErrorTenDangNhap"] = "Không tìm thấy địa chỉ email.";
+                    }
+                }
+                else
+                {
+                    TempData["ErrorTenDangNhap"] = "Không tìm thấy tài khoản.";
+                }
                 // Đăng nhập thành công, chuyển hướng đến trang chủ
-                return RedirectToAction("Index", "TongQuan");
+                return View();
             }
 
         }
