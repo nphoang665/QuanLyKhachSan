@@ -120,9 +120,11 @@ namespace QuanLyKhachSan.Controllers
         public IActionResult LayTenKhachHang(string maPhong)
         {
             var phong = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == maPhong);
+
             if (phong != null)
             {
                 var tenkhachhang = _db.KhachHangs.FirstOrDefault(s => s.MaKhachHang == phong.MaKhachHang);
+
                 if (tenkhachhang != null)
                 {
                     return Json(tenkhachhang);
@@ -130,9 +132,26 @@ namespace QuanLyKhachSan.Controllers
             }
             return Json(new { error = "không có tên khách hàng trùng khớp" });
         }
+		[HttpGet]
+		public IActionResult LaySoNguoiO(string maPhong)
+		{
+          
+			var phong = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == maPhong);
+
+			if (phong != null)
+			{
+                var songuoio = _db.DatPhongs.FirstOrDefault(s => s.MaPhong == maPhong);
+
+				if (songuoio != null)
+				{
+					return Json(songuoio);
+				}
+			}
+			return Json(new { error = "không có tên khách hàng trùng khớp" });
+		}
 
 
-        [HttpPost]
+		[HttpPost]
         public JsonResult ThanhToan(string Phong, string khachDaThanhToan)
         {
             float khachDaThanhToanSo;

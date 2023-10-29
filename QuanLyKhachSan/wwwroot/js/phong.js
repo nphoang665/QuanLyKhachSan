@@ -156,9 +156,22 @@ function popUpTraPhong(maPhong) {
         url: '/Phong/LayTenKhachHang',
         type: 'GET',
         data: { maPhong: maPhong },
-        success: function (data) {
+        success: function (data,data1) {
             // 'data' chính là đối tượng đặt phòng trả về từ controller
             $('#ten_kh').text(data.tenKhachHang);
+      
+        },
+
+    });
+    $.ajax({
+        url: '/Phong/LaySoNguoiO',
+        type: 'GET',
+        data: { maPhong: maPhong },
+        success: function (data) {
+            // 'data' chính là đối tượng đặt phòng trả về từ controller
+            $('#so_Nguoi_O').text("|Số người ở: "+data.soNguoiO);
+            console.log(data);
+
         },
 
     });
