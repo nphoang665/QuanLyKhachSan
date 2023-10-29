@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Facebook;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
 using QuanLyKhachSan.DataAcess.Data;
 using QuanLyKhachSan.Model;
@@ -17,8 +18,34 @@ namespace QuanLyKhachSan.Controllers
         }
         public IActionResult Index()
         {
+            var fb = new FacebookClient();
+            var loginUrl = fb.GetLoginUrl(new
+            {
+                client_id = "645775411083495",
+                redirect_uri = "https://localhost:7284/Login/FacebookRedirect",
+                scope = "public_profile,email"
+            });
+            ViewBag.Url = loginUrl;
             return View();
         }
+        public IActionResult FacebookRedirect(string code)
+        {
+            var fb = new FacebookClient();
+            dynamic result = fb.Get("/oauth/access_token", new
+            {
+                client_id = "645775411083495",
+                client_secret = "65ca299968f6279165596be550ab39fc",
+                redirect_uri = "https://localhost:7284/Login/FacebookRedirect",
+                code = code
+            });
+            fb.AccessToken = result.access_token;
+
+            dynamic me = fb.Get("/me?fields=name,email");
+            string name = me.Name;
+            string email = me.Email;
+            return RedirectToAction("Index", "TongQuan");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Index(TaiKhoan obj)
