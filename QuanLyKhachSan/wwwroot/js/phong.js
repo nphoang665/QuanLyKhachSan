@@ -70,7 +70,6 @@ function updateDuration() {
                 var checkOutDate = new Date(checkOutInput.value);
                 var duration = ((checkOutDate - checkInDate) / 1000 / 60 / 60).toFixed(2);
                 var thanhtien = Math.round(duration * giaphong);
-                console.log(thanhtien);
 
         document.getElementById('dukien').value = duration + ' giờ';
         document.getElementById('thanhtien').value = thanhtien;
@@ -85,7 +84,7 @@ function updateDuration() {
                 var checkOutDate = new Date(checkOutInput.value);
                 var duration = ((checkOutDate - checkInDate) / 1000 / 60 / 60 / 24).toFixed(2);
                 var thanhtien = Math.round(duration * giaphong);
-                console.log(thanhtien);
+
 
         document.getElementById('dukien').value = duration + ' ngày';
         document.getElementById('thanhtien').value = thanhtien;
@@ -170,7 +169,6 @@ function popUpTraPhong(maPhong) {
         success: function (data) {
             // 'data' chính là đối tượng đặt phòng trả về từ controller
             $('#so_Nguoi_O').text("|Số người ở: "+data.soNguoiO);
-            console.log(data);
 
         },
 
@@ -335,4 +333,48 @@ function filterRooms(status) {
         }
     }
 }
+$(document).ready(function () {
+    // Hàm để lấy tên và mã khách hàng
+    function layTenKhachHang() {
+        var maKhachHang = $("#select_mkh").val();
+        if (maKhachHang) {
+            $.ajax({
+                url: '/Phong/LayTenKhachHangDatPhong',
+                type: 'GET',
+                data: { maKhachHang: maKhachHang },
+                success: function (tenKhachHang) {
+                    $("#labelMaKhachHang").text(tenKhachHang);
+                },
+                error: function (request, status, error) {
+                    console.log("Error while fetching Khách Hàng: " + error);
+                }
+            });
+        }
+    }
 
+    // Hàm để lấy tên và mã nhân viên
+    function layTenNhanVien() {
+        var maNhanVien = $("#select_mnv").val();
+        if (maNhanVien) {
+            $.ajax({
+                url: '/Phong/LayTenNhanVienDatPhong',
+                type: 'GET',
+                data: { maNhanVien: maNhanVien },
+                success: function (tenNhanVien) {
+                    $("#labelMaNhanVien").text(tenNhanVien);
+                },
+                error: function (request, status, error) {
+                    console.log("Error while fetching Nhân Viên: " + error);
+                }
+            });
+        }
+    }
+
+    // Gọi các hàm khi trang tải lên
+    layTenKhachHang();
+    layTenNhanVien();
+
+    // Gọi các hàm khi người dùng thay đổi lựa chọn
+    $("#select_mkh").change(layTenKhachHang);  // Gọi hàm khi thẻ select thay đổi
+    $("#select_mnv").change(layTenNhanVien);  // Gọi hàm khi thẻ select thay đổi
+});
