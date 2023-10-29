@@ -17,7 +17,7 @@ public class DatPhong
     [ForeignKey("Phong")]
     public string MaPhong { get; set; }
     public virtual Room Phong { get; set; }
-
+    public byte SoNguoiO { get; set; }
     // Thêm khóa ngoại từ bảng KhachHang
     [ForeignKey("KhachHang")]
     public string MaKhachHang { get; set; }
@@ -28,4 +28,5 @@ public class DatPhong
     public DateTime NgayTra { get; set; }
     public string DuKien { get; set; }
     public float ThanhTien { get; set; }
+
 }

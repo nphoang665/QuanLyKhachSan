@@ -304,3 +304,22 @@ $(document).ready(function () {
         $("#" + id).addClass("active");
     });
 });
+
+
+
+
+function filterRooms(status) {
+    var rooms = document.getElementsByClassName('room');
+    for (var i = 0; i < rooms.length; i++) {
+        if (status === 'all') {
+            rooms[i].style.display = 'block';
+        } else if (status === 'booked' && rooms[i].classList.contains('booked')) {
+            rooms[i].style.display = 'block';
+        } else if (status === 'empty' && !rooms[i].classList.contains('booked')) {
+            rooms[i].style.display = 'block';
+        } else {
+            rooms[i].style.display = 'none';
+        }
+    }
+}
+
