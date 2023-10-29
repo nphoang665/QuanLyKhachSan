@@ -77,22 +77,10 @@ namespace QuanLyKhachSan.Controllers
 				ModelState.AddModelError("KhuVuc", "Khu vực chỉ được chứa chữ, số và có dấu.");
 			}
 
-			if (string.IsNullOrEmpty(phong.HangPhong))
-			{
-				ModelState.AddModelError("HangPhong", "Hạng phòng không được để trống");
-				return false;
-			}
-
 			// Hạng phòng: Allow letters and accented characters
-			Regex regexItem = new Regex("^[\\p{L}]*$");
-			if (!regexItem.IsMatch(phong.HangPhong))
-			{
-				ModelState.AddModelError("HangPhong", "Hạng phòng chỉ được chứa chữ");
-				return false;
-			}
 
 			// Kiểm tra giá không có chữ và kí tự đặc biệt
-			regexItem = new Regex("^[0-9]*$");
+			Regex regexItem = new Regex("^[0-9]*$");
 			if (!regexItem.IsMatch(phong.GiaTheoGio.ToString()) || !regexItem.IsMatch(phong.GiaTheoNgay.ToString()) )
 			{
 				ModelState.AddModelError("Gia", "Giá không được chứa chữ và kí tự đặc biệt");

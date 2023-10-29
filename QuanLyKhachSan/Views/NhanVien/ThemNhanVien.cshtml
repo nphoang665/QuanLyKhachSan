@@ -41,8 +41,8 @@
             <div class="form-group">
                 <label for="ChucVu">Chức Vụ</label>
                 <select asp-for="ChucVu" class="form-control">
-                    <option value="Quản Lý">Quản Lý</option>
-                    <option value="Nhân Viên">Nhân Viên</option>
+                    <option value="Quản lý">Quản lý</option>
+                    <option value="Nhân viên">Nhân viên</option>
                 </select>
                 @Html.ValidationMessageFor(model => model.ChucVu, "", new { @class = "text-danger" })
             </div>
