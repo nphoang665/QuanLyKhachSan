@@ -12,8 +12,8 @@ using QuanLyKhachSan.DataAcess.Data;
 namespace QuanLyKhachSan.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231029071742_themKhachDaThanhToan")]
-    partial class themKhachDaThanhToan
+    [Migration("20231029143632_UpdatengayTaoAccc")]
+    partial class UpdatengayTaoAccc
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -143,7 +143,6 @@ namespace QuanLyKhachSan.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("GhiChu")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("GioiTinh")
@@ -168,62 +167,242 @@ namespace QuanLyKhachSan.Migrations
                         new
                         {
                             MaKhachHang = "KH0001",
-                            CCCD = "123456789",
+                            CCCD = "123432156789",
                             DiaChi = "Hà Nội",
                             DienThoai = "0938481234",
                             GhiChu = "Không",
                             GioiTinh = "Nam",
                             NgaySinh = new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6655),
                             TenKhachHang = "Nguyễn Văn An"
                         },
                         new
                         {
                             MaKhachHang = "KH0002",
-                            CCCD = "987654321",
+                            CCCD = "987654232321",
                             DiaChi = "TP Hồ Chí Minh",
                             DienThoai = "0938484567",
                             GhiChu = "Không",
                             GioiTinh = "Nữ",
                             NgaySinh = new DateTime(1985, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6669),
                             TenKhachHang = "Trần Thị Bé"
                         },
                         new
                         {
                             MaKhachHang = "KH0003",
-                            CCCD = "987654321",
+                            CCCD = "123432156734",
                             DiaChi = "TP Hồ Chí Minh",
                             DienThoai = "0938485966",
                             GhiChu = "Không",
                             GioiTinh = "Nam",
                             NgaySinh = new DateTime(1988, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6670),
                             TenKhachHang = "Huỳnh An Cao"
                         },
                         new
                         {
                             MaKhachHang = "KH0004",
-                            CCCD = "987654321",
+                            CCCD = "123432156754",
                             DiaChi = "TP Hồ Chí Minh",
                             DienThoai = "0938234166",
                             GhiChu = "Không",
                             GioiTinh = "Nữ",
                             NgaySinh = new DateTime(1995, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6672),
                             TenKhachHang = "Nguyễn Thị Bích"
                         },
                         new
                         {
                             MaKhachHang = "KH0005",
-                            CCCD = "987654321",
+                            CCCD = "123432156785",
                             DiaChi = "TP Hồ Chí Minh",
                             DienThoai = "0938485966",
                             GhiChu = "Không",
                             GioiTinh = "Nữ",
                             NgaySinh = new DateTime(1985, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6673),
                             TenKhachHang = "Hồ Thị Mỹ"
+                        },
+                        new
+                        {
+                            MaKhachHang = "KH0006",
+                            CCCD = "123432156782",
+                            DiaChi = "Hà Nội",
+                            DienThoai = "0938481235",
+                            GhiChu = "Không",
+                            GioiTinh = "Nam",
+                            NgaySinh = new DateTime(1981, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6674),
+                            TenKhachHang = "Nguyễn Văn B"
+                        },
+                        new
+                        {
+                            MaKhachHang = "KH0007",
+                            CCCD = "123432156781",
+                            DiaChi = "TP Hồ Chí Minh",
+                            DienThoai = "0938484568",
+                            GhiChu = "Không",
+                            GioiTinh = "Nữ",
+                            NgaySinh = new DateTime(1986, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6676),
+                            TenKhachHang = "Trần Thị C"
+                        },
+                        new
+                        {
+                            MaKhachHang = "KH0008",
+                            CCCD = "123432157823",
+                            DiaChi = "Hà Nội",
+                            DienThoai = "0938481236",
+                            GhiChu = "Không",
+                            GioiTinh = "Nam",
+                            NgaySinh = new DateTime(1982, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6677),
+                            TenKhachHang = "Lê Văn C"
+                        },
+                        new
+                        {
+                            MaKhachHang = "KH0009",
+                            CCCD = "123432156733",
+                            DiaChi = "TP Hồ Chí Minh",
+                            DienThoai = "0938484569",
+                            GhiChu = "Không",
+                            GioiTinh = "Nữ",
+                            NgaySinh = new DateTime(1987, 2, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6678),
+                            TenKhachHang = "Phạm Thị D"
+                        },
+                        new
+                        {
+                            MaKhachHang = "KH0010",
+                            CCCD = "123432156734",
+                            DiaChi = "Hà Nội",
+                            DienThoai = "0938481237",
+                            GhiChu = "Không",
+                            GioiTinh = "Nam",
+                            NgaySinh = new DateTime(1983, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6680),
+                            TenKhachHang = "Đặng Văn D"
+                        },
+                        new
+                        {
+                            MaKhachHang = "KH0011",
+                            CCCD = "123432156756",
+                            DiaChi = "TP Hồ Chí Minh",
+                            DienThoai = "0938484570",
+                            GhiChu = "Không",
+                            GioiTinh = "Nữ",
+                            NgaySinh = new DateTime(1988, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6681),
+                            TenKhachHang = "Vũ Thị E"
+                        },
+                        new
+                        {
+                            MaKhachHang = "KH0012",
+                            CCCD = "123432156774",
+                            DiaChi = "Hà Nội",
+                            DienThoai = "0938481238",
+                            GhiChu = "Không",
+                            GioiTinh = "Nam",
+                            NgaySinh = new DateTime(1984, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6682),
+                            TenKhachHang = "Bùi Văn E"
+                        },
+                        new
+                        {
+                            MaKhachHang = "KH0013",
+                            CCCD = "123432156775",
+                            DiaChi = "TP Hồ Chí Minh",
+                            DienThoai = "0938484571",
+                            GhiChu = "Không",
+                            GioiTinh = "Nữ",
+                            NgaySinh = new DateTime(1989, 2, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6685),
+                            TenKhachHang = "Ngô Thị F"
+                        },
+                        new
+                        {
+                            MaKhachHang = "KH0014",
+                            CCCD = "123432156756",
+                            DiaChi = "Hà Nội",
+                            DienThoai = "0938481239",
+                            GhiChu = "Không",
+                            GioiTinh = "Nam",
+                            NgaySinh = new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6686),
+                            TenKhachHang = "Lý Văn F"
+                        },
+                        new
+                        {
+                            MaKhachHang = "KH0015",
+                            CCCD = "123432156775",
+                            DiaChi = "TP Hồ Chí Minh",
+                            DienThoai = "0938484572",
+                            GhiChu = "Không",
+                            GioiTinh = "Nữ",
+                            NgaySinh = new DateTime(1990, 2, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6687),
+                            TenKhachHang = "Dương Thị G"
+                        },
+                        new
+                        {
+                            MaKhachHang = "KH0016",
+                            CCCD = "123432156756",
+                            DiaChi = "Hà Nội",
+                            DienThoai = "0938481240",
+                            GhiChu = "Không",
+                            GioiTinh = "Nam",
+                            NgaySinh = new DateTime(1986, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6689),
+                            TenKhachHang = "Phan Văn G"
+                        },
+                        new
+                        {
+                            MaKhachHang = "KH0017",
+                            CCCD = "123432156734",
+                            DiaChi = "TP Hồ Chí Minh",
+                            DienThoai = "0938484573",
+                            GhiChu = "Không",
+                            GioiTinh = "Nữ",
+                            NgaySinh = new DateTime(1991, 2, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6690),
+                            TenKhachHang = "Trịnh Thị H"
+                        },
+                        new
+                        {
+                            MaKhachHang = "KH0018",
+                            CCCD = "123432156775",
+                            DiaChi = "Hà Nội",
+                            DienThoai = "0938481241",
+                            GhiChu = "Không",
+                            GioiTinh = "Nam",
+                            NgaySinh = new DateTime(1987, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6691),
+                            TenKhachHang = "Nguyễn Văn H"
+                        },
+                        new
+                        {
+                            MaKhachHang = "KH0019",
+                            CCCD = "123432156734",
+                            DiaChi = "TP Hồ Chí Minh",
+                            DienThoai = "0938484574",
+                            GhiChu = "Không",
+                            GioiTinh = "Nữ",
+                            NgaySinh = new DateTime(1992, 2, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6692),
+                            TenKhachHang = "Lê Thị I"
+                        },
+                        new
+                        {
+                            MaKhachHang = "KH0020",
+                            CCCD = "123432156765",
+                            DiaChi = "Hà Nội",
+                            DienThoai = "0938481242",
+                            GhiChu = "Không",
+                            GioiTinh = "Nam",
+                            NgaySinh = new DateTime(1988, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6694),
+                            TenKhachHang = "Đỗ Văn I"
                         });
                 });
 
@@ -253,7 +432,6 @@ namespace QuanLyKhachSan.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("GhiChu")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("GioiTinh")
@@ -278,11 +456,11 @@ namespace QuanLyKhachSan.Migrations
                         new
                         {
                             MaNhanVien = "NV0001",
-                            CCCD = "123456789",
+                            CCCD = "123456314789",
                             ChucVu = "Quản lý",
                             DiaChi = "Hà Nội",
-                            DienThoai = "0123456789",
-                            Email = "an123@gmail.com",
+                            DienThoai = "0938481234",
+                            Email = "nhutbmt82@gmail.com",
                             GhiChu = "Không",
                             GioiTinh = "Nam",
                             NgaySinh = new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -292,11 +470,11 @@ namespace QuanLyKhachSan.Migrations
                         new
                         {
                             MaNhanVien = "NV0002",
-                            CCCD = "987654321",
+                            CCCD = "982347654321",
                             ChucVu = "Nhân viên",
                             DiaChi = "TP Hồ Chí Minh",
-                            DienThoai = "0987654321",
-                            Email = "be123@gmail.com",
+                            DienThoai = "0938484567",
+                            Email = "ttb@gmail.com",
                             GhiChu = "Không",
                             GioiTinh = "Nữ",
                             NgaySinh = new DateTime(1985, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -306,44 +484,114 @@ namespace QuanLyKhachSan.Migrations
                         new
                         {
                             MaNhanVien = "NV0003",
-                            CCCD = "234567890",
-                            ChucVu = "Quản lý",
-                            DiaChi = "Đà Nẵng",
-                            DienThoai = "0234567890",
-                            Email = "quoc123a@gmail.com",
+                            CCCD = "123456732190",
+                            ChucVu = "Nhân viên",
+                            DiaChi = "Hà Nội",
+                            DienThoai = "0938481235",
+                            Email = "lvc@gmail.com",
                             GhiChu = "Không",
                             GioiTinh = "Nam",
-                            NgaySinh = new DateTime(1990, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayVaoLam = new DateTime(2022, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TenNhanVien = "Phạm Văn C"
+                            NgaySinh = new DateTime(1982, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayVaoLam = new DateTime(2020, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TenNhanVien = "Lê Văn C"
                         },
                         new
                         {
                             MaNhanVien = "NV0004",
-                            CCCD = "345678901",
+                            CCCD = "987652314322",
                             ChucVu = "Nhân viên",
-                            DiaChi = "Cần Thơ",
-                            DienThoai = "0345678901",
-                            Email = "tung123@gmail.com",
+                            DiaChi = "TP Hồ Chí Minh",
+                            DienThoai = "0938484568",
+                            Email = "ptd@gmail.com",
                             GhiChu = "Không",
                             GioiTinh = "Nữ",
-                            NgaySinh = new DateTime(1995, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayVaoLam = new DateTime(2023, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TenNhanVien = "Lê Thị D"
+                            NgaySinh = new DateTime(1986, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayVaoLam = new DateTime(2021, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TenNhanVien = "Phạm Thị D"
                         },
                         new
                         {
                             MaNhanVien = "NV0005",
-                            CCCD = "456789012",
-                            ChucVu = "Quản lý",
-                            DiaChi = "Hải Phòng",
-                            DienThoai = "0456789012",
-                            Email = "e2s3441@gmail.com",
+                            CCCD = "123324456791",
+                            ChucVu = "Nhân viên",
+                            DiaChi = "Hà Nội",
+                            DienThoai = "0938481236",
+                            Email = "nve@gmail.com",
                             GhiChu = "Không",
                             GioiTinh = "Nam",
-                            NgaySinh = new DateTime(2000, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayVaoLam = new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            TenNhanVien = "Hoàng Văn E"
+                            NgaySinh = new DateTime(1983, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayVaoLam = new DateTime(2020, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TenNhanVien = "Nguyễn Văn E"
+                        },
+                        new
+                        {
+                            MaNhanVien = "NV0006",
+                            CCCD = "987655674323",
+                            ChucVu = "Quản lý",
+                            DiaChi = "TP Hồ Chí Minh",
+                            DienThoai = "0938484569",
+                            Email = "ttf@gmail.com",
+                            GhiChu = "Không",
+                            GioiTinh = "Nữ",
+                            NgaySinh = new DateTime(1987, 2, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayVaoLam = new DateTime(2021, 2, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            TenNhanVien = "Trần Thị F"
+                        },
+                        new
+                        {
+                            MaNhanVien = "NV0007",
+                            CCCD = "123454346792",
+                            ChucVu = "Nhân viên",
+                            DiaChi = "Hà Nội",
+                            DienThoai = "0938481237",
+                            Email = "dvg@gmail.com",
+                            GhiChu = "Không",
+                            GioiTinh = "Nam",
+                            NgaySinh = new DateTime(1984, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayVaoLam = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6834),
+                            TenNhanVien = "Đặng Văn G"
+                        },
+                        new
+                        {
+                            MaNhanVien = "NV0008",
+                            CCCD = "987654444324",
+                            ChucVu = "Quản lý",
+                            DiaChi = "TP Hồ Chí Minh",
+                            DienThoai = "0938484570",
+                            Email = "vth@gmail.com",
+                            GhiChu = "Không",
+                            GioiTinh = "Nữ",
+                            NgaySinh = new DateTime(1988, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayVaoLam = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6836),
+                            TenNhanVien = "Vũ Thị H"
+                        },
+                        new
+                        {
+                            MaNhanVien = "NV0009",
+                            CCCD = "123456545793",
+                            ChucVu = "Nhân viên",
+                            DiaChi = "Hà Nội",
+                            DienThoai = "0938481238",
+                            Email = "bvi@gmail.com",
+                            GhiChu = "Không",
+                            GioiTinh = "Nam",
+                            NgaySinh = new DateTime(1985, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayVaoLam = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6837),
+                            TenNhanVien = "Bùi Văn I"
+                        },
+                        new
+                        {
+                            MaNhanVien = "NV0010",
+                            CCCD = "987654444325",
+                            ChucVu = "Nhân viên",
+                            DiaChi = "TP Hồ Chí Minh",
+                            DienThoai = "0938484571",
+                            Email = "ntj@gmail.com",
+                            GhiChu = "Không",
+                            GioiTinh = "Nữ",
+                            NgaySinh = new DateTime(1989, 2, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NgayVaoLam = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6839),
+                            TenNhanVien = "Ngô Thị J"
                         });
                 });
 
@@ -356,9 +604,6 @@ namespace QuanLyKhachSan.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("GiaTheoNgay")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GiaTheoQuaDem")
                         .HasColumnType("int");
 
                     b.Property<string>("HangPhong")
@@ -381,50 +626,45 @@ namespace QuanLyKhachSan.Migrations
                         new
                         {
                             MaPhong = "101",
-                            GiaTheoGio = 200000,
-                            GiaTheoNgay = 1000000,
-                            GiaTheoQuaDem = 500000,
-                            HangPhong = "VIP",
+                            GiaTheoGio = 100000,
+                            GiaTheoNgay = 600000,
+                            HangPhong = "Phòng Đơn",
                             KhuVuc = "A",
                             TrangThai = "Trống"
                         },
                         new
                         {
                             MaPhong = "102",
-                            GiaTheoGio = 100000,
-                            GiaTheoNgay = 600000,
-                            GiaTheoQuaDem = 300000,
-                            HangPhong = "Thường",
+                            GiaTheoGio = 200000,
+                            GiaTheoNgay = 1000000,
+                            HangPhong = "Phòng Đôi",
                             KhuVuc = "A",
                             TrangThai = "Trống"
                         },
                         new
                         {
                             MaPhong = "103",
-                            GiaTheoGio = 200000,
-                            GiaTheoNgay = 1000000,
-                            GiaTheoQuaDem = 500000,
-                            HangPhong = "VIP",
+                            GiaTheoGio = 100000,
+                            GiaTheoNgay = 600000,
+                            HangPhong = "Phòng Đơn",
                             KhuVuc = "B",
-                            TrangThai = "Đang sử dụng"
+                            TrangThai = "Trống"
                         },
                         new
                         {
                             MaPhong = "104",
                             GiaTheoGio = 100000,
                             GiaTheoNgay = 600000,
-                            GiaTheoQuaDem = 300000,
-                            HangPhong = "Thường",
+                            HangPhong = "Phòng Đơn",
                             KhuVuc = "B",
-                            TrangThai = "Đang sử dụng"
+                            TrangThai = "Trống"
                         },
                         new
                         {
                             MaPhong = "201",
                             GiaTheoGio = 200000,
                             GiaTheoNgay = 1000000,
-                            GiaTheoQuaDem = 500000,
-                            HangPhong = "VIP",
+                            HangPhong = "Phòng Đôi",
                             KhuVuc = "C",
                             TrangThai = "Trống"
                         },
@@ -433,8 +673,7 @@ namespace QuanLyKhachSan.Migrations
                             MaPhong = "202",
                             GiaTheoGio = 100000,
                             GiaTheoNgay = 600000,
-                            GiaTheoQuaDem = 300000,
-                            HangPhong = "Thường",
+                            HangPhong = "Phòng Đơn",
                             KhuVuc = "A",
                             TrangThai = "Trống"
                         },
@@ -443,28 +682,25 @@ namespace QuanLyKhachSan.Migrations
                             MaPhong = "203",
                             GiaTheoGio = 200000,
                             GiaTheoNgay = 1000000,
-                            GiaTheoQuaDem = 500000,
-                            HangPhong = "VIP",
+                            HangPhong = "Phòng Đôi",
                             KhuVuc = "B",
-                            TrangThai = "Đang sử dụng"
+                            TrangThai = "Trống"
                         },
                         new
                         {
                             MaPhong = "204",
                             GiaTheoGio = 100000,
                             GiaTheoNgay = 600000,
-                            GiaTheoQuaDem = 300000,
-                            HangPhong = "Thường",
+                            HangPhong = "Phòng Đơn",
                             KhuVuc = "B",
-                            TrangThai = "Đang sử dụng"
+                            TrangThai = "Trống"
                         },
                         new
                         {
                             MaPhong = "301",
                             GiaTheoGio = 200000,
                             GiaTheoNgay = 1000000,
-                            GiaTheoQuaDem = 500000,
-                            HangPhong = "VIP",
+                            HangPhong = "Phòng Đôi",
                             KhuVuc = "C",
                             TrangThai = "Trống"
                         },
@@ -473,8 +709,7 @@ namespace QuanLyKhachSan.Migrations
                             MaPhong = "302",
                             GiaTheoGio = 100000,
                             GiaTheoNgay = 600000,
-                            GiaTheoQuaDem = 300000,
-                            HangPhong = "Thường",
+                            HangPhong = "Phòng Đơn",
                             KhuVuc = "A",
                             TrangThai = "Trống"
                         },
@@ -483,28 +718,25 @@ namespace QuanLyKhachSan.Migrations
                             MaPhong = "303",
                             GiaTheoGio = 200000,
                             GiaTheoNgay = 1000000,
-                            GiaTheoQuaDem = 500000,
-                            HangPhong = "VIP",
+                            HangPhong = "Phòng Đôi",
                             KhuVuc = "B",
-                            TrangThai = "Đang sử dụng"
+                            TrangThai = "Trống"
                         },
                         new
                         {
                             MaPhong = "304",
                             GiaTheoGio = 100000,
                             GiaTheoNgay = 600000,
-                            GiaTheoQuaDem = 300000,
-                            HangPhong = "Thường",
+                            HangPhong = "Phòng Đơn",
                             KhuVuc = "B",
-                            TrangThai = "Đang sử dụng"
+                            TrangThai = "Trống"
                         },
                         new
                         {
                             MaPhong = "401",
                             GiaTheoGio = 200000,
                             GiaTheoNgay = 1000000,
-                            GiaTheoQuaDem = 500000,
-                            HangPhong = "VIP",
+                            HangPhong = "Phòng Đôi",
                             KhuVuc = "C",
                             TrangThai = "Trống"
                         },
@@ -513,8 +745,7 @@ namespace QuanLyKhachSan.Migrations
                             MaPhong = "402",
                             GiaTheoGio = 100000,
                             GiaTheoNgay = 600000,
-                            GiaTheoQuaDem = 300000,
-                            HangPhong = "Thường",
+                            HangPhong = "Phòng Đơn",
                             KhuVuc = "A",
                             TrangThai = "Trống"
                         },
@@ -523,20 +754,18 @@ namespace QuanLyKhachSan.Migrations
                             MaPhong = "403",
                             GiaTheoGio = 200000,
                             GiaTheoNgay = 1000000,
-                            GiaTheoQuaDem = 500000,
-                            HangPhong = "VIP",
+                            HangPhong = "Phòng Đôi",
                             KhuVuc = "B",
-                            TrangThai = "Đang sử dụng"
+                            TrangThai = "Trống"
                         },
                         new
                         {
                             MaPhong = "404",
                             GiaTheoGio = 100000,
                             GiaTheoNgay = 600000,
-                            GiaTheoQuaDem = 300000,
-                            HangPhong = "Thường",
+                            HangPhong = "Phòng Đơn",
                             KhuVuc = "B",
-                            TrangThai = "Đang sử dụng"
+                            TrangThai = "Trống"
                         });
                 });
 
@@ -564,16 +793,16 @@ namespace QuanLyKhachSan.Migrations
                         new
                         {
                             TenDangNhap = "admin",
-                            Email = "an123@gmail.com",
+                            Email = "nhutbmt82@gmail.com",
                             MatKhau = "admin",
-                            NgayTao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6890)
                         },
                         new
                         {
                             TenDangNhap = "user",
                             Email = "be123@gmail.com",
                             MatKhau = "user",
-                            NgayTao = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            NgayTao = new DateTime(2023, 10, 29, 21, 36, 32, 354, DateTimeKind.Local).AddTicks(6893)
                         });
                 });
 

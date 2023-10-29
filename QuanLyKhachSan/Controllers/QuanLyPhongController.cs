@@ -71,20 +71,23 @@ namespace QuanLyKhachSan.Controllers
 				ModelState.AddModelError("KhuVuc", "Khu vực không được để trống");
 				return false;
 			}
-            else if (!Regex.IsMatch(phong.KhuVuc, "^[a-zA-Z0-9]*$"))
-            {
-                ModelState.AddModelError("KhuVuc", "Khu vực chỉ được chứa chữ và số.");
-            }
-            if (string.IsNullOrEmpty(phong.HangPhong))
+			// Khu vực: Allow letters, numbers, and accented characters
+			if (!Regex.IsMatch(phong.KhuVuc, "^[\\p{L}0-9]*$"))
+			{
+				ModelState.AddModelError("KhuVuc", "Khu vực chỉ được chứa chữ, số và có dấu.");
+			}
+
+			if (string.IsNullOrEmpty(phong.HangPhong))
 			{
 				ModelState.AddModelError("HangPhong", "Hạng phòng không được để trống");
 				return false;
 			}
-			// Kiểm tra hạng phòng không có số và kí tự đặc biệt
+
+			// Hạng phòng: Allow letters and accented characters
 			Regex regexItem = new Regex("^[\\p{L}]*$");
 			if (!regexItem.IsMatch(phong.HangPhong))
 			{
-				ModelState.AddModelError("HangPhong", "Hạng phòng không được chứa số và kí tự đặc biệt");
+				ModelState.AddModelError("HangPhong", "Hạng phòng chỉ được chứa chữ");
 				return false;
 			}
 
