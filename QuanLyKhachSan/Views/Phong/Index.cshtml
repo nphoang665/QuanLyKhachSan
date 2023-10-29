@@ -31,15 +31,16 @@
 				Sơ đồ
 			</a>
 			<div class="tri-state-toggle">
-				<button class="tri-state-toggle-button" id="toggle-button1">
+				<button class="tri-state-toggle-button" id="toggle-button1" onclick="filterRooms('all')">
 					Tất cả phòng
 				</button>
-				<button class="tri-state-toggle-button" id="toggle-button2">
+				<button class="tri-state-toggle-button" id="toggle-button2" onclick="filterRooms('empty')">
 					Phòng trống
 				</button>
-				<button class="tri-state-toggle-button" id="toggle-button3">
+				<button class="tri-state-toggle-button" id="toggle-button3" onclick="filterRooms('booked')">
 					Phòng đang sử dụng
 				</button>
+
 			</div>
 			<a class="d-none"><i class="bi bi-search"></i></a>
 			
@@ -86,9 +87,10 @@
 			<h2>Đặt nhận phòng</h2>
 			<table class="table table-bordered">
 				<thead>
-					<tr>
-						<th>Mã DP</th>
-						<th>Phòng</th>
+                    <tr>
+                        <th>Phòng</th>
+						<th>Số người ở</th>
+						
 						<th>Hạng phòng</th>
 						<th>Mã KH</th>
 						<th>Người lập phiếu</th>
@@ -96,20 +98,21 @@
 				</thead>
 
 				<tbody>
-					<tr>
+                    <tr>
+                        <td>
+                            @* Phòng *@
+                            <select class="combo" id="Ma_Phong" asp-for="Phong" style="width:100px" onchange="updateHangPhong()">
+
+                                @foreach (var phong in ViewBag.Rooms)
+                                {
+                                    <option value="@phong.MaPhong"> P.@phong.MaPhong </option>
+                                }
+
+                            </select>
+                        </td>
 						@* Mã đặt phòng *@
-						<td><input asp-for="MaDatPhong" style="width:120px" id="MaDatPhong" /></td>
-						<td>
-							@* Phòng *@
-							<select class="combo" id="Ma_Phong" asp-for="Phong" style="width:100px" onchange="updateHangPhong()">
-
-								@foreach (var phong in ViewBag.Rooms)
-								{
-									<option value="@phong.MaPhong"> P.@phong.MaPhong </option>
-								}
-
-							</select>
-						</td>
+						<td><input asp-for="SoNguoiO" style="width:120px" id="SoNguoiO" /></td>
+						
 						@* Hạng Phòng *@
 						<td>
 

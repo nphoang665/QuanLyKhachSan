@@ -18,29 +18,23 @@ namespace QuanLyKhachSan.Controllers
             ViewBag.Rooms = rooms;
             var khachhangs = _db.KhachHangs.ToList();
             ViewBag.KhachHangs = khachhangs;
-            var bookedRooms = _db.DatPhongs.Select(p => p.MaPhong).ToList();
-            ViewBag.BookedRooms = bookedRooms;
+            var bookedRooms = _db.Phong
+					.Where(p => p.TrangThai == "Đang sử dụng")
+					.Select(p => p.MaPhong)
+					.ToList();
+			ViewBag.BookedRooms = bookedRooms;
             var nhanvien = _db.NhanViens.ToList();
             ViewBag.NhanViens = nhanvien;
 
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> NhanPhong(string MaDatPhong, string Phong, string MaKhachHang, string HinhThuc, int GiaPhong, DateTime? NgayNhan, DateTime? NgayTra, string DuKien, float ThanhTien, string MaNhanVien, float khachTra)
+        public async Task<IActionResult> NhanPhong(byte SoNguoiO , string Phong, string MaKhachHang, string HinhThuc, int GiaPhong, DateTime? NgayNhan, DateTime? NgayTra, string DuKien, float ThanhTien, string MaNhanVien, float khachTra)
         {
-            var MadatPhongExist = _db.DatPhongs.FirstOrDefault(s => s.MaDatPhong == MaDatPhong);
-            if (string.IsNullOrEmpty(MaDatPhong))
-            {
-                return Json(new { success = false, message = "Mã đặt phòng không được để trống." });
-            }
-            if (MadatPhongExist != null)
-            {
-                return Json(new { success = false, message = "Mã đặt phòng đã tồn tại." });
-            }
-            if (MaDatPhong.Length != 6)
-            {
-                return Json(new { success = false, message = "Mã đặt phòng phải là 6 kí tự." });
-            }
+            Random random = new Random();
+            string MaDatPhong = "DP" + random.Next(1000, 9999).ToString();
+
+
             if (NgayNhan == null)
             {
                 return Json(new { success = false, message = "Ngày nhận không được để trống." });
@@ -62,6 +56,7 @@ namespace QuanLyKhachSan.Controllers
             {
                 var nhanphong = new DatPhong();
                 nhanphong.MaDatPhong = MaDatPhong;
+                nhanphong.SoNguoiO = SoNguoiO;
                 nhanphong.MaPhong = Phong;
                 nhanphong.MaNhanVien = MaNhanVien;
                 nhanphong.MaKhachHang = MaKhachHang;
