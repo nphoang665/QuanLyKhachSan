@@ -41,8 +41,9 @@ namespace QuanLyKhachSan.Controllers
             fb.AccessToken = result.access_token;
 
             dynamic me = fb.Get("/me?fields=name,email");
-            string name = me.Name;
-            string email = me.Email;
+            string name = me.name;
+            string email = me.email;
+            Response.Cookies.Append("TenNhanVien", name);
             return RedirectToAction("Index", "TongQuan");
         }
 
