@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using QuanLyKhachSan.Data;
 using QuanLyKhachSan.DataAcess.Data;
+using QuanLyKhachSan.Model;
+
 namespace QuanLyKhachSan.Controllers
 {
     public class PhongController : Controller
@@ -15,7 +17,16 @@ namespace QuanLyKhachSan.Controllers
         public IActionResult Index()
         {
 			var rooms = _db.Phong.ToList();
-			ViewBag.Rooms = rooms;
+			if (rooms != null)
+			{
+				ViewBag.Rooms = rooms;
+			}
+			else
+			{
+			
+				ViewBag.Rooms = new List<Room>();
+			}
+
 			var khachhangs = _db.KhachHangs.ToList();
 			ViewBag.KhachHangs = khachhangs;
 			var bookedRooms = _db.Phong
