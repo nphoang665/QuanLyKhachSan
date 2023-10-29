@@ -38,22 +38,22 @@ namespace QuanLyKhachSan.DataAcess.Data
      new TaiKhoan { TenDangNhap = "user", MatKhau = "user", Email = "be123@gmail.com" }
  );
             modelBuilder.Entity<Room>().HasData(
-       new Room { MaPhong = "101", KhuVuc = "A", HangPhong = "VIP", GiaTheoGio = 200000, GiaTheoQuaDem = 500000, GiaTheoNgay = 1000000, TrangThai = "Trống" },
-       new Room { MaPhong = "102", KhuVuc = "A", HangPhong = "Thường", GiaTheoGio = 100000, GiaTheoQuaDem = 300000, GiaTheoNgay = 600000, TrangThai = "Trống" },
-       new Room { MaPhong = "103", KhuVuc = "B", HangPhong = "VIP", GiaTheoGio = 200000, GiaTheoQuaDem = 500000, GiaTheoNgay = 1000000, TrangThai = "Đang sử dụng" },
-       new Room { MaPhong = "104", KhuVuc = "B", HangPhong = "Thường", GiaTheoGio = 100000, GiaTheoQuaDem = 300000, GiaTheoNgay = 600000, TrangThai = "Đang sử dụng" },
-       new Room { MaPhong = "201", KhuVuc = "C", HangPhong = "VIP", GiaTheoGio = 200000, GiaTheoQuaDem = 500000, GiaTheoNgay = 1000000, TrangThai = "Trống" },
-          new Room { MaPhong = "202", KhuVuc = "A", HangPhong = "Thường", GiaTheoGio = 100000, GiaTheoQuaDem = 300000, GiaTheoNgay = 600000, TrangThai = "Trống" },
-       new Room { MaPhong = "203", KhuVuc = "B", HangPhong = "VIP", GiaTheoGio = 200000, GiaTheoQuaDem = 500000, GiaTheoNgay = 1000000, TrangThai = "Đang sử dụng" },
-       new Room { MaPhong = "204", KhuVuc = "B", HangPhong = "Thường", GiaTheoGio = 100000, GiaTheoQuaDem = 300000, GiaTheoNgay = 600000, TrangThai = "Đang sử dụng" },
-          new Room { MaPhong = "301", KhuVuc = "C", HangPhong = "VIP", GiaTheoGio = 200000, GiaTheoQuaDem = 500000, GiaTheoNgay = 1000000, TrangThai = "Trống" },
-          new Room { MaPhong = "302", KhuVuc = "A", HangPhong = "Thường", GiaTheoGio = 100000, GiaTheoQuaDem = 300000, GiaTheoNgay = 600000, TrangThai = "Trống" },
-       new Room { MaPhong = "303", KhuVuc = "B", HangPhong = "VIP", GiaTheoGio = 200000, GiaTheoQuaDem = 500000, GiaTheoNgay = 1000000, TrangThai = "Đang sử dụng" },
-       new Room { MaPhong = "304", KhuVuc = "B", HangPhong = "Thường", GiaTheoGio = 100000, GiaTheoQuaDem = 300000, GiaTheoNgay = 600000, TrangThai = "Đang sử dụng" },
-          new Room { MaPhong = "401", KhuVuc = "C", HangPhong = "VIP", GiaTheoGio = 200000, GiaTheoQuaDem = 500000, GiaTheoNgay = 1000000, TrangThai = "Trống" },
-          new Room { MaPhong = "402", KhuVuc = "A", HangPhong = "Thường", GiaTheoGio = 100000, GiaTheoQuaDem = 300000, GiaTheoNgay = 600000, TrangThai = "Trống" },
-       new Room { MaPhong = "403", KhuVuc = "B", HangPhong = "VIP", GiaTheoGio = 200000, GiaTheoQuaDem = 500000, GiaTheoNgay = 1000000, TrangThai = "Đang sử dụng" },
-       new Room { MaPhong = "404", KhuVuc = "B", HangPhong = "Thường", GiaTheoGio = 100000, GiaTheoQuaDem = 300000, GiaTheoNgay = 600000, TrangThai = "Đang sử dụng" }
+       new Room { MaPhong = "101", KhuVuc = "A", HangPhong = "VIP", GiaTheoGio = 200000, GiaTheoNgay = 1000000, TrangThai = "Trống" },
+       new Room { MaPhong = "102", KhuVuc = "A", HangPhong = "Thường", GiaTheoGio = 100000, GiaTheoNgay = 600000, TrangThai = "Trống" },
+       new Room { MaPhong = "103", KhuVuc = "B", HangPhong = "VIP", GiaTheoGio = 200000, GiaTheoNgay = 1000000, TrangThai = "Đang sử dụng" },
+       new Room { MaPhong = "104", KhuVuc = "B", HangPhong = "Thường", GiaTheoGio = 100000, GiaTheoNgay = 600000, TrangThai = "Đang sử dụng" },
+       new Room { MaPhong = "201", KhuVuc = "C", HangPhong = "VIP", GiaTheoGio = 200000, GiaTheoNgay = 1000000, TrangThai = "Trống" },
+          new Room { MaPhong = "202", KhuVuc = "A", HangPhong = "Thường", GiaTheoGio = 100000, GiaTheoNgay = 600000, TrangThai = "Trống" },
+       new Room { MaPhong = "203", KhuVuc = "B", HangPhong = "VIP", GiaTheoGio = 200000, GiaTheoNgay = 1000000, TrangThai = "Đang sử dụng" },
+       new Room { MaPhong = "204", KhuVuc = "B", HangPhong = "Thường", GiaTheoGio = 100000, GiaTheoNgay = 600000, TrangThai = "Đang sử dụng" },
+          new Room { MaPhong = "301", KhuVuc = "C", HangPhong = "VIP", GiaTheoGio = 200000, GiaTheoNgay = 1000000, TrangThai = "Trống" },
+          new Room { MaPhong = "302", KhuVuc = "A", HangPhong = "Thường", GiaTheoGio = 100000, GiaTheoNgay = 600000, TrangThai = "Trống" },
+       new Room { MaPhong = "303", KhuVuc = "B", HangPhong = "VIP", GiaTheoGio = 200000, GiaTheoNgay = 1000000, TrangThai = "Đang sử dụng" },
+       new Room { MaPhong = "304", KhuVuc = "B", HangPhong = "Thường", GiaTheoGio = 100000, GiaTheoNgay = 600000, TrangThai = "Đang sử dụng" },
+          new Room { MaPhong = "401", KhuVuc = "C", HangPhong = "VIP", GiaTheoGio = 200000, GiaTheoNgay = 1000000, TrangThai = "Trống" },
+          new Room { MaPhong = "402", KhuVuc = "A", HangPhong = "Thường", GiaTheoGio = 100000, GiaTheoNgay = 600000, TrangThai = "Trống" },
+       new Room { MaPhong = "403", KhuVuc = "B", HangPhong = "VIP", GiaTheoGio = 200000, GiaTheoNgay = 1000000, TrangThai = "Đang sử dụng" },
+       new Room { MaPhong = "404", KhuVuc = "B", HangPhong = "Thường", GiaTheoGio = 100000, GiaTheoNgay = 600000, TrangThai = "Đang sử dụng" }
    );
         }
     }

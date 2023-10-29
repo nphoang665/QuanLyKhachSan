@@ -90,7 +90,7 @@ namespace QuanLyKhachSan.Controllers
 
 			// Kiểm tra giá không có chữ và kí tự đặc biệt
 			regexItem = new Regex("^[0-9]*$");
-			if (!regexItem.IsMatch(phong.GiaTheoGio.ToString()) || !regexItem.IsMatch(phong.GiaTheoNgay.ToString()) || !regexItem.IsMatch(phong.GiaTheoQuaDem.ToString()))
+			if (!regexItem.IsMatch(phong.GiaTheoGio.ToString()) || !regexItem.IsMatch(phong.GiaTheoNgay.ToString()) )
 			{
 				ModelState.AddModelError("Gia", "Giá không được chứa chữ và kí tự đặc biệt");
 				return false;
@@ -98,7 +98,6 @@ namespace QuanLyKhachSan.Controllers
 			else if(phong.GiaTheoGio <=0)
 			{
                 ModelState.AddModelError("GiaTheoGio", "Giá không được nhỏ hơn hoặc bằng 0");
-                ModelState.AddModelError("GiaTheoNgay", "Giá không được nhỏ hơn hoặc bằng 0");
                 return false;
             }
 			else if(phong.GiaTheoNgay <=0)

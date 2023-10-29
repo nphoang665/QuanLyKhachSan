@@ -141,32 +141,26 @@ namespace QuanLyKhachSan.Controllers
             }
 
 
-            //kiểm tra email có tồn tại trong hệ thống chưa
             var existEmail = _db.TaiKhoan.FirstOrDefault(s => s.Email == tk.Email);
-            //kiểm tra email rỗng
             if (tk.Email == null)
             {
                 return Json(new { success = false, field = "Email", message = "Vui lòng điền email." });
             }
-            //kiểm tra email có tồn tại trong hệ thống chưa
             else if (existEmail != null)
             {
                 return Json(new { success = false, field = "Email", message = "Lỗi. Email đã tồn tại trong hệ thống." });
             }
 
 
-            //kiểm tra mật khẩu rỗng
             if (tk.MatKhau == null)
             {
                 return Json(new { success = false, field = "MatKhau", message = "Vui lòng điền mật khẩu." });
             }
-            //kiểm tra độ dài của mật khẩu
             else if (tk.MatKhau.Length < 4 || tk.MatKhau.Length > 25)
             {
                 return Json(new { success = false, field = "MatKhau", message = "Lỗi. Độ dài mật khẩu từ 4 đến 25 kí tự." });
 
             }
-            //kiểm tra mật khẩu không chứa số và kí tự đặc biệt
             else if (!regexItem.IsMatch(tk.MatKhau))
             {
                 return Json(new { success = false, field = "MatKhau", message = "Lỗi. Mật khẩu không chứa dấu hoặc kí tự đặc biệt." });
@@ -220,21 +214,18 @@ namespace QuanLyKhachSan.Controllers
                 Random rnd = new Random();
                 MaXacNhan = rnd.Next().ToString();
 
-                // Tạo mới một đối tượng SmtpClient.
                 SmtpClient smtp = new SmtpClient("smtp.gmail.com");
                 smtp.EnableSsl = true;
                 smtp.Port = 587;
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtp.Credentials = new NetworkCredential("khachsanasap@gmail.com", "ulwg gvjl vqmb iwya");
 
-                // Tạo mới một đối tượng MailMessage.
                 MailMessage mail = new MailMessage();
                 mail.To.Add(Email);
                 mail.From = new MailAddress("khachsanasap@gmail.com");
 				mail.Subject = "Thông Báo Quan Trọng Từ Khách Sạn ASAP";
 
-				// Nội dung thư chuyên nghiệp.
-				string logoUrl = "https://i.imgur.com/2VUOkoU.png"; // Thay thế bằng URL của logo của bạn
+				string logoUrl = "https://i.imgur.com/2VUOkoU.png"; 
 
 				mail.Body = "Kính gửi,<br>" +
 							"Chúng tôi xác nhận bạn đã sử dụng quên mật khẩu của chúng tôi<br>" +
@@ -247,10 +238,8 @@ namespace QuanLyKhachSan.Controllers
 
 
 
-				// Gửi email.
 				await smtp.SendMailAsync(mail);
 
-                // Trả về một phản hồi thành công.
                 return Json(new { success = true, confirmationCode = MaXacNhan, responseText = "Email đã được gửi thành công!" });
             }
             else
