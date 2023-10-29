@@ -14,19 +14,25 @@ namespace QuanLyKhachSan.Controllers
 
         public IActionResult Index()
         {
-            var rooms = _db.Phong.ToList();
-            ViewBag.Rooms = rooms;
-            var khachhangs = _db.KhachHangs.ToList();
-            ViewBag.KhachHangs = khachhangs;
-            var bookedRooms = _db.Phong
-					.Where(p => p.TrangThai == "Đang sử dụng")
-					.Select(p => p.MaPhong)
-					.ToList();
+			var rooms = _db.Phong.ToList();
+			ViewBag.Rooms = rooms;
+			var khachhangs = _db.KhachHangs.ToList();
+			ViewBag.KhachHangs = khachhangs;
+			var bookedRooms = _db.Phong
+				.Where(p => p.TrangThai == "Đang sử dụng")
+				.Select(p => p.MaPhong)
+				.ToList();
 			ViewBag.BookedRooms = bookedRooms;
-            var nhanvien = _db.NhanViens.ToList();
-            ViewBag.NhanViens = nhanvien;
 
-            return View();
+
+			var phongDangSuDung = _db.Phong
+				.Where(p => p.TrangThai  != "Đang sử dụng")
+				.Select(p => p.MaPhong)
+				.ToList();
+			ViewBag.PhongDaThue = phongDangSuDung;
+			var nhanvien = _db.NhanViens.ToList();
+			ViewBag.NhanViens = nhanvien;
+			return View();
         }
         [HttpPost]
         public async Task<IActionResult> NhanPhong(byte SoNguoiO , string Phong, string MaKhachHang, string HinhThuc, int GiaPhong, DateTime? NgayNhan, DateTime? NgayTra, string DuKien, float ThanhTien, string MaNhanVien, float khachTra)
@@ -86,7 +92,7 @@ namespace QuanLyKhachSan.Controllers
                 float tongtienkhachdatra = ThanhTien - khachTra;
                 var tinhTienKhachHangTra = _db.DatPhongs.FirstOrDefault(s => s.MaDatPhong == MaDatPhong);
                 tinhTienKhachHangTra.ThanhTien = tongtienkhachdatra;
-
+                nhanphong.KhachDaThanhToan = khachTra;
                 await _db.SaveChangesAsync();
 
                 return Json(new { success = true, message = "Đặt phòng thành công." });
@@ -183,7 +189,7 @@ namespace QuanLyKhachSan.Controllers
                 hd.NgayNhan = datphong.NgayNhan;
                 hd.NgayTra = datphong.NgayTra;
                 hd.DuKien = datphong.DuKien;
-                hd.ThanhTien = datphong.ThanhTien;
+                hd.ThanhTien = datphong.ThanhTien + datphong.KhachDaThanhToan;
                 hd.MaDatPhong = datphong.MaDatPhong;
                 hd.MaKhachHang = datphong.MaKhachHang;
                 hd.MaNhanVien = datphong.MaNhanVien;

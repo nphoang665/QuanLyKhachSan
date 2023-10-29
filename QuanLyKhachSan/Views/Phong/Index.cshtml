@@ -103,9 +103,9 @@
                             @* Phòng *@
                             <select class="combo" id="Ma_Phong" asp-for="Phong" style="width:100px" onchange="updateHangPhong()">
 
-                                @foreach (var phong in ViewBag.Rooms)
+								@foreach (var phong in ViewBag.PhongDaThue)
                                 {
-                                    <option value="@phong.MaPhong"> P.@phong.MaPhong </option>
+                                    <option value="@phong"> P.@phong </option>
                                 }
 
                             </select>
