@@ -147,10 +147,30 @@ namespace QuanLyKhachSan.Migrations
                 values: new object[,]
                 {
                     { "KH0001", "123456789111", "Hà Nội", "0938481234", "Không", "Nam", new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nguyễn Văn An" },
-                    { "KH0002", "987654321111", "TP Hồ Chí Minh", "0938484567", "Không", "Nữ", new DateTime(1985, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Trần Thị Bé" },
-                    { "KH0003", "987654321222", "TP Hồ Chí Minh", "0938485966", "Không", "Nam", new DateTime(1988, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Huỳnh An Cao" },
-                    { "KH0004", "987654321333", "TP Hồ Chí Minh", "0938234166", "Không", "Nữ", new DateTime(1995, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nguyễn Thị Bích" },
-                    { "KH0005", "987654321444", "TP Hồ Chí Minh", "0938485966", "Không", "Nữ", new DateTime(1985, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Hồ Thị Mỹ" }
+    { "KH0002", "987654321111", "TP Hồ Chí Minh", "0938484567", "Không", "Nữ", new DateTime(1985, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Trần Thị Bé" },
+    { "KH0003", "987654321222", "TP Hồ Chí Minh", "0938485966", "Không", "Nam", new DateTime(1988, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Huỳnh An Cao" },
+    { "KH0004", "987654321333", "TP Hồ Chí Minh", "0938234166", "Không", "Nữ", new DateTime(1995, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nguyễn Thị Bích" },
+    { "KH0005", "987654321444", "TP Hồ Chí Minh", "0938485966", "Không", "Nữ", new DateTime(1985, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Hồ Thị Mỹ" },
+    { "KH0006", "987654321555", "Hà Nội", "0938485966", "Không", "Nam", new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nguyễn Văn Bình" },
+    { "KH0007", "987654321666", "Hà Nội", "0938485966", "Không", "Nữ", new DateTime(1992, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Trần Thị Mai" },
+    { "KH0008", "987654321777", "Đà Nẵng", "0938485966", "Không", "Nam", new DateTime(1987, 5, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lê Văn Nam" },
+    { "KH0009", "987654321888", "Đà Nẵng", "0938485966", "Không", "Nữ", new DateTime(1994, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "Phạm Thị Hà" },
+    { "KH0010", "987654321999", "Cần Thơ", "0938485966", "Không", "Nam", new DateTime(1982, 12, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nguyễn Văn Tân" },
+    { "KH0011", "987654322000", "Cần Thơ", "0938485966", "Không", "Nữ", new DateTime(1996, 6, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), "Trần Thị Tú" },
+    { "KH0012", "987654322111", "Bình Định", "0938485966", "Không", "Nam", new DateTime(1990, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Hồ Văn Cường" },
+    { "KH0013", "987654322222", "Bình Định", "0938485966", "Không", "Nữ", new DateTime(1988, 7, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nguyễn Thị Lan" },
+    { "KH0014", "987654322333", "Nghệ An", "0938485966", "Không", "Nam", new DateTime(1989, 3, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lê Văn Đông" },
+    { "KH0015", "987654322444", "Nghệ An", "0938485966", "Không", "Nữ", new DateTime(1997, 4, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Phạm Thị Hương" },
+    { "KH0016", "987654322555", "Hà Tĩnh", "0938485966", "Không", "Nam", new DateTime(1981, 10, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nguyễn Văn Đạt" },
+    { "KH0017", "987654322666", "Hà Tĩnh", "0938485966", "Không", "Nữ", new DateTime(1984, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Trần Thị Thảo" },
+    { "KH0018", "987654322777", "Quảng Bình", "0938485966", "Không", "Nam", new DateTime(1993, 2, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Hoàng Văn Hòa" },
+    { "KH0019", "987654322888", "Quảng Bình", "0938485966", "Không", "Nữ", new DateTime(1983, 8, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nguyễn Thị Ngọc" },
+    { "KH0020", "987654322999", "Huế", "0938485966", "Không", "Nam", new DateTime(1980, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lê Văn Khánh" },
+    { "KH0021", "987654323000", "Huế", "0938485966", "Không", "Nữ", new DateTime(1988, 5, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Trần Thị Hằng" },
+    { "KH0022", "987654323111", "Quảng Nam", "0938485966", "Không", "Nam", new DateTime(1991, 7, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Hoàng Văn Thọ" },
+    { "KH0023", "987654323222", "Quảng Nam", "0938485966", "Không", "Nữ", new DateTime(1996, 8, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nguyễn Thị Tâm" },
+    { "KH0024", "987654323333", "Quảng Ngãi", "0938485966", "Không", "Nam", new DateTime(1984, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lê Văn Long" },
+    { "KH0025", "987654323444", "Quảng Ngãi", "0938485966", "Không", "Nữ", new DateTime(1986, 3, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Trần Thị Dung" }
                 });
 
             migrationBuilder.InsertData(
