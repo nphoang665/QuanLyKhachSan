@@ -171,6 +171,12 @@ namespace QuanLyKhachSan.Controllers
             {
                 return Json(new { success = false, field = "MatKhau", message = "Lỗi. Mật khẩu không chứa dấu hoặc kí tự đặc biệt." });
             }
+            var existEmailInNhanVien = _db.NhanViens.FirstOrDefault(s => s.Email == tk.Email);
+            if (existEmailInNhanVien == null)
+            {
+                return Json(new { success = false, field = "Email", message = "Lỗi. Email không tồn tại trong danh sách nhân viên." });
+            }
+
             if (ModelState.IsValid)
             {
                 DateTime ngayHienTai =DateTime.Now;
