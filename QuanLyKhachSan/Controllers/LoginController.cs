@@ -231,11 +231,24 @@ namespace QuanLyKhachSan.Controllers
                 MailMessage mail = new MailMessage();
                 mail.To.Add(Email);
                 mail.From = new MailAddress("khachsanasap@gmail.com");
-                mail.Subject = "Test";
-                mail.Body = MaXacNhan;
+				mail.Subject = "Thông Báo Quan Trọng Từ Khách Sạn ASAP";
 
-                // Gửi email.
-                await smtp.SendMailAsync(mail);
+				// Nội dung thư chuyên nghiệp.
+				string logoUrl = "https://i.imgur.com/2VUOkoU.png"; // Thay thế bằng URL của logo của bạn
+
+				mail.Body = "Kính gửi,<br>" +
+							"Chúng tôi xác nhận bạn đã sử dụng quên mật khẩu của chúng tôi<br>" +
+							"<strong><h2>Đây là mã xác nhận của bạn: " + MaXacNhan + "</h2></strong><br>" +
+							"Xin vui lòng không cung cấp cho người khác<br>" +
+							"Trân trọng.<br>" +
+							"Đội ngũ hỗ trợ Khách Sạn ASAP" + "<br><br>" +
+							"<img src='" + logoUrl + "' alt='Logo' />";
+				mail.IsBodyHtml = true;
+
+
+
+				// Gửi email.
+				await smtp.SendMailAsync(mail);
 
                 // Trả về một phản hồi thành công.
                 return Json(new { success = true, confirmationCode = MaXacNhan, responseText = "Email đã được gửi thành công!" });
