@@ -6,7 +6,7 @@
     height: 120px;
     width: 220px;
     background-color: forestgreen;
-    border-radius: 10px;
+    border-radius: 5px;
     position: relative;
     margin-bottom: 10px
 }
@@ -15,7 +15,7 @@
     height: 40px;
     width: 70px;
     background-color: orange;
-    border-radius: 10px;
+    border-radius: 4px;
     padding-top: 6px;
     padding-left: 13px;
     position: absolute;
